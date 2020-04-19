@@ -163,24 +163,17 @@ public class GameManager : MonoBehaviour
     {
         return movedPawns.Contains(pawn);
     }
-	bool Exist(List<Vector2Int> ite,Vector2Int t)
-	{
-		bool Is = false;
-		for (int i = 0; i < ite.Count; i++) {
-			if (ite[i].x == t.x && ite[i].y == t.y)
-				return true;
-		}
-		return Is; 
-	}
+
     public void CapturePieceAt(Vector2Int gridPoint)
     {
         GameObject pieceToCapture = PieceAtGrid(gridPoint);
-        if (pieceToCapture.GetComponent<Piece>().type == PieceType.King)
-        {
-            Debug.Log(currentPlayer.name + " wins!");
-            Destroy(board.GetComponent<TileSelector>());
-            Destroy(board.GetComponent<MoveSelector>());
-        }
+		if (pieceToCapture != null) {
+			if (pieceToCapture.GetComponent<Piece> ().type == PieceType.King) {
+				Debug.Log (currentPlayer.name + " wins!");
+				Destroy (board.GetComponent<TileSelector> ());
+				Destroy (board.GetComponent<MoveSelector> ());
+			}
+		}
         currentPlayer.capturedPieces.Add(pieceToCapture);
         pieces[gridPoint.x, gridPoint.y] = null;
         Destroy(pieceToCapture);

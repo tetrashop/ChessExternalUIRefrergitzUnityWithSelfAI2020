@@ -31,27 +31,65 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[SerializeField]
 public class MoveSelector : MonoBehaviour
-{
-	static int OrderAI=1;
-	static ArtificialInteligenceMove t = new ArtificialInteligenceMove ();
-    public GameObject moveLocationPrefab;
-    public GameObject tileHighlightPrefab;
+{		public GameObject moveLocationPrefab;
+	 public GameObject tileHighlightPrefab;
     public GameObject attackLocationPrefab;
 
     private GameObject tileHighlight;
     private GameObject movingPiece;
     private List<Vector2Int> moveLocations;
     private List<GameObject> locationHighlights;
+	int Order=1;
+	public int x,y,x1,y1;
 
+
+	static int OrderAI=1;
+	int xB,yB,OrB=0;
+	ArtificialInteligenceMove t;
     void Start ()
-    {
-        this.enabled = false;
-        tileHighlight = Instantiate(tileHighlightPrefab, Geometry.PointFromGrid(new Vector2Int(0, 0)),
-            Quaternion.identity, gameObject.transform);
-        tileHighlight.SetActive(false);
-    }
+	{
+		
+
+		this.enabled = false;
+		tileHighlight = Instantiate (tileHighlightPrefab, Geometry.PointFromGrid (new Vector2Int (0, 0)),
+			Quaternion.identity, gameObject.transform);
+		tileHighlight.SetActive (false);
+	
+	}
+
+	bool GameCanged()
+	{
+		if (OrB ==0)
+			return false;		
+		return true;
+
+	}
+	public bool MoveAI(int i,int j,int i1,int j1)
+	{
+		if(Order==1)
+		{
+			t.t.Play(i,j);
+			t.t.Play(i1,j1);
+			Order=-1;
+
+
+
+
+		}else
+			if(Order==-1)
+			{
+				t.t.Play(-1,-1);
+				x=t.t.R.CromosomRowFirst;
+				y=t.t.R.CromosomColumnFirst;
+				x1=t.t.R.CromosomRow;
+				y1=t.t.R.CromosomColumn;
+
+
+			}
+		return true;
+	}
 	bool Exist(List<Vector2Int> ite,Vector2Int t)
 	{
 		bool Is = false;
@@ -77,35 +115,52 @@ public class MoveSelector : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 // Reference Point 2: check for valid move location
-				if (!Exist(moveLocations,gridPoint))
-                {
-                    return;
-                }
-				if (t.t.LoadP) {	
-					if (GameManager.instance.PieceAtGrid (gridPoint) == null) {
-						GameManager.instance.Move (movingPiece, gridPoint);
-					} else {
-						if (OrderAI == 1) {
-							if (t.MoveSelector (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y)) {							
-								GameManager.instance.CapturePieceAt (gridPoint);
-								GameManager.instance.Move (movingPiece, gridPoint);
-								OrderAI = -1;
-							}
-						} else {
-							Debug.Log ("Thinking...");
-							if (t.MoveSelector (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y)) {
-								Debug.Log ("Thinking Finished.");
-								Input.mousePosition.Set (t.x, t.y, Input.mousePosition.z); 
-								(new TileSelector ()).Update ();
-								gridPoint.x = t.x1;
-								gridPoint.y = t.y1;					
-								GameManager.instance.CapturePieceAt (gridPoint);
-								GameManager.instance.Move (movingPiece, gridPoint);
-										OrderAI = 1;
+//				if (!Exist(moveLocations,gridPoint))
+//                {
+//                    return;
+//                }
+				bool a = t != null && GameCanged ();
+				if (a)
+					a = a && t.t != null;
+						if (a) {
+					if (t.t.LoadP) 
+					{	
+						if (GameManager.instance.PieceAtGrid (gridPoint) == null) {
+							GameManager.instance.Move (movingPiece, gridPoint);
+						} else 
+						{
+							if (OrderAI == 1) {
+								OrB = 0;
+								if (MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y)) {							
+									GameManager.instance.CapturePieceAt (gridPoint);
+									GameManager.instance.Move (movingPiece, gridPoint);
+										OrderAI = -1;
+									OrB = 1;
+
+											
+								}
+							} else {
+								OrB = 0;
+								Debug.Log ("Thinking...");
+								if (MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y)) {
+									
+									Debug.Log ("Thinking Finished.");
+									Input.mousePosition.Set (x, y, Input.mousePosition.z); 
+									(new TileSelector ()).Update ();
+									gridPoint.x = x1;
+									gridPoint.y = y1;					
+									GameManager.instance.CapturePieceAt (gridPoint);
+									GameManager.instance.Move (movingPiece, gridPoint);
+									OrB=1;
+									OrderAI = 1;
+							
+								}
 							}
 						}
 					}
 				} else {
+					OrB = 0;
+
 					GameManager.instance.CapturePieceAt (gridPoint);
 					GameManager.instance.Move (movingPiece, gridPoint);
 
@@ -119,6 +174,11 @@ public class MoveSelector : MonoBehaviour
             tileHighlight.SetActive(false);
         }
     }
+	void Awake(){
+		if(t==null)
+		t = new ArtificialInteligenceMove ();
+
+	}
 
     private void CancelMove()
     {
@@ -163,8 +223,7 @@ public class MoveSelector : MonoBehaviour
     }
 
     private void ExitState()
-    {
-        this.enabled = false;
+	{    this.enabled = false;
         TileSelector selector = GetComponent<TileSelector>();
         tileHighlight.SetActive(false);
         GameManager.instance.DeselectPiece(movingPiece);

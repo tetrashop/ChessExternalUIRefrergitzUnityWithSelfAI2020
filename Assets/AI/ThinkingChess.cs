@@ -136,7 +136,7 @@ namespace RefrigtzChessPortable
         public int HeuristicKingDangourSup = new int();
         public List<bool> IsSup = new List<bool>();
         public List<bool> IsSupHu = new List<bool>();
-         StackFrame callStack = new StackFrame(1, true);
+         
         //Initiate Global and Static Variables. 
         public List<bool> IsThereMateOfEnemy = new List<bool>();
         public List<bool> IsThereMateOfSelf = new List<bool>();

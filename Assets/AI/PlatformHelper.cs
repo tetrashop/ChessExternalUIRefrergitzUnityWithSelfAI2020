@@ -31,6 +31,8 @@ namespace System.Threading
                     s_ProcessorCount = num2 = Environment.ProcessorCount;
                     s_LastProcessorCountRefreshTicks = tickCount;
                 }
+				if (num2 >= 4)
+					return 4;
                 return num2;
             }
         }

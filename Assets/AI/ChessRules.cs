@@ -2940,13 +2940,13 @@ namespace RefrigtzChessPortable
                             if (i != RowFirst && j != ColumnFirst)
                             {
                                 {
-                                    //If the Root Contains Self Home Return Not Validity.
+                                    //If the Root Exists Self Home Return Not Validity.
                                     if (Table[i, j] > 0 && Table[RowFirst, ColumnFirst] > 0)
                                     {
                                         Act = true;
                                         Move = false;
                                     }
-                                    //If The Root Contains Self Home Return Not vALIDITY. 
+                                    //If The Root Exists Self Home Return Not vALIDITY. 
                                     if (Table[i, j] < 0 && Table[RowFirst, ColumnFirst] < 0)
                                     {
                                         Act = true;
