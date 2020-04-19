@@ -46,7 +46,7 @@ public class MoveSelector : MonoBehaviour
 
 
 	static int OrderAI=1;
-	int xB,yB,OrB=0;
+	int xB,yB,OrB=-2;
 	ArtificialInteligenceMove t;
     void Start ()
 	{
@@ -119,6 +119,11 @@ public class MoveSelector : MonoBehaviour
 //                {
 //                    return;
 //                }
+				if (t == null) {
+					t = new ArtificialInteligenceMove ();
+					if(t.t==null)
+					t.Awake ();
+				}
 				bool a = t != null && GameCanged ();
 				if (a)
 					a = a && t.t != null;
@@ -175,8 +180,11 @@ public class MoveSelector : MonoBehaviour
         }
     }
 	void Awake(){
-		if(t==null)
-		t = new ArtificialInteligenceMove ();
+		if (t == null) {
+			t = new ArtificialInteligenceMove ();
+			if (t.t == null)
+				t.Awake ();
+		}
 
 	}
 

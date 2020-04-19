@@ -9,7 +9,7 @@ public class ArtificialInteligenceMove:MonoBehaviour
 		public ArtificialInteligenceMove ()
 		{
 		}
-	void Awake(){
+	public void Awake(){
 		if(t==null){
 
 			t = new RefrigtzChessPortable.RefrigtzChessPortableForm();
@@ -21,8 +21,8 @@ public class ArtificialInteligenceMove:MonoBehaviour
 	{
 		if(Order==1)
 		{
-				t.Play(i,j);
-			t.Play(i1,j1);
+				t.Play(i,7-j);
+			t.Play(i1,7-j1);
 			Order=-1;
 
 
@@ -34,8 +34,8 @@ public class ArtificialInteligenceMove:MonoBehaviour
 					t.Play(-1,-1);
 				x=t.R.CromosomRowFirst;
 				y=t.R.CromosomColumnFirst;
-				x1=t.R.CromosomRow;
-				y1=t.R.CromosomColumn;
+				x1=7-t.R.CromosomRow;
+				y1=7-t.R.CromosomColumn;
 
 
 			}
