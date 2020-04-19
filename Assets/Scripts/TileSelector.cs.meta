@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: be0b3ae2be1ec485e92156d9782b6385
+timeCreated: 1587234300
+licenseType: Pro
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - tileHighlightPrefab: {fileID: 1333511979136996, guid: e860aff6f484c47d7b713cbebd3ee5d3,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

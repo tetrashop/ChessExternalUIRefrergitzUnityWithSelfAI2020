@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 69ccfe8c654294ec3a7a7cc1369e8c91
+timeCreated: 1587232362
+licenseType: Pro
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - moveLocationPrefab: {fileID: 1555274435638532, guid: 4cb3dfa64c6fa4774b49468d68a0845b,
+      type: 2}
+  - tileHighlightPrefab: {fileID: 1333511979136996, guid: e860aff6f484c47d7b713cbebd3ee5d3,
+      type: 2}
+  - attackLocationPrefab: {fileID: 1341371675672656, guid: c4a2ba9f320f1459996f001bc0387b40,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

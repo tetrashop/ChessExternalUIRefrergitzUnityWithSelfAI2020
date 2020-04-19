@@ -1,0 +1,37 @@
+fileFormatVersion: 2
+guid: 0467ea60d08c74bf09df7bda660533e7
+timeCreated: 1587232827
+licenseType: Pro
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - board: {instanceID: 0}
+  - whiteKing: {fileID: 1097184490271986, guid: 286f8291ea775409f91f3dcc8dc0e06c,
+      type: 2}
+  - whiteQueen: {fileID: 1108025435085622, guid: 348ae07a400ab45c5afcbe22039e9d5e,
+      type: 2}
+  - whiteBishop: {fileID: 1877345029257820, guid: 27727deede5194cdba8c2ebab33ecaab,
+      type: 2}
+  - whiteKnight: {fileID: 1486526489832934, guid: 3768577674528430691fecf5a4660eb2,
+      type: 2}
+  - whiteRook: {fileID: 1125735659761782, guid: eafb872984133466d8325974f39dd911,
+      type: 2}
+  - whitePawn: {fileID: 1716508534991360, guid: e8b76efea0e604eb5afd123b073ea8fd,
+      type: 2}
+  - blackKing: {fileID: 1953080492828278, guid: 53ab43e1f4f674178b234d7ca733a67b,
+      type: 2}
+  - blackQueen: {fileID: 1218684493727980, guid: c13dffa2e41e349c78351ec06686dc75,
+      type: 2}
+  - blackBishop: {fileID: 1821828046532228, guid: 9fbaf3c5b38c8464f9df18844447db85,
+      type: 2}
+  - blackKnight: {fileID: 1747904550817830, guid: fff2331e5321f4f49ab37c84b68ba184,
+      type: 2}
+  - blackRook: {fileID: 1218684493727980, guid: c13dffa2e41e349c78351ec06686dc75,
+      type: 2}
+  - blackPawn: {fileID: 1795645163035938, guid: 455e0d5008a5e426a96c3987ea4f82b6,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
