@@ -17,27 +17,28 @@ namespace RefrigtzChessPortable
     [Serializable]
     public class RefrigtzChessPortableForm //: System.Windows.Forms.Form
     {
-        public bool LoadP = false;
-        static  bool UsePenaltyRegardMechnisam = false;
-        static  bool AStarGreedyHeuristic = false;
-        int AllDrawKind = 0;
-        bool NotFoundBegin = false;
-        bool Deeperthandeeper = false;
-         String path3 = @"temp";
-        String AllDrawReplacement = "";
-        
-        public static int MovmentsNumber = 0;
-        public static String Root = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]);
-        public static String AllDrawKindString = "";
-        public static int OrderPlate = 1;
-        bool CoPermit = true;
-        int ConClick = -1;
-        bool WaitOnplay = false;
-        public RefrigtzChessPortable.RefrigtzChessPortableGeneticAlgorithm R = new RefrigtzChessPortable.RefrigtzChessPortableGeneticAlgorithm(false, false,UsePenaltyRegardMechnisam, false, false, false, false, true);
-        bool Person = true;
-        public RefrigtzChessPortable.AllDraw Draw = new AllDraw(-1, false, false, UsePenaltyRegardMechnisam, false, false, false, AStarGreedyHeuristic, true);
-        int[,] Table = null;
-        bool FOUND = false;
+		public bool LoadP = false;
+		static readonly bool UsePenaltyRegardMechnisam = false;
+		static readonly bool AStarGreedyHeuristic = false;
+		int AllDrawKind = 0;
+		bool NotFoundBegin = false;
+		bool Deeperthandeeper = false;
+		readonly String path3 = @"temp";
+		String AllDrawReplacement = "";
+
+		public static int MovmentsNumber = 0;
+		public static String Root = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]);
+		public static String AllDrawKindString = "";
+		public static int OrderPlate = 1;
+		bool CoPermit = true;
+		int ConClick = -1;
+		bool WaitOnplay = false;
+		public RefrigtzChessPortable.RefrigtzChessPortableGeneticAlgorithm R = new RefrigtzChessPortable.RefrigtzChessPortableGeneticAlgorithm(false, false,UsePenaltyRegardMechnisam, false, false, false, false, true);
+		bool Person = true;
+		public RefrigtzChessPortable.AllDraw Draw = new AllDraw(-1, false, false, UsePenaltyRegardMechnisam, false, false, false, AStarGreedyHeuristic, true);
+		int[,] Table = null;
+		bool FOUND = false;
+
 		#region These are the global variables and objects for RefrigtzChessPortableForm class
 			private int cl;
 		private int order;
@@ -125,7 +126,7 @@ namespace RefrigtzChessPortable
                 {
                     //MessageBox.Show("Wait...");
                     var parallelOptions = new ParallelOptions();
-                    parallelOptions.MaxDegreeOfParallelism = System.Threading.PlatformHelper.ProcessorCount;
+                    parallelOptions.MaxDegreeOfParallelism = AllDraw.PlatformHelperProcessorCount;
                     RefrigtzChessPortable.AllDraw.OrderPlateDraw = -1;
                     RefrigtzChessPortable.AllDraw.TableListAction.Add(CloneATable(brd.GetTable()));
                     Table = CloneATable(brd.GetTable());
@@ -156,7 +157,7 @@ namespace RefrigtzChessPortable
                                 aa = -1;
                             bool B = AllDraw.Blitz;
                             AllDraw.Blitz = false;
-                            RefrigtzChessPortable.AllDraw.MaxAStarGreedy = PlatformHelper.ProcessorCount;
+                            RefrigtzChessPortable.AllDraw.MaxAStarGreedy = AllDraw.PlatformHelperProcessorCount;
                             
                             if (Draw.IsAtLeastAllObjectIsNull())
                             {
@@ -1108,7 +1109,7 @@ namespace RefrigtzChessPortable
                                             aa = -1;
                                         bool B = AllDraw.Blitz;
                                         AllDraw.Blitz = false;
-                                        RefrigtzChessPortable.AllDraw.MaxAStarGreedy = PlatformHelper.ProcessorCount;
+                                        RefrigtzChessPortable.AllDraw.MaxAStarGreedy = AllDraw.PlatformHelperProcessorCount;
 
                                         AllDraw thiB = Draw.AStarGreedyString;
                                         if (Draw.IsAtLeastAllObjectIsNull())
@@ -1181,7 +1182,7 @@ namespace RefrigtzChessPortable
                                     aa = -1;
                                 bool B = AllDraw.Blitz;
                                 AllDraw.Blitz = false;
-                                RefrigtzChessPortable.AllDraw.MaxAStarGreedy = PlatformHelper.ProcessorCount;
+                                RefrigtzChessPortable.AllDraw.MaxAStarGreedy = AllDraw.PlatformHelperProcessorCount;
 
                                 AllDraw thiB = Draw.AStarGreedyString;
                                 if (Draw.IsAtLeastAllObjectIsNull())
@@ -1631,7 +1632,7 @@ namespace RefrigtzChessPortable
                                     aa = -1;
                                 bool B = AllDraw.Blitz;
                                 AllDraw.Blitz = false;
-                                RefrigtzChessPortable.AllDraw.MaxAStarGreedy = PlatformHelper.ProcessorCount;
+                                RefrigtzChessPortable.AllDraw.MaxAStarGreedy = AllDraw.PlatformHelperProcessorCount;
 
                                 if (!FirstS)
                                 {
@@ -1809,7 +1810,7 @@ namespace RefrigtzChessPortable
                             aa = -1;
                         bool B = AllDraw.Blitz;
                         AllDraw.Blitz = false;
-                        RefrigtzChessPortable.AllDraw.MaxAStarGreedy = PlatformHelper.ProcessorCount * 2;
+                        RefrigtzChessPortable.AllDraw.MaxAStarGreedy = AllDraw.PlatformHelperProcessorCount * 2;
 
                         FOUND = false;
 

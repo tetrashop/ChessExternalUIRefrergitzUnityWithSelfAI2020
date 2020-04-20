@@ -47,7 +47,7 @@ public class MoveSelector : MonoBehaviour
 
 	static int OrderAI=1;
 	int xB,yB,OrB=-2;
-	ArtificialInteligenceMove t;
+	static ArtificialInteligenceMove t;
     void Start ()
 	{
 		
@@ -113,17 +113,14 @@ public class MoveSelector : MonoBehaviour
             tileHighlight.SetActive(true);
             tileHighlight.transform.position = Geometry.PointFromGrid(gridPoint);
             if (Input.GetMouseButtonDown(0))
-            {
+			{if (OrB == -2)
+					OrB = 1;
                 // Reference Point 2: check for valid move location
 //				if (!Exist(moveLocations,gridPoint))
 //                {
 //                    return;
 //                }
-				if (t == null) {
-					t = new ArtificialInteligenceMove ();
-					if(t.t==null)
-					t.Awake ();
-				}
+
 				bool a = t != null && GameCanged ();
 				if (a)
 					a = a && t.t != null;
@@ -182,9 +179,7 @@ public class MoveSelector : MonoBehaviour
 	void Awake(){
 		if (t == null) {
 			t = new ArtificialInteligenceMove ();
-			if (t.t == null)
-				t.Awake ();
-		}
+			}
 
 	}
 

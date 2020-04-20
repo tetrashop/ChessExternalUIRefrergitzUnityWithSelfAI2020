@@ -89,18 +89,23 @@ namespace RefrigtzChessPortable
                 String P = Path.GetFullPath(path3);
                 AllDrawReplacement = Path.Combine(P, AllDrawKindString);
 
-                Logger y = new Logger(AllDrawReplacement);
+//                Logger y = new Logger(AllDrawReplacement);
                 //y.Dispose();
 
-                y = new Logger(AllDrawKindString);
+//                y = new Logger(AllDrawKindString);
                 //y.Dispose();
 
                 if (File.Exists(AllDrawKindString))
-                {
-
+				{FileInfo f = new FileInfo (AllDrawKindString);
+					if (f.Length == 0)
+						return false;
+					
                     if (File.Exists(AllDrawReplacement))
                     {
-                        if (((new System.IO.FileInfo(AllDrawKindString).Length) < (new System.IO.FileInfo(AllDrawReplacement)).Length))
+						f = new FileInfo (AllDrawReplacement);
+						if (f.Length == 0)
+							return false;
+if (((new System.IO.FileInfo(AllDrawKindString).Length) < (new System.IO.FileInfo(AllDrawReplacement)).Length))
                         {
                             File.Delete(AllDrawKindString);
                             File.Copy(AllDrawReplacement, AllDrawKindString);
@@ -139,7 +144,8 @@ namespace RefrigtzChessPortable
             Object OO = new Object();
             lock (OO)
             {
-                DrawManagement(FOUND, UsePenaltyRegardMechnisam, AStarGreedyHeuristic);
+				if (!DrawManagement (FOUND, UsePenaltyRegardMechnisam, AStarGreedyHeuristic))
+					return false;
 
                 bool DrawDrawen = false;
                 //Load Middle Targets.

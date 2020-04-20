@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 
 namespace RefrigtzChessPortable
 {
@@ -45,4 +45,4 @@ namespace RefrigtzChessPortable
 			}
 		}
 	}
-}
+}*/

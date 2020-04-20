@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,4 +33,4 @@ public class GarbageCollectionManager : MonoBehaviour
 		GarbageCollector.GCMode = GarbageCollector.Mode.Disabled;
 		#endif
 	}
-}
+}*/

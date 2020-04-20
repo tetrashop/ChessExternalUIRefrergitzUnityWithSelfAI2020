@@ -53,7 +53,7 @@ namespace RefrigtzChessPortable
 
     [Serializable]
     public class AllDraw//: IDisposable
-    {
+	{   public static int PlatformHelperProcessorCount=2;
         public static int CompleteNumber = 300;
         public static bool CompleteTreeDo = false;
         public static bool CompleteTreeCancel = false;
@@ -17423,8 +17423,8 @@ if (Order == 1)
             Object O = new Object();
             lock (O)
 			{
-				if (!MyGCCollectClass.ReadyMemmory ())
-					return true;
+				//if(!MyGCCollectClass.ReadyMemmory ())
+					//return true;
 				
                 bool IS = false;
                 if (!CompleteTreeDo)
@@ -17994,6 +17994,7 @@ if (Order == 1)
                 }
                 CurrentAStarGredyMax = AStarGreedyiLevelMax - iAStarGreedy;
             }
+			iAStarGreedy--;
             bool Do = false;
             if (iAStarGreedy >= 0 && iAStarGreedy < MaxDuringLevelThinkingCreation)
             {
@@ -24330,7 +24331,7 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                 ThinkingRefrigtzChessPortable.IsAtLeastOneKillerAtDraw = false;
 
                 var parallelOptions = new ParallelOptions();
-                parallelOptions.MaxDegreeOfParallelism = PlatformHelper.ProcessorCount;
+				parallelOptions.MaxDegreeOfParallelism =AllDraw.PlatformHelperProcessorCount;
                 SetDeptIgnore = SetDept;
                 int[,] TableHeuristic = null;
                 int Current = ChessRules.CurrentOrder;
@@ -24429,7 +24430,7 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                 lock (OOOO)
                 {
                     //if (MaxAStarGreedy == 0)
-                    MaxAStarGreedy = PlatformHelper.ProcessorCount;
+                    MaxAStarGreedy = AllDraw.PlatformHelperProcessorCount;
                     MaxAStarGreedy1 = MaxAStarGreedy;
                     int[,] Tabl = CloneATable(Table);
                     int aaa = a;
