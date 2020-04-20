@@ -47,10 +47,16 @@ public class MoveSelector : MonoBehaviour
 
 	static int OrderAI=1;
 	int xB,yB,OrB=-2;
-	static ArtificialInteligenceMove t;
+	ArtificialInteligenceMove t;
+	bool TU=false;
+	bool TT=false;
+		System.Threading.Tasks.Task ff = null;
+	System.Threading.Tasks.Task f = null;
+	bool xc = false;
+	bool xx = false;
+
     void Start ()
 	{
-		
 
 		this.enabled = false;
 		tileHighlight = Instantiate (tileHighlightPrefab, Geometry.PointFromGrid (new Vector2Int (0, 0)),
@@ -70,8 +76,8 @@ public class MoveSelector : MonoBehaviour
 	{
 		if(Order==1)
 		{
-			t.t.Play(i,j);
-			t.t.Play(i1,j1);
+			t.t.Play(i,7-j);
+			t.t.Play(i1,7-j1);
 			Order=-1;
 
 
@@ -101,87 +107,168 @@ public class MoveSelector : MonoBehaviour
 	}
 
     void Update ()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+	{
+		if (TU) {
 
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
-        {
-            Vector3 point = hit.point;
-            Vector2Int gridPoint = Geometry.GridFromPoint(point);
+			if (xc) {							
+				OrderAI = -1;
+				OrB = 1;
+				TU = false;
+				Awake ();
+				xc = false;
+				return;
+			}
+		}
+			
+		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
-            tileHighlight.SetActive(true);
-            tileHighlight.transform.position = Geometry.PointFromGrid(gridPoint);
-            if (Input.GetMouseButtonDown(0))
-			{if (OrB == -2)
+		RaycastHit hit;
+		if (Physics.Raycast (ray, out hit)) {
+			Vector3 point = hit.point;
+			Vector2Int gridPoint = Geometry.GridFromPoint (point);
+
+			tileHighlight.SetActive (true);
+			tileHighlight.transform.position = Geometry.PointFromGrid (gridPoint);
+			if (Input.GetMouseButtonDown (0)) {
+				if (OrB == -2)
 					OrB = 1;
-                // Reference Point 2: check for valid move location
-//				if (!Exist(moveLocations,gridPoint))
-//                {
-//                    return;
-//                }
+				// Reference Point 2: check for valid move location
+//				if (!Exist (moveLocations, gridPoint)) {
+//					return;
+//				}
 
 				bool a = t != null && GameCanged ();
 				if (a)
 					a = a && t.t != null;
-						if (a) {
-					if (t.t.LoadP) 
-					{	
-						if (GameManager.instance.PieceAtGrid (gridPoint) == null) {
-							GameManager.instance.Move (movingPiece, gridPoint);
-						} else 
+				if (a) {
+					if (t.t.LoadP) {	
+//						if (GameManager.instance.PieceAtGrid (gridPoint) == null) {
+//							GameManager.instance.Move (movingPiece, gridPoint);
+//						} else 
 						{
-							if (OrderAI == 1) {
+							if (OrderAI == 1 ) {
 								OrB = 0;
-								if (MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y)) {							
-									GameManager.instance.CapturePieceAt (gridPoint);
-									GameManager.instance.Move (movingPiece, gridPoint);
-										OrderAI = -1;
-									OrB = 1;
 
-											
-								}
-							} else {
-								OrB = 0;
-								Debug.Log ("Thinking...");
-								if (MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y)) {
-									
-									Debug.Log ("Thinking Finished.");
-									Input.mousePosition.Set (x, y, Input.mousePosition.z); 
-									(new TileSelector ()).Update ();
-									gridPoint.x = x1;
-									gridPoint.y = y1;					
-									GameManager.instance.CapturePieceAt (gridPoint);
-									GameManager.instance.Move (movingPiece, gridPoint);
-									OrB=1;
-									OrderAI = 1;
+								GameManager.instance.CapturePieceAt (gridPoint);
+								GameManager.instance.Move (movingPiece, gridPoint);
+								ExitState ();
+								tileHighlight.SetActive (false);
 							
-								}
+								if (!TU) {
+									ff=	System.Threading.Tasks.Task.Factory.StartNew (() => xc = MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y));
+									TU = true;
+									System.Threading.Thread d = new System.Threading.Thread (new System.Threading.ThreadStart (UserWait));
+									d.Start ();
+									}
+									
+
 							}
 						}
+					} else {
+						OrB = 0;
+
+						GameManager.instance.CapturePieceAt (gridPoint);
+						GameManager.instance.Move (movingPiece, gridPoint);
+
 					}
+
+
+					
+					// Reference Point 3: capture enemy piece here later
+					
+		
+			
 				} else {
-					OrB = 0;
-
-					GameManager.instance.CapturePieceAt (gridPoint);
-					GameManager.instance.Move (movingPiece, gridPoint);
-
+					tileHighlight.SetActive (false);
 				}
-                // Reference Point 3: capture enemy piece here later
-                ExitState();
-            }
-        }
-        else
-        {
-            tileHighlight.SetActive(false);
-        }
-    }
+			}
+
+		}
+
+	}
+	 
+	void UserWait()
+	{
+		ff.Wait ();
+
+		Awake ();
+	}void ThinkingWait()
+	{
+		f.Wait ();
+
+		Awake ();
+	}
+	
 	void Awake(){
 		if (t == null) {
 			t = new ArtificialInteligenceMove ();
-			}
+			t.t = new RefrigtzChessPortable.RefrigtzChessPortableForm ();
+			t.t.Form1_Load ();
+		}
+		if (TT) {
+			if (xx) {
 
+				Debug.Log ("Thinking Finished.");
+				Vector2Int gridPointN = new Vector2Int (0, 0);
+				gridPointN.x = x;
+				gridPointN.y = 7 - y;
+
+				Vector3 pointN = Geometry.PointFromGrid (gridPointN);
+				gridPointN = Geometry.GridFromPoint (pointN);
+
+				GameManager.instance.AddPiece (movingPiece, new Player ("black", true), x, 7 - y);
+
+
+				if (GameManager.instance.DoesPieceBelongToCurrentPlayer (movingPiece)) {
+					GameManager.instance.SelectPiece (movingPiece);
+				}
+
+				Vector2Int gridPointNN = new Vector2Int (0, 0);
+				gridPointNN.x = x1;
+				gridPointNN.y = 7 - y1;
+				tileHighlight.SetActive (true);
+				tileHighlight.transform.position = Geometry.PointFromGrid (gridPointNN);
+
+				GameManager.instance.CapturePieceAt (gridPointN);
+				GameManager.instance.Move (movingPiece, gridPointN);
+				OrB = 1;
+				OrderAI = 1;
+				ExitState ();
+				tileHighlight.SetActive (false);
+				//				
+				TT = false;
+				xx = false;
+				return;
+			}
+		}
+		if (OrderAI == 1)
+			Update ();
+		else {
+			if (!TT) {
+				bool aa = t != null && GameCanged ();
+				if (aa)
+					aa = aa && t.t != null;
+				if (aa) {
+					if (t.t.LoadP) {
+						if (OrderAI == -1 && OrB == 1) {
+							OrB = 0;
+							Debug.Log ("Thinking...");
+							if (!TT) {
+								f = System.Threading.Tasks.Task.Factory.StartNew (() => xx = MoveAI (-1, -1, -1, -1));
+								TT = true;
+								System.Threading.Thread d = new System.Threading.Thread (new System.Threading.ThreadStart (ThinkingWait));
+								d.Start ();
+
+							}
+
+						}
+					}
+				}
+			} 
+				
+			}
 	}
+
 
     private void CancelMove()
     {
@@ -238,4 +325,5 @@ public class MoveSelector : MonoBehaviour
             Destroy(highlight);
         }
     }
+
 }

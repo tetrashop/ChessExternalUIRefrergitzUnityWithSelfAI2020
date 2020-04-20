@@ -53,9 +53,9 @@ namespace RefrigtzChessPortable
 
     [Serializable]
     public class AllDraw//: IDisposable
-	{   public static int PlatformHelperProcessorCount=2;
+	{   public static int PlatformHelperProcessorCount=1;
         public static int CompleteNumber = 300;
-        public static bool CompleteTreeDo = false;
+		public static bool CompleteTreeDo = false;
         public static bool CompleteTreeCancel = false;
         public static int[,,] QuntumTable = {
             {{-1, -1, - 1, -1, -1, -1, -1, -1 },

@@ -2,20 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArtificialInteligenceMove:MonoBehaviour
+public class ArtificialInteligenceMove
 {
 	int Order=1;
 	public int x,y,x1,y1;
 	public RefrigtzChessPortable.RefrigtzChessPortableForm t=null;
-
-	void Awake(){
+	public  ArtificialInteligenceMove(){
 		if(t==null){
 
 			t = new RefrigtzChessPortable.RefrigtzChessPortableForm();
 			t.Form1_Load ();
 
-		}
-	}
+		}}
+//	void Awake(){
+//		if(t==null){
+//
+//			t = new RefrigtzChessPortable.RefrigtzChessPortableForm();
+//			t.Form1_Load ();
+//
+//		}
+//	}
 	public bool MoveSelector(int i,int j,int i1,int j1)
 	{
 		if(Order==1)

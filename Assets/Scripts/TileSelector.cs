@@ -39,7 +39,7 @@ public class TileSelector : MonoBehaviour
 
     private GameObject tileHighlight;
 
-    void Start ()
+    public void Start ()
     {
         Vector2Int gridPoint = Geometry.GridPoint(0, 0);
         Vector3 point = Geometry.PointFromGrid(gridPoint);
@@ -56,17 +56,17 @@ public class TileSelector : MonoBehaviour
         {
             Vector3 point = hit.point;
             Vector2Int gridPoint = Geometry.GridFromPoint(point);
-			x = gridPoint.x;
-			y = gridPoint.y;
-
+		
             tileHighlight.SetActive(true);
             tileHighlight.transform.position = Geometry.PointFromGrid(gridPoint);
             if (Input.GetMouseButtonDown(0))
             {
-                GameObject selectedPiece = GameManager.instance.PieceAtGrid(gridPoint);
+				GameObject selectedPiece = GameManager.instance.PieceAtGrid(gridPoint);
                 if (GameManager.instance.DoesPieceBelongToCurrentPlayer(selectedPiece))
                 {
-                    GameManager.instance.SelectPiece(selectedPiece);
+					x = gridPoint.x;
+					y = gridPoint.y;
+					GameManager.instance.SelectPiece(selectedPiece);
                     // Reference Point 1: add ExitState call here later
                     ExitState(selectedPiece);
                 }
