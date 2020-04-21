@@ -250,7 +250,13 @@ public class MoveSelector : MonoBehaviour
 			t = new ArtificialInteligenceMove ();
 		}
 
+<<<<<<< HEAD
 
+=======
+		if (OrderAI == -1) {
+			Update ();
+		}
+>>>>>>> b8bafb953c796dcfbae14fe7c799e526d6edf647
 	
 		}
 
