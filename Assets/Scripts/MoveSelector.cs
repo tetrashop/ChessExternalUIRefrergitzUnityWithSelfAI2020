@@ -49,15 +49,14 @@ public class MoveSelector : MonoBehaviour
 	int xB,yB,OrB=-2;
 	ArtificialInteligenceMove t;
 	bool TU=false;
-	bool TT=false;
-		System.Threading.Tasks.Task ff = null;
+	System.Threading.Tasks.Task ff = null;
 	System.Threading.Tasks.Task f = null;
 	bool xc = false;
 	bool xx = false;
-
-    void Start ()
+	System.Threading.Tasks.Task Output = null;
+	void Start ()
 	{
-
+		Awake();
 		this.enabled = false;
 		tileHighlight = Instantiate (tileHighlightPrefab, Geometry.PointFromGrid (new Vector2Int (0, 0)),
 			Quaternion.identity, gameObject.transform);
@@ -108,24 +107,14 @@ public class MoveSelector : MonoBehaviour
 
     void Update ()
 	{
-		if (TU) {
-
-			if (xc) {							
-				OrderAI = -1;
-				OrB = 1;
-				TU = false;
-				Awake ();
-				xc = false;
-				return;
-			}
-		}
-			
+		bool MoveAIBool = false;
+		Vector2Int gridPoint = null;
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
 		RaycastHit hit;
 		if (Physics.Raycast (ray, out hit)) {
 			Vector3 point = hit.point;
-			Vector2Int gridPoint = Geometry.GridFromPoint (point);
+			gridPoint = Geometry.GridFromPoint (point);
 
 			tileHighlight.SetActive (true);
 			tileHighlight.transform.position = Geometry.PointFromGrid (gridPoint);
@@ -133,141 +122,137 @@ public class MoveSelector : MonoBehaviour
 				if (OrB == -2)
 					OrB = 1;
 				// Reference Point 2: check for valid move location
-//				if (!Exist (moveLocations, gridPoint)) {
-//					return;
-//				}
-
-				bool a = t != null && GameCanged ();
-				if (a)
-					a = a && t.t != null;
-				if (a) {
+				if (!Exist (moveLocations, gridPoint)) {
+					return;
+				}
+				if (GameManager.instance.PieceAtGrid (gridPoint) == null) {
+					
+					GameManager.instance.Move (movingPiece, gridPoint);
+					MoveAIBool = true;
+				} else {
+					GameManager.instance.CapturePieceAt (gridPoint);
+					GameManager.instance.Move (movingPiece, gridPoint);
+					MoveAIBool = true;
+				}
+				ExitState ();
+				tileHighlight.SetActive(false);
+				//
+			}
+			
+		}
+			Output =	System.Threading.Tasks.Task.Factory.StartNew (() => {
+			if (MoveAIBool) {
+				bool aa = false;
+					aa = t != null && GameCanged ();
+				if (aa)
+					aa = aa && t.t != null;
+				if (aa) {
 					if (t.t.LoadP) {	
-//						if (GameManager.instance.PieceAtGrid (gridPoint) == null) {
-//							GameManager.instance.Move (movingPiece, gridPoint);
-//						} else 
-						{
-							if (OrderAI == 1 ) {
-								OrB = 0;
 
-								GameManager.instance.CapturePieceAt (gridPoint);
-								GameManager.instance.Move (movingPiece, gridPoint);
-								ExitState ();
-								tileHighlight.SetActive (false);
-							
-								if (!TU) {
-									ff=	System.Threading.Tasks.Task.Factory.StartNew (() => xc = MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y));
-									TU = true;
-									System.Threading.Thread d = new System.Threading.Thread (new System.Threading.ThreadStart (UserWait));
-									d.Start ();
-									}
-									
+						if (OrderAI == 1) {
+							OrB = 0;
+
+								
+							if (!TU) {
+								ff =	System.Threading.Tasks.Task.Factory.StartNew (() => xc = MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y));
+								TU = true;
+								ff.Wait ();
+								OrderAI = -1;
+								OrB = 1;
+								TU = false;
+								//							System.Threading.Thread d = new System.Threading.Thread (new System.Threading.ThreadStart (UserWait));
+								//									
+								Debug.Log ("Thinking...");
+										
+								f = System.Threading.Tasks.Task.Factory.StartNew (() => xx = MoveAI (-1, -1, -1, -1));
+								f.Wait ();
+											
+													
+
+								Debug.Log ("Thinking Finished.");
+								Vector2Int gridPointN = new Vector2Int (x, 7 - y);
+
+
+								//
+								//				
+								//				gridPointN =new Vector2Int(x,7-y); 
+
+								movingPiece =	GameManager.instance.pieces [x, 7 - y];
+
+								Vector2Int gridPointNN = new Vector2Int (x1, 7 - y1);
+
+								tileHighlight.SetActive (true);
+								tileHighlight.transform.position = Geometry.PointFromGrid (gridPointNN);
+
+								Debug.Log ("tile selected.");
+								//				Vector3 pointN = Geometry.PointFromGrid (gridPointNN);
+								//				movingPiece.transform.position = pointN;
+//								if (!Exist (moveLocations, gridPointN)) {
+//									return;
+//								}
+								Debug.Log ("Move Source...");
+
+								if (GameManager.instance.PieceAtGrid (gridPointN) == null) {
+
+									GameManager.instance.Move (movingPiece, gridPointNN);
+									MoveAIBool = false;
+								} else {
+									GameManager.instance.CapturePieceAt (gridPointNN);
+									GameManager.instance.Move (movingPiece, gridPointNN);
+									MoveAIBool = false;
+								}
+								Debug.Log ("Move Occured.");
+
+								OrB = 1;
+								OrderAI = 1;
+								//				tileHighlight.SetActive (false);
+
+								xx = false;
+								// Reference Point 1: add ExitState call here later
+								//				ExitState ();
+
+								ExitState();
+											
+
+								tileHighlight.SetActive(false);
 
 							}
 						}
-					} else {
-						OrB = 0;
-
-						GameManager.instance.CapturePieceAt (gridPoint);
-						GameManager.instance.Move (movingPiece, gridPoint);
-
-					}
-
-
-					
-					// Reference Point 3: capture enemy piece here later
-					
-		
 			
-				} else {
-					tileHighlight.SetActive (false);
-				}
-			}
+											
+					}
+				}}
+			});
+			Output.Wait ();	
 
-		}
+//			System.Threading.Thread d = new System.Threading.Thread (new System.Threading.ThreadStart (ThinkingWait));
+//			d.Start ();
+//			//						
+			// Reference Point 3: capture enemy piece here later	
+
 
 	}
+
 	 
 	void UserWait()
 	{
 		ff.Wait ();
 
-		Awake ();
+		Update ();
 	}void ThinkingWait()
 	{
-		f.Wait ();
+		Output.Wait ();	
 
-		Awake ();
 	}
-	
+
 	void Awake(){
 		if (t == null) {
 			t = new ArtificialInteligenceMove ();
-			t.t = new RefrigtzChessPortable.RefrigtzChessPortableForm ();
-			t.t.Form1_Load ();
 		}
-		if (TT) {
-			if (xx) {
-
-				Debug.Log ("Thinking Finished.");
-				Vector2Int gridPointN = new Vector2Int (0, 0);
-				gridPointN.x = x;
-				gridPointN.y = 7 - y;
-
-				Vector3 pointN = Geometry.PointFromGrid (gridPointN);
-				gridPointN = Geometry.GridFromPoint (pointN);
-
-				GameManager.instance.AddPiece (movingPiece, new Player ("black", true), x, 7 - y);
 
 
-				if (GameManager.instance.DoesPieceBelongToCurrentPlayer (movingPiece)) {
-					GameManager.instance.SelectPiece (movingPiece);
-				}
-
-				Vector2Int gridPointNN = new Vector2Int (0, 0);
-				gridPointNN.x = x1;
-				gridPointNN.y = 7 - y1;
-				tileHighlight.SetActive (true);
-				tileHighlight.transform.position = Geometry.PointFromGrid (gridPointNN);
-
-				GameManager.instance.CapturePieceAt (gridPointN);
-				GameManager.instance.Move (movingPiece, gridPointN);
-				OrB = 1;
-				OrderAI = 1;
-				ExitState ();
-				tileHighlight.SetActive (false);
-				//				
-				TT = false;
-				xx = false;
-				return;
-			}
+	
 		}
-		if (OrderAI == 1)
-			Update ();
-		else {
-			if (!TT) {
-				bool aa = t != null && GameCanged ();
-				if (aa)
-					aa = aa && t.t != null;
-				if (aa) {
-					if (t.t.LoadP) {
-						if (OrderAI == -1 && OrB == 1) {
-							OrB = 0;
-							Debug.Log ("Thinking...");
-							if (!TT) {
-								f = System.Threading.Tasks.Task.Factory.StartNew (() => xx = MoveAI (-1, -1, -1, -1));
-								TT = true;
-								System.Threading.Thread d = new System.Threading.Thread (new System.Threading.ThreadStart (ThinkingWait));
-								d.Start ();
-
-							}
-
-						}
-					}
-				}
-			} 
-				
-			}
-	}
 
 
     private void CancelMove()
