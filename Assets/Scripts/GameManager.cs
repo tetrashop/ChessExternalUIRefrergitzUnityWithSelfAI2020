@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     public GameObject blackRook;
     public GameObject blackPawn;
 
-    private GameObject[,] pieces;
+	public GameObject[,] pieces;
     private List<GameObject> movedPawns;
 
     private Player white;
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    void Start ()
+	public void Start ()
     {
         pieces = new GameObject[8, 8];
         movedPawns = new List<GameObject>();
