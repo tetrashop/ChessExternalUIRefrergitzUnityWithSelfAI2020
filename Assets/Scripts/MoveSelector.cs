@@ -154,16 +154,30 @@ public class MoveSelector : MonoBehaviour
 				
 				}
 				var output = Task.Factory.StartNew(() => {
-					RefrigtzChessPortable.AllDraw.CalIdle=2;
-					do{ System.Threading.Thread.Sleep(1000);}while(RefrigtzChessPortable.AllDraw.CalIdle!=1);
-
+					Object OO=new Object();
+					lock(OO){
+						if((RefrigtzChessPortable.AllDraw.CalIdle==0||RefrigtzChessPortable.AllDraw.CalIdle==2)){
+							//signal to stop idle
+							RefrigtzChessPortable.AllDraw.CalIdle=2;
+							//white to exit
+							do{ }while(RefrigtzChessPortable.AllDraw.CalIdle!=1);
+						}
+					}
 					//				xc =	MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y);
 					ff =	System.Threading.Tasks.Task.Factory.StartNew (() => xc = MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y));
 					ff.Wait ();
 					OrB = 1;
 					ExitState ();
-			
-				
+					Object OOO=new Object();
+					lock(OOO){
+						
+						if((RefrigtzChessPortable.AllDraw.CalIdle==0||RefrigtzChessPortable.AllDraw.CalIdle==2)){
+							//signal to stop idle
+							RefrigtzChessPortable.AllDraw.CalIdle=2;
+							//white to exit
+							do{ }while(RefrigtzChessPortable.AllDraw.CalIdle!=1);
+						}
+					}
 //				xx = MoveAI (-1, -1, -1, -1);
 					f = System.Threading.Tasks.Task.Factory.StartNew (() => xx = MoveAI (-1, -1, -1, -1));
 					f.Wait ();
@@ -195,9 +209,11 @@ public class MoveSelector : MonoBehaviour
 					OrB = 1;
 					xx = false;
 					// Reference Point 1: add ExitState call here later
-										
-					RefrigtzChessPortable.AllDraw.CalIdle=0;
-							
+					Object OOOO=new Object();
+					lock(OOOO){				
+							RefrigtzChessPortable.AllDraw.CalIdle=0;
+
+					}
 
 				});
 				output.Wait ();
@@ -217,6 +233,7 @@ public class MoveSelector : MonoBehaviour
 
 			}					
 			// Reference Point 3: capture enemy piece here later	
+					RefrigtzChessPortable.AllDraw.CalIdle=0;
 
 
 	}

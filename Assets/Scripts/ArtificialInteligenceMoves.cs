@@ -32,8 +32,11 @@ public class ArtificialInteligenceMove
 	}
 	public void ThinkingIdle()
 	{
+		Object O=new Object();
+		lock(O){
+			
 		do {
-			if(t!=null&&t.LoadP){
+				if(t!=null&&t.LoadP){
 			if(RefrigtzChessPortable.AllDraw.CalIdle==0)
 				t.Play(-1,-1);
 			else
@@ -42,6 +45,7 @@ public class ArtificialInteligenceMove
 			}
 
 				} while(RefrigtzChessPortable.AllDraw.CalIdle!=3);
+		}
 	}
 	public bool MoveSelector(int i,int j,int i1,int j1)
 	{

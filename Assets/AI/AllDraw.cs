@@ -54,8 +54,11 @@ namespace RefrigtzChessPortable
     [Serializable]
     public class AllDraw//: IDisposable
 	{
-		public static int CalIdle=1;
-		public static int PlatformHelperProcessorCount=1;
+		public const int MaxTimeInMillisseconds = 10;//Max 10 millisecond
+		public static int TimeInitiation;
+
+		public static int CalIdle=4;
+		public static int PlatformHelperProcessorCount = PlatformHelper.ProcessorCount;
         public static int CompleteNumber = 300;
 		public static bool CompleteTreeDo = false;
         public static bool CompleteTreeCancel = false;
@@ -6379,6 +6382,9 @@ namespace RefrigtzChessPortable
                                     int aa = 1;
                                     if (Order * -1 == -1)
                                         aa = -1;
+									if(AllDraw.TimeInitiation==0)
+										AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+									
                                     var H = Task.Factory.StartNew(() => SolderesOnTable[i].SoldierThinking[0].AStarGreedy[j].InitiateAStarGreedyt(MaxAStarGreedy, 0, 0, aa, CloneATable(SolderesOnTable[i].SoldierThinking[0].TableListSolder[j]), Order * -1, false, false, 0));
                                     H.Wait();
                                     H.Dispose();
@@ -6398,7 +6404,9 @@ namespace RefrigtzChessPortable
                                     int aa = 1;
                                     if (Order * -1 == -1)
                                         aa = -1;
-                                    var H = Task.Factory.StartNew(() => SolderesOnTable[i].SoldierThinking[0].AStarGreedy[j].InitiateAStarGreedyt(MaxAStarGreedy, 0, 0, aa, CloneATable(SolderesOnTable[i].SoldierThinking[0].TableListSolder[j]), Order * -1, false, false, 0));
+									if(AllDraw.TimeInitiation==0)
+										AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+									 var H = Task.Factory.StartNew(() => SolderesOnTable[i].SoldierThinking[0].AStarGreedy[j].InitiateAStarGreedyt(MaxAStarGreedy, 0, 0, aa, CloneATable(SolderesOnTable[i].SoldierThinking[0].TableListSolder[j]), Order * -1, false, false, 0));
                                     H.Wait();
                                     H.Dispose();
                                     SolderesOnTable[i].SoldierThinking[0].AStarGreedy[j].AStarGreedyString = this;
@@ -6450,7 +6458,9 @@ namespace RefrigtzChessPortable
                                     int aa = 1;
                                     if (Order * -1 == -1)
                                         aa = -1;
-                                    var H = Task.Factory.StartNew(() => ElephantOnTable[i].ElefantThinking[0].AStarGreedy[j].InitiateAStarGreedyt(MaxAStarGreedy, 0, 0, aa, CloneATable(ElephantOnTable[i].ElefantThinking[0].TableListElefant[j]), Order * -1, false, false, 0));
+									if(AllDraw.TimeInitiation==0)
+										AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+									  var H = Task.Factory.StartNew(() => ElephantOnTable[i].ElefantThinking[0].AStarGreedy[j].InitiateAStarGreedyt(MaxAStarGreedy, 0, 0, aa, CloneATable(ElephantOnTable[i].ElefantThinking[0].TableListElefant[j]), Order * -1, false, false, 0));
                                     H.Wait();
                                     H.Dispose();
                                     ElephantOnTable[i].ElefantThinking[0].AStarGreedy[j].AStarGreedyString = this;
@@ -6469,7 +6479,9 @@ namespace RefrigtzChessPortable
                                     int aa = 1;
                                     if (Order * -1 == -1)
                                         aa = -1;
-                                    var H = Task.Factory.StartNew(() => ElephantOnTable[i].ElefantThinking[0].AStarGreedy[j].InitiateAStarGreedyt(MaxAStarGreedy, 0, 0, aa, CloneATable(ElephantOnTable[i].ElefantThinking[0].TableListElefant[j]), Order * -1, false, false, 0));
+									if(AllDraw.TimeInitiation==0)
+										AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+									  var H = Task.Factory.StartNew(() => ElephantOnTable[i].ElefantThinking[0].AStarGreedy[j].InitiateAStarGreedyt(MaxAStarGreedy, 0, 0, aa, CloneATable(ElephantOnTable[i].ElefantThinking[0].TableListElefant[j]), Order * -1, false, false, 0));
                                     ElephantOnTable[i].ElefantThinking[0].AStarGreedy[j].AStarGreedyString = this;
                                     H.Wait();
                                     H.Dispose();
@@ -6518,7 +6530,9 @@ namespace RefrigtzChessPortable
                                     int aa = 1;
                                     if (Order * -1 == -1)
                                         aa = -1;
-                                    var H = Task.Factory.StartNew(() => HoursesOnTable[i].HourseThinking[0].AStarGreedy[j].InitiateAStarGreedyt(MaxAStarGreedy, 0, 0, aa, CloneATable(HoursesOnTable[i].HourseThinking[0].TableListHourse[j]), Order * -1, false, false, 0));
+									if(AllDraw.TimeInitiation==0)
+										AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+									  var H = Task.Factory.StartNew(() => HoursesOnTable[i].HourseThinking[0].AStarGreedy[j].InitiateAStarGreedyt(MaxAStarGreedy, 0, 0, aa, CloneATable(HoursesOnTable[i].HourseThinking[0].TableListHourse[j]), Order * -1, false, false, 0));
                                     H.Wait();
                                     H.Dispose();
                                     HoursesOnTable[i].HourseThinking[0].AStarGreedy[j].AStarGreedyString = this;
@@ -6537,7 +6551,9 @@ namespace RefrigtzChessPortable
                                     int aa = 1;
                                     if (Order * -1 == -1)
                                         aa = -1;
-                                    var H = Task.Factory.StartNew(() => HoursesOnTable[i].HourseThinking[0].AStarGreedy[j].InitiateAStarGreedyt(MaxAStarGreedy, 0, 0, aa, CloneATable(HoursesOnTable[i].HourseThinking[0].TableListHourse[j]), Order * -1, false, false, 0));
+									if(AllDraw.TimeInitiation==0)
+										AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+									 var H = Task.Factory.StartNew(() => HoursesOnTable[i].HourseThinking[0].AStarGreedy[j].InitiateAStarGreedyt(MaxAStarGreedy, 0, 0, aa, CloneATable(HoursesOnTable[i].HourseThinking[0].TableListHourse[j]), Order * -1, false, false, 0));
                                     H.Wait();
                                     H.Dispose();
                                     HoursesOnTable[i].HourseThinking[0].AStarGreedy[j].AStarGreedyString = this;
@@ -6589,6 +6605,8 @@ namespace RefrigtzChessPortable
                                     int aa = 1;
                                     if (Order * -1 == -1)
                                         aa = -1;
+									if(AllDraw.TimeInitiation==0)
+										AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
                                     var H = Task.Factory.StartNew(() => CastlesOnTable[i].CastleThinking[0].AStarGreedy[j].InitiateAStarGreedyt(MaxAStarGreedy, 0, 0, aa, CloneATable(CastlesOnTable[i].CastleThinking[0].TableListCastle[j]), Order * -1, false, false, 0));
                                     H.Wait();
                                     H.Dispose();
@@ -6608,6 +6626,9 @@ namespace RefrigtzChessPortable
                                     int aa = 1;
                                     if (Order * -1 == -1)
                                         aa = -1;
+									if(AllDraw.TimeInitiation==0)
+										AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+									
                                     var H = Task.Factory.StartNew(() => CastlesOnTable[i].CastleThinking[0].AStarGreedy[j].InitiateAStarGreedyt(MaxAStarGreedy, 0, 0, aa, CloneATable(CastlesOnTable[i].CastleThinking[0].TableListCastle[j]), Order * -1, false, false, 0));
                                     H.Wait();
                                     H.Dispose();
@@ -6657,6 +6678,9 @@ namespace RefrigtzChessPortable
                                     int aa = 1;
                                     if (Order * -1 == -1)
                                         aa = -1;
+									if(AllDraw.TimeInitiation==0)
+										AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+									
                                     var H = Task.Factory.StartNew(() => MinisterOnTable[i].MinisterThinking[0].AStarGreedy[j].InitiateAStarGreedyt(MaxAStarGreedy, 0, 0, aa, CloneATable(MinisterOnTable[i].MinisterThinking[0].TableListMinister[j]), Order * -1, false, false, 0));
                                     H.Wait();
                                     H.Dispose();
@@ -6676,6 +6700,9 @@ namespace RefrigtzChessPortable
                                     int aa = 1;
                                     if (Order * -1 == -1)
                                         aa = -1;
+									if(AllDraw.TimeInitiation==0)
+										AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+									
                                     var H = Task.Factory.StartNew(() => MinisterOnTable[i].MinisterThinking[0].AStarGreedy[j].InitiateAStarGreedyt(MaxAStarGreedy, 0, 0, aa, CloneATable(MinisterOnTable[i].MinisterThinking[0].TableListMinister[j]), Order * -1, false, false, 0));
                                     H.Wait();
                                     H.Dispose();
@@ -6726,6 +6753,9 @@ namespace RefrigtzChessPortable
                                     int aa = 1;
                                     if (Order * -1 == -1)
                                         aa = -1;
+									if(AllDraw.TimeInitiation==0)
+										AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+									
                                     var H = Task.Factory.StartNew(() => KingOnTable[i].KingThinking[0].AStarGreedy[j].InitiateAStarGreedyt(MaxAStarGreedy, 0, 0, aa, CloneATable(KingOnTable[i].KingThinking[0].TableListKing[j]), Order * -1, false, false, 0));
                                     H.Wait();
                                     H.Dispose();
@@ -6745,6 +6775,9 @@ namespace RefrigtzChessPortable
                                     int aa = 1;
                                     if (Order * -1 == -1)
                                         aa = -1;
+									if(AllDraw.TimeInitiation==0)
+										AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+									
                                     var H = Task.Factory.StartNew(() => KingOnTable[i].KingThinking[0].AStarGreedy[j].InitiateAStarGreedyt(MaxAStarGreedy, 0, 0, aa, CloneATable(KingOnTable[i].KingThinking[0].TableListKing[j]), Order * -1, false, false, 0));
                                     H.Wait();
                                     H.Dispose();
@@ -6771,8 +6804,11 @@ namespace RefrigtzChessPortable
 
             Object a = new Object();
             lock (a)
-            {
-                if (LeafDeep > MaxAStarGreedy)
+			{   int TimeNow = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+				if ((TimeNow - TimeInitiation) > MaxTimeInMillisseconds)
+					return Leaf;
+				
+                if (LeafDeep >= MaxAStarGreedy)
                     return Leaf;
                 LeafDeep++;
                 //when found return recursive
@@ -17424,7 +17460,9 @@ if (Order == 1)
         {
             Object O = new Object();
             lock (O)
-			{
+			{   int TimeNow = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+				if ((TimeNow - TimeInitiation) > MaxTimeInMillisseconds)
+					return true;
 				if (CalIdle == 2)
 					return true;
 				//if(!MyGCCollectClass.ReadyMemmory ())
@@ -18044,6 +18082,8 @@ if (Order == 1)
                     RefrigtzChessPortable.AllDraw Leaf = null;
                     Tabl = CloneATable(Table);
                     int LeafDeep = MaxAStarGreedy;
+					TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+
                     var array1 = Task.Factory.StartNew(() => FoundOfLeafDepenOfKind(ref Leaf, ref FOUND, Order, LeafDeep, 0, 0, 0, 0));
 
                     array1.Wait();
@@ -18054,15 +18094,19 @@ if (Order == 1)
             {
                 if (!Deeperthandeeper || ThinkingRefrigtzChessPortable.FullGameAllow)
                 {
+					bool Blit = AllDraw.Blitz;
+					if (AllDraw.OrderPlateDraw == Order * -1)
+						AllDraw.Blitz = true;
+					
                     Object O = new Object();
                     lock (O)
                     {
                         NumberOfnewMove = 0;
                         Order = DummyOrder;
                         ChessRules.CurrentOrder = DummyCurrentOrder;
-                        int Ord = Order, iAStarGreedy1 = iAStarGreedy - 1, ii1 = ii, jj1 = jj, ik1 = ik, j1 = j;
+                        int Ord = Order, iAStarGreedy1 = iAStarGreedy, ii1 = ii, jj1 = jj, ik1 = ik, j1 = j;
 
-                        var array1 = Task.Factory.StartNew(() => Do = this.FullGameThinkingTree(Ord, iAStarGreedy1 - 1, ii1, jj1, ik1, j1, false, LeafAStarGreedy));
+                        var array1 = Task.Factory.StartNew(() => Do = this.FullGameThinkingTree(Ord, iAStarGreedy1, ii1, jj1, ik1, j1, false, LeafAStarGreedy));
 
 
                         array1.Wait();
@@ -18081,6 +18125,7 @@ if (Order == 1)
                         array11.Wait();
                         array11.Dispose();
 
+						AllDraw.Blitz = Blit;
                     }
                 }
             }
@@ -18173,7 +18218,7 @@ if (Order == 1)
                          lock (O)
                          {
                              Tabl = CloneATable(Table);
-                             FoundOfLeafDepenOfKindFullGame(Tabl, Order, iAStarGreedy - 1, ii, jj, ik, j, FOUND, LeafAStarGreedy);
+                             FoundOfLeafDepenOfKindFullGame(Tabl, Order, iAStarGreedy, ii, jj, ik, j, FOUND, LeafAStarGreedy);
                          }
                      }
                      else
@@ -18183,7 +18228,7 @@ if (Order == 1)
                          {
                              Order = DummyOrder;
                              ChessRules.CurrentOrder = DummyCurrentOrder;
-                             int Ord = Order, iAStarGreedy1 = iAStarGreedy - 1, ii1 = ii, jj1 = jj, ik1 = ik, j1 = j;
+                             int Ord = Order, iAStarGreedy1 = iAStarGreedy, ii1 = ii, jj1 = jj, ik1 = ik, j1 = j;
 
                              //Parallel.Invoke(() =>
                              {
@@ -24313,6 +24358,7 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
         //Main Initiate Thinking Method.
         public int[,] Initiate(int ii, int jj, int a, int[,] Table, int Order, bool TB, bool FOUND, int LeafAStarGreedy, bool SetDept = false)
         {
+			TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
 
             Object o = new Object();
             lock (o)

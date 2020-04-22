@@ -166,6 +166,8 @@ namespace RefrigtzChessPortable
                                 Draw.SetRowColumn(0);
                                 Draw.IsCurrentDraw = true;
                             }
+							AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+
                             Draw.InitiateAStarGreedyt(RefrigtzChessPortable.AllDraw.MaxAStarGreedy, 0, 0, aa, CloneATable(RefrigtzChessPortable.AllDraw.TableListAction[RefrigtzChessPortable.AllDraw.TableListAction.Count - 1]), Ord, false, FOUND, 0);
 
                             AllDraw.Blitz = B;
@@ -267,6 +269,7 @@ namespace RefrigtzChessPortable
 
                     if (i == -1 && j == -1)
                     {
+						AllDraw.MaxAStarGreedy=PlatformHelper.ProcessorCount;
                         Again:
                         CoPermit = false;
                         Person = false;
@@ -285,6 +288,10 @@ namespace RefrigtzChessPortable
                         var newTask = Task.Factory.StartNew(() => AliceAction(-1));
                         newTask.Wait();
                         newTask.Dispose();
+						Object oa=new object();
+						lock(oa){
+							if(AllDraw.CalIdle!=0&&AllDraw.CalIdle!=2)
+						{
                         if (Draw.TableZero(Table))
                         {
                             //MessageBox.Show("Board is invalid;");
@@ -359,7 +366,13 @@ namespace RefrigtzChessPortable
                             }
                         }
                         
-                        
+						}}
+//						else
+//						{   
+//							bool LoadTree=false;
+//							(new TakeRoot()).Save(FOUND, false, this, ref LoadTree, false, false, UsePenaltyRegardMechnisam, false, false, false, AStarGreedyHeuristic, true);
+//							return 0;
+//						}
                     }
                     else
                     {
@@ -368,7 +381,12 @@ namespace RefrigtzChessPortable
                         //if (k == 0)
                         
                     }
-                  if (k > 6)
+					Object oaa=new object();
+					lock(oaa){
+					if(AllDraw.CalIdle==0||AllDraw.CalIdle==2)
+						return 0;
+					}
+			      if (k > 6)
                     {
                         played = 2;
                     }
@@ -1096,9 +1114,8 @@ namespace RefrigtzChessPortable
                                 lock (oo)
                                 {
                                     if (Com && (order == 1))
-                                    {
-										do{ System.Threading.Thread.Sleep(100);}while(AllDraw.CalIdle!=1);
-										  MovmentsNumber++;
+									{
+											MovmentsNumber++;
                                         
                                         
                                         Table = brd.GetTable();
@@ -1124,6 +1141,8 @@ namespace RefrigtzChessPortable
                                         }
                                         Draw.AStarGreedyString = thiB;
 
+										AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+
                                         Draw.InitiateAStarGreedyt(RefrigtzChessPortable.AllDraw.MaxAStarGreedy, 0, 0, aa, CloneATable(RefrigtzChessPortable.AllDraw.TableListAction[RefrigtzChessPortable.AllDraw.TableListAction.Count - 1]), Ord, false, FOUND, 0);
 
                                         AllDraw.Blitz = B;
@@ -1140,14 +1159,14 @@ namespace RefrigtzChessPortable
 
                                         Play(-1, -1);
                                         
-                                        
+
                                         
                                     }
                                     else
                               if (Com && (order == 2))
                                     {
-											do{ System.Threading.Thread.Sleep(100);}while(AllDraw.CalIdle!=1);
-											 MovmentsNumber++;
+
+											MovmentsNumber++;
                                         Table = brd.GetTable();
                                         ClearTableInitiationPreventionOfMultipleMove();
 
@@ -1157,8 +1176,7 @@ namespace RefrigtzChessPortable
                                         tt.Abort();
                                         AllDraw.OrderPlate = 1; OrderPlate = 1;
 
-											AllDraw.CalIdle=0;
-
+							
 
 }
                                 }
@@ -1173,7 +1191,7 @@ namespace RefrigtzChessPortable
                         {
                             if (Com && (order == 1))
                             {
-								do{ System.Threading.Thread.Sleep(100);}while(AllDraw.CalIdle!=1);
+									
 								MovmentsNumber++;
                                 
                                
@@ -1201,6 +1219,8 @@ namespace RefrigtzChessPortable
                                 }
                                 Draw.AStarGreedyString = thiB;
 
+								AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+
                                 Draw.InitiateAStarGreedyt(RefrigtzChessPortable.AllDraw.MaxAStarGreedy, 0, 0, aa, CloneATable(RefrigtzChessPortable.AllDraw.TableListAction[RefrigtzChessPortable.AllDraw.TableListAction.Count - 1]), Ord, false, FOUND, 0);
 
 
@@ -1221,13 +1241,13 @@ namespace RefrigtzChessPortable
 
                                 Play(-1, -1);
                                 
-                                
+
 						     }
                             else
                               if (Com && (order == 2))
-                            {
-									do{ System.Threading.Thread.Sleep(100);}while(AllDraw.CalIdle!=1);
-											Table = brd.GetTable();
+								{
+									
+												Table = brd.GetTable();
                                 MovmentsNumber++;
                                 ClearTableInitiationPreventionOfMultipleMove();
 
@@ -1236,7 +1256,7 @@ namespace RefrigtzChessPortable
                                 tt.Join();
                                 tt.Abort();
                                 AllDraw.OrderPlate = 1; OrderPlate = 1;
-									AllDraw.CalIdle=0;
+					
                             }
                         }
                         return 1;
@@ -1836,6 +1856,7 @@ namespace RefrigtzChessPortable
                         }
                         Draw.AStarGreedyString = thiB;
 
+					AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
 
                         output = Task.Factory.StartNew(() => Draw.InitiateAStarGreedyt(RefrigtzChessPortable.AllDraw.MaxAStarGreedy, 0, 0, aa, CloneATable(RefrigtzChessPortable.AllDraw.TableListAction[RefrigtzChessPortable.AllDraw.TableListAction.Count - 1]), Ord, false, FOUND, 0));
                         output.Wait();
