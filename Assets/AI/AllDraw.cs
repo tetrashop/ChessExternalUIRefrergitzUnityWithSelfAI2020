@@ -17431,7 +17431,7 @@ if (Order == 1)
                 {
                     try
                     {
-                        if (iAStarGreedy < 0 //&& iAStarGreedy < MaxDuringLevelThinkingCreation
+                        if (iAStarGreedy <= 0 //&& iAStarGreedy < MaxDuringLevelThinkingCreation
                        )
                         {
                             IS = true;

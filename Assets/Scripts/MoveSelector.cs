@@ -31,9 +31,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
+using System.Threading.Tasks;
+using UnityEditor;
+
+
 [SerializeField]
+
+
 public class MoveSelector : MonoBehaviour
-{		public GameObject moveLocationPrefab;
+{	
+
+	public GameObject deprecatedTarget;
+	public GameObject[] target;
+
+	public GameObject moveLocationPrefab;
 	 public GameObject tileHighlightPrefab;
     public GameObject attackLocationPrefab;
 
@@ -45,15 +57,15 @@ public class MoveSelector : MonoBehaviour
 	public int x,y,x1,y1;
 
 
-	static int OrderAI=1;
+//	static int OrderAI=1;
 	int xB,yB,OrB=-2;
 	ArtificialInteligenceMove t;
-	bool TU=false;
+//	bool TU=false;
 	System.Threading.Tasks.Task ff = null;
 	System.Threading.Tasks.Task f = null;
 	bool xc = false;
 	bool xx = false;
-	System.Threading.Tasks.Task Output = null;
+//	System.Threading.Tasks.Task Output = null;
 	void Start ()
 	{
 		Awake();
@@ -106,9 +118,15 @@ public class MoveSelector : MonoBehaviour
 	}
 
     void Update ()
-	{
-		bool MoveAIBool = false;
-		Vector2Int gridPoint = null;
+	{bool aa = false;
+		
+		aa = t != null;
+		aa = aa && t.t != null;
+		if (!aa)
+			return;
+		if (!t.t.LoadP)
+			return;
+			Vector2Int gridPoint = null;
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
 		RaycastHit hit;
@@ -128,106 +146,72 @@ public class MoveSelector : MonoBehaviour
 				if (GameManager.instance.PieceAtGrid (gridPoint) == null) {
 					
 					GameManager.instance.Move (movingPiece, gridPoint);
-					MoveAIBool = true;
+
+				
 				} else {
 					GameManager.instance.CapturePieceAt (gridPoint);
 					GameManager.instance.Move (movingPiece, gridPoint);
-					MoveAIBool = true;
+				
 				}
-				ExitState ();
-				tileHighlight.SetActive(false);
-				//
-			}
-			
-		}
-			Output =	System.Threading.Tasks.Task.Factory.StartNew (() => {
-			if (MoveAIBool) {
-				bool aa = false;
-					aa = t != null && GameCanged ();
-				if (aa)
-					aa = aa && t.t != null;
-				if (aa) {
-					if (t.t.LoadP) {	
+				var output = Task.Factory.StartNew(() => {
+					//				xc =	MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y);
+					ff =	System.Threading.Tasks.Task.Factory.StartNew (() => xc = MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y));
+					ff.Wait ();
+					OrB = 1;
+					ExitState ();
 
-						if (OrderAI == 1) {
-							OrB = 0;
-
-								
-							if (!TU) {
-								ff =	System.Threading.Tasks.Task.Factory.StartNew (() => xc = MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y));
-								TU = true;
-								ff.Wait ();
-								OrderAI = -1;
-								OrB = 1;
-								TU = false;
-								//							System.Threading.Thread d = new System.Threading.Thread (new System.Threading.ThreadStart (UserWait));
-								//									
-								Debug.Log ("Thinking...");
-										
-								f = System.Threading.Tasks.Task.Factory.StartNew (() => xx = MoveAI (-1, -1, -1, -1));
-								f.Wait ();
-											
-													
-
-								Debug.Log ("Thinking Finished.");
-								Vector2Int gridPointN = new Vector2Int (x, 7 - y);
-
-
-								//
-								//				
-								//				gridPointN =new Vector2Int(x,7-y); 
-
-								movingPiece =	GameManager.instance.pieces [x, 7 - y];
-
-								Vector2Int gridPointNN = new Vector2Int (x1, 7 - y1);
-
-								tileHighlight.SetActive (true);
-								tileHighlight.transform.position = Geometry.PointFromGrid (gridPointNN);
-
-								Debug.Log ("tile selected.");
-								//				Vector3 pointN = Geometry.PointFromGrid (gridPointNN);
-								//				movingPiece.transform.position = pointN;
-//								if (!Exist (moveLocations, gridPointN)) {
-//									return;
-//								}
-								Debug.Log ("Move Source...");
-
-								if (GameManager.instance.PieceAtGrid (gridPointN) == null) {
-
-									GameManager.instance.Move (movingPiece, gridPointNN);
-									MoveAIBool = false;
-								} else {
-									GameManager.instance.CapturePieceAt (gridPointNN);
-									GameManager.instance.Move (movingPiece, gridPointNN);
-									MoveAIBool = false;
-								}
-								Debug.Log ("Move Occured.");
-
-								OrB = 1;
-								OrderAI = 1;
-								//				tileHighlight.SetActive (false);
-
-								xx = false;
-								// Reference Point 1: add ExitState call here later
-								//				ExitState ();
-
-								ExitState();
+					Debug.Log ("Thinking...");
+//				xx = MoveAI (-1, -1, -1, -1);
+					f = System.Threading.Tasks.Task.Factory.StartNew (() => xx = MoveAI (-1, -1, -1, -1));
+					f.Wait ();
 											
 
-								tileHighlight.SetActive(false);
+					Debug.Log ("Thinking Finished.");
+					Vector2Int gridPointN = new Vector2Int (x, 7 - y);
 
-							}
-						}
-			
-											
+
+					movingPiece =	GameManager.instance.pieces [x, 7 - y];
+
+					Vector2Int gridPointNN = new Vector2Int (x1, 7 - y1);
+
+					tileHighlight.SetActive (true);
+					tileHighlight.transform.position = Geometry.PointFromGrid (gridPointNN);
+
+					Debug.Log ("tile selected.");
+					Debug.Log ("Move Source...");
+
+					if (GameManager.instance.PieceAtGrid (gridPointN) == null) {
+
+						GameManager.instance.Move (movingPiece, gridPointNN);
+					} else {
+						GameManager.instance.CapturePieceAt (gridPointNN);
+						GameManager.instance.Move (movingPiece, gridPointNN);
 					}
-				}}
-			});
-			Output.Wait ();	
+					Debug.Log ("Move Occured.");
 
-//			System.Threading.Thread d = new System.Threading.Thread (new System.Threading.ThreadStart (ThinkingWait));
-//			d.Start ();
-//			//						
+					OrB = 1;
+					xx = false;
+					// Reference Point 1: add ExitState call here later
+										
+								
+
+				});
+				output.Wait ();
+						
+
+
+
+					ExitState ();
+
+
+			
+			
+			
+			}
+		} else {
+				tileHighlight.SetActive (false);
+
+			}					
 			// Reference Point 3: capture enemy piece here later	
 
 
@@ -239,25 +223,27 @@ public class MoveSelector : MonoBehaviour
 		ff.Wait ();
 
 		Update ();
-	}void ThinkingWait()
-	{
-		Output.Wait ();	
-
 	}
+	bool ThinkingWait()
+	{
+		if(f==null)
+		f = System.Threading.Tasks.Task.Factory.StartNew (() => xx = MoveAI (-1, -1, -1, -1));
+	else
+		if(f.IsCanceled)
+		f = System.Threading.Tasks.Task.Factory.StartNew (() => xx = MoveAI (-1, -1, -1, -1));
+		//f.Wait ();
+
+		if(f.IsCompleted)
+			return true;
+		return false;
+}
 
 	void Awake(){
 		if (t == null) {
 			t = new ArtificialInteligenceMove ();
 		}
 
-<<<<<<< HEAD
 
-=======
-		if (OrderAI == -1) {
-			Update ();
-		}
->>>>>>> b8bafb953c796dcfbae14fe7c799e526d6edf647
-	
 		}
 
 

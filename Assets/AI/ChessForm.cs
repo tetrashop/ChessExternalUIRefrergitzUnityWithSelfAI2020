@@ -171,6 +171,8 @@ namespace RefrigtzChessPortable
                             AllDraw.Blitz = B;
                             Deeperthandeeper = Store;
                             
+							(new TakeRoot()).Save(FOUND, false, this, ref LoadTree, false, false, UsePenaltyRegardMechnisam, false, false, false, AStarGreedyHeuristic, true);
+
                         }
                         else
                         {

@@ -8,20 +8,25 @@ public class ArtificialInteligenceMove
 	public int x,y,x1,y1;
 	public RefrigtzChessPortable.RefrigtzChessPortableForm t=null;
 	public  ArtificialInteligenceMove(){
-		if(t==null){
+		var t = new System.Threading.Thread (new System.Threading.ThreadStart (Awake));
+		t.Start ();
+	}
+		
 
-			t = new RefrigtzChessPortable.RefrigtzChessPortableForm();
+	void Awake()
+	{
+		if (t == null) {
+					
+	
+
+				
+			t = new RefrigtzChessPortable.RefrigtzChessPortableForm ();
 			t.Form1_Load ();
+				
 
-		}}
-//	void Awake(){
-//		if(t==null){
-//
-//			t = new RefrigtzChessPortable.RefrigtzChessPortableForm();
-//			t.Form1_Load ();
-//
-//		}
-//	}
+
+		}
+	}
 	public bool MoveSelector(int i,int j,int i1,int j1)
 	{
 		if(Order==1)
