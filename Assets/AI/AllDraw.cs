@@ -53,7 +53,9 @@ namespace RefrigtzChessPortable
 
     [Serializable]
     public class AllDraw//: IDisposable
-	{   public static int PlatformHelperProcessorCount=1;
+	{
+		public static int CalIdle=1;
+		public static int PlatformHelperProcessorCount=1;
         public static int CompleteNumber = 300;
 		public static bool CompleteTreeDo = false;
         public static bool CompleteTreeCancel = false;
@@ -17423,6 +17425,8 @@ if (Order == 1)
             Object O = new Object();
             lock (O)
 			{
+				if (CalIdle == 2)
+					return true;
 				//if(!MyGCCollectClass.ReadyMemmory ())
 					//return true;
 				

@@ -154,13 +154,16 @@ public class MoveSelector : MonoBehaviour
 				
 				}
 				var output = Task.Factory.StartNew(() => {
+					RefrigtzChessPortable.AllDraw.CalIdle=2;
+					do{ System.Threading.Thread.Sleep(1000);}while(RefrigtzChessPortable.AllDraw.CalIdle!=1);
+
 					//				xc =	MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y);
 					ff =	System.Threading.Tasks.Task.Factory.StartNew (() => xc = MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y));
 					ff.Wait ();
 					OrB = 1;
 					ExitState ();
-
-					Debug.Log ("Thinking...");
+			
+				
 //				xx = MoveAI (-1, -1, -1, -1);
 					f = System.Threading.Tasks.Task.Factory.StartNew (() => xx = MoveAI (-1, -1, -1, -1));
 					f.Wait ();
@@ -193,7 +196,8 @@ public class MoveSelector : MonoBehaviour
 					xx = false;
 					// Reference Point 1: add ExitState call here later
 										
-								
+					RefrigtzChessPortable.AllDraw.CalIdle=0;
+							
 
 				});
 				output.Wait ();

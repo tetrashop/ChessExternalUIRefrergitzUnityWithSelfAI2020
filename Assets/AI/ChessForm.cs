@@ -1097,7 +1097,8 @@ namespace RefrigtzChessPortable
                                 {
                                     if (Com && (order == 1))
                                     {
-                                        MovmentsNumber++;
+										do{ System.Threading.Thread.Sleep(100);}while(AllDraw.CalIdle!=1);
+										  MovmentsNumber++;
                                         
                                         
                                         Table = brd.GetTable();
@@ -1133,7 +1134,9 @@ namespace RefrigtzChessPortable
                                         tt.Abort();
                                         AllDraw.OrderPlate = -1; OrderPlate = -1;
 
+										RefrigtzChessPortable.AllDraw.CalIdle=2;
 
+										do{ System.Threading.Thread.Sleep(1000);}while(RefrigtzChessPortable.AllDraw.CalIdle!=1);
 
                                         Play(-1, -1);
                                         
@@ -1143,7 +1146,8 @@ namespace RefrigtzChessPortable
                                     else
                               if (Com && (order == 2))
                                     {
-                                        MovmentsNumber++;
+											do{ System.Threading.Thread.Sleep(100);}while(AllDraw.CalIdle!=1);
+											 MovmentsNumber++;
                                         Table = brd.GetTable();
                                         ClearTableInitiationPreventionOfMultipleMove();
 
@@ -1153,10 +1157,10 @@ namespace RefrigtzChessPortable
                                         tt.Abort();
                                         AllDraw.OrderPlate = 1; OrderPlate = 1;
 
+											AllDraw.CalIdle=0;
 
 
-
-                                    }
+}
                                 }
                             }
                         }
@@ -1169,7 +1173,8 @@ namespace RefrigtzChessPortable
                         {
                             if (Com && (order == 1))
                             {
-                                MovmentsNumber++;
+								do{ System.Threading.Thread.Sleep(100);}while(AllDraw.CalIdle!=1);
+								MovmentsNumber++;
                                 
                                
                                 Table = brd.GetTable();
@@ -1209,16 +1214,20 @@ namespace RefrigtzChessPortable
 
                                 AllDraw.OrderPlate = -1; OrderPlate = -1;
 
+								RefrigtzChessPortable.AllDraw.CalIdle=2;
+
+								do{ System.Threading.Thread.Sleep(1000);}while(RefrigtzChessPortable.AllDraw.CalIdle!=1);
+
 
                                 Play(-1, -1);
                                 
                                 
-                                
-                            }
+						     }
                             else
                               if (Com && (order == 2))
                             {
-                                Table = brd.GetTable();
+									do{ System.Threading.Thread.Sleep(100);}while(AllDraw.CalIdle!=1);
+											Table = brd.GetTable();
                                 MovmentsNumber++;
                                 ClearTableInitiationPreventionOfMultipleMove();
 
@@ -1227,6 +1236,7 @@ namespace RefrigtzChessPortable
                                 tt.Join();
                                 tt.Abort();
                                 AllDraw.OrderPlate = 1; OrderPlate = 1;
+									AllDraw.CalIdle=0;
                             }
                         }
                         return 1;
