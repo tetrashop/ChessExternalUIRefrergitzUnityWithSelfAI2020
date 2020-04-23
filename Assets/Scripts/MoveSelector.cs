@@ -63,18 +63,19 @@ public class MoveSelector : MonoBehaviour
 //	bool TU=false;
 	System.Threading.Tasks.Task ff = null;
 	System.Threading.Tasks.Task f = null;
+
 	bool xc = false;
 	bool xx = false;
 //	System.Threading.Tasks.Task Output = null;
 	void Start ()
 	{
-		Awake();
 		this.enabled = false;
 		tileHighlight = Instantiate (tileHighlightPrefab, Geometry.PointFromGrid (new Vector2Int (0, 0)),
 			Quaternion.identity, gameObject.transform);
 		tileHighlight.SetActive (false);
 	
-	}
+		Awake();
+		}
 
 	bool GameCanged()
 	{
@@ -102,7 +103,7 @@ public class MoveSelector : MonoBehaviour
 				y=t.t.R.CromosomColumnFirst;
 				x1=t.t.R.CromosomRow;
 				y1=t.t.R.CromosomColumn;
-
+                                Order=1;
 
 			}
 		return true;
@@ -118,7 +119,44 @@ public class MoveSelector : MonoBehaviour
 	}
 
     void Update ()
-	{bool aa = false;
+	{
+			
+//		object OBO=new object();
+//		lock(OBO){
+//			if(RefrigtzChessPortable.AllDraw.CalIdle==0){
+//				//signal to stop idle
+//				RefrigtzChessPortable.AllDraw.CalIdle=2;
+//				Debug.LogError ("0 base");
+//				return;
+//				//white to exit
+//			}
+//		}
+		object OAO=new object();
+		lock(OAO){
+			{	if(RefrigtzChessPortable.AllDraw.CalIdle==3)
+				{
+					//signal to stop idle
+					RefrigtzChessPortable.AllDraw.CalIdle=2;
+					Debug.LogError ("3 base");
+					return;
+					//white to exit
+				}	if(RefrigtzChessPortable.AllDraw.CalIdle==4)
+				{
+					//signal to stop idle
+					RefrigtzChessPortable.AllDraw.CalIdle=2;
+					Debug.LogError ("4 base");
+					return;
+					//white to exit
+				}	if(RefrigtzChessPortable.AllDraw.CalIdle==5)
+				{
+					//signal to stop idle
+					RefrigtzChessPortable.AllDraw.CalIdle=2;
+					Debug.LogError ("5 base");
+					return;
+					//white to exit
+				}}
+		}	
+		bool aa = false;
 		
 		aa = t != null;
 		aa = aa && t.t != null;
@@ -153,35 +191,38 @@ public class MoveSelector : MonoBehaviour
 					GameManager.instance.Move (movingPiece, gridPoint);
 				
 				}
+
 				var output = Task.Factory.StartNew(() => {
-					Object OO=new Object();
+					object OO=new object();
 					lock(OO){
-						if((RefrigtzChessPortable.AllDraw.CalIdle==0||RefrigtzChessPortable.AllDraw.CalIdle==2)){
-							//signal to stop idle
+						if(RefrigtzChessPortable.AllDraw.IdleInWork&&(RefrigtzChessPortable.AllDraw.CalIdle==0||RefrigtzChessPortable.AllDraw.CalIdle==2||RefrigtzChessPortable.AllDraw.CalIdle==3||RefrigtzChessPortable.AllDraw.CalIdle==4)){
+																		//signal to stop idle
 							RefrigtzChessPortable.AllDraw.CalIdle=2;
 							//white to exit
-							do{ }while(RefrigtzChessPortable.AllDraw.CalIdle!=1);
-						}
+							do{ System.Threading.Thread.Sleep(10);}while(RefrigtzChessPortable.AllDraw.CalIdle!=1);
+										}
 					}
 					//				xc =	MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y);
 					ff =	System.Threading.Tasks.Task.Factory.StartNew (() => xc = MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y));
 					ff.Wait ();
-					OrB = 1;
 					ExitState ();
-					Object OOO=new Object();
+
+					OrB = 1;
+						object OOO=new object();
 					lock(OOO){
-						
-						if((RefrigtzChessPortable.AllDraw.CalIdle==0||RefrigtzChessPortable.AllDraw.CalIdle==2)){
-							//signal to stop idle
+						if(RefrigtzChessPortable.AllDraw.IdleInWork&&(RefrigtzChessPortable.AllDraw.CalIdle==0||RefrigtzChessPortable.AllDraw.CalIdle==2||RefrigtzChessPortable.AllDraw.CalIdle==3||RefrigtzChessPortable.AllDraw.CalIdle==4)){
+													//signal to stop idle
 							RefrigtzChessPortable.AllDraw.CalIdle=2;
 							//white to exit
-							do{ }while(RefrigtzChessPortable.AllDraw.CalIdle!=1);
-						}
+							do{ System.Threading.Thread.Sleep(10);}while(RefrigtzChessPortable.AllDraw.CalIdle!=1);
+										}
 					}
+				
 //				xx = MoveAI (-1, -1, -1, -1);
 					f = System.Threading.Tasks.Task.Factory.StartNew (() => xx = MoveAI (-1, -1, -1, -1));
 					f.Wait ();
 											
+
 
 					Debug.Log ("Thinking Finished.");
 					Vector2Int gridPointN = new Vector2Int (x, 7 - y);
@@ -209,9 +250,10 @@ public class MoveSelector : MonoBehaviour
 					OrB = 1;
 					xx = false;
 					// Reference Point 1: add ExitState call here later
-					Object OOOO=new Object();
-					lock(OOOO){				
+					object OOOOO=new object();
+					lock(OOOOO){				
 							RefrigtzChessPortable.AllDraw.CalIdle=0;
+						ExitState ();
 
 					}
 
@@ -221,8 +263,7 @@ public class MoveSelector : MonoBehaviour
 
 
 
-					ExitState ();
-
+			
 
 			
 			
@@ -233,8 +274,7 @@ public class MoveSelector : MonoBehaviour
 
 			}					
 			// Reference Point 3: capture enemy piece here later	
-					RefrigtzChessPortable.AllDraw.CalIdle=0;
-
+	
 
 	}
 
@@ -262,6 +302,7 @@ public class MoveSelector : MonoBehaviour
 	void Awake(){
 		if (t == null) {
 			t = new ArtificialInteligenceMove ();
+
 		}
 
 

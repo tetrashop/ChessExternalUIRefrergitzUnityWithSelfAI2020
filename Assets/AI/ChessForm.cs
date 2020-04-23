@@ -23,7 +23,7 @@ namespace RefrigtzChessPortable
 		int AllDrawKind = 0;
 		bool NotFoundBegin = false;
 		bool Deeperthandeeper = false;
-		readonly String path3 = @"temp";
+		readonly String path3 = @"tempUnity";
 		String AllDrawReplacement = "";
 
 		public static int MovmentsNumber = 0;
@@ -290,8 +290,14 @@ namespace RefrigtzChessPortable
                         newTask.Dispose();
 						Object oa=new object();
 						lock(oa){
+							if(AllDraw.CalIdle!=0&&AllDraw.CalIdle==2)
+							{
+								AllDraw.CalIdle=5;
+								return 1;
+							}
+							
 							if(AllDraw.CalIdle!=0&&AllDraw.CalIdle!=2)
-						{
+									{
                         if (Draw.TableZero(Table))
                         {
                             //MessageBox.Show("Board is invalid;");
@@ -383,7 +389,7 @@ namespace RefrigtzChessPortable
                     }
 					Object oaa=new object();
 					lock(oaa){
-					if(AllDraw.CalIdle==0||AllDraw.CalIdle==2)
+						if(AllDraw.CalIdle==0||AllDraw.CalIdle==5||AllDraw.CalIdle==2)
 						return 0;
 					}
 			      if (k > 6)
@@ -1155,8 +1161,7 @@ namespace RefrigtzChessPortable
 
 										RefrigtzChessPortable.AllDraw.CalIdle=2;
 
-										do{ System.Threading.Thread.Sleep(1000);}while(RefrigtzChessPortable.AllDraw.CalIdle!=1);
-
+									
                                         Play(-1, -1);
                                         
 
@@ -1236,7 +1241,6 @@ namespace RefrigtzChessPortable
 
 								RefrigtzChessPortable.AllDraw.CalIdle=2;
 
-								do{ System.Threading.Thread.Sleep(1000);}while(RefrigtzChessPortable.AllDraw.CalIdle!=1);
 
 
                                 Play(-1, -1);

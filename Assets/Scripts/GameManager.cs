@@ -111,9 +111,9 @@ public class GameManager : MonoBehaviour
 
     public void AddPiece(GameObject prefab, Player player, int col, int row)
     {
-        GameObject pieceObject = board.AddPiece(prefab, col, row);
-        player.pieces.Add(pieceObject);
-        pieces[col, row] = pieceObject;
+        GameObject pieceobject = board.AddPiece(prefab, col, row);
+        player.pieces.Add(pieceobject);
+        pieces[col, row] = pieceobject;
     }
 
     public void SelectPieceAtGrid(Vector2Int gridPoint)
@@ -125,10 +125,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public List<Vector2Int> MovesForPiece(GameObject pieceObject)
+    public List<Vector2Int> MovesForPiece(GameObject pieceobject)
     {
-        Piece piece = pieceObject.GetComponent<Piece>();
-        Vector2Int gridPoint = GridForPiece(pieceObject);
+        Piece piece = pieceobject.GetComponent<Piece>();
+        Vector2Int gridPoint = GridForPiece(pieceobject);
         List<Vector2Int> locations = piece.MoveLocations(gridPoint);
 
         // filter out offboard locations

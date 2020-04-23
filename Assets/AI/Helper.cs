@@ -13,7 +13,7 @@ internal static class Helper
     }
     public static void WaitOnUsed(string filePath) 
     {
-        do { } while (!CanReadFile(filePath)); 
+		do { } while (!CanReadFile(filePath)); 
     
     }
     internal static bool CanReadFile(string filePath)

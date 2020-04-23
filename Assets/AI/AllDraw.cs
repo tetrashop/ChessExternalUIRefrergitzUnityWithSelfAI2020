@@ -54,10 +54,11 @@ namespace RefrigtzChessPortable
     [Serializable]
     public class AllDraw//: IDisposable
 	{
-		public const int MaxTimeInMillisseconds = 10;//Max 10 millisecond
+		public static bool IdleInWork = false;
+		public const int MaxTimeInMillisseconds = 60000;//Max 1 minute
 		public static int TimeInitiation;
 
-		public static int CalIdle=4;
+		public static int CalIdle=1;
 		public static int PlatformHelperProcessorCount = PlatformHelper.ProcessorCount;
         public static int CompleteNumber = 300;
 		public static bool CompleteTreeDo = false;
@@ -6804,8 +6805,8 @@ namespace RefrigtzChessPortable
 
             Object a = new Object();
             lock (a)
-			{   int TimeNow = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
-				if ((TimeNow - TimeInitiation) > MaxTimeInMillisseconds)
+			{
+				if (FullBoundryConditions(CurrentAStarGredyMax, Order,MaxAStarGreedy- LeafDeep))
 					return Leaf;
 				
                 if (LeafDeep >= MaxAStarGreedy)
@@ -18082,8 +18083,9 @@ if (Order == 1)
                     RefrigtzChessPortable.AllDraw Leaf = null;
                     Tabl = CloneATable(Table);
                     int LeafDeep = MaxAStarGreedy;
-					TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
-
+					if(TimeInitiation==0)
+						TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+					
                     var array1 = Task.Factory.StartNew(() => FoundOfLeafDepenOfKind(ref Leaf, ref FOUND, Order, LeafDeep, 0, 0, 0, 0));
 
                     array1.Wait();

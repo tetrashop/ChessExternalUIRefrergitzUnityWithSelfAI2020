@@ -48,7 +48,46 @@ public class TileSelector : MonoBehaviour
     }
 
     public void Update ()
-    {
+
+	{
+//		object OBO=new object();
+//		lock(OBO){
+//			if(RefrigtzChessPortable.AllDraw.CalIdle==0){
+//				//signal to stop idle
+//				RefrigtzChessPortable.AllDraw.CalIdle=2;
+//				Debug.LogError ("0 base");
+//				return;
+//				//white to exit
+//			}
+//		}
+		object OAO=new object();
+		lock(OAO){
+			{	if(RefrigtzChessPortable.AllDraw.CalIdle==3)
+				{
+					//signal to stop idle
+					RefrigtzChessPortable.AllDraw.CalIdle=2;
+					Debug.LogError ("3 base");
+					return;
+					//white to exit
+				}	if(RefrigtzChessPortable.AllDraw.CalIdle==4)
+				{
+					//signal to stop idle
+					RefrigtzChessPortable.AllDraw.CalIdle=2;
+					Debug.LogError ("4 base");
+					return;
+					//white to exit
+				}	if(RefrigtzChessPortable.AllDraw.CalIdle==5)
+				{
+					//signal to stop idle
+					RefrigtzChessPortable.AllDraw.CalIdle=2;
+					Debug.LogError ("5 base");
+					return;
+					//white to exit
+				}}
+		}	
+		RefrigtzChessPortable.AllDraw.IdleInWork=false;
+		Debug.Log("Idle Finished");
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
