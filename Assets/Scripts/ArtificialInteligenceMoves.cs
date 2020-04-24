@@ -13,61 +13,73 @@ public class ArtificialInteligenceMove
 	System.Threading.Thread ttt = null; 
 	bool Idle = false;
 	public  ArtificialInteligenceMove(){
-		var tt = new System.Threading.Thread (new System.Threading.ThreadStart (Awake));
+		object O=new object();
+		lock(O){	var tt = new System.Threading.Thread (new System.Threading.ThreadStart (Awake));
 		tt.Start ();
 		ttt = new System.Threading.Thread (new System.Threading.ThreadStart (ThinkingIdle));
 		ttt.Start ();
 			}
-		
+	}
 
 	void Awake()
 	{
-		if (t == null) {
+		object O = new object ();
+		lock (O) {
+			if (t == null) {
 					
 	
 
 				
-			t = new RefrigtzChessPortable.RefrigtzChessPortableForm ();
-			t.Form1_Load ();
+				t = new RefrigtzChessPortable.RefrigtzChessPortableForm ();
+				t.Form1_Load ();
 				
 
 
+			}
 		}
 	}
 	public void ThinkingIdle()
 	{
 		object O=new object();
 		lock(O){
-			Debug.Log("Idle ethod Begin");
+			Debug.Log("Idle method Begin");
 
-		do {
-				if(t!=null){
+			do {
+					if(t!=null){
 					if(t.LoadP||Idle){
 						if(RefrigtzChessPortable.AllDraw.CalIdle==0&&RefrigtzChessPortable.AllDraw.IdleInWork)
 					{
-						Debug.Log("Idle Begin");
-							RefrigtzChessPortable.AllDraw.IdleInWork=true;
-											Idle=true;
+							
+								bool Blit=RefrigtzChessPortable.AllDraw.Blitz;
+							RefrigtzChessPortable.AllDraw.Blitz=false;
+										Debug.Log("Idle Begin");
+															Idle=true;
 						RefrigtzChessPortable.AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
 							RefrigtzChessPortable.AllDraw.MaxAStarGreedy=PlatformHelper.ProcessorCount;
 							var arrayA =Task.Factory.StartNew(() =>	t.Draw.Initiate(1, 4, t.Draw.OrderP, CloneATable(t.brd.GetTable()), t.Draw.OrderP, false, false, 0));
 							arrayA.Wait();
-							
-					}
-			else
+							bool LoadTree=false;
+							(new RefrigtzChessPortable.TakeRoot()).Save(false, false, t, ref LoadTree, false, false, false, false, false, false, false, true);
+							RefrigtzChessPortable.AllDraw.Blitz=Blit;
+//							System.Threading.Thread.Sleep(5000);
+							}
+					
+						else{
 				if(RefrigtzChessPortable.AllDraw.CalIdle==5)
 						{		RefrigtzChessPortable.AllDraw.CalIdle=1;
-							Debug.Log("Ready to 1 yyyyyyybase");
+								Debug.Log("Idle Finished");
+
+							Debug.Log("Ready to 1 base");
 
 						}
-					do	{System.Threading.Thread.Sleep(10);}while(RefrigtzChessPortable.AllDraw.CalIdle==1);
+						do	{System.Threading.Thread.Sleep(10);}while(RefrigtzChessPortable.AllDraw.CalIdle==1);
+					}
+				
 					}
 				}
-						
-
 				} while(RefrigtzChessPortable.AllDraw.CalIdle!=3);
+		
 		}
-
 	}
 	int[,] CloneATable(int[,] Tab)
 	{
@@ -84,26 +96,26 @@ public class ArtificialInteligenceMove
 	}
 	public bool MoveSelector(int i,int j,int i1,int j1)
 	{
-		if(Order==1)
-		{
-			t.Play(i,j);
-			t.Play(i1,j1);
-			Order=-1;
+		object O=new object();
+		lock (O) {
+			if (Order == 1) {
+				t.Play (i, j);
+				t.Play (i1, j1);
+				Order = -1;
 
 
 
 
-		}else
-			if(Order==-1)
-			{
-				t.Play(-1,-1);
-				x=t.R.CromosomRowFirst;
-				y=t.R.CromosomColumnFirst;
-				x1=t.R.CromosomRow;
-				y1=t.R.CromosomColumn;
+			} else if (Order == -1) {
+				t.Play (-1, -1);
+				x = t.R.CromosomRowFirst;
+				y = t.R.CromosomColumnFirst;
+				x1 = t.R.CromosomRow;
+				y1 = t.R.CromosomColumn;
 
-			Order = -1;
+				Order = -1;
 			}
+		}
 		return true;
 	}
 }

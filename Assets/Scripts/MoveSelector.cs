@@ -119,49 +119,7 @@ public class MoveSelector : MonoBehaviour
     void Update ()
 	{
 			
-//		object OBO=new object();
-//		lock(OBO){
-//			if(RefrigtzChessPortable.AllDraw.CalIdle==0){
-//				//signal to stop idle
-//				RefrigtzChessPortable.AllDraw.CalIdle=2;
-//				Debug.LogError ("0 base");
-//				return;
-//				//white to exit
-//			}
-//		}
-		RefrigtzChessPortable.AllDraw.IdleInWork=false;
 
-		object OAO=new object();
-		lock(OAO){
-			{	if(RefrigtzChessPortable.AllDraw.CalIdle==3)
-				{
-					//signal to stop idle
-					RefrigtzChessPortable.AllDraw.CalIdle=2;
-					Debug.LogError ("3 base");
-					tileHighlight.SetActive(false);
-
-					return;
-					//white to exit
-				}	if(RefrigtzChessPortable.AllDraw.CalIdle==4)
-				{
-					//signal to stop idle
-					RefrigtzChessPortable.AllDraw.CalIdle=2;
-					Debug.LogError ("4 base");
-					tileHighlight.SetActive(false);
-
-					return;
-					//white to exit
-				}	if(RefrigtzChessPortable.AllDraw.CalIdle==5)
-				{
-					//signal to stop idle
-					RefrigtzChessPortable.AllDraw.CalIdle=2;
-					Debug.LogError ("5 base");
-					tileHighlight.SetActive(false);
-
-					return;
-					//white to exit
-				}}
-		}	
 		bool aa = false;
 		
 		aa = t != null;
@@ -170,6 +128,14 @@ public class MoveSelector : MonoBehaviour
 			return;
 		if (!t.t.LoadP)
 			return;
+		object o = new object ();
+		lock (o) {
+
+			if(RefrigtzChessPortable.AllDraw.CalIdle!=5||RefrigtzChessPortable.AllDraw.CalIdle==0)
+				RefrigtzChessPortable.AllDraw.CalIdle=2;
+			RefrigtzChessPortable.AllDraw.IdleInWork=false;
+				}
+
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
 		RaycastHit hit;
@@ -187,12 +153,10 @@ public class MoveSelector : MonoBehaviour
 				if (GameManager.instance.PieceAtGrid (gridPoint) == null) {
 					
 					GameManager.instance.Move (movingPiece, gridPoint);
-
-				
-				} else {
+					} else {
 					GameManager.instance.CapturePieceAt (gridPoint);
 					GameManager.instance.Move (movingPiece, gridPoint);
-				
+		
 				}
 				// Reference Point 3: capture enemy piece here later	
 			ExitState ();
@@ -201,32 +165,40 @@ public class MoveSelector : MonoBehaviour
 					if(Order==1){
 					object OO=new object();
 					lock(OO){
-						if(RefrigtzChessPortable.AllDraw.IdleInWork&&(RefrigtzChessPortable.AllDraw.CalIdle==0||RefrigtzChessPortable.AllDraw.CalIdle==2||RefrigtzChessPortable.AllDraw.CalIdle==3||RefrigtzChessPortable.AllDraw.CalIdle==4)){
+							if(RefrigtzChessPortable.AllDraw.CalIdle!=1
+								){
 																		//signal to stop idle
-							RefrigtzChessPortable.AllDraw.CalIdle=2;
-							//white to exit
+								if(RefrigtzChessPortable.AllDraw.CalIdle!=5)
+									RefrigtzChessPortable.AllDraw.CalIdle=2;
+										//white to exit
 							do{ System.Threading.Thread.Sleep(10);}while(RefrigtzChessPortable.AllDraw.CalIdle!=1);
-										}
-					}
+//										}
+							}
 						//				xc =	MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y);
 					
 					ff =	System.Threading.Tasks.Task.Factory.StartNew (() => xc = MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y));
 					ff.Wait ();
 					}
+						object OOO=new object();
+						lock(OOO){
 					if(Order==-1){
 					if(xc){
 					OrB = 1;
-						object OOO=new object();
-					lock(OOO){
-						if(RefrigtzChessPortable.AllDraw.IdleInWork&&(RefrigtzChessPortable.AllDraw.CalIdle==0||RefrigtzChessPortable.AllDraw.CalIdle==2||RefrigtzChessPortable.AllDraw.CalIdle==3||RefrigtzChessPortable.AllDraw.CalIdle==4)){
+							
+						
+								if(RefrigtzChessPortable.AllDraw.CalIdle!=1)
+								{
+//									
 													//signal to stop idle
-							RefrigtzChessPortable.AllDraw.CalIdle=2;
-							//white to exit
-							do{ System.Threading.Thread.Sleep(10);}while(RefrigtzChessPortable.AllDraw.CalIdle!=1);
-										}
-					}
-				
-							//xx = MoveAI (-1, -1, -1, -1);
+									
+										RefrigtzChessPortable.AllDraw.CalIdle=2;
+											//white to exit
+									do{ System.Threading.Thread.Sleep(10);}while(RefrigtzChessPortable.AllDraw.CalIdle!=1);
+
+//															}
+								}
+							
+								//xx = MoveAI (-1, -1, -1, -1);
 					f = System.Threading.Tasks.Task.Factory.StartNew (() => xx = MoveAI (-1, -1, -1, -1));
 					f.Wait ();
 							if(x!=-1&&y!=-1&&x1!=-1&&y1!=-1)
@@ -307,36 +279,41 @@ public class MoveSelector : MonoBehaviour
 					lock(OOOOO){				
 							RefrigtzChessPortable.AllDraw.CalIdle=0;
 								tileHighlight.SetActive (false);
+										RefrigtzChessPortable.AllDraw.IdleInWork=true;
+
+
+										RefrigtzChessPortable.AllDraw.CalIdle = 0;
+										x = t.t.R.CromosomRowFirst = -1;
+										y = t.t.R.CromosomColumnFirst = -1;
+										x1 = t.t.R.CromosomRow = -1;
+										y1 = t.t.R.CromosomColumn = -1;
+
 									}
-							}
+							
 							}else
 								Debug.LogError("Thjinkingn Failed.");
-						}
+								}
+								}
+							}
 					}
-
+					}
 				});
 				output.Wait ();
 						
-				RefrigtzChessPortable.AllDraw.IdleInWork=true;
 
-
-
-			
 
 			
 			
 			
 			}
 		} else {
+				RefrigtzChessPortable.AllDraw.CalIdle=0;
 				tileHighlight.SetActive (false);
-
-			}	
+				RefrigtzChessPortable.AllDraw.IdleInWork=true;
+			}
+				
 	
-		x = t.t.R.CromosomRowFirst = -1;
-		y = t.t.R.CromosomColumnFirst = -1;
-		x1 = t.t.R.CromosomRow = -1;
-		y1 = t.t.R.CromosomColumn = -1;
-
+	
 	}
 
 	 

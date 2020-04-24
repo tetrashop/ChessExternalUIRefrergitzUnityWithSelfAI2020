@@ -373,13 +373,15 @@ namespace RefrigtzChessPortable
                             }
                         }
                         
-						}}
-//						else
-//						{   
-//							bool LoadTree=false;
-//							(new TakeRoot()).Save(FOUND, false, this, ref LoadTree, false, false, UsePenaltyRegardMechnisam, false, false, false, AStarGreedyHeuristic, true);
-//							return 0;
-//						}
+						}
+						
+						if(AllDraw.CalIdle==0)
+						{   
+							bool LoadTree=false;
+							(new TakeRoot()).Save(FOUND, false, this, ref LoadTree, false, false, UsePenaltyRegardMechnisam, false, false, false, AStarGreedyHeuristic, true);
+							return 0;
+							}
+						}
                     }
                     else
                     {
