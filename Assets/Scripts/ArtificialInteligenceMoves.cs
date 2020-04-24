@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
+using System.Threading.Tasks;
+using System;
 
 public class ArtificialInteligenceMove
 {
@@ -43,10 +46,12 @@ public class ArtificialInteligenceMove
 						if(RefrigtzChessPortable.AllDraw.CalIdle==0&&RefrigtzChessPortable.AllDraw.IdleInWork)
 					{
 						Debug.Log("Idle Begin");
-								RefrigtzChessPortable.AllDraw.IdleInWork=true;
-							Idle=true;
-									
-				t.Play(-1,-1);
+							RefrigtzChessPortable.AllDraw.IdleInWork=true;
+											Idle=true;
+						RefrigtzChessPortable.AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+							RefrigtzChessPortable.AllDraw.MaxAStarGreedy=PlatformHelper.ProcessorCount;
+							var arrayA =Task.Factory.StartNew(() =>	t.Draw.Initiate(1, 4, t.Draw.OrderP, CloneATable(t.brd.GetTable()), t.Draw.OrderP, false, false, 0));
+							arrayA.Wait();
 							
 					}
 			else
@@ -63,6 +68,19 @@ public class ArtificialInteligenceMove
 				} while(RefrigtzChessPortable.AllDraw.CalIdle!=3);
 		}
 
+	}
+	int[,] CloneATable(int[,] Tab)
+	{
+		object O = new object();
+		lock (O)
+		{          
+			int[,] Tabl = new int[8, 8];
+			for (var i = 0; i < 8; i++)
+				for (var j = 0; j < 8; j++)
+					Tabl[i, j] = Tab[i, j];
+
+			return Tabl;
+		}
 	}
 	public bool MoveSelector(int i,int j,int i1,int j1)
 	{

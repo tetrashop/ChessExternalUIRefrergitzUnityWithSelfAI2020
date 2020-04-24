@@ -66,6 +66,8 @@ public class MoveSelector : MonoBehaviour
 
 	bool xc = false;
 	bool xx = false;
+	private GameObject	selectobject;
+	public static MoveSelector Instance;
 //	System.Threading.Tasks.Task Output = null;
 	void Start ()
 	{
@@ -90,11 +92,7 @@ public class MoveSelector : MonoBehaviour
 		{
 			t.t.Play(i,7-j);
 			t.t.Play(i1,7-j1);
-			Order=-1;
-
-
-
-
+			Order = -1;
 		}else
 			if(Order==-1)
 			{
@@ -103,8 +101,8 @@ public class MoveSelector : MonoBehaviour
 				y=t.t.R.CromosomColumnFirst;
 				x1=t.t.R.CromosomRow;
 				y1=t.t.R.CromosomColumn;
-                                Order=1;
-
+			Order = 1;
+  
 			}
 		return true;
 	}
@@ -131,6 +129,8 @@ public class MoveSelector : MonoBehaviour
 //				//white to exit
 //			}
 //		}
+		RefrigtzChessPortable.AllDraw.IdleInWork=false;
+
 		object OAO=new object();
 		lock(OAO){
 			{	if(RefrigtzChessPortable.AllDraw.CalIdle==3)
@@ -138,6 +138,8 @@ public class MoveSelector : MonoBehaviour
 					//signal to stop idle
 					RefrigtzChessPortable.AllDraw.CalIdle=2;
 					Debug.LogError ("3 base");
+					tileHighlight.SetActive(false);
+
 					return;
 					//white to exit
 				}	if(RefrigtzChessPortable.AllDraw.CalIdle==4)
@@ -145,6 +147,8 @@ public class MoveSelector : MonoBehaviour
 					//signal to stop idle
 					RefrigtzChessPortable.AllDraw.CalIdle=2;
 					Debug.LogError ("4 base");
+					tileHighlight.SetActive(false);
+
 					return;
 					//white to exit
 				}	if(RefrigtzChessPortable.AllDraw.CalIdle==5)
@@ -152,6 +156,8 @@ public class MoveSelector : MonoBehaviour
 					//signal to stop idle
 					RefrigtzChessPortable.AllDraw.CalIdle=2;
 					Debug.LogError ("5 base");
+					tileHighlight.SetActive(false);
+
 					return;
 					//white to exit
 				}}
@@ -164,19 +170,16 @@ public class MoveSelector : MonoBehaviour
 			return;
 		if (!t.t.LoadP)
 			return;
-			Vector2Int gridPoint = null;
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
 		RaycastHit hit;
 		if (Physics.Raycast (ray, out hit)) {
 			Vector3 point = hit.point;
-			gridPoint = Geometry.GridFromPoint (point);
+			Vector2Int gridPoint =Geometry.GridFromPoint (point);
 
 			tileHighlight.SetActive (true);
 			tileHighlight.transform.position = Geometry.PointFromGrid (gridPoint);
 			if (Input.GetMouseButtonDown (0)) {
-				if (OrB == -2)
-					OrB = 1;
 				// Reference Point 2: check for valid move location
 				if (!Exist (moveLocations, gridPoint)) {
 					return;
@@ -191,8 +194,11 @@ public class MoveSelector : MonoBehaviour
 					GameManager.instance.Move (movingPiece, gridPoint);
 				
 				}
+				// Reference Point 3: capture enemy piece here later	
+			ExitState ();
 
 				var output = Task.Factory.StartNew(() => {
+					if(Order==1){
 					object OO=new object();
 					lock(OO){
 						if(RefrigtzChessPortable.AllDraw.IdleInWork&&(RefrigtzChessPortable.AllDraw.CalIdle==0||RefrigtzChessPortable.AllDraw.CalIdle==2||RefrigtzChessPortable.AllDraw.CalIdle==3||RefrigtzChessPortable.AllDraw.CalIdle==4)){
@@ -202,11 +208,13 @@ public class MoveSelector : MonoBehaviour
 							do{ System.Threading.Thread.Sleep(10);}while(RefrigtzChessPortable.AllDraw.CalIdle!=1);
 										}
 					}
-					//				xc =	MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y);
+						//				xc =	MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y);
+					
 					ff =	System.Threading.Tasks.Task.Factory.StartNew (() => xc = MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y));
 					ff.Wait ();
-					ExitState ();
-
+					}
+					if(Order==-1){
+					if(xc){
 					OrB = 1;
 						object OOO=new object();
 					lock(OOO){
@@ -218,33 +226,78 @@ public class MoveSelector : MonoBehaviour
 										}
 					}
 				
-//				xx = MoveAI (-1, -1, -1, -1);
+							//xx = MoveAI (-1, -1, -1, -1);
 					f = System.Threading.Tasks.Task.Factory.StartNew (() => xx = MoveAI (-1, -1, -1, -1));
 					f.Wait ();
-											
+							if(x!=-1&&y!=-1&&x1!=-1&&y1!=-1)
+							{
+												
 
+						if(xx){
+									Debug.Log ("Thinking Finished.");
+												Vector2Int gridPointN = Geometry.GridPoint (x, 7 - y);
+									Debug.Log ("gridPointN.");
 
-					Debug.Log ("Thinking Finished.");
-					Vector2Int gridPointN = new Vector2Int (x, 7 - y);
+//					TileSelector instance=GetComponent<TileSelector>();
 
+//										TileSelector.instance=GetComponent<TileSelector>();
+//										Debug.Log ("TileSelector.instance=GetComponent<TileSelector>().");
 
-					movingPiece =	GameManager.instance.pieces [x, 7 - y];
+									TileSelector.instance.tileHighlight.SetActive (true);
+									Debug.Log ("TileSelector.instance.tileHighlight.SetActive (true).");
 
-					Vector2Int gridPointNN = new Vector2Int (x1, 7 - y1);
+								TileSelector.instance.tileHighlight.transform.position = Geometry.PointFromGrid (gridPointN);
+									Debug.Log ("TileSelector.instance.tileHighlight.transform.position = Geometry.PointFromGrid (gridPointN).");
 
-					tileHighlight.SetActive (true);
-					tileHighlight.transform.position = Geometry.PointFromGrid (gridPointNN);
+									selectobject = GameManager.instance.pieces[x,7-y];
+					
+									Debug.Log ("GameObject\tselectobject = GameManager.instance.PieceAtGrid(gridPointN).");
 
-					Debug.Log ("tile selected.");
-					Debug.Log ("Move Source...");
+					TileSelector.instance.EnterState ();
+									Debug.Log ("TileSelector.instance.EnterState ().");
 
-					if (GameManager.instance.PieceAtGrid (gridPointN) == null) {
+		        	if (GameManager.instance.DoesPieceBelongToCurrentPlayer(selectobject))
+					{
 
-						GameManager.instance.Move (movingPiece, gridPointNN);
-					} else {
+									Debug.Log ("current player.");
+
+									GameManager.instance.SelectPiece(selectobject);
+						// Reference Point 1: add ExitState call here later
+//									TileSelector.instance.enabled = false;
+//									TileSelector.instance.tileHighlight.SetActive(false);
+								TileSelector.instance.ExitState(selectobject);
+								}
+//									movingPiece=selectobject;
+//									EnterState(selectobject);
+
+						    Vector2Int gridPointNN = Geometry.GridPoint (x1, 7 - y1);
+								
+				
+									MoveSelector.Instance.tileHighlight.SetActive (true);
+									MoveSelector.Instance.tileHighlight.transform.position = Geometry.PointFromGrid (gridPointNN);
+											// Reference Point 1: add ExitState call here later
+									Debug.Log ("tile selected.");
+									if(MoveSelector.Instance.moveLocations.Count==0)
+										Debug.Log ("enter state not valid.");
+									
+										if (!Exist (MoveSelector.Instance.moveLocations, gridPointNN)) {
+										return;
+									}
+									Debug.Log ("Move Source...");
+					if (GameManager.instance.PieceAtGrid (gridPointNN) == null) {
+
+										GameManager.instance.Move (MoveSelector.Instance.movingPiece, gridPointNN);
+
+								} else {
 						GameManager.instance.CapturePieceAt (gridPointNN);
-						GameManager.instance.Move (movingPiece, gridPointNN);
+										GameManager.instance.Move (MoveSelector.Instance.movingPiece, gridPointNN);
+
+			
 					}
+			
+					
+							ExitState ();
+
 					Debug.Log ("Move Occured.");
 
 					OrB = 1;
@@ -253,13 +306,18 @@ public class MoveSelector : MonoBehaviour
 					object OOOOO=new object();
 					lock(OOOOO){				
 							RefrigtzChessPortable.AllDraw.CalIdle=0;
-						ExitState ();
-
+								tileHighlight.SetActive (false);
+									}
+							}
+							}else
+								Debug.LogError("Thjinkingn Failed.");
+						}
 					}
 
 				});
 				output.Wait ();
 						
+				RefrigtzChessPortable.AllDraw.IdleInWork=true;
 
 
 
@@ -272,9 +330,12 @@ public class MoveSelector : MonoBehaviour
 		} else {
 				tileHighlight.SetActive (false);
 
-			}					
-			// Reference Point 3: capture enemy piece here later	
+			}	
 	
+		x = t.t.R.CromosomRowFirst = -1;
+		y = t.t.R.CromosomColumnFirst = -1;
+		x1 = t.t.R.CromosomRow = -1;
+		y1 = t.t.R.CromosomColumn = -1;
 
 	}
 
@@ -321,7 +382,7 @@ public class MoveSelector : MonoBehaviour
         GameManager.instance.DeselectPiece(movingPiece);
         TileSelector selector = GetComponent<TileSelector>();
         selector.EnterState();
-    }
+	  }
 
     public void EnterState(GameObject piece)
     {
@@ -349,6 +410,7 @@ public class MoveSelector : MonoBehaviour
             }
             locationHighlights.Add(highlight);
         }
+	
     }
 
     private void ExitState()

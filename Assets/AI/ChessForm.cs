@@ -44,7 +44,7 @@ namespace RefrigtzChessPortable
 		private int order;
 		private int x1;
 		private int y1;
-		private Board brd=new Board();
+		public Board brd=new Board();
 	#endregion
 
   [field: NonSerialized]
@@ -69,7 +69,8 @@ namespace RefrigtzChessPortable
             {
                 int LeafAStarGrteedy = 0;
                 AllDraw THIS = Draw.AStarGreedyString;
-                Table = Draw.Initiate(1, 4, a, CloneATable(brd.GetTable()), Order, false, FOUND, LeafAStarGrteedy);
+				Table = Draw.Initiate(1, 4, a, CloneATable(brd.GetTable()), Order, false, FOUND, LeafAStarGrteedy);
+
                 //Draw.AStarGreedyString = THIS;
             }
         }
@@ -295,7 +296,7 @@ namespace RefrigtzChessPortable
 								AllDraw.CalIdle=5;
 								return 1;
 							}
-							
+
 							if(AllDraw.CalIdle!=0&&AllDraw.CalIdle!=2)
 									{
                         if (Draw.TableZero(Table))

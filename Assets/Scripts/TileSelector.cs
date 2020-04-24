@@ -37,19 +37,24 @@ public class TileSelector : MonoBehaviour
 	public static int x, y; 
     public GameObject tileHighlightPrefab;
 
-    private GameObject tileHighlight;
-
+	public GameObject tileHighlight;
+	public static TileSelector instance;
     public void Start ()
-    {
+    { 
         Vector2Int gridPoint = Geometry.GridPoint(0, 0);
         Vector3 point = Geometry.PointFromGrid(gridPoint);
         tileHighlight = Instantiate(tileHighlightPrefab, point, Quaternion.identity, gameObject.transform);
         tileHighlight.SetActive(false);
     }
-
-    public void Update ()
+	public void Awake ()
+	{
+		instance = this;
+	}
+	public void Update ()
 
 	{
+		RefrigtzChessPortable.AllDraw.IdleInWork=false;
+
 //		object OBO=new object();
 //		lock(OBO){
 //			if(RefrigtzChessPortable.AllDraw.CalIdle==0){
@@ -67,6 +72,8 @@ public class TileSelector : MonoBehaviour
 					//signal to stop idle
 					RefrigtzChessPortable.AllDraw.CalIdle=2;
 					Debug.LogError ("3 base");
+					tileHighlight.SetActive(false);
+
 					return;
 					//white to exit
 				}	if(RefrigtzChessPortable.AllDraw.CalIdle==4)
@@ -74,6 +81,8 @@ public class TileSelector : MonoBehaviour
 					//signal to stop idle
 					RefrigtzChessPortable.AllDraw.CalIdle=2;
 					Debug.LogError ("4 base");
+					tileHighlight.SetActive(false);
+
 					return;
 					//white to exit
 				}	if(RefrigtzChessPortable.AllDraw.CalIdle==5)
@@ -81,6 +90,8 @@ public class TileSelector : MonoBehaviour
 					//signal to stop idle
 					RefrigtzChessPortable.AllDraw.CalIdle=2;
 					Debug.LogError ("5 base");
+					tileHighlight.SetActive(false);
+
 					return;
 					//white to exit
 				}}
@@ -122,11 +133,13 @@ public class TileSelector : MonoBehaviour
         enabled = true;
     }
 
-    private void ExitState(GameObject movingPiece)
-    {
-        this.enabled = false;
-        tileHighlight.SetActive(false);
-        MoveSelector move = GetComponent<MoveSelector>();
-        move.EnterState(movingPiece);
-    }
+	public void ExitState(GameObject movingPiece)
+	{
+		this.enabled = false;
+		tileHighlight.SetActive (false);
+		MoveSelector move = GetComponent<MoveSelector> ();
+		move.EnterState (movingPiece);
+		//addd by tetrashop.ir	  
+		MoveSelector.Instance = move;
+	}
 }
