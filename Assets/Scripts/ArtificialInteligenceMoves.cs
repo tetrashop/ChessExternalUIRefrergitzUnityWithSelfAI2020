@@ -61,11 +61,11 @@ public class ArtificialInteligenceMove
 							bool LoadTree=false;
 							(new RefrigtzChessPortable.TakeRoot()).Save(false, false, t, ref LoadTree, false, false, false, false, false, false, false, true);
 							RefrigtzChessPortable.AllDraw.Blitz=Blit;
-//							System.Threading.Thread.Sleep(5000);
+//							System.Threading.Thread.Sleep(50);
 							}
 					
-						else{
-				if(RefrigtzChessPortable.AllDraw.CalIdle==5)
+
+						if(RefrigtzChessPortable.AllDraw.CalIdle==5||(RefrigtzChessPortable.AllDraw.CalIdle==2&&(!RefrigtzChessPortable.AllDraw.IdleInWork)))
 						{		RefrigtzChessPortable.AllDraw.CalIdle=1;
 								Debug.Log("Idle Finished");
 
@@ -73,7 +73,7 @@ public class ArtificialInteligenceMove
 
 						}
 						do	{System.Threading.Thread.Sleep(10);}while(RefrigtzChessPortable.AllDraw.CalIdle==1);
-					}
+					
 				
 					}
 				}

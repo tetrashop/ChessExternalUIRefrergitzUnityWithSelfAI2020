@@ -128,13 +128,7 @@ public class MoveSelector : MonoBehaviour
 			return;
 		if (!t.t.LoadP)
 			return;
-		object o = new object ();
-		lock (o) {
-
-			if(RefrigtzChessPortable.AllDraw.CalIdle!=5||RefrigtzChessPortable.AllDraw.CalIdle==0)
-				RefrigtzChessPortable.AllDraw.CalIdle=2;
-			RefrigtzChessPortable.AllDraw.IdleInWork=false;
-				}
+		
 
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
@@ -150,13 +144,34 @@ public class MoveSelector : MonoBehaviour
 				if (!Exist (moveLocations, gridPoint)) {
 					return;
 				}
+
 				if (GameManager.instance.PieceAtGrid (gridPoint) == null) {
 					
 					GameManager.instance.Move (movingPiece, gridPoint);
-					} else {
+					object o = new object ();
+					lock (o) {
+
+						if (RefrigtzChessPortable.AllDraw.CalIdle != 5 &&RefrigtzChessPortable.AllDraw.CalIdle != 2 && RefrigtzChessPortable.AllDraw.CalIdle == 0) {
+							RefrigtzChessPortable.AllDraw.CalIdle = 2;
+							RefrigtzChessPortable.AllDraw.IdleInWork = false;
+						}
+						do	{System.Threading.Thread.Sleep(1);}while(RefrigtzChessPortable.AllDraw.CalIdle!=5&&RefrigtzChessPortable.AllDraw.CalIdle!=1);
+
+					}
+				} else {
 					GameManager.instance.CapturePieceAt (gridPoint);
 					GameManager.instance.Move (movingPiece, gridPoint);
 		
+					object o = new object ();
+					lock (o) {
+
+						if (RefrigtzChessPortable.AllDraw.CalIdle != 5 &&RefrigtzChessPortable.AllDraw.CalIdle != 2 && RefrigtzChessPortable.AllDraw.CalIdle == 0) {
+							RefrigtzChessPortable.AllDraw.CalIdle = 2;
+							RefrigtzChessPortable.AllDraw.IdleInWork = false;
+						}
+						do	{System.Threading.Thread.Sleep(1);}while(RefrigtzChessPortable.AllDraw.CalIdle!=5&&RefrigtzChessPortable.AllDraw.CalIdle!=1);
+
+					}
 				}
 				// Reference Point 3: capture enemy piece here later	
 			ExitState ();
@@ -178,6 +193,7 @@ public class MoveSelector : MonoBehaviour
 					
 					ff =	System.Threading.Tasks.Task.Factory.StartNew (() => xc = MoveAI (TileSelector.x, TileSelector.y, gridPoint.x, gridPoint.y));
 					ff.Wait ();
+						}
 					}
 						object OOO=new object();
 						lock(OOO){
@@ -191,8 +207,9 @@ public class MoveSelector : MonoBehaviour
 //									
 													//signal to stop idle
 									
-										RefrigtzChessPortable.AllDraw.CalIdle=2;
-											//white to exit
+										if(RefrigtzChessPortable.AllDraw.CalIdle!=5)
+											RefrigtzChessPortable.AllDraw.CalIdle=2;
+														//white to exit
 									do{ System.Threading.Thread.Sleep(10);}while(RefrigtzChessPortable.AllDraw.CalIdle!=1);
 
 //															}
@@ -289,14 +306,14 @@ public class MoveSelector : MonoBehaviour
 										y1 = t.t.R.CromosomColumn = -1;
 
 									}
-							
+									}
 							}else
 								Debug.LogError("Thjinkingn Failed.");
-								}
+								
 								}
 							}
 					}
-					}
+					
 				});
 				output.Wait ();
 						
@@ -307,9 +324,7 @@ public class MoveSelector : MonoBehaviour
 			
 			}
 		} else {
-				RefrigtzChessPortable.AllDraw.CalIdle=0;
 				tileHighlight.SetActive (false);
-				RefrigtzChessPortable.AllDraw.IdleInWork=true;
 			}
 				
 	

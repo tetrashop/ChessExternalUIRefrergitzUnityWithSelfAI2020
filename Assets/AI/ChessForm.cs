@@ -270,6 +270,11 @@ namespace RefrigtzChessPortable
 
                     if (i == -1 && j == -1)
                     {
+						if(AllDraw.CalIdle!=1&&(AllDraw.CalIdle!=0||AllDraw.CalIdle==2))
+						{
+							AllDraw.CalIdle=5;
+							return 1;
+						}
 						AllDraw.MaxAStarGreedy=PlatformHelper.ProcessorCount;
                         Again:
                         CoPermit = false;
@@ -289,15 +294,17 @@ namespace RefrigtzChessPortable
                         var newTask = Task.Factory.StartNew(() => AliceAction(-1));
                         newTask.Wait();
                         newTask.Dispose();
+						Object oaa=new object();
+						if(AllDraw.CalIdle!=1&&(AllDraw.CalIdle!=0||AllDraw.CalIdle==2))
+						{
+							AllDraw.CalIdle=5;
+							return 1;
+						}
 						Object oa=new object();
 						lock(oa){
-							if(AllDraw.CalIdle!=0&&AllDraw.CalIdle==2)
-							{
-								AllDraw.CalIdle=5;
-								return 1;
-							}
+							
 
-							if(AllDraw.CalIdle!=0&&AllDraw.CalIdle!=2)
+							if((AllDraw.CalIdle!=0&&AllDraw.CalIdle!=2)||AllDraw.CalIdle==1)
 									{
                         if (Draw.TableZero(Table))
                         {
@@ -390,11 +397,8 @@ namespace RefrigtzChessPortable
                         //if (k == 0)
                         
                     }
-					Object oaa=new object();
-					lock(oaa){
-						if(AllDraw.CalIdle==0||AllDraw.CalIdle==5||AllDraw.CalIdle==2)
-						return 0;
-					}
+
+
 			      if (k > 6)
                     {
                         played = 2;

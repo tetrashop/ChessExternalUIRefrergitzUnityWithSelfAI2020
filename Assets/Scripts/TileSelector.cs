@@ -54,8 +54,6 @@ public class TileSelector : MonoBehaviour
 
 	{
 			
-
-
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
@@ -70,7 +68,6 @@ public class TileSelector : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
 				
-			
 				GameObject selectedPiece = GameManager.instance.PieceAtGrid(gridPoint);
                 if (GameManager.instance.DoesPieceBelongToCurrentPlayer(selectedPiece))
                 {
@@ -84,7 +81,7 @@ public class TileSelector : MonoBehaviour
         }
         else
 		{
-				tileHighlight.SetActive (false);
+					tileHighlight.SetActive (false);
 				
 
 		}
