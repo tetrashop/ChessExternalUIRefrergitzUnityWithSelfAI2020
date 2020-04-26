@@ -270,7 +270,7 @@ namespace RefrigtzChessPortable
 
                     if (i == -1 && j == -1)
                     {
-						if(AllDraw.CalIdle!=1&&(AllDraw.CalIdle!=0||AllDraw.CalIdle==2))
+						if(AllDraw.CalIdle==2)
 						{
 							AllDraw.CalIdle=5;
 							return 1;
@@ -295,7 +295,7 @@ namespace RefrigtzChessPortable
                         newTask.Wait();
                         newTask.Dispose();
 						Object oaa=new object();
-						if(AllDraw.CalIdle!=1&&(AllDraw.CalIdle!=0||AllDraw.CalIdle==2))
+						if(AllDraw.CalIdle==2)
 						{
 							AllDraw.CalIdle=5;
 							return 1;

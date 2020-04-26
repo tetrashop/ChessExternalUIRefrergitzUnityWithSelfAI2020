@@ -7,6 +7,7 @@ using System;
 
 public class ArtificialInteligenceMove
 {
+	int LevelMul=1;
 	int Order=1;
 	public int x,y,x1,y1;
 	public RefrigtzChessPortable.RefrigtzChessPortableForm t=null;
@@ -47,34 +48,45 @@ public class ArtificialInteligenceMove
 			do {
 					if(t!=null){
 					if(t.LoadP||Idle){
-						if(RefrigtzChessPortable.AllDraw.CalIdle==0&&RefrigtzChessPortable.AllDraw.IdleInWork)
-					{
+						if(RefrigtzChessPortable.AllDraw.CalIdle==0//&&RefrigtzChessPortable.AllDraw.IdleInWork
+						)
+										{
 							
 								bool Blit=RefrigtzChessPortable.AllDraw.Blitz;
 							RefrigtzChessPortable.AllDraw.Blitz=false;
 										Debug.Log("Idle Begin");
 															Idle=true;
 						RefrigtzChessPortable.AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
-							RefrigtzChessPortable.AllDraw.MaxAStarGreedy=PlatformHelper.ProcessorCount;
-							var arrayA =Task.Factory.StartNew(() =>	t.Draw.Initiate(1, 4, t.Draw.OrderP, CloneATable(t.brd.GetTable()), t.Draw.OrderP, false, false, 0));
+							RefrigtzChessPortable.AllDraw.MaxAStarGreedy=PlatformHelper.ProcessorCount*LevelMul;
+							var arrayA =Task.Factory.StartNew(() =>	t.Draw.InitiateAStarGreedyt(RefrigtzChessPortable.AllDraw.MaxAStarGreedy,1, 4, t.Draw.OrderP, CloneATable(t.brd.GetTable()), t.Draw.OrderP, false, false, 0));
 							arrayA.Wait();
 							bool LoadTree=false;
 							(new RefrigtzChessPortable.TakeRoot()).Save(false, false, t, ref LoadTree, false, false, false, false, false, false, false, true);
 							RefrigtzChessPortable.AllDraw.Blitz=Blit;
 //							System.Threading.Thread.Sleep(50);
-							}
-					
+							//LevelMul++;
+							Debug.Log("Idle Finished");
 
-						if(RefrigtzChessPortable.AllDraw.CalIdle==5||(RefrigtzChessPortable.AllDraw.CalIdle==2&&(!RefrigtzChessPortable.AllDraw.IdleInWork)))
+						}
+					
+						if(RefrigtzChessPortable.AllDraw.CalIdle==2)
+						{
+							RefrigtzChessPortable.AllDraw.CalIdle=5;
+						}
+						if(RefrigtzChessPortable.AllDraw.CalIdle==5)
 						{		RefrigtzChessPortable.AllDraw.CalIdle=1;
 								Debug.Log("Idle Finished");
+							RefrigtzChessPortable.AllDraw.IdleInWork=false;
 
 							Debug.Log("Ready to 1 base");
 
 						}
-						do	{System.Threading.Thread.Sleep(10);}while(RefrigtzChessPortable.AllDraw.CalIdle==1);
-					
-				
+						do	{System.Threading.Thread.Sleep(10);}while(RefrigtzChessPortable.AllDraw.CalIdle==1
+									//&&(!RefrigtzChessPortable.AllDraw.IdleInWork)
+						);
+
+						RefrigtzChessPortable.AllDraw.IdleInWork=true;
+						RefrigtzChessPortable.AllDraw.CalIdle=0;
 					}
 				}
 				} while(RefrigtzChessPortable.AllDraw.CalIdle!=3);

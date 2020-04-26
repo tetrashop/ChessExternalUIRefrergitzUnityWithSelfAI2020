@@ -53,6 +53,8 @@ public class TileSelector : MonoBehaviour
 	public void Update ()
 
 	{
+		
+
 			
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -68,6 +70,7 @@ public class TileSelector : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
 				
+
 				GameObject selectedPiece = GameManager.instance.PieceAtGrid(gridPoint);
                 if (GameManager.instance.DoesPieceBelongToCurrentPlayer(selectedPiece))
                 {
