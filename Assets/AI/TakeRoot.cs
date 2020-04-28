@@ -6,6 +6,8 @@ using System.Text;
 using System.IO;
 using RefrigtzChessPortable;
 using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace RefrigtzChessPortable
 {
@@ -27,18 +29,18 @@ namespace RefrigtzChessPortable
         {
             try
             {
-                Object a = new Object();
+                object a = new object();
                 lock (a)
                 {
                     string stackTrace = ex.ToString();
                     File.AppendAllText(RefrigtzChessPortableForm.Root + "\\ErrorProgramRun.txt",  ": On" + DateTime.Now.ToString()); // path of file where stack trace will be stored.
                 }
             }
-            catch (Exception t) {  Log(t); }
+            catch (Exception t) { /*Log(t);*/ }
         }
         void SetAllDrawKindString()
         {
-            Object OO = new Object();
+            object OO = new object();
             lock (OO)
             {
                 if (AllDrawKind == 4)
@@ -58,7 +60,7 @@ namespace RefrigtzChessPortable
         }
         void SetAllDrawKind(bool UsePenaltyRegardMechnisam, bool AStarGreedyHeuristic)
         {
-            Object OO = new Object();
+            object OO = new object();
             lock (OO)
             {
                 if (UsePenaltyRegardMechnisam && AStarGreedyHeuristic)
@@ -75,7 +77,7 @@ namespace RefrigtzChessPortable
 
         bool DrawManagement(bool FOUND,bool UsePenaltyRegardMechnisam, bool AStarGreedyHeuristic)
         {
-            Object OO = new Object();
+            object OO = new object();
             lock (OO)
             {
                 SetAllDrawKind(UsePenaltyRegardMechnisam, AStarGreedyHeuristic);
@@ -89,22 +91,25 @@ namespace RefrigtzChessPortable
                 String P = Path.GetFullPath(path3);
                 AllDrawReplacement = Path.Combine(P, AllDrawKindString);
 
-//                Logger y = new Logger(AllDrawReplacement);
+//                //Logger y = new Logger(AllDrawReplacement);
                 //y.Dispose();
 
 //                y = new Logger(AllDrawKindString);
                 //y.Dispose();
+				var ttt = Task.Factory.StartNew(() =>Wait(AllDrawKindString));
+
+				ttt.Wait();
 
                 if (File.Exists(AllDrawKindString))
-				{FileInfo f = new FileInfo (AllDrawKindString);
-					if (f.Length == 0)
-						return false;
+				{
+					var tttt = Task.Factory.StartNew(() =>Wait(AllDrawReplacement));
+
+					tttt.Wait();
+
 					
                     if (File.Exists(AllDrawReplacement))
                     {
-						f = new FileInfo (AllDrawReplacement);
-						if (f.Length == 0)
-							return false;
+						
 if (((new System.IO.FileInfo(AllDrawKindString).Length) < (new System.IO.FileInfo(AllDrawReplacement)).Length))
                         {
                             File.Delete(AllDrawKindString);
@@ -139,19 +144,23 @@ if (((new System.IO.FileInfo(AllDrawKindString).Length) < (new System.IO.FileInf
             }
         }
 
-        public bool Load(bool FOUND, bool Quantum, RefrigtzChessPortableForm Curent, ref bool LoadTree, bool MovementsAStarGreedyHeuristicFound, bool IInoreSelfObjects, bool UsePenaltyRegardMechnisam, bool BestMovments, bool PredictHeuristic, bool OnlySelf, bool AStarGreedyHeuristic, bool ArrangmentsChanged)
+        public bool Load(bool FOUND, bool Quantum, RefrigtzChessPortableForm Curent, ref bool LoadTree, bool MovementsAStarGreedyHeuristicFound, bool IInoreSelfobjects, bool UsePenaltyRegardMechnisam, bool BestMovments, bool PredictHeuristic, bool OnlySelf, bool AStarGreedyHeuristic, bool ArrangmentsChanged)
         {
-            Object OO = new Object();
+            object OO = new object();
             lock (OO)
-            {
-				if (!DrawManagement (FOUND, UsePenaltyRegardMechnisam, AStarGreedyHeuristic))
-					return false;
+			{	if (!DrawManagement (FOUND, UsePenaltyRegardMechnisam, AStarGreedyHeuristic))
+				return false;
 
+				var ttt = Task.Factory.StartNew(() =>Wait(AllDrawKindString));
+
+				ttt.Wait();
+
+			
                 bool DrawDrawen = false;
                 //Load Middle Targets.
                 try
                 {
-                    if (File.Exists(RefrigtzChessPortableForm.AllDrawKindString))
+                    if (File.Exists(AllDrawKindString))
                     {
                         if (RefrigtzChessPortableForm.MovmentsNumber >= 0)
                         {
@@ -159,7 +168,7 @@ if (((new System.IO.FileInfo(AllDrawKindString).Length) < (new System.IO.FileInf
                             {
 
 
-                                GalleryStudio.RefregizMemmory tr = new GalleryStudio.RefregizMemmory(MovementsAStarGreedyHeuristicFound, IInoreSelfObjects, UsePenaltyRegardMechnisam, BestMovments, PredictHeuristic, OnlySelf, AStarGreedyHeuristic, ArrangmentsChanged);
+                                GalleryStudio.RefregizMemmory tr = new GalleryStudio.RefregizMemmory(MovementsAStarGreedyHeuristicFound, IInoreSelfobjects, UsePenaltyRegardMechnisam, BestMovments, PredictHeuristic, OnlySelf, AStarGreedyHeuristic, ArrangmentsChanged);
 
 
                                 t = (RefrigtzChessPortable.AllDraw)tr.Load(Quantum, RefrigtzChessPortableForm.OrderPlate);
@@ -182,7 +191,7 @@ if (((new System.IO.FileInfo(AllDrawKindString).Length) < (new System.IO.FileInf
                             }
                             /*else
                             {
-                                GalleryStudio.RefregizMemmory tr = new GalleryStudio.RefregizMemmory(MovementsAStarGreedyHeuristicFound, IInoreSelfObjects, UsePenaltyRegardMechnisam, BestMovments, PredictHeuristic, OnlySelf, AStarGreedyHeuristic, ArrangmentsChanged);
+                                GalleryStudio.RefregizMemmory tr = new GalleryStudio.RefregizMemmory(MovementsAStarGreedyHeuristicFound, IInoreSelfobjects, UsePenaltyRegardMechnisam, BestMovments, PredictHeuristic, OnlySelf, AStarGreedyHeuristic, ArrangmentsChanged);
                                tt =(QuantumRefrigiz.AllDraw) tr.LoadQ(Quantum, RefrigtzChessPortableForm.OrderPlate);
                                 if (t != null)
                                 {
@@ -205,7 +214,7 @@ if (((new System.IO.FileInfo(AllDrawKindString).Length) < (new System.IO.FileInf
                         File.Delete(RefrigtzChessPortableForm.AllDrawKindString);
                     }
                 }
-                catch (Exception t) {  Log(t); }
+                catch (Exception t) { /*Log(t);*/ }
                 //System.Threading.Thread ttt = new System.Threading.Thread(new System.Threading.ThreadStart(Wait));
                 //ttt.Start();
                 //ttt.Join();
@@ -214,16 +223,19 @@ if (((new System.IO.FileInfo(AllDrawKindString).Length) < (new System.IO.FileInf
             }
         }
 
-       
+		void Wait(String path)
+		{
+			object O = new object ();
+			lock (O) {
+				Helper.WaitOnUsed (path);
+			}
 
-        public bool Save(bool FOUND,bool Quantum, RefrigtzChessPortableForm Curent, ref bool LoadTree, bool MovementsAStarGreedyHeuristicFound, bool IInoreSelfObjects, bool UsePenaltyRegardMechnisam, bool BestMovments, bool PredictHeuristic, bool OnlySelf, bool AStarGreedyHeuristic, bool ArrangmentsChanged)
+		}
+        public bool Save(bool FOUND,bool Quantum, RefrigtzChessPortableForm Curent, ref bool LoadTree, bool MovementsAStarGreedyHeuristicFound, bool IInoreSelfobjects, bool UsePenaltyRegardMechnisam, bool BestMovments, bool PredictHeuristic, bool OnlySelf, bool AStarGreedyHeuristic, bool ArrangmentsChanged)
         {
-            Object OO = new Object();
+            object OO = new object();
             lock (OO)
             {
-                //System.Threading.Thread ttt = new System.Threading.Thread(new System.Threading.ThreadStart(Wait));
-                //ttt.Start();
-                //ttt.Join();
 
                 /*if (!Quantum)
                 {
@@ -250,14 +262,19 @@ if (((new System.IO.FileInfo(AllDrawKindString).Length) < (new System.IO.FileInf
                 */
                 try
                 {
+					if (!DrawManagement (FOUND, UsePenaltyRegardMechnisam, AStarGreedyHeuristic))
+						return false;
+					
+					var ttt = Task.Factory.StartNew(() =>Wait(AllDrawKindString));
 
+					ttt.Wait();
 
                     RefrigtzChessPortable.AllDraw Stote = Curent.Draw;
                     if (!File.Exists(AllDrawKindString))
                     {
 
 
-                        GalleryStudio.RefregizMemmory rt = new GalleryStudio.RefregizMemmory(MovementsAStarGreedyHeuristicFound, IInoreSelfObjects, UsePenaltyRegardMechnisam, BestMovments, PredictHeuristic, OnlySelf, AStarGreedyHeuristic, ArrangmentsChanged
+                        GalleryStudio.RefregizMemmory rt = new GalleryStudio.RefregizMemmory(MovementsAStarGreedyHeuristicFound, IInoreSelfobjects, UsePenaltyRegardMechnisam, BestMovments, PredictHeuristic, OnlySelf, AStarGreedyHeuristic, ArrangmentsChanged
 
 
                             );
@@ -301,7 +318,7 @@ if (((new System.IO.FileInfo(AllDrawKindString).Length) < (new System.IO.FileInf
                         File.Delete(RefrigtzChessPortableForm.AllDrawKindString);
 
 
-                        GalleryStudio.RefregizMemmory rt = new GalleryStudio.RefregizMemmory(MovementsAStarGreedyHeuristicFound, IInoreSelfObjects, UsePenaltyRegardMechnisam, BestMovments, PredictHeuristic, OnlySelf, AStarGreedyHeuristic, ArrangmentsChanged
+                        GalleryStudio.RefregizMemmory rt = new GalleryStudio.RefregizMemmory(MovementsAStarGreedyHeuristicFound, IInoreSelfobjects, UsePenaltyRegardMechnisam, BestMovments, PredictHeuristic, OnlySelf, AStarGreedyHeuristic, ArrangmentsChanged
 
 
                             );

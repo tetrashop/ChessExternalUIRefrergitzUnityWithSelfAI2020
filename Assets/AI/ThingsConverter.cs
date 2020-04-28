@@ -85,7 +85,7 @@ namespace RefrigtzChessPortable
         public bool ConvertOperation(int i, int j, int a, int[,] Tab, int Ord, bool TB, int Cur)
         {
             //long Time = TimeElapced.TimeNow();Spaces++;
-            Object OOO = new Object();
+            object OOO = new object();
             lock (OOO)
             {
                 //Initiate Global variables with Local One.
@@ -98,19 +98,19 @@ namespace RefrigtzChessPortable
                 if (!Convert && (ActOfClickEqualTow || AllDraw.StateCC || (!AllDraw.Person)))
 
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
                         AllDraw.ConvertWait = true;
                     }
 
-                    Object O1 = new Object();
+                    object O1 = new object();
                     lock (O1)
                     {
                         ClickOcurred = true;
                     }
                     //Set tow time click unclicked.
-                    Object O2 = new Object();
+                    object O2 = new object();
                     lock (O2)
                     {
                         ActOfClickEqualTow = false;
@@ -134,12 +134,12 @@ namespace RefrigtzChessPortable
                     //If Converted is Occured the Operation od Set and table reference content occured.
                     if (Convert)
                     {
-                        bool ASS = false; Object OOOAAA = new Object(); lock (OOOAAA) { ASS = AllDraw.Blitz; }
+                        bool ASS = false; object OOOAAA = new object(); lock (OOOAAA) { ASS = AllDraw.Blitz; }
                         if (!ASS)
                         {
                             AllDraw.ConvertedKind = -1;
                             AllDraw.SodierConversionOcuured = true;
-                            //Randomly Number of 4 kind Object.
+                            //Randomly Number of 4 kind object.
                             int Rand = -1;
                             if (//AllDraw.Person && 
                                 AllDraw.StateCP && AllDraw.THISSecradioButtonGrayOrderChecked)
@@ -248,7 +248,7 @@ namespace RefrigtzChessPortable
                             {
                                 AllDraw.ConvertedKind = -1;
                                 AllDraw.SodierConversionOcuured = true;
-                                //Randomly Number of 4 kind Object.
+                                //Randomly Number of 4 kind object.
                                 int Rand = -1;
                                 if (//AllDraw.Person &&
                                     AllDraw.StateCP && AllDraw.THISSecradioButtonGrayOrderChecked)
@@ -359,7 +359,7 @@ namespace RefrigtzChessPortable
 
                                 AllDraw.ConvertedKind = -1;
                                 AllDraw.SodierConversionOcuured = true;
-                                //Randomly Number of 4 kind Object.
+                                //Randomly Number of 4 kind object.
                                 int Rand = -1;
                                 if (//AllDraw.Person && 
                                     AllDraw.StateCP && AllDraw.THISSecradioButtonGrayOrderChecked)
@@ -469,7 +469,7 @@ namespace RefrigtzChessPortable
                 AllDraw.ConvertWait = false;
                 if (Convert)
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
                         TableConverted = new int[8, 8];
@@ -477,7 +477,7 @@ namespace RefrigtzChessPortable
                             for (var jjj = 0; jjj < 8; jjj++)
                                 TableConverted[iii, jjj] = Tab[iii, jjj];
                     }
-                    Object O1 = new Object();
+                    object O1 = new object();
                     lock (O1)
                     {
                         LoadConvertTable = true;

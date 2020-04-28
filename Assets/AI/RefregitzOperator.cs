@@ -18,7 +18,7 @@ namespace GalleryStudio
 
 
         public bool MovementsAStarGreedyHeuristicFoundT = false;
-        public bool IgnoreSelfObjectsT = false;
+        public bool IgnoreSelfobjectsT = false;
         public bool UsePenaltyRegardMechnisamT = true;
         public bool BestMovmentsT = false;
         public bool PredictHeuristicT = true;
@@ -35,7 +35,7 @@ namespace GalleryStudio
         static void Log(Exception ex)
         {
             
-                Object a = new Object();
+                object a = new object();
                 lock (a)
                 {
                     string stackTrace = ex.ToString();
@@ -75,25 +75,25 @@ namespace GalleryStudio
             //UpdateConfigurationTableVal = true;                             
             SetAllDrawKindString();
             SAllDraw = AllDrawKindString;
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 MovementsAStarGreedyHeuristicFoundT = MovementsAStarGreedyHeuristicTFou;
-                IgnoreSelfObjectsT = IgnoreSelfObject;
+                IgnoreSelfobjectsT = IgnoreSelfObject;
                 UsePenaltyRegardMechnisamT = UsePenaltyRegardMechnisa;
                 BestMovmentsT = BestMovment;
                 PredictHeuristicT = PredictHurist;
                 OnlySelfT = OnlySel;
                 AStarGreedyHeuristicT = AStarGreedyHuris;
                 ArrangmentsT = Arrangments;
-                RefrigtzChessPortable.AllDraw Current = new RefrigtzChessPortable.AllDraw(Order, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsT);
+                RefrigtzChessPortable.AllDraw Current = new RefrigtzChessPortable.AllDraw(Order, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsT);
             }
         }
 
 
         public RefrigtzChessPortable.AllDraw GetRefregiz(int No)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
 

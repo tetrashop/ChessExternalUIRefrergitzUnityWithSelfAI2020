@@ -14,7 +14,7 @@ namespace RefrigtzChessPortable
 
         public static void SaveByCode(int Code, int LineCode, String File)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 if (!System.IO.File.Exists("CodeLogEvent.log"))

@@ -34,17 +34,17 @@ namespace RefrigtzChessPortable
         const int BigCastleCastleColumnBefore = 0;
         const int BigCastleCastleColumnAfter = 3;
 
-        const int TowObjectDistanceInBigCastleBefor = 4;
-        const int TowObjectDistanceInBigCastleAfter = 1;
-        const int TowObjectDistanceInSamllCastleBefor = 2;
-        const int TowObjectDistanceInSmallCastleAfter = 1;
+        const int TowobjectDistanceInBigCastleBefor = 4;
+        const int TowobjectDistanceInBigCastleAfter = 1;
+        const int TowobjectDistanceInSamllCastleBefor = 2;
+        const int TowobjectDistanceInSmallCastleAfter = 1;
         const int CastleGray = 4;
         const int CastleBrown = -4;
         const int KingGray = 6;
         const int KingBrown = -6;
         //Initiate Global Variables.
         public bool MovementsAStarGreedyHeuristicFoundT = false;
-        public bool IgnoreSelfObjectsT = false;
+        public bool IgnoreSelfobjectsT = false;
         public bool UsePenaltyRegardMechnisamT = true;
         public bool BestMovmentsT = false;
         public bool PredictHeuristicT = true;
@@ -63,7 +63,7 @@ namespace RefrigtzChessPortable
         {
             try
             {
-                Object a = new Object();
+                object a = new object();
                 lock (a)
                 {
                     string stackTrace = ex.ToString();
@@ -71,14 +71,14 @@ namespace RefrigtzChessPortable
                 }
             }
 
-            catch (Exception t) {Log(t); }
+            catch (Exception tt) { }
 
         }
         //Constructor.
         public RefrigtzChessPortableGeneticAlgorithm(bool MovementsAStarGreedyHeuristicTFou, bool IgnoreSelfObject, bool UsePenaltyRegardMechnisa, bool BestMovment, bool PredictHurist, bool OnlySel, bool AStarGreedyHuris, bool Arrangments)
         {
             MovementsAStarGreedyHeuristicFoundT = MovementsAStarGreedyHeuristicTFou;
-            IgnoreSelfObjectsT = IgnoreSelfObject;
+            IgnoreSelfobjectsT = IgnoreSelfObject;
             UsePenaltyRegardMechnisamT = UsePenaltyRegardMechnisa;
             BestMovmentsT = BestMovment;
             PredictHeuristicT = PredictHurist;
@@ -260,7 +260,7 @@ namespace RefrigtzChessPortable
                                 //Small Castles King Brown.
                                 if (j == DistantColumnSmall && Cromosom2[BigCastleKingColumnAfter, DistantRowBelow] == KingBrown && Cromosom2[BigCastleCastleColumnAfter, DistantRowBelow] == CastleBrown && Cromosom1[BigCastleKingColumnBefore, DistantRowBelow] == KingBrown && Cromosom1[BigCastleCastleColumnBefore, DistantRowBelow] == CastleBrown)
                                 {
-                                    Object O = new Object();
+                                    object O = new object();
                                     lock (O)
                                     {
                                         CromosomRowFirst = DistantRowBelow;
@@ -276,7 +276,7 @@ namespace RefrigtzChessPortable
                                 else//Big Castles King Brown.
                                     if (j == DistantColumnBig && Cromosom2[BigCastleCastleColumnAfter, DistantRowBelow] == CastleBrown && Cromosom2[BigCastleKingColumnBefore, DistantRowBelow] == KingBrown && Cromosom1[BigCastleCastleColumnBefore, DistantRowBelow] == CastleBrown && Cromosom1[BigCastleKingColumnBefore, DistantRowBelow] == KingBrown)
                                 {
-                                    Object O = new Object();
+                                    object O = new object();
                                     lock (O)
                                     {
                                         CromosomRowFirst = DistantRowBelow;
@@ -399,7 +399,7 @@ namespace RefrigtzChessPortable
                                 //Small Castles King Brown.
                                 if (j == DistantColumnSmall && Cromosom2[SmallCastleKingColumnAfter, DistantRowUp] == KingBrown && Cromosom2[SmallCastleCastleColumnAfter, DistantRowUp] == CastleBrown && Cromosom1[SmallCastleKingColumnBefore, DistantRowUp] == KingBrown && Cromosom1[SmallCastleCastleColumnBefore, DistantRowUp] == CastleBrown)
                                 {
-                                    Object O = new Object();
+                                    object O = new object();
                                     lock (O)
                                     {
                                         CromosomRowFirst = DistantRowUp;
@@ -415,7 +415,7 @@ namespace RefrigtzChessPortable
                                 else//Big Castles King Brown.
                                     if (j == DistantColumnBig && Cromosom2[BigCastleCastleColumnAfter, DistantRowUp] == CastleBrown && Cromosom2[BigCastleKingColumnAfter, DistantRowUp] == KingBrown && Cromosom1[BigCastleCastleColumnBefore, DistantRowUp] == CastleBrown && Cromosom1[BigCastleKingColumnBefore, DistantRowUp] == KingBrown)
                                 {
-                                    Object O = new Object();
+                                    object O = new object();
                                     lock (O)
                                     {
                                         CromosomRowFirst = DistantRowUp;
@@ -510,22 +510,22 @@ namespace RefrigtzChessPortable
                     }
                 }
             }
-            catch (Exception t) {  Log(t); }
+            catch (Exception t) { /*Log(t);*/ }
             return Hit;
         }
         int[,] CloneATable(int[,] Tab)
         {
             
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
-                //Create and new an Object.
+                //Create and new an object.
                 int[,] Table = new int[8, 8];
-                //Assigne Parameter To New Objects.
+                //Assigne Parameter To New objects.
                 for (var i = 0; i < 8; i++)
                     for (var j = 0; j < 8; j++)
                         Table[i, j] = Tab[i, j];
-                //Return New Object.
+                //Return New object.
                 
                 return Table;
             }
@@ -534,16 +534,16 @@ namespace RefrigtzChessPortable
         bool[,] CloneATable(bool[,] Tab)
         {
             
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
-                //Create and new an Object.
+                //Create and new an object.
                 bool[,] Table = new bool[8, 8];
-                //Assigne Parameter To New Objects.
+                //Assigne Parameter To New objects.
                 for (var i = 0; i < 8; i++)
                     for (var j = 0; j < 8; j++)
                         Table[i, j] = Tab[i, j];
-                //Return New Object.
+                //Return New object.
                 
                 return Table;
             }
@@ -622,7 +622,7 @@ namespace RefrigtzChessPortable
                         if (Gen1 == CromosomRow && Gen2 == CromosomColumn)
                             continue;
                         //Rulement of Gen Movments.
-                        if ((new ChessRules(0, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, GeneticTable[CromosomRow, CromosomColumn], CloneATable(GeneticTable), Order, CromosomRow, CromosomColumn)).Rules(CromosomRow, CromosomColumn, Gen1,
+                        if ((new ChessRules(0, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, GeneticTable[CromosomRow, CromosomColumn], CloneATable(GeneticTable), Order, CromosomRow, CromosomColumn)).Rules(CromosomRow, CromosomColumn, Gen1,
                         Gen2, color, GeneticTable[CromosomRow, CromosomColumn]))
                         {
                             //Initiate Global Variables and Syntax.
@@ -646,7 +646,7 @@ namespace RefrigtzChessPortable
                             else
                             {
                                 //Check Consideration.
-                                if ((new ChessRules(0, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, GeneticTable[CromosomRow, CromosomRow], CloneATable(GeneticTable), Order, CromosomRow, CromosomColumn)).Check(CloneATable(GeneticTable), Order))
+                                if ((new ChessRules(0, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, GeneticTable[CromosomRow, CromosomRow], CloneATable(GeneticTable), Order, CromosomRow, CromosomColumn)).Check(CloneATable(GeneticTable), Order))
                                 {
                                     GeneticTable[CromosomRow, CromosomColumn] = GeneticTable[Gen1, Gen2];
                                     GeneticTable[Gen1, Gen2] = 0;
@@ -689,7 +689,7 @@ namespace RefrigtzChessPortable
                         else
                             Ki = 1;
                         Count++;
-                    } while (Count < 6 && !(new ChessRules(0, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Ki, List[List.Count + MinusOne], Order, CromosomRow, CromosomColumn)).FindAThing(List[List.Count + MinusOne], ref CromosomRow, ref CromosomColumn, Ki, true, RowColumn));
+                    } while (Count < 6 && !(new ChessRules(0, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Ki, List[List.Count + MinusOne], Order, CromosomRow, CromosomColumn)).FindAThing(List[List.Count + MinusOne], ref CromosomRow, ref CromosomColumn, Ki, true, RowColumn));
                     if (Count >= 6)
                     {
                         NoGameFounf = true;
@@ -708,7 +708,7 @@ namespace RefrigtzChessPortable
                         else
                             Ki = -1;
                         Count++;
-                    } while (Count < 6 && !(new ChessRules(0, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Ki, List[List.Count + MinusOne], Order, CromosomRow, CromosomColumn)).FindAThing(List[List.Count + MinusOne], ref CromosomRow, ref CromosomColumn, Ki, true, RowColumn));
+                    } while (Count < 6 && !(new ChessRules(0, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Ki, List[List.Count + MinusOne], Order, CromosomRow, CromosomColumn)).FindAThing(List[List.Count + MinusOne], ref CromosomRow, ref CromosomColumn, Ki, true, RowColumn));
                     if (Count >= 6)
                     {
                         NoGameFounf = true;
@@ -741,7 +741,7 @@ namespace RefrigtzChessPortable
                     else
                         Ki = 1;
                     Count++;
-                } while (Count < 6 && !(new ChessRules(0, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Ki, List[List.Count + MinusOne], Order, CromosomRow, CromosomColumn)).FindAThing(List[List.Count + MinusOne], ref CromosomRow, ref CromosomColumn, Ki, true, RowColumn));
+                } while (Count < 6 && !(new ChessRules(0, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Ki, List[List.Count + MinusOne], Order, CromosomRow, CromosomColumn)).FindAThing(List[List.Count + MinusOne], ref CromosomRow, ref CromosomColumn, Ki, true, RowColumn));
                 if (Count >= 6)
                     return null;
 
@@ -756,7 +756,7 @@ namespace RefrigtzChessPortable
                     else
                         Ki = -1;
                     Count++;
-                } while (Count < 6 && !(new ChessRules(0, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Ki, List[List.Count + MinusOne], Order, CromosomRow, CromosomColumn)).FindAThing(List[List.Count + MinusOne], ref CromosomRow, ref CromosomColumn, Ki, true, RowColumn));
+                } while (Count < 6 && !(new ChessRules(0, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Ki, List[List.Count + MinusOne], Order, CromosomRow, CromosomColumn)).FindAThing(List[List.Count + MinusOne], ref CromosomRow, ref CromosomColumn, Ki, true, RowColumn));
                 if (Count >= 6)
                     return null;
             }

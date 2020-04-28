@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-	public void Start ()
+    void Start ()
     {
         pieces = new GameObject[8, 8];
         movedPawns = new List<GameObject>();
@@ -111,9 +111,9 @@ public class GameManager : MonoBehaviour
 
     public void AddPiece(GameObject prefab, Player player, int col, int row)
     {
-        GameObject pieceobject = board.AddPiece(prefab, col, row);
-        player.pieces.Add(pieceobject);
-        pieces[col, row] = pieceobject;
+        GameObject pieceObject = board.AddPiece(prefab, col, row);
+        player.pieces.Add(pieceObject);
+        pieces[col, row] = pieceObject;
     }
 
     public void SelectPieceAtGrid(Vector2Int gridPoint)
@@ -125,10 +125,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public List<Vector2Int> MovesForPiece(GameObject pieceobject)
+    public List<Vector2Int> MovesForPiece(GameObject pieceObject)
     {
-        Piece piece = pieceobject.GetComponent<Piece>();
-        Vector2Int gridPoint = GridForPiece(pieceobject);
+        Piece piece = pieceObject.GetComponent<Piece>();
+        Vector2Int gridPoint = GridForPiece(pieceObject);
         List<Vector2Int> locations = piece.MoveLocations(gridPoint);
 
         // filter out offboard locations
@@ -163,17 +163,24 @@ public class GameManager : MonoBehaviour
     {
         return movedPawns.Contains(pawn);
     }
-
+	bool Exist(List<Vector2Int> ite,Vector2Int t)
+	{
+		bool Is = false;
+		for (int i = 0; i < ite.Count; i++) {
+			if (ite[i].x == t.x && ite[i].y == t.y)
+				return true;
+		}
+		return Is; 
+	}
     public void CapturePieceAt(Vector2Int gridPoint)
     {
         GameObject pieceToCapture = PieceAtGrid(gridPoint);
-		if (pieceToCapture != null) {
-			if (pieceToCapture.GetComponent<Piece> ().type == PieceType.King) {
-				Debug.Log (currentPlayer.name + " wins!");
-				Destroy (board.GetComponent<TileSelector> ());
-				Destroy (board.GetComponent<MoveSelector> ());
-			}
-		}
+        if (pieceToCapture.GetComponent<Piece>().type == PieceType.King)
+        {
+            Debug.Log(currentPlayer.name + " wins!");
+            Destroy(board.GetComponent<TileSelector>());
+            Destroy(board.GetComponent<MoveSelector>());
+        }
         currentPlayer.capturedPieces.Add(pieceToCapture);
         pieces[gridPoint.x, gridPoint.y] = null;
         Destroy(pieceToCapture);

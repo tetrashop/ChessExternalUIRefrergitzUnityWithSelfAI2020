@@ -14,7 +14,7 @@ namespace RefrigtzChessPortable
         static void Log(Exception ex)
         {
             
-                Object a = new Object();
+                object a = new object();
                 lock (a)
                 {
                     string stackTrace = ex.ToString();
@@ -28,7 +28,7 @@ namespace RefrigtzChessPortable
 
         public NetworkQuantumLearningKrinskyAtamata(int r0, int m0, int k0) : base(r0, m0, k0)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 Netfi = new LearningKrinskyAtamata[m0, k0];
@@ -41,7 +41,7 @@ namespace RefrigtzChessPortable
         }
         public double LearningAlgorithmRegardNet(int Row, int Column)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
 
@@ -55,7 +55,7 @@ namespace RefrigtzChessPortable
         }
         public int IsRewardActionNet(int Row, int Column)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 if (Netfi[Row, Column].IsReward)
@@ -66,7 +66,7 @@ namespace RefrigtzChessPortable
 
         public double IsPenaltyActionNet(int Row, int Column)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 if (Netfi[Row, Column].IsPenalty)
@@ -76,7 +76,7 @@ namespace RefrigtzChessPortable
         }
         public double LearningAlgorithmPenaltyNet(int Row, int Column)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 double Hu = 1;
@@ -89,7 +89,7 @@ namespace RefrigtzChessPortable
         }
         public double LearingValue(int Row, int Column)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 double Hu = 1;

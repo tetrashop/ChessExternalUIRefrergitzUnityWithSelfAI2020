@@ -15,7 +15,7 @@ namespace RefrigtzChessPortable
     {
         private static Double fx0untinxn(Double[] x, Double[] f, int n, int i, int j)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 if ((i == j - 1) || (i + 1 == j))
@@ -28,7 +28,7 @@ namespace RefrigtzChessPortable
 
         public static Double[] px(Double[] x, Double[] f, int n)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 /*Double s = f[0];
@@ -65,7 +65,7 @@ namespace RefrigtzChessPortable
         }
         static Double[] Simplify(Double[] s, Double[] x, int i, int j)
             {
-                Object o = new Object();
+                object o = new object();
                 lock (o)
                 {
                     if (j == i)

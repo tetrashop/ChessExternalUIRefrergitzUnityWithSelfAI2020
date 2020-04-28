@@ -51,7 +51,7 @@ namespace RefrigtzChessPortable
     [Serializable]
     public class ThinkingRefrigtzChessPortable//: IDisposable
     {
-        List<List<List<int[]>>> MovableAllObjectsList = new List<List<List<int[]>>>();
+        List<List<List<int[]>>> MovableAllobjectsList = new List<List<List<int[]>>>();
         public int RemoveOfDisturbIndex = -1;
         int HeuristicDoubleDefenceIndexInOnGameMidle = 0;
         List<List<int[]>> HeuristicDoubleDefenceIndexInOnGame = new List<List<int[]>>();
@@ -82,7 +82,7 @@ namespace RefrigtzChessPortable
         int HeuristicAllReducedMoveMidel = 0;
         public static int NoOfBoardMovedGray = 0;
         public static int NoOfBoardMovedBrown = 0;
-        public static int NoOfMovableAllObjectMove = 1;
+        public static int NoOfMovableAllobjectMove = 1;
         public int DifOfNoOfSupporteAndReducedSupportGray = int.MinValue;
         public int DifOfNoOfSupporteAndReducedSupportBrown = int.MinValue;
         public static int ColleralationGray = int.MaxValue;
@@ -146,7 +146,7 @@ namespace RefrigtzChessPortable
         bool ThinkingAtRun = false;
         public static String ActionsString = "";
         int ThinkingLevel = 0;
-        public List<bool[]> LearningVarsObject = new List<bool[]>();
+        public List<bool[]> LearningVarsobject = new List<bool[]>();
         public static bool LearningVarsCheckedMateOccured;
         public static bool LearningVarsCheckedMateOccuredOneCheckedMate;
         bool IsGardHighPriority = false;
@@ -154,7 +154,7 @@ namespace RefrigtzChessPortable
         const int ThresholdFullGame = 20000;
         public static int MaxHeuristicx = int.MinValue;
         public bool MovementsAStarGreedyHeuristicFoundT = false;
-        public bool IgnoreSelfObjectsT = false;
+        public bool IgnoreSelfobjectsT = false;
         public bool UsePenaltyRegardMechnisamT = false;
         public bool BestMovmentsT = false;
         public bool PredictHeuristicT = true;
@@ -189,7 +189,7 @@ namespace RefrigtzChessPortable
         public static int BeginThread = 0;
         public static int EndThread = 0;
         bool ExistingOfEnemyHiiting = false;
-        int IgnoreObjectDangour = -1;
+        int IgnoreobjectDangour = -1;
         public int CheckMateAStarGreedy = 0;
         bool CheckMateOcuured = false;
         int CurrentRow = -1, CurrentColumn = -1;
@@ -251,13 +251,13 @@ namespace RefrigtzChessPortable
         public List<bool> AStarGreedyMove = new List<bool>();
          int[,] Value = new int[8, 8];
         int CurrentAStarGredyMax = -1;
-        List<int[,]> ObjectNumbers = new List<int[,]>();
+        List<int[,]> objectNumbers = new List<int[,]>();
         ///Log of Errors.
         static void Log(Exception ex)
         {
             try
             {
-                Object a = new Object();
+                object a = new object();
                 lock (a)
                 {
                     string stackTrace = ex.ToString();
@@ -266,13 +266,13 @@ namespace RefrigtzChessPortable
                 }
             }
 
-            catch (Exception t) {Log(t); }
+            catch (Exception t) { /*Log(t);*/ }
 
         }
         //create a tow dimension list of all object boundry
-        void SetObjectNumbersInList(int[,] Tab)
+        void SetobjectNumbersInList(int[,] Tab)
         {
-            SetObjectNumbers(Tab);
+            SetobjectNumbers(Tab);
             int[,] A = new int[2, 6];
             A[0, 0] = SodierMidle;
             A[1, 0] = SodierHigh;
@@ -291,12 +291,12 @@ namespace RefrigtzChessPortable
 
             A[0, 5] = KingMidle;
             A[1, 5] = KingHigh;
-            ObjectNumbers.Add(A);
+            objectNumbers.Add(A);
         }
         //distiguis object boundries 
-        public void SetObjectNumbers(int[,] TabS)
+        public void SetobjectNumbers(int[,] TabS)
         {
-            Object a = new Object();
+            object a = new object();
             lock (a)
             {
                 SodierMidle = 0;
@@ -394,14 +394,14 @@ namespace RefrigtzChessPortable
         public ThinkingRefrigtzChessPortable(int iInde, int KindO, int CurrentAStarGredy, bool MovementsAStarGreedyHeuristicTFou, bool IgnoreSelfObject, bool UsePenaltyRegardMechnisa, bool BestMovment, bool PredictHurist, bool OnlySel, bool AStarGreedyHuris, bool Arrangments, int i, int j)
         {
 
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 //Initiate Variables.
                 iIndex = iInde;
                 CurrentAStarGredyMax = CurrentAStarGredy;
                 MovementsAStarGreedyHeuristicFoundT = MovementsAStarGreedyHeuristicTFou;
-                IgnoreSelfObjectsT = IgnoreSelfObject;
+                IgnoreSelfobjectsT = IgnoreSelfObject;
                 UsePenaltyRegardMechnisamT = UsePenaltyRegardMechnisa;
                 BestMovmentsT = BestMovment;
                 PredictHeuristicT = PredictHurist;
@@ -470,10 +470,10 @@ namespace RefrigtzChessPortable
             }
         }
 
-        //determine When Arrangment of Table Objects is Validated at Begin.
+        //determine When Arrangment of Table objects is Validated at Begin.
         bool BeginArragmentsOfOrderFinished(int[,] Table, int Order)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int CH = 0;
@@ -481,7 +481,7 @@ namespace RefrigtzChessPortable
                 {
                     if (Order == 1)
                     {
-                        //Number of Gray Objects at Last Row Bottmm.
+                        //Number of Gray objects at Last Row Bottmm.
                         for (var i = 0; i < 2; i++)
                             for (var j = 6; j < 8; j++)
                                 if (Table[i, j] > 0)
@@ -489,7 +489,7 @@ namespace RefrigtzChessPortable
                     }
                     else
                     {
-                        //Number of Brown Objects at Last tow Row Upper.
+                        //Number of Brown objects at Last tow Row Upper.
                         for (var i = 0; i < 8; i++)
                             for (var j = 0; j < 2; j++)
                                 if (Table[i, j] < 0)
@@ -500,7 +500,7 @@ namespace RefrigtzChessPortable
                 {
                     if (Order == -1)
                     {
-                        //Number of Brown Objects Table at Last tow row Uppper.
+                        //Number of Brown objects Table at Last tow row Uppper.
                         for (var i = 0; i < 8; i++)
                             for (var j = 6; j < 2; j++)
                                 if (Table[i, j] > 0)
@@ -508,7 +508,7 @@ namespace RefrigtzChessPortable
                     }
                     else
                     {
-                        //Number of Gray Objects Table at Last tow rown below.
+                        //Number of Gray objects Table at Last tow rown below.
                         for (var i = 0; i < 2; i++)
                             for (var j = 0; j < 8; j++)
                                 if (Table[i, j] < 0)
@@ -523,14 +523,14 @@ namespace RefrigtzChessPortable
         //Constructor
         public ThinkingRefrigtzChessPortable(int iInde, int KindO, int CurrentAStarGredy, bool MovementsAStarGreedyHeuristicTFou, bool IgnoreSelfObject, bool UsePenaltyRegardMechnisa, bool BestMovment, bool PredictHurist, bool OnlySel, bool AStarGreedyHuris, bool Arrangments, int i, int j, int a, int[,] Tab, int Ma, int Ord, bool ThinkingBeg, int CurA, int ThingN, int Kin)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 
                 iIndex = iInde;
                 CurrentAStarGredyMax = CurrentAStarGredy;
                 MovementsAStarGreedyHeuristicFoundT = MovementsAStarGreedyHeuristicTFou;
-                IgnoreSelfObjectsT = IgnoreSelfObject;
+                IgnoreSelfobjectsT = IgnoreSelfObject;
                 UsePenaltyRegardMechnisamT = UsePenaltyRegardMechnisa;
                 BestMovmentsT = BestMovment;
                 PredictHeuristicT = PredictHurist;
@@ -539,7 +539,7 @@ namespace RefrigtzChessPortable
                 //Initiate Variables.
                 ArrangmentsChanged = Arrangments;
                 Kind = Kin;
-                SetObjectNumbers(Tab);
+                SetobjectNumbers(Tab);
                 AStarGreedy = new List<AllDraw>();
                 ThingsNumber = ThingN;
                 CurrentArray = CurA;
@@ -619,31 +619,31 @@ namespace RefrigtzChessPortable
         //Clone A Table
         int[,] CloneATable(int[,] Tab)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
-                //Create and new an Object.
+                //Create and new an object.
                 int[,] Table = new int[8, 8];
-                //Assigne Parameter To New Objects.
+                //Assigne Parameter To New objects.
                 for (var i = 0; i < 8; i++)
                     for (var j = 0; j < 8; j++)
                         Table[i, j] = Tab[i, j];
-                //Return New Object.
+                //Return New object.
                 return Table;
             }
         }
         //Clone A List.  
         int[] CloneAList(int[] Tab, int Count)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
-                //Initiate new Objects.
+                //Initiate new objects.
                 int[] Table = new int[Count];
-                //Asigne to new Objects.
+                //Asigne to new objects.
                 for (var i = 0; i < Count; i++)
                     Table[i] = Tab[i];
-                //Retrun new Object.
+                //Retrun new object.
                 return Table;
             }
         }
@@ -651,7 +651,7 @@ namespace RefrigtzChessPortable
         //Gwt Value of Book Netwrok  Atamtat at Every Need time form parameters index.
         int GetValue(int i, int j)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 return Value[i, j];
@@ -660,37 +660,37 @@ namespace RefrigtzChessPortable
         ///Clone a Copy.
         public void Clone(ref ThinkingRefrigtzChessPortable AA)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
-                //Assignment Content to New Content Object.
-                //Initaite New Object.
+                //Assignment Content to New Content object.
+                //Initaite New object.
                 if (AA == null)
-                    AA = new ThinkingRefrigtzChessPortable(iIndex, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Row, Column//, Kind
+                    AA = new ThinkingRefrigtzChessPortable(iIndex, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Row, Column//, Kind
                         );
                 AA.ArrangmentsChanged = ArrangmentsChanged;
-                //When Depth Object is not NULL.
+                //When Depth object is not NULL.
                 if (AStarGreedy.Count != 0)
                 {
                     AA.AStarGreedy = new System.Collections.Generic.List<AllDraw>();
                     //For All Depth(s).
                     for (var i = 0; i < AStarGreedy.Count; i++)
                     {
-                        //Clone a Copy From Depth Objects.
+                        //Clone a Copy From Depth objects.
                         AStarGreedy[i].Clone(AA.AStarGreedy[i]);
                     }
                 }
                 //For All Moves Indexx Solders List Count.
                 for (var j = 0; j < RowColumnSoldier.Count; j++)
-                    //Add a Clone To New Solder indexx Object.
+                    //Add a Clone To New Solder indexx object.
                     AA.RowColumnSoldier.Add(CloneAList(RowColumnSoldier[j], 2));
                 //For All Castle List Count.
                 for (var j = 0; j < RowColumnCastle.Count; j++)
-                    //Add a Clone to New Castle index Objects List.
+                    //Add a Clone to New Castle index objects List.
                     AA.RowColumnCastle.Add(CloneAList(RowColumnCastle[j], 2));
                 //For All Elephant index List Count.
                 for (var j = 0; j < RowColumnElefant.Count; j++)
-                    //Add a Clone to New Elephant Object List.
+                    //Add a Clone to New Elephant object List.
                     AA.RowColumnElefant.Add(CloneAList(RowColumnElefant[j], 2));
                 //For All Hourse index List Count.
                 for (var j = 0; j < RowColumnHourse.Count; j++)
@@ -698,36 +698,36 @@ namespace RefrigtzChessPortable
                     AA.RowColumnHourse.Add(CloneAList(RowColumnHourse[j], 2));
                 //For All King index List Count.
                 for (var j = 0; j < RowColumnKing.Count; j++)
-                    //Add a Clone To New King Object List.
+                    //Add a Clone To New King object List.
                     AA.RowColumnKing.Add(CloneAList(RowColumnKing[j], 2));
                 //For All Minister index Count.
                 for (var j = 0; j < RowColumnMinister.Count; j++)
                     //Add a Clone To Minister New index List.
                     AA.RowColumnMinister.Add(CloneAList(RowColumnMinister[j], 2));
                 //Assgine thread.
-                //Create and Initiate new Table Object.
+                //Create and Initiate new Table object.
                 AA.TableT = new int[8, 8];
-                //Create and Initaite New Table Object.
+                //Create and Initaite New Table object.
                 AA.TableConst = new int[8, 8];
                 //if Table is not NULL>
                 if (TableT != null)
-                    //For All Items in Table Object.
+                    //For All Items in Table object.
                     for (var i = 0; i < 8; i++)
                         for (var j = 0; j < 8; j++)
-                            //Assgine Table items in New Table Object.
+                            //Assgine Table items in New Table object.
                             AA.TableT[i, j] = TableT[i, j];
                 //If Table is Not Null.
                 if (TableConst != null)
-                    //For All Items in Table Object.
+                    //For All Items in Table object.
                     for (var i = 0; i < 8; i++)
                         for (var j = 0; j < 8; j++)
-                            //Assignm Items in New Table Object.
+                            //Assignm Items in New Table object.
                             AA.TableConst[i, j] = TableConst[i, j];
-                //For All Table State Movements in Castles Objects.
+                //For All Table State Movements in Castles objects.
                 for (var i = 0; i < TableListCastle.Count; i++)
                     //Add aclon of a Table in New Briges Table List.
                     AA.TableListCastle.Add(CloneATable(TableListCastle[i]));
-                //For All Table List Movements in  Elephant Objects 
+                //For All Table List Movements in  Elephant objects 
                 for (var i = 0; i < TableListElefant.Count; i++)
                     //Add a Clone of Tables in Elephant Mevments Obejcts List To New One.
                     AA.TableListElefant.Add(CloneATable(TableListElefant[i]));
@@ -779,79 +779,79 @@ namespace RefrigtzChessPortable
                     AA.PenaltyRegardListSolder = new List<QuantumAtamata>();
                     for (var i = 0; i < PenaltyRegardListSolder.Count; i++)
                     {
-                        //Initiate a new  QuantumAtamata Object
-                        //Add New Object Create to New Penalty Solder List.
+                        //Initiate a new  QuantumAtamata object
+                        //Add New object Create to New Penalty Solder List.
                         AA.PenaltyRegardListSolder.Add(PenaltyRegardListSolder[i]);
                     }
                 }
                 else
                 if (Kind == 2)
                 {
-                    //Initaite and Create Elephant Penalty List Object.
+                    //Initaite and Create Elephant Penalty List object.
                     AA.PenaltyRegardListElefant = new List<QuantumAtamata>();
                     //For All Elepahtn Penalty List Count.
                     for (var i = 0; i < PenaltyRegardListElefant.Count; i++)
                     {
-                        //Initiate a new  QuantumAtamata Object
+                        //Initiate a new  QuantumAtamata object
                         //Clone a Copy Of Penalty Elephant.
                         AA.PenaltyRegardListElefant.Add(PenaltyRegardListElefant[i]);
-                        //Add New Object Create to New Penalty Elephant List.
+                        //Add New object Create to New Penalty Elephant List.
                     }
                 }
                 else
             if (Kind == 3)
                 {
-                    //Initaite and Create Hourse Penalty List Object.
+                    //Initaite and Create Hourse Penalty List object.
                     AA.PenaltyRegardListHourse = new List<QuantumAtamata>();
                     //For All Solder Hourse List Count.
                     for (var i = 0; i < PenaltyRegardListHourse.Count; i++)
                     {
-                        //Initiate a new  QuantumAtamata Object
+                        //Initiate a new  QuantumAtamata object
                         QuantumAtamata Current = new QuantumAtamata(3, 3, 3);
                         //Clone a Copy Of Penalty Hourse.
-                        //Add New Object Create to New Penalty Hourse List.
+                        //Add New object Create to New Penalty Hourse List.
                         AA.PenaltyRegardListHourse.Add(PenaltyRegardListHourse[i]);
                     }
                 }
                 else
                 if (Kind == 4)
                 {
-                    //Initaite and Create Castles Penalty List Object.
+                    //Initaite and Create Castles Penalty List object.
                     AA.PenaltyRegardListCastle = new List<QuantumAtamata>();
                     //For All Solder Castle List Count.
                     for (var i = 0; i < PenaltyRegardListCastle.Count; i++)
                     {
-                        //Initiate a new  QuantumAtamata Object
+                        //Initiate a new  QuantumAtamata object
                         //Clone a Copy Of Penalty Castles.
-                        //Add New Object Create to New Penalty Castles List.
+                        //Add New object Create to New Penalty Castles List.
                         AA.PenaltyRegardListCastle.Add(PenaltyRegardListCastle[i]);
                     }
                 }
                 else
                 if (Kind == 5)
                 {
-                    //Initaite and Create Minister Penalty List Object.
+                    //Initaite and Create Minister Penalty List object.
                     AA.PenaltyRegardListMinister = new List<QuantumAtamata>();
                     //For All Solder Minster List Count.
                     for (var i = 0; i < PenaltyRegardListMinister.Count; i++)
                     {
-                        //Initiate a new  QuantumAtamata Object
+                        //Initiate a new  QuantumAtamata object
                         //Clone a Copy Of Penalty Minsiter.
-                        //Add New Object Create to New Penalty Minsietr List.
+                        //Add New object Create to New Penalty Minsietr List.
                         AA.PenaltyRegardListMinister.Add(PenaltyRegardListMinister[i]);
                     }
                 }
                 else
                 if (Kind == 6)
                 {
-                    //Initaite and Create King Penalty List Object.
+                    //Initaite and Create King Penalty List object.
                     AA.PenaltyRegardListKing = new List<QuantumAtamata>();
                     //For All Solder King List Count.
                     for (var i = 0; i < PenaltyRegardListKing.Count; i++)
                     {
-                        //Initiate a new  QuantumAtamata Object
+                        //Initiate a new  QuantumAtamata object
                         //Clone a Copy Of Penalty King.
-                        //Add New Object Create to New Penalty King List.
+                        //Add New object Create to New Penalty King List.
                         AA.PenaltyRegardListKing.Add(PenaltyRegardListKing[i]);
                     }
                 }
@@ -866,7 +866,7 @@ namespace RefrigtzChessPortable
                 AA.ElefantValue = ElefantValue;
                 AA.ExistingOfEnemyHiiting = ExistingOfEnemyHiiting;
                 AA.HourseValue = HourseValue;
-                AA.IgnoreObjectDangour = IgnoreObjectDangour;
+                AA.IgnoreobjectDangour = IgnoreobjectDangour;
                 AA.IndexCastle = IndexCastle;
                 AA.IndexElefant = IndexElefant;
                 AA.IndexHourse = IndexHourse;
@@ -888,9 +888,9 @@ namespace RefrigtzChessPortable
                 AA.ThinkingFinished = ThinkingFinished;
             }
         }
-        bool IsDistributedObjectAttackNonDistributedEnemyObject(bool Before, int[,] Table, int Ord, int aa, int RowS, int ColS, int RowD, int ColD)
+        bool IsDistributedobjectAttackNonDistributedEnemyobject(bool Before, int[,] Table, int Ord, int aa, int RowS, int ColS, int RowD, int ColD)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 bool Is = false;
@@ -902,7 +902,7 @@ namespace RefrigtzChessPortable
         ///Heuristic of Attacker.
         int HeuristicAttack(bool Before, int[,] Table, int Ord, int aa, int RowS, int ColS, int RowD, int ColD)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int HeuristicAttackValue = 0;
@@ -940,13 +940,13 @@ namespace RefrigtzChessPortable
                     else
                         return HeuristicAttackValue;
                     //For Attack Movments.- GetObjectValueHeuristic
-                    Object O1 = new Object();
+                    object O1 = new object();
                     lock (O1)
                     {
                         //if (Before)
                         {
                             bool ab = false;
-                            var th = Task.Factory.StartNew(() => ab = IsDistributedObjectAttackNonDistributedEnemyObject(Before, CloneATable(Table), Ord, aa, RowS, ColS, RowD, ColD));
+                            var th = Task.Factory.StartNew(() => ab = IsDistributedobjectAttackNonDistributedEnemyobject(Before, CloneATable(Table), Ord, aa, RowS, ColS, RowD, ColD));
                             th.Wait();
                             th.Dispose();
                             if (ab)
@@ -960,7 +960,7 @@ namespace RefrigtzChessPortable
                                 if (ab)
                                 {
                                     HA += RationalRegard;
-                                    //When there is supporter of attacked Objects take Heuristic negative else take muliply sign and muliply Heuristic.
+                                    //When there is supporter of attacked objects take Heuristic negative else take muliply sign and muliply Heuristic.
                                     int Supported = new int();
                                     int SupportedS = new int();
                                     Supported = 0;
@@ -972,7 +972,7 @@ namespace RefrigtzChessPortable
                                         ////Parallel.For(0, 8, h =>
                                         for (int h = 0; h < 8; h++)
                                         {
-                                            //Ignore Of Self Objects.
+                                            //Ignore Of Self objects.
                                             if (Order == 1 && Table[g, h] >= 0)
                                                 continue;
                                             if (Order == -1 && Table[g, h] <= 0)
@@ -987,7 +987,7 @@ namespace RefrigtzChessPortable
                                             //When Enemy is Supported.
                                             bool A = new bool();
                                             bool B = new bool();
-                                            Object O2 = new Object();
+                                            object O2 = new object();
                                             lock (O2)
                                             {
                                                 var th2 = Task.Factory.StartNew(() => A = Support(CloneATable(Table), g, h, RowD, ColD, aaa, Order * -1));
@@ -1053,13 +1053,13 @@ namespace RefrigtzChessPortable
                         return HeuristicAttackValue;
 
                     //For Attack Movments.
-                    Object O2 = new Object();
+                    object O2 = new object();
                     lock (O2)
                     {
                         //if (Before)
                         {
                             bool ab = false;
-                            var th = Task.Factory.StartNew(() => ab = IsDistributedObjectAttackNonDistributedEnemyObject(Before, CloneATable(Table), Ord, aa, RowS, ColS, RowD, ColD));
+                            var th = Task.Factory.StartNew(() => ab = IsDistributedobjectAttackNonDistributedEnemyobject(Before, CloneATable(Table), Ord, aa, RowS, ColS, RowD, ColD));
                             th.Wait();
                             th.Dispose();
                             if (ab)
@@ -1073,7 +1073,7 @@ namespace RefrigtzChessPortable
                          
                                     HA += RationalRegard;
 
-                                //When there is supporter of attacked Objects take Heuristic negative else take muliply sign and muliply Heuristic.
+                                //When there is supporter of attacked objects take Heuristic negative else take muliply sign and muliply Heuristic.
                                 //For All Enemy Obejcts.                                             
                                 ////Parallel.For(0, 8, g =>
                                 int Supported = new int();
@@ -1087,7 +1087,7 @@ namespace RefrigtzChessPortable
                                     ////Parallel.For(0, 8, h =>
                                     for (int h = 0; h < 8; h++)
                                     {
-                                        //Ignore Of Self Objects.
+                                        //Ignore Of Self objects.
                                         if (Order == 1 && Table[g, h] >= 0)
                                             continue;
                                         if (Order == -1 && Table[g, h] <= 0)
@@ -1102,7 +1102,7 @@ namespace RefrigtzChessPortable
                                         //When Enemy is Supported.
                                         bool A = new bool();
                                         bool B = new bool();
-                                        Object O12 = new Object();
+                                        object O12 = new object();
                                         lock (O12)
                                         {
                                             var th2 = Task.Factory.StartNew(() => A = Support(CloneATable(Table), g, h, RowD, ColD, aaa, Order * -1));
@@ -1171,7 +1171,7 @@ namespace RefrigtzChessPortable
                 if (Table[RowS, ColS] == MinisterGray)
                 {
                     bool ab = false;
-                    var th = Task.Factory.StartNew(() => ab = IsNumberOfObjecttIsLessThanThreashold(CloneATable(Table), 31));
+                    var th = Task.Factory.StartNew(() => ab = IsNumberOfobjecttIsLessThanThreashold(CloneATable(Table), 31));
                     th.Wait();
                     th.Dispose();
                     if (!ab)
@@ -1186,7 +1186,7 @@ namespace RefrigtzChessPortable
                 if (Table[RowS, ColS] == MinisterBrown)
                 {
                     bool ab = false;
-                    var th = Task.Factory.StartNew(() => ab = IsNumberOfObjecttIsLessThanThreashold(CloneATable(Table), 31));
+                    var th = Task.Factory.StartNew(() => ab = IsNumberOfobjecttIsLessThanThreashold(CloneATable(Table), 31));
                     th.Wait();
                     th.Dispose();
                     if (!ab)
@@ -1201,11 +1201,11 @@ namespace RefrigtzChessPortable
         int HeuristicReducsedAttack(bool Before, int[,] Table, int Ord, int aa, int RowS, int ColS, int RowD, int ColD
                   )
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int HeuristicReducedAttackValue = 0;
-                //Initiate Objects.
+                //Initiate objects.
                 int HA = 0;
                 int DumOrder = Order;
                 int DummyOrder = Order;
@@ -1218,7 +1218,7 @@ namespace RefrigtzChessPortable
                     //For All Self
                     {
                         {
-                            //For Current Object Lcation.
+                            //For Current object Lcation.
                             int aaa = 1;
                             Order = DumOrder;
                             int a = 1;
@@ -1254,7 +1254,7 @@ namespace RefrigtzChessPortable
                             else
                                 return HeuristicReducedAttackValue;
                             //For Attack Movments.
-                            Object O1 = new Object();
+                            object O1 = new object();
                             lock (O1)
                             {
                                 //if (Before)
@@ -1267,7 +1267,7 @@ namespace RefrigtzChessPortable
                                     {
                                         MinisterOnAttack = true;
                                         HA += RationalPenalty;
-                                        //When there is supporter of attacked Objects take Heuristic negative else take muliply sign and muliply Heuristic.
+                                        //When there is supporter of attacked objects take Heuristic negative else take muliply sign and muliply Heuristic.
                                         int Supported = new int();
                                         int SupportedS = new int();
                                         Supported = 0;
@@ -1279,7 +1279,7 @@ namespace RefrigtzChessPortable
                                             ////Parallel.For(0, 8, h =>
                                             for (int h = 0; h < 8; h++)
                                             {
-                                                //Ignore Of Self Objects.
+                                                //Ignore Of Self objects.
                                                 if (Order == 1 && Table[g, h] >= 0)
                                                     continue;
                                                 if (Order == -1 && Table[g, h] <= 0)
@@ -1294,7 +1294,7 @@ namespace RefrigtzChessPortable
                                                 //When Enemy is Supported.
                                                 bool A = new bool();
                                                 bool B = new bool();
-                                                Object O2 = new Object();
+                                                object O2 = new object();
                                                 lock (O2)
                                                 {
                                                     var th2 = Task.Factory.StartNew(() => A = Support(CloneATable(Table), g, h, RowD, ColD, aaa, Order * -1));
@@ -1368,7 +1368,7 @@ namespace RefrigtzChessPortable
                         else
                             return HeuristicReducedAttackValue;
                         //For Attack Movments.
-                        Object O1 = new Object();
+                        object O1 = new object();
                         lock (O1)
                         {
                             //if (Before)
@@ -1381,7 +1381,7 @@ namespace RefrigtzChessPortable
                                 {
                                     MinisterOnAttack = true;
                                     HA += RationalPenalty;
-                                    //When there is supporter of attacked Objects take Heuristic negative else take muliply sign and muliply Heuristic.
+                                    //When there is supporter of attacked objects take Heuristic negative else take muliply sign and muliply Heuristic.
                                     int Supported = new int();
                                     int SupportedS = new int();
                                     Supported = 0;
@@ -1393,7 +1393,7 @@ namespace RefrigtzChessPortable
                                         ////Parallel.For(0, 8, h =>
                                         for (int h = 0; h < 8; h++)
                                         {
-                                            //Ignore Of Self Objects.
+                                            //Ignore Of Self objects.
                                             if (Order == 1 && Table[g, h] >= 0)
                                                 continue;
                                             if (Order == -1 && Table[g, h] <= 0)
@@ -1407,7 +1407,7 @@ namespace RefrigtzChessPortable
                                             //When Enemy is Supported.
                                             bool A = new bool();
                                             bool B = new bool();
-                                            Object O2 = new Object();
+                                            object O2 = new object();
                                             lock (O2)
                                             {
                                                 var th2 = Task.Factory.StartNew(() => A = Support(CloneATable(Table), g, h, RowD, ColD, aaa, Order * -1));
@@ -1474,19 +1474,19 @@ namespace RefrigtzChessPortable
                 return HA;
             }
         }
-        ///Value of Object method.
+        ///Value of object method.
         int GetObjectValue(int[,] Tabl, int ii, int jj, int Order)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 return System.Math.Abs(Tabl[ii, jj]);
             }
         }
-        ///Heuristic of ObjectDanger.
-        int HeuristicObjectDangour(int[,] Table, int Order, int a, int RowS, int ColS, int RowD, int ColD)
+        ///Heuristic of objectDanger.
+        int HeuristicobjectDangour(int[,] Table, int Order, int a, int RowS, int ColS, int RowD, int ColD)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int HeuristicCheckedMate = 0;
@@ -1496,18 +1496,18 @@ namespace RefrigtzChessPortable
                 ///When There is no AStarGreedyHeuristicT
                 if (!AStarGreedyHeuristicT)
                 {
-                    ///For All Object in Current Table.
+                    ///For All object in Current Table.
                     if (RowS == RowD && ColS == ColD)
                         return HeuristicCheckedMate;
                     Order = DummyOrder;
                     int Sign = 1;
-                    ///When ObjectDanger is true. means [RowD,ColD] is in ObjectDanger by [RowS,ColS].
-                    ///What is ObjectDanger!
+                    ///When objectDanger is true. means [RowD,ColD] is in objectDanger by [RowS,ColS].
+                    ///What is objectDanger!
                     ///Ans:When [RowS,ColS] is Attacked [RowD,ColD] return true when enemy is located in [RowD,ColD].
                     if (Table[RowD, ColD] > 0 && DummyOrder == -1 && Table[RowS, ColS] < 0)
                     {
                         Order = 1;
-                        Object O1 = new Object();
+                        object O1 = new object();
                         lock (O1)
                         {
                             Sign = -1 * AllDraw.SignAttack;
@@ -1518,7 +1518,7 @@ namespace RefrigtzChessPortable
                     else if (Table[RowD, ColD] < 0 && DummyOrder == 1 && Table[RowS, ColS] > 0)
                     {
                         Order = -1;
-                        Object O1 = new Object();
+                        object O1 = new object();
                         lock (O1)
                         {
                             Sign = -1 * AllDraw.SignAttack;
@@ -1529,33 +1529,33 @@ namespace RefrigtzChessPortable
                     else
                         return HeuristicCheckedMate;
                     bool ab = false;
-                    var th = Task.Factory.StartNew(() => ab = ObjectDanger(CloneATable(Table), RowD, ColD, RowS, ColS, a, Order));
+                    var th = Task.Factory.StartNew(() => ab = objectDanger(CloneATable(Table), RowD, ColD, RowS, ColS, a, Order));
 
                     th.Wait();
                     th.Dispose();
-                    //For ObjectDanger Movments.
+                    //For objectDanger Movments.
                     if (ab)
                     {
                         var th1 = Task.Factory.StartNew(() => HA += Sign * (ObjectValueCalculator(CloneATable(Table), RowD, ColD, RowS, ColS)));
                         th1.Wait();
                         th1.Dispose();
-                        //Find Local Sumation of ObjectDanger Heuristic.                               
+                        //Find Local Sumation of objectDanger Heuristic.                               
 
                     }
                 }
-                //For All Table Home Find ObjectDanger Heuristic
+                //For All Table Home Find objectDanger Heuristic
                 else
                 {
                     if (RowS == RowD && ColS == ColD)
                         return HeuristicCheckedMate;
                     int Sign = 1;
-                    ///When ObjectDanger is true. means [RowD,ColD] is in ObjectDanger by [RowS,ColS].
-                    ///What is ObjectDanger!
+                    ///When objectDanger is true. means [RowD,ColD] is in objectDanger by [RowS,ColS].
+                    ///What is objectDanger!
                     ///Ans:When [RowS,ColS] is Attacked [RowD,ColD] return true when enemy is located in [RowD,ColD].
                     if (Table[RowD, ColD] > 0 && DummyOrder == -1 && Table[RowS, ColS] < 0)
                     {
                         Order = 1;
-                        Object O2 = new Object();
+                        object O2 = new object();
                         lock (O2)
                         {
                             Sign = -1 * AllDraw.SignAttack;
@@ -1566,7 +1566,7 @@ namespace RefrigtzChessPortable
                     else if (Table[RowD, ColD] < 0 && DummyOrder == 1 && Table[RowS, ColS] > 0)
                     {
                         Order = -1;
-                        Object O3 = new Object();
+                        object O3 = new object();
                         lock (O3)
                         {
                             Sign = -1 * AllDraw.SignAttack;
@@ -1576,18 +1576,18 @@ namespace RefrigtzChessPortable
                     }
                     else
                         return HeuristicCheckedMate;
-                    //For ObjectDanger Movments.
-                    Object O1 = new Object();
+                    //For objectDanger Movments.
+                    object O1 = new object();
                     lock (O1)
                     {
                         bool ab = false;
-                        var th = Task.Factory.StartNew(() => ab = ObjectDanger(CloneATable(Table), RowD, ColD, RowS, ColS, a, Order));
+                        var th = Task.Factory.StartNew(() => ab = objectDanger(CloneATable(Table), RowD, ColD, RowS, ColS, a, Order));
                         th.Wait();
                         th.Dispose();
 
                         if (ab)
                         {
-                            //Find Local Sumation of ObjectDanger Heuristic.                                
+                            //Find Local Sumation of objectDanger Heuristic.                                
                             var th1 = Task.Factory.StartNew(() => HA += Sign * (ObjectValueCalculator(CloneATable(Table), RowD, ColD, RowS, ColS)));
                             th1.Wait();
                             th1.Dispose();
@@ -1604,7 +1604,7 @@ namespace RefrigtzChessPortable
         }
         int HeuristicKiller(int Killed, int[,] Tabl, int RowS, int ColS, int RowD, int ColD, int Ord, int aa, bool Hit)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int[,] Tab = new int[8, 8];
@@ -1638,14 +1638,14 @@ namespace RefrigtzChessPortable
                 if (Order == -1)
                     a = -1;
                 //Wehn Curfrent Movemnet is on attack.
-                Object O1 = new Object();
+                object O1 = new object();
                 lock (O1)
                 {
                     var th = Task.Factory.StartNew(() => EnemyNotSupported = InAttackEnemyThatIsNotSupported(Killed, CloneATable(Tab), Order, aa, RowS, ColS, RowD, ColD));
                     th.Wait();
                     th.Dispose();
 
-                    //When there is Attacks to Current Objects and is killable..
+                    //When there is Attacks to Current objects and is killable..
                     bool ab = false;
                     var th1 = Task.Factory.StartNew(() => ab = Attack(CloneATable(Tab), RowD, ColD, RowS, ColS, a, Order));
                     th1.Wait();
@@ -1680,7 +1680,7 @@ namespace RefrigtzChessPortable
         bool InAttackEnemyThatIsNotSupported(int Kilded, int[,] Table, int Order, int a, int i, int j, int ii, int jj)
         {
 
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 //Initiate Global Variables.                
@@ -1710,14 +1710,14 @@ namespace RefrigtzChessPortable
                                 for (var jk = 0; jk < 8; jk++)
                                 ////Parallel.For(0, 8, jk =>
                                 {
-                                    Object O3 = new Object();
+                                    object O3 = new object();
                                     lock (O3)
                                     {
                                         Tab[ik, jk] = Table[ik, jk];
                                     }
                                 }
                             }
-                            Object O2 = new Object();
+                            object O2 = new object();
                             lock (O2)
                             {
                                 Tab[i, j] = Tab[ii, jj];
@@ -1733,7 +1733,7 @@ namespace RefrigtzChessPortable
                             if (Order1 * -1 == -1)
                                 a = -1;
                             //When Enemy is Supported.
-                            Object O1 = new Object();
+                            object O1 = new object();
                             lock (O1)
                             {
                                 bool ab = false;
@@ -1768,15 +1768,15 @@ namespace RefrigtzChessPortable
                 return false;
             }
         }
-        //When at least one Attacked Self Object return true.
+        //When at least one Attacked Self object return true.
         bool InAttackEnemyThatIsNotSupportedAll(bool EnemyIsValuable, int[,] Table, int Order, int a, int ij, int ji, int iij, int jji, ref List<int[]> ValuableEnemyNotSupported)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 //Initiate Global Variables.
                 int Ord = Order;
-                Object O4 = new Object();
+                object O4 = new object();
                 lock (O4)
                 {
                     int[,] Tab = new int[8, 8];
@@ -1808,12 +1808,12 @@ namespace RefrigtzChessPortable
                                     else
                                         if (Order == -1 && Tab[ii, jj] <= 0)
                                         continue;
-                                    Object O1 = new Object();
+                                    object O1 = new object();
                                     lock (O1)
                                     {
                                         bool ab = false;
                                         List<int[]> ValuableEnemyNotSupportedA = ValuableEnemyNotSupported;
-                                        var th = Task.Factory.StartNew(() => ab = EnemyIsValuable && (!IsObjectValaubleObjectEnemy(ii, jj, Tab[ii, jj], ref ValuableEnemyNotSupportedA)));
+                                        var th = Task.Factory.StartNew(() => ab = EnemyIsValuable && (!IsobjectValaubleobjectEnemy(ii, jj, Tab[ii, jj], ref ValuableEnemyNotSupportedA)));
                                         th.Wait();
                                         th.Dispose();
 
@@ -1897,11 +1897,11 @@ namespace RefrigtzChessPortable
             }
         }
         //When  there is more than tow self object not supported on atacked by movement return true.
-        int IsNotSafeToMoveAenemeyToAttackMoreThanTowObject(int AttackCount, int[,] Table, int Order, int i, int j, int ii, int jj)
+        int IsNotSafeToMoveAenemeyToAttackMoreThanTowobject(int AttackCount, int[,] Table, int Order, int i, int j, int ii, int jj)
         {
 
             //For All Enemie
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 //Ignore of Self
@@ -1923,12 +1923,12 @@ namespace RefrigtzChessPortable
                 {
                     return 0;
                 }
-                ChessRules A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Table[i, j], CloneATable(Table), Order * -1, i, j);
+                ChessRules A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Table[i, j], CloneATable(Table), Order * -1, i, j);
                 int a = 1;
                 if (Order * -1 == -1)
                     a = -1;
                 int[,] Tab = new int[8, 8];
-                Object O = new Object();
+                object O = new object();
                 lock (O)
                 {
                     for (var ik = 0; ik < 8; ik++)
@@ -1936,7 +1936,7 @@ namespace RefrigtzChessPortable
                             Tab[ik, jk] = Table[ik, jk];
                 }
                 //When there is attack to some self node.
-                Object OO = new Object();
+                object OO = new object();
                 lock (OO)
                 {
                     if (A.Rules(i, j, ii, jj, a, Tab[i, j]))
@@ -2025,12 +2025,12 @@ namespace RefrigtzChessPortable
         //Supported of Self that is Not Attacks.QC_BAD
         bool InAttackSelfThatNotSupported(int[,] TableS, int Order, int a, int ij, int ji, int ii, int jj)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 //Initiate Variables.
                 int[,] Tab = new int[8, 8];
-                Object O1 = new Object();
+                object O1 = new object();
                 lock (O1)
                 {
                     for (var ik = 0; ik < 8; ik++)
@@ -2063,7 +2063,7 @@ namespace RefrigtzChessPortable
                                     Tab[ik, jk] = TableS[ik, jk];
                             InAttackedNotSelfSupported = false;
                             SelfSupported = false;
-                            Object OO = new Object();
+                            object OO = new object();
                             lock (OO)
                             {
                                 bool ab = false;
@@ -2148,17 +2148,17 @@ namespace RefrigtzChessPortable
         //When there is at least on self object that is not safty.
         bool InAttackSelfThatNotSupportedAll(int[,] TableS, int Order, int a, int i, int j, int RowS, int ColS, int ikk, int jkk, int iik, int jjk)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 bool S = true;
                 int Ord = Order;
                 List<int[]> ValuableSelfSupported = new List<int[]>();
-                bool IsTowValuableObject = false;
-                Object O1 = new Object();
+                bool IsTowValuableobject = false;
+                object O1 = new object();
                 lock (O1)
                 {
-                    var th = Task.Factory.StartNew(() => IsTowValuableObject = InAttackSelfThatNotSupportedCalculateValuableAll(CloneATable(TableS), Order, color, ikk, jkk, iik, jjk, ref ValuableSelfSupported));
+                    var th = Task.Factory.StartNew(() => IsTowValuableobject = InAttackSelfThatNotSupportedCalculateValuableAll(CloneATable(TableS), Order, color, ikk, jkk, iik, jjk, ref ValuableSelfSupported));
                     th.Wait();
                     th.Dispose();
 
@@ -2180,7 +2180,7 @@ namespace RefrigtzChessPortable
                         return false;
                     //when there is another object valuable in List continue.
                     bool ab = false;
-                    var th1 = Task.Factory.StartNew(() => ab = IsTowValuableObject && (!IsObjectValaubleObjectSelf(i, j, Tab[i, j], ref ValuableSelfSupported)));
+                    var th1 = Task.Factory.StartNew(() => ab = IsTowValuableobject && (!IsobjectValaubleobjectSelf(i, j, Tab[i, j], ref ValuableSelfSupported)));
                     th1.Wait();
                     th1.Dispose();
                     if (ab)
@@ -2207,7 +2207,7 @@ namespace RefrigtzChessPortable
                     for (var ik = 0; ik < 8; ik++)
                         for (var jk = 0; jk < 8; jk++)
                             Tab[ik, jk] = TableS[ik, jk];
-                    Object O2 = new Object();
+                    object O2 = new object();
                     lock (O2)
                     {
                         var th2 = Task.Factory.StartNew(() => ab = Attack(CloneATable(Tab), RowS, ColS, i, j, a, Order * -1));
@@ -2270,10 +2270,10 @@ namespace RefrigtzChessPortable
                 return true;
             }
         }
-        //Creation A Complete List of Attacked Self Object(s).
+        //Creation A Complete List of Attacked Self object(s).
         bool InAttackSelfThatNotSupportedCalculateValuableAll(int[,] TableS, int Order, int a, int ij, int ji, int ii, int jj, ref List<int[]> ValuableSelfSupported)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 //Initiate Variables.
@@ -2318,8 +2318,8 @@ namespace RefrigtzChessPortable
                                 InAttackedNotSelfSupported = false;
                                 SelfSupported = false;
                                 S = true;
-                                //Wehn an Object of Enemy Attack Self Object
-                                Object O1 = new Object();
+                                //Wehn an object of Enemy Attack Self object
+                                object O1 = new object();
                                 lock (O1)
                                 {
                                     bool ab = false;
@@ -2349,7 +2349,7 @@ namespace RefrigtzChessPortable
                                                 for (var ik = 0; ik < 8; ik++)
                                                     for (var jk = 0; jk < 8; jk++)
                                                         Tab[ik, jk] = TableS[ik, jk];
-                                                //When There is Supporter For Attacked Self Object and Is Greater than Attacking Object.
+                                                //When There is Supporter For Attacked Self object and Is Greater than Attacking object.
                                                 var th1 = Task.Factory.StartNew(() => ab = Support(CloneATable(Tab), RowD, ColD, i, j, a, Order) && (ObjectValueCalculator(CloneATable(Tab), i, j) <= ObjectValueCalculator(CloneATable(Tab), RowS, ColS)));
                                                 th1.Wait();
                                                 th1.Dispose();
@@ -2369,8 +2369,8 @@ namespace RefrigtzChessPortable
                                         //a source object is less than or equal  than another source object.Is = 1 Is not another object valuable.                                        
                                     }
                                 }
-                                //When Attacked Current Object is not supported and there is another object valuable
-                                Object O2 = new Object();
+                                //When Attacked Current object is not supported and there is another object valuable
+                                object O2 = new object();
                                 lock (O2)
                                 {
                                     if ((!SelfSupported && InAttackedNotSelfSupported))
@@ -2393,7 +2393,7 @@ namespace RefrigtzChessPortable
                     }
                 }
                 Order = Ord;
-                //When There is at Last tow SelfNotSupporeted Object.
+                //When There is at Last tow SelfNotSupporeted object.
                 if (ValuableSelfSupported.Count > 1)
                     return true;
                 return false;
@@ -2401,7 +2401,7 @@ namespace RefrigtzChessPortable
         }
         bool ExistValuble(int[] Table, ref List<int[]> ValuableSelfSupported)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 bool Is = false;
@@ -2417,7 +2417,7 @@ namespace RefrigtzChessPortable
         }
         bool MaxObjecvts(List<int> Obj, int Max)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 bool MaxO = true;
@@ -2448,7 +2448,7 @@ namespace RefrigtzChessPortable
         //When Current Movment Take Supporte.QC_OK
         bool IsCurrentMoveTakeSupporte(int[,] Table, int Order, int a, int i, int j, int ii, int jj)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 //Initiate Variables.
@@ -2462,7 +2462,7 @@ namespace RefrigtzChessPortable
                 {
                     for (var ColS = 0; ColS < 8; ColS++)
                     {
-                        //Ignore of Enemy Objects.
+                        //Ignore of Enemy objects.
                         if (Tab[RowS, ColS] <= 0 && Order == 1)
                             continue;
                         if (Tab[RowS, ColS] >= 0 && Order == -1)
@@ -2484,7 +2484,7 @@ namespace RefrigtzChessPortable
           )
         {
 
-            Object ol = new Object();
+            object ol = new object();
             lock (ol)
             {
                 int HA = 0;
@@ -2492,7 +2492,7 @@ namespace RefrigtzChessPortable
                 if (Order == 1)
                 {
                     int RowK = -1, ColK = -1;
-                    ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Tab), Order, RowS, ColS);
+                    ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Tab), Order, RowS, ColS);
                     G.FindGrayKing(CloneATable(Tab), ref RowK, ref ColK);
                     if (Kind == 7)
                         HA = RationalRegard;
@@ -2524,7 +2524,7 @@ namespace RefrigtzChessPortable
                 else
                 {
                     int RowK = -1, ColK = -1;
-                    ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Tab), Order, RowS, ColS);
+                    ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Tab), Order, RowS, ColS);
                     G.FindBrownKing(CloneATable(Tab), ref RowK, ref ColK);
                     if (Kind == -7)
                         HA = RationalRegard;
@@ -2558,7 +2558,7 @@ namespace RefrigtzChessPortable
         int HeuristicKingPreventionOfCheckedAtBegin(int[,] Tab, int Order, int a, int CurrentAStarGredy, int RowS, int ColS, int RowD, int ColD
             )
         {
-            Object O3 = new Object();
+            object O3 = new object();
             lock (O3)
             {
                 int HA = 0;
@@ -2567,7 +2567,7 @@ namespace RefrigtzChessPortable
                 {
                     Tabl[RowD, ColD] = Tabl[RowS, ColS];
                     Tabl[RowS, ColS] = 0;
-                    ChessRules A = new ChessRules(CurrentAStarGredy, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Tab[RowD, ColD], CloneATable(Tab), Order, RowD, ColD);
+                    ChessRules A = new ChessRules(CurrentAStarGredy, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Tab[RowD, ColD], CloneATable(Tab), Order, RowD, ColD);
                     var th = Task.Factory.StartNew(() => A.CheckMate(Tabl, Order));
                     th.Wait();
                     th.Dispose();
@@ -2598,7 +2598,7 @@ namespace RefrigtzChessPortable
                 }
                 else
                 {
-                    ChessRules A = new ChessRules(CurrentAStarGredy, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Tab[RowD, ColD], CloneATable(Tab), Order, RowD, ColD);
+                    ChessRules A = new ChessRules(CurrentAStarGredy, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Tab[RowD, ColD], CloneATable(Tab), Order, RowD, ColD);
                     var th = Task.Factory.StartNew(() => A.CheckMate(Tabl, Order));
                     th.Wait();
                     th.Dispose();
@@ -2630,7 +2630,7 @@ namespace RefrigtzChessPortable
            )
         {
 
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int HAS = 0;
@@ -2656,7 +2656,7 @@ namespace RefrigtzChessPortable
         int HeuristicSelfSupported(int[,] Tab, int Ord, int aa, int RowS, int ColS, int RowD, int ColD
           )
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int HeuristicSelfSupportedValue = 0;
@@ -2671,7 +2671,7 @@ namespace RefrigtzChessPortable
                     //For All Self
                     {
                         {
-                            //For Current Object Lcation.
+                            //For Current object Lcation.
                             int aaa = 1;
                             Order = DumOrder;
                             int a = 1;
@@ -2691,7 +2691,7 @@ namespace RefrigtzChessPortable
                             if (Tab[RowD, ColD] < 0 && DummyOrder == -1 && Tab[RowS, ColS] <= 0)
                             {
                                 Order = -1;
-                                Object O1 = new Object();
+                                object O1 = new object();
                                 lock (O1)
                                 {
                                     Sign = 1 * AllDraw.SignSupport;
@@ -2702,7 +2702,7 @@ namespace RefrigtzChessPortable
                             else if (Tab[RowD, ColD] > 0 && DummyOrder == 1 && Tab[RowS, ColS] > 0)
                             {
                                 Order = 1;
-                                Object O1 = new Object();
+                                object O1 = new object();
                                 lock (O1)
                                 {
                                     Sign = 1 * AllDraw.SignSupport;
@@ -2733,11 +2733,11 @@ namespace RefrigtzChessPortable
                                     ////Parallel.For(0, 8, h =>
                                     for (int h = 0; h < 8; h++)
                                     {
-                                        Object O2 = new Object();
+                                        object O2 = new object();
                                         lock (O2)
                                         {
                                             //if (Supported)
-                                            //Ignore Of Enemy Objects.
+                                            //Ignore Of Enemy objects.
                                             if (Order == 1 && Tab[g, h] == 0)
                                                 continue;
                                             if (Order == -1 && Tab[g, h] == 0)
@@ -2782,7 +2782,7 @@ namespace RefrigtzChessPortable
                                     }
                                     // if (Supported)
                                 }
-                                Object O1 = new Object();
+                                object O1 = new object();
                                 lock (O1)
                                 {
                                     if (Supported > 0 && SupportedE == 0)
@@ -2821,7 +2821,7 @@ namespace RefrigtzChessPortable
                                         if (Tab[RowD, ColD] < 0 && DummyOrder == -1 && Tab[RowS, ColS] <= 0)
                                         {
                                             Order = -1;
-                                            Object O2 = new Object();
+                                            object O2 = new object();
                                             lock (O2)
                                             {
                                                 Sign = 1 * AllDraw.SignSupport;
@@ -2832,7 +2832,7 @@ namespace RefrigtzChessPortable
                                         else if (Tab[RowD, ColD] > 0 && DummyOrder == 1 && Tab[RowS, ColS] > 0)
                                         {
                                             Order = 1;
-                                            Object O2 = new Object();
+                                            object O2 = new object();
                                             lock (O2)
                                             {
                                                 Sign = 1 * AllDraw.SignSupport;
@@ -2863,11 +2863,11 @@ namespace RefrigtzChessPortable
                                                 ////Parallel.For(0, 8, h =>
                                                 for (int h = 0; h < 8; h++)
                                                 {
-                                                    Object O2 = new Object();
+                                                    object O2 = new object();
                                                     lock (O2)
                                                     {
                                                         //if (Supported)
-                                                        //Ignore Of Enemy Objects.
+                                                        //Ignore Of Enemy objects.
                                                         if (Order == 1 && Tab[g, h] == 0)
                                                             continue;
                                                         if (Order == -1 && Tab[g, h] == 0)
@@ -2911,7 +2911,7 @@ namespace RefrigtzChessPortable
                                                 }
                                                 // if (Supported)
                                             }
-                                            Object O1 = new Object();
+                                            object O1 = new object();
                                             lock (O1)
                                             {
                                                 if (Supported > 0 && SupportedE == 0)
@@ -2940,7 +2940,7 @@ namespace RefrigtzChessPortable
         int HeuristicEnemySupported(int[,] Tab, int Ord, int aa, int RowD, int ColD, int RowS, int ColS
           )
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int HeuristicSelfSupportedValue = 0;
@@ -2955,7 +2955,7 @@ namespace RefrigtzChessPortable
                     //For All Self
                     {
                         {
-                            //For Current Object Lcation.
+                            //For Current object Lcation.
                             int aaa = 1;
                             Order = DumOrder;
                             int a = 1;
@@ -2975,7 +2975,7 @@ namespace RefrigtzChessPortable
                             if (Tab[RowD, ColD] < 0 && DummyOrder == -1 && Tab[RowS, ColS] <= 0)
                             {
                                 Order = -1;
-                                Object O1 = new Object();
+                                object O1 = new object();
                                 lock (O1)
                                 {
                                     Sign = 1 * AllDraw.SignSupport;
@@ -2986,7 +2986,7 @@ namespace RefrigtzChessPortable
                             else if (Tab[RowD, ColD] > 0 && DummyOrder == 1 && Tab[RowS, ColS] > 0)
                             {
                                 Order = 1;
-                                Object O1 = new Object();
+                                object O1 = new object();
                                 lock (O1)
                                 {
                                     Sign = 1 * AllDraw.SignSupport;
@@ -3018,11 +3018,11 @@ namespace RefrigtzChessPortable
                                     ////Parallel.For(0, 8, h =>
                                     for (int h = 0; h < 8; h++)
                                     {
-                                        Object O2 = new Object();
+                                        object O2 = new object();
                                         lock (O2)
                                         {
                                             //if (Supported)
-                                            //Ignore Of Enemy Objects.
+                                            //Ignore Of Enemy objects.
                                             if (Order == 1 && Tab[g, h] == 0)
                                                 continue;
                                             if (Order == -1 && Tab[g, h] == 0)
@@ -3066,7 +3066,7 @@ namespace RefrigtzChessPortable
                                     }
                                     // if (Supported)
                                 }
-                                Object O1 = new Object();
+                                object O1 = new object();
                                 lock (O1)
                                 {
                                     if (SupportedE > 0 && Supported == 0)
@@ -3105,7 +3105,7 @@ namespace RefrigtzChessPortable
                                         if (Tab[RowD, ColD] < 0 && DummyOrder == -1 && Tab[RowS, ColS] <= 0)
                                         {
                                             Order = -1;
-                                            Object O2 = new Object();
+                                            object O2 = new object();
                                             lock (O2)
                                             {
                                                 Sign = 1 * AllDraw.SignSupport;
@@ -3116,7 +3116,7 @@ namespace RefrigtzChessPortable
                                         else if (Tab[RowD, ColD] > 0 && DummyOrder == 1 && Tab[RowS, ColS] > 0)
                                         {
                                             Order = 1;
-                                            Object O2 = new Object();
+                                            object O2 = new object();
                                             lock (O2)
                                             {
                                                 Sign = 1 * AllDraw.SignSupport;
@@ -3148,11 +3148,11 @@ namespace RefrigtzChessPortable
                                                 ////Parallel.For(0, 8, h =>
                                                 for (int h = 0; h < 8; h++)
                                                 {
-                                                    Object O2 = new Object();
+                                                    object O2 = new object();
                                                     lock (O2)
                                                     {
                                                         //if (Supported)
-                                                        //Ignore Of Enemy Objects.
+                                                        //Ignore Of Enemy objects.
                                                         if (Order == 1 && Tab[g, h] == 0)
                                                             continue;
                                                         if (Order == -1 && Tab[g, h] == 0)
@@ -3196,7 +3196,7 @@ namespace RefrigtzChessPortable
                                                 }
                                                 // if (Supported)
                                             }
-                                            Object O1 = new Object();
+                                            object O1 = new object();
                                             lock (O1)
                                             {
                                                 if (SupportedE > 0 && Supported == 0)
@@ -3223,7 +3223,7 @@ namespace RefrigtzChessPortable
         }        ///Identification of Equality
         public static bool TableEqual(int[,] Tab1, int[,] Tab2)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 //For All Home
@@ -3243,7 +3243,7 @@ namespace RefrigtzChessPortable
         //If tow int Objects is equal.
         public static bool TableEqual(int Tab1, int Tab2)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 //When there is different values in same location of tow Table return non equality.
@@ -3258,7 +3258,7 @@ namespace RefrigtzChessPortable
         //Deterimination of Existance of Table in List..
         static public bool ExistTableInList(int[,] Tab, List<int[,]> List, int Index)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 //Initiate Local Variables.
@@ -3284,7 +3284,7 @@ namespace RefrigtzChessPortable
         ///Move Determination.
         public bool Movable(int[,] Tab, int i, int j, int ii, int jj, int a, int Order)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 if (Tab[i, j] == 0)
@@ -3299,7 +3299,7 @@ namespace RefrigtzChessPortable
                         Table[p, k] = Tab[p, k];
                 //Initiate Local Variables.
                 int Store = Table[ii, jj];
-                ChessRules A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Table[i, j], CloneATable(Table), Order, i, j);
+                ChessRules A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Table[i, j], CloneATable(Table), Order, i, j);
                 //Menen Parameter is Moveble to Second Parameters Location returm Movable.
                 if (Order == 1 && Table[ii, jj] < 0)
                 {
@@ -3356,7 +3356,7 @@ namespace RefrigtzChessPortable
         //When Oredrs of OrderPalte and Calculation Order is not equal return negative one and else return one.
         int SignOrderToPlate(int Order)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int Sign = 1;
@@ -3373,21 +3373,21 @@ namespace RefrigtzChessPortable
         //Remove Penalties of Unnesserily Nodes.
         public bool RemovePenalty(int[,] Tab, int Order, int i, int j)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 bool Remove = false;
-                //Create Objects.
-                ChessRules AA = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Tab[i, j], CloneATable(Tab), Order, i, j);
+                //Create objects.
+                ChessRules AA = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Tab[i, j], CloneATable(Tab), Order, i, j);
                 //When is Check.
                 if (AA.Check(CloneATable(Tab), Order))
                 {
-                    //When there is Current Checked or Objects Danger return false.
-                    if (Order == 1 && (AA.CheckGray || AA.CheckGrayObjectDangour))
+                    //When there is Current Checked or objects Danger return false.
+                    if (Order == 1 && (AA.CheckGray || AA.CheckGrayobjectDangour))
                     {
                         return Remove;
                     }
-                    if (Order == -1 && (AA.CheckBrown || AA.CheckBrownObjectDangour))
+                    if (Order == -1 && (AA.CheckBrown || AA.CheckBrownobjectDangour))
                     {
                         return Remove;
                     }
@@ -3407,7 +3407,7 @@ namespace RefrigtzChessPortable
                         for (var RowS = 0; RowS < 8; RowS++)
                             for (var ColS = 0; ColS < 8; ColS++)
                                 Table[RowS, ColS] = Tab[RowS, ColS];
-                        ChessRules A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Table[ii, jj], CloneATable(Table), Order * -1, ii, jj);
+                        ChessRules A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Table[ii, jj], CloneATable(Table), Order * -1, ii, jj);
                         int a = 1;
                         if (Order * -1 == -1)
                             a = -1;
@@ -3423,13 +3423,13 @@ namespace RefrigtzChessPortable
                             var th1 = Task.Factory.StartNew(() => Count = AttackerCount(CloneATable(Table), Order * -1, a, ii, jj));
                             th1.Wait();
                             th1.Dispose();
-                            //When there is Object Danger.
+                            //When there is object Danger.
                             //Clone a Copy.
                             for (var RowS = 0; RowS < 8; RowS++)
                                 for (var ColS = 0; ColS < 8; ColS++)
                                     Table[RowS, ColS] = Tab[RowS, ColS];
-                            //Create New RefrigtzChessPortable Rule Object.
-                            A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Table[ii, jj], CloneATable(Table), Order, ii, jj);
+                            //Create New RefrigtzChessPortable Rule object.
+                            A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Table[ii, jj], CloneATable(Table), Order, ii, jj);
                             //Detect int.
                             a = 1;
                             if (Order == -1)
@@ -3527,11 +3527,11 @@ namespace RefrigtzChessPortable
         //Dangouring of current movment fo current Order.
         bool IsCurrentStateIsDangreousForCurrentOrder(int[,] Tabl, int Order, int a, int ii, int jj)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
-                //Initiate Object.
-                ChessRules A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, 1, CloneATable(Tabl), 1, Row, Column);
+                //Initiate object.
+                ChessRules A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, 1, CloneATable(Tabl), 1, Row, Column);
                 //Gray Order.
                 if (Order == 1)
                 {
@@ -3550,7 +3550,7 @@ namespace RefrigtzChessPortable
                                     continue;
                                 if (i != ii && j != jj)
                                 {
-                                    //Create new Objects of Table
+                                    //Create new objects of Table
                                     int[,] TablCon = new int[8, 8];
                                     for (var RowS = 0; RowS < 8; RowS++)
                                         for (var ColS = 0; ColS < 8; ColS++)
@@ -3558,14 +3558,14 @@ namespace RefrigtzChessPortable
                                     //For Enemy Order.
                                     if (TablCon[i, j] < 0)
                                     {
-                                        //For Gray and Empty Objects.
+                                        //For Gray and Empty objects.
                                         if (TablCon[ii, jj] >= 0)
                                         {
                                             //Setting Enemy Order.
                                             int DummyOrder = Order;
                                             int DummyCurrentOrder = ChessRules.CurrentOrder;
-                                            A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TablCon[i, j], TablCon, -1, i, j);
-                                            //When Enemy is Attacked Gray Objects.
+                                            A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TablCon[i, j], TablCon, -1, i, j);
+                                            //When Enemy is Attacked Gray objects.
                                             bool ab = false;
                                             var th = Task.Factory.StartNew(() => ab = A.Rules(i, j, ii, jj, -1, TablCon[i, j]));
                                             th.Wait();
@@ -3578,8 +3578,8 @@ namespace RefrigtzChessPortable
                                                 TablCon[i, j] = 0;
                                                 //Settting Current Order.
                                                 ChessRules.CurrentOrder = 1;
-                                                //Settting Object.
-                                                A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TablCon[ii, jj], TablCon, 1, ii, jj);
+                                                //Settting object.
+                                                A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TablCon[ii, jj], TablCon, 1, ii, jj);
                                                 //When Occured Check.
                                                 var th1 = Task.Factory.StartNew(() => ab = A.Check(TablCon, 1));
                                                 th1.Wait();
@@ -3590,7 +3590,7 @@ namespace RefrigtzChessPortable
                                                     //When Gray is Check.
                                                     if (A.CheckGray)
                                                     {
-                                                        //For Enemy Order Objects.
+                                                        //For Enemy Order objects.
                                                         for (int RowD = 0; RowD < 8; RowD++)
                                                             for (int ColD = 0; ColD < 8; ColD++)
                                                             {
@@ -3640,23 +3640,23 @@ namespace RefrigtzChessPortable
                                     continue;
                                 if (i != ii && j != jj)
                                 {
-                                    //Create new Objects of Table
+                                    //Create new objects of Table
                                     int[,] TablCon = new int[8, 8];
                                     for (var RowS = 0; RowS < 8; RowS++)
                                         for (var ColS = 0; ColS < 8; ColS++)
                                             TablCon[RowS, ColS] = Tabl[RowS, ColS];
-                                    //For Enemy Objects.
+                                    //For Enemy objects.
                                     if (TablCon[i, j] > 0)
                                     {
-                                        //For Self Objects and Empty.
+                                        //For Self objects and Empty.
                                         if (TablCon[ii, jj] <= 0)
                                         {
                                             //Store and Enemy Order.
                                             int DummyOrder = Order;
                                             int DummyCurrentOrder = ChessRules.CurrentOrder;
-                                            A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TablCon[i, j], TablCon, 1, i, j);
+                                            A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TablCon[i, j], TablCon, 1, i, j);
                                             ChessRules.CurrentOrder = 1;
-                                            //When Enemy Attacked Self Objects.
+                                            //When Enemy Attacked Self objects.
                                             bool ab = false;
                                             var th = Task.Factory.StartNew(() => ab = A.Rules(i, j, ii, jj, 1, TablCon[i, j]));
                                             th.Wait();
@@ -3668,7 +3668,7 @@ namespace RefrigtzChessPortable
                                                 TablCon[i, j] = 0;
                                                 //Setting current Order.
                                                 ChessRules.CurrentOrder = -1;
-                                                A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TablCon[ii, jj], TablCon, -1, ii, jj);
+                                                A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TablCon[ii, jj], TablCon, -1, ii, jj);
                                                 //When Check Occured.
                                                 var th1 = Task.Factory.StartNew(() => ab = A.Check(TablCon, -1));
                                                 th1.Wait();
@@ -3719,11 +3719,11 @@ namespace RefrigtzChessPortable
         //When Next Movements is Checked.QC_OK.
         int[] IsNextMovmentIsCheckOrCheckMateForCurrentMovmentbaseKernel(int Order, int[,] Tabl, int ik, int jk, int iki, int jki, int OrderPalte, int OrderPalteMulMinuse, int Depth, bool KindCheckedSelf)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int[] Is = new int[4];
-                Object O3 = new Object();
+                object O3 = new object();
                 lock (O3)
                 {
                     Is[0] = 0;
@@ -3731,7 +3731,7 @@ namespace RefrigtzChessPortable
                     Is[2] = 0;
                     Is[3] = 0;
                     int[,] Tab2 = CloneATable(Tabl);
-                    ChessRules A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Tab2[ik, jk], Tab2, Order * -1, ik, jk);
+                    ChessRules A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Tab2[ik, jk], Tab2, Order * -1, ik, jk);
                     if (Order * -1 == 1)
                         color=1;
                     else
@@ -3746,7 +3746,7 @@ namespace RefrigtzChessPortable
                         
                         Tab2[iki, jki] = Tab2[ik, jk];
                         Tab2[ik, jk] = 0;
-                        A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Tab2[iki, jki], Tab2, Order * -1, iki, jki);
+                        A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Tab2[iki, jki], Tab2, Order * -1, iki, jki);
                         //When Current Always is in CheckedMate.
                         var th1 = Task.Factory.StartNew(() => ab = A.CheckMate(Tab2, Order * -1));
                         th1.Wait();
@@ -3826,7 +3826,7 @@ namespace RefrigtzChessPortable
                             a = -1;
                         int ik1 = ik, jk1 = jk, iki1 = iki, jki1 = jki, OrderP = OrderPalte, OrderM = OrderPalteMulMinuse, Depth1 = Depth + 1;
                         bool KindCheckedSelf1 = KindCheckedSelf;
-                        Object O1 = new Object();
+                        object O1 = new object();
                         int[] IS = null;
                         lock (O1)
                         {
@@ -3847,7 +3847,7 @@ namespace RefrigtzChessPortable
         //When Next Movements is Checked.QC_OK.
         bool IsNextMovmentIsCheckOrCheckMateForCurrentMovmentOnCurrentMovemnet(int Order, int[,] Tabl, int ik, int jk, int iki, int jki, int OrderPalte)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 bool Is = false;
@@ -3855,9 +3855,9 @@ namespace RefrigtzChessPortable
                 for (int ki = 0; ki < 8; ki++)
                     for (int kj = 0; kj < 8; kj++)
                         Tab2[ki, kj] = Tabl[ki, kj];
-                ChessRules A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Tab2[ik, jk], Tab2, Order - 1, ik, jk);
+                ChessRules A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Tab2[ik, jk], Tab2, Order - 1, ik, jk);
                 //When Enemy Attack Currnet.
-                A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Tab2[iki, jki], Tab2, OrderPalte, iki, jki);
+                A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Tab2[iki, jki], Tab2, OrderPalte, iki, jki);
                 //When Current Always is in CheckedMate.
                 bool ab = false;
                 var th = Task.Factory.StartNew(() => ab = A.CheckMate(Tab2, OrderPalte));
@@ -3933,11 +3933,11 @@ namespace RefrigtzChessPortable
         }
         int[] IsNextMovmentIsCheckOrCheckMateForCurrentMovment(int[,] Tabl, int Order, int a, int Depth, int OrderPalte, int OrderPalteMinusPluse, bool KindCheckedSelf)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int[] Is = new int[4];
-                Object O3 = new Object();
+                object O3 = new object();
                 lock (O3)
                 {
                     Is[0] = 0;
@@ -3985,7 +3985,7 @@ namespace RefrigtzChessPortable
                                             int ik1 = ik, jk1 = jk, iki1 = iki, jki1 = jki, OrderP = OrderPalte, OrderM = OrderPalteMinusPluse, Depth1 = Depth + 1;
                                             bool KindCheckedSelf1 = KindCheckedSelf;
                                             int[] IS = null;
-                                            Object O1 = new Object();
+                                            object O1 = new object();
                                             lock (O1)
                                             {
                                                 var th = Task.Factory.StartNew(() => IS = IsNextMovmentIsCheckOrCheckMateForCurrentMovmentbaseKernel(Ord, CloneATable(Tab), ik1, jk1, iki1, jki1, OrderP, OrderM, Depth1, KindCheckedSelf1));
@@ -4017,7 +4017,7 @@ namespace RefrigtzChessPortable
                                         int ik1 = ik, jk1 = jk, iki1 = iki, jki1 = jki, OrderP = OrderPalte, OrderM = OrderPalteMinusPluse, Depth1 = Depth + 1;
                                         bool KindCheckedSelf1 = KindCheckedSelf;
                                         int[] IS = null;
-                                        Object O1 = new Object();
+                                        object O1 = new object();
                                         lock (O1)
                                         {
                                             var th = Task.Factory.StartNew(() => IS = IsNextMovmentIsCheckOrCheckMateForCurrentMovmentbaseKernel(Ord, CloneATable(Tab), ik1, jk1, iki1, jki1, OrderP, OrderM, Depth1, KindCheckedSelf1));
@@ -4046,7 +4046,7 @@ namespace RefrigtzChessPortable
                                         int ik1 = ik, jk1 = jk, iki1 = iki, jki1 = jki, OrderP = OrderPalte, OrderM = OrderPalteMinusPluse, Depth1 = Depth + 1;
                                         bool KindCheckedSelf1 = KindCheckedSelf;
                                         int[] IS = null;
-                                        Object O1 = new Object();
+                                        object O1 = new object();
                                         lock (O1)
                                         {
                                             var th = Task.Factory.StartNew(() => IS = IsNextMovmentIsCheckOrCheckMateForCurrentMovmentbaseKernel(Ord, CloneATable(Tab), ik1, jk1, iki1, jki1, OrderP, OrderM, Depth1, KindCheckedSelf1));
@@ -4076,7 +4076,7 @@ namespace RefrigtzChessPortable
                                             int ik1 = ik, jk1 = jk, iki1 = iki, jki1 = jki, OrderP = OrderPalte, OrderM = OrderPalteMinusPluse, Depth1 = Depth + 1;
                                             bool KindCheckedSelf1 = KindCheckedSelf;
                                             int[] IS = null;
-                                            Object O1 = new Object();
+                                            object O1 = new object();
                                             lock (O1)
                                             {
                                                 var th = Task.Factory.StartNew(() => IS = IsNextMovmentIsCheckOrCheckMateForCurrentMovmentbaseKernel(Ord, CloneATable(Tab), ik1, jk1, iki1, jki1, OrderP, OrderM, Depth1, KindCheckedSelf1));
@@ -4108,7 +4108,7 @@ namespace RefrigtzChessPortable
                                         int ik1 = ik, jk1 = jk, iki1 = iki, jki1 = jki, OrderP = OrderPalte, OrderM = OrderPalteMinusPluse, Depth1 = Depth + 1;
                                         bool KindCheckedSelf1 = KindCheckedSelf;
                                         int[] IS = null;
-                                        Object O1 = new Object();
+                                        object O1 = new object();
                                         lock (O1)
                                         {
                                             var th = Task.Factory.StartNew(() => IS = IsNextMovmentIsCheckOrCheckMateForCurrentMovmentbaseKernel(Ord, CloneATable(Tab), ik1, jk1, iki1, jki1, OrderP, OrderM, Depth1, KindCheckedSelf1));
@@ -4137,7 +4137,7 @@ namespace RefrigtzChessPortable
                                         int ik1 = ik, jk1 = jk, iki1 = iki, jki1 = jki, OrderP = OrderPalte, OrderM = OrderPalteMinusPluse, Depth1 = Depth + 1;
                                         bool KindCheckedSelf1 = KindCheckedSelf;
                                         int[] IS = null;
-                                        Object O1 = new Object();
+                                        object O1 = new object();
                                         lock (O1)
                                         {
                                             var th = Task.Factory.StartNew(() => IS = IsNextMovmentIsCheckOrCheckMateForCurrentMovmentbaseKernel(Ord, CloneATable(Tab), ik1, jk1, iki1, jki1, OrderP, OrderM, Depth1, KindCheckedSelf1));
@@ -4171,7 +4171,7 @@ namespace RefrigtzChessPortable
                                             int ik1 = ik, jk1 = jk, iki1 = iki, jki1 = jki, OrderP = OrderPalte, OrderM = OrderPalteMinusPluse, Depth1 = Depth + 1;
                                             bool KindCheckedSelf1 = KindCheckedSelf;
                                             int[] IS = null;
-                                            Object O1 = new Object();
+                                            object O1 = new object();
                                             lock (O1)
                                             {
                                                 var th = Task.Factory.StartNew(() => IS = IsNextMovmentIsCheckOrCheckMateForCurrentMovmentbaseKernel(Ord, CloneATable(Tab), ik1, jk1, iki1, jki1, OrderP, OrderM, Depth1, KindCheckedSelf1));
@@ -4204,7 +4204,7 @@ namespace RefrigtzChessPortable
                                             int ik1 = ik, jk1 = jk, iki1 = iki, jki1 = jki, OrderP = OrderPalte, OrderM = OrderPalteMinusPluse, Depth1 = Depth + 1;
                                             bool KindCheckedSelf1 = KindCheckedSelf;
                                             int[] IS = null;
-                                            Object O1 = new Object();
+                                            object O1 = new object();
                                             lock (O1)
                                             {
                                                 var th = Task.Factory.StartNew(() => IS = IsNextMovmentIsCheckOrCheckMateForCurrentMovmentbaseKernel(Ord, CloneATable(Tab), ik1, jk1, iki1, jki1, OrderP, OrderM, Depth1, KindCheckedSelf1));
@@ -4226,19 +4226,19 @@ namespace RefrigtzChessPortable
         //When Current Movements is in dangrous and is not movable.
         bool IsGardForCurrentMovmentsAndIsNotMovable(int[,] Tab, int Order, int a, int ii, int jj, int RowS, int ColS)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 //Setting false.
                 bool Attacked = true;
-                int NumberOfCurrentEnemyAttackSuchObject = 0;
+                int NumberOfCurrentEnemyAttackSuchobject = 0;
                 int DummyOrder = Order;
                 int DummyCurrentOrder = ChessRules.CurrentOrder;
                 //For Enemy Order.
-                Object O1 = new Object();
+                object O1 = new object();
                 lock (O1)
                 {
-                    //Ignore of Self Objects.
+                    //Ignore of Self objects.
                     if (Order == 1 && Tab[ii, jj] >= 0)
                     {
                         return false;
@@ -4251,9 +4251,9 @@ namespace RefrigtzChessPortable
                     //Restore
                     Order = DummyOrder;
                     ChessRules.CurrentOrder = DummyCurrentOrder;
-                    NumberOfCurrentEnemyAttackSuchObject = 0;
-                    //For Self Objects and Empty.
-                    //Ignore of Enemy Objects.
+                    NumberOfCurrentEnemyAttackSuchobject = 0;
+                    //For Self objects and Empty.
+                    //Ignore of Enemy objects.
                     if (Order == 1 && Tab[RowS, ColS] < 0)
                     {
                         return false;
@@ -4277,7 +4277,7 @@ namespace RefrigtzChessPortable
                     //When Enemy Attacked Current Movements.
                     if (ab)
                     {
-                        NumberOfCurrentEnemyAttackSuchObject++;
+                        NumberOfCurrentEnemyAttackSuchobject++;
                         //Clone a Table.
                         int[,] TabS = new int[8, 8];
                         for (int p = 0; p < 8; p++)
@@ -4285,16 +4285,16 @@ namespace RefrigtzChessPortable
                                 TabS[p, m] = Tab[p, m];
                         TabS[RowS, ColS] = TabS[ii, jj];
                         TabS[ii, jj] = 0;
-                        //For Self Objects.
+                        //For Self objects.
                         ////Parallel.For(0, 8, RowD =>
                         for (int RowD = 0; RowD < 8; RowD++)
                         {
-                            if (!Attacked || NumberOfCurrentEnemyAttackSuchObject > 1)
+                            if (!Attacked || NumberOfCurrentEnemyAttackSuchobject > 1)
                                 continue;
                             ////Parallel.For(0, 8, ColD =>
                             for (int ColD = 0; ColD < 8; ColD++)
                             {
-                                if (!Attacked || NumberOfCurrentEnemyAttackSuchObject > 1)
+                                if (!Attacked || NumberOfCurrentEnemyAttackSuchobject > 1)
                                     if (Order == 1 && Tab[RowD, ColD] <= 0)
                                         continue;
                                     else
@@ -4302,24 +4302,24 @@ namespace RefrigtzChessPortable
                                         continue;
                                 //Show the Attacked.
                                 Attacked = true;
-                                //For Self Objects and Empty.
+                                //For Self objects and Empty.
                                 ////Parallel.For(0, 8, iiiii =>
                                 for (int iiiii = 0; iiiii < 8; iiiii++)
                                 {
                                     ////Parallel.For(0, 8, jjjjj =>
                                     for (int jjjjj = 0; jjjjj < 8; jjjjj++)
                                     {
-                                        //Ignore of Enemy Objects.
+                                        //Ignore of Enemy objects.
                                         if (Order == 1 && Tab[iiiii, jjjjj] < 0)
                                             continue;
                                         else
                                                if (Order == -1 && Tab[iiiii, jjjjj] > 0)
                                             continue;
-                                        //When Current Objects Movable not need to consideration mor going to next Current object.
-                                        Object O2 = new Object();
+                                        //When Current objects Movable not need to consideration mor going to next Current object.
+                                        object O2 = new object();
                                         lock (O2)
                                         {
-                                            var th1 = Task.Factory.StartNew(() => ab = (new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TabS[RowD, ColD], TabS, Order, RowD, ColD)).Rules(RowD, ColD, iiiii, jjjjj, a, TabS[RowD, ColD]));
+                                            var th1 = Task.Factory.StartNew(() => ab = (new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TabS[RowD, ColD], TabS, Order, RowD, ColD)).Rules(RowD, ColD, iiiii, jjjjj, a, TabS[RowD, ColD]));
                                             th1.Wait();
                                             th1.Dispose();
                                             if (ab)
@@ -4329,13 +4329,13 @@ namespace RefrigtzChessPortable
                                             }
                                         }
                                     }
-                                    if (!Attacked || NumberOfCurrentEnemyAttackSuchObject > 1)
+                                    if (!Attacked || NumberOfCurrentEnemyAttackSuchobject > 1)
                                         continue;
                                 }
-                                if (Attacked || NumberOfCurrentEnemyAttackSuchObject > 1)
+                                if (Attacked || NumberOfCurrentEnemyAttackSuchobject > 1)
                                     continue;
                             }
-                            if (Attacked || NumberOfCurrentEnemyAttackSuchObject > 1)
+                            if (Attacked || NumberOfCurrentEnemyAttackSuchobject > 1)
                                 continue;
                         }
                     }
@@ -4350,21 +4350,21 @@ namespace RefrigtzChessPortable
                 Order = DummyOrder;
                 ChessRules.CurrentOrder = DummyCurrentOrder;
 
-                //continue Variable when true show an object is not movable or one enemy object attack more than one current Object.
-                return Attacked || NumberOfCurrentEnemyAttackSuchObject > 1;
+                //continue Variable when true show an object is not movable or one enemy object attack more than one current object.
+                return Attacked || NumberOfCurrentEnemyAttackSuchobject > 1;
             }
         }
         ///when current movments gards enemy with higer priority at movment.QC_OK
         bool IsCurrentCanGardHighPriorityEnemy(int Depth, int[,] Table, int Order, int a, int ij, int ji, int iij, int jji, int OrderPlate)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 if (Depth >= CurrentAStarGredyMax)
                 {
                     return false;
                 }
-                Object O4 = new Object();
+                object O4 = new object();
                 lock (O4)
                 {
                     Depth++;
@@ -4435,10 +4435,10 @@ namespace RefrigtzChessPortable
         }
         bool CurrentIsTowCastleOrMinisterBecomeCheckedMateAtCloseRanAway(int RowK, int ColK, int[,] Table)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
-                if (!IsNumberOfObjecttIsLessThanThreashold(CloneATable(Table)))
+                if (!IsNumberOfobjecttIsLessThanThreashold(CloneATable(Table)))
                     return false;
                 bool Is = false;
                 int IsN = 0;
@@ -4507,7 +4507,7 @@ namespace RefrigtzChessPortable
         }
         bool SameSign(int Obj1, int Obj2)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 bool Is = false;
@@ -4521,10 +4521,10 @@ namespace RefrigtzChessPortable
         }
         bool ThereIsOneSideToRanAwayByEnemyKing(int RowK, int ColK, int[,] Table)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
-                if (!IsNumberOfObjecttIsLessThanThreashold(CloneATable(Table)))
+                if (!IsNumberOfobjecttIsLessThanThreashold(CloneATable(Table)))
                     return false;
                 bool Is = false;
                 if ((ColK == 7) && (ColK - 1 >= 0) && (RowK - 1 >= 0) && (RowK + 1 < 8))
@@ -4550,7 +4550,7 @@ namespace RefrigtzChessPortable
         }
         bool CurrentCanBecomeClosedRanAwayByOneCastleOrMinister(int RowK, int ColK, int[,] Table)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 bool Is = false;
@@ -4613,12 +4613,12 @@ namespace RefrigtzChessPortable
                 return Is;
             }
         }
-        bool IsObjectrSelfAttackEnemyKing(int Rowk, int ColK, int[,] Table, int Order)
+        bool IsobjectrSelfAttackEnemyKing(int Rowk, int ColK, int[,] Table, int Order)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
-                if (!IsNumberOfObjecttIsLessThanThreashold(CloneATable(Table)))
+                if (!IsNumberOfobjecttIsLessThanThreashold(CloneATable(Table)))
                     return false;
                 bool Is = false;
                 const int MinisteGrayObj = 5, CastleGrayObj = 4, ElepahantGrayObj = 2, PawnGrayObj = 1;
@@ -4701,13 +4701,13 @@ namespace RefrigtzChessPortable
         }
         public int SimpleMate_Zero(int RowS, int ColS, int RowD, int ColD, int[,] Table, int a)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int HA = 0;
                 if (Order == 1)
                 {
-                    ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowD, ColD);
+                    ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowD, ColD);
                     int[,] Tab = CloneATable(Table);
                     bool ab = false;
                     var th = Task.Factory.StartNew(() => ab = G.CheckMate(CloneATable(Tab), Order));
@@ -4724,7 +4724,7 @@ namespace RefrigtzChessPortable
                 }
                 else
                 {
-                    ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowS, ColS);
+                    ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowS, ColS);
                     int[,] Tab = CloneATable(Table);
                     bool ab = false;
                     var th = Task.Factory.StartNew(() => ab = G.CheckMate(CloneATable(Tab), Order));
@@ -4744,14 +4744,14 @@ namespace RefrigtzChessPortable
         }
         public int SimpleMate_One(int RowS, int ColS, int RowD, int ColD, int[,] Table, int a)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int HA = 0;
                 if (Order == 1)
                 {
                     int RowK = -1, ColK = -1;
-                    ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowS, ColS);
+                    ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowS, ColS);
                     G.FindBrownKing(CloneATable(Table), ref RowK, ref ColK);
                     bool S1 = false;
                     var H1 = Task.Factory.StartNew(() => S1 = CurrentIsTowCastleOrMinisterBecomeCheckedMateAtCloseRanAway(RowK, ColK, CloneATable(Table)));
@@ -4770,7 +4770,7 @@ namespace RefrigtzChessPortable
                         else
                         {
                             bool S3 = false;
-                            var H3 = Task.Factory.StartNew(() => S3 = IsObjectrSelfAttackEnemyKing(RowK, ColK, CloneATable(Table), Order));
+                            var H3 = Task.Factory.StartNew(() => S3 = IsobjectrSelfAttackEnemyKing(RowK, ColK, CloneATable(Table), Order));
                             H3.Wait();
                             H3.Dispose();
                             if (S3)
@@ -4781,7 +4781,7 @@ namespace RefrigtzChessPortable
                 else
                 {
                     int RowK = -1, ColK = -1;
-                    ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowS, ColS);
+                    ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowS, ColS);
                     G.FindGrayKing(CloneATable(Table), ref RowK, ref ColK);
                     bool S1 = false;
                     var H1 = Task.Factory.StartNew(() => S1 = CurrentIsTowCastleOrMinisterBecomeCheckedMateAtCloseRanAway(RowK, ColK, CloneATable(Table)));
@@ -4800,7 +4800,7 @@ namespace RefrigtzChessPortable
                         else
                         {
                             bool S3 = false;
-                            var H3 = Task.Factory.StartNew(() => S2 = IsObjectrSelfAttackEnemyKing(RowK, ColK, CloneATable(Table), Order));
+                            var H3 = Task.Factory.StartNew(() => S2 = IsobjectrSelfAttackEnemyKing(RowK, ColK, CloneATable(Table), Order));
                             H3.Wait();
                             H3.Dispose();
                             if (S3)
@@ -4812,14 +4812,14 @@ namespace RefrigtzChessPortable
         }
         public int SimpleMate_Tow(int RowS, int ColS, int RowD, int ColD, int[,] Table, int a)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int HA = 0;
                 if (Order == 1)
                 {
                     int RowK = -1, ColK = -1;
-                    ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowS, ColS);
+                    ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowS, ColS);
                     G.FindBrownKing(CloneATable(Table), ref RowK, ref ColK);
                     if (EnemyKingCanMateByCloseHome(RowK, ColK, CloneATable(Table), Order))
                         HA += RationalRegard;
@@ -4827,7 +4827,7 @@ namespace RefrigtzChessPortable
                 else
                 {
                     int RowK = -1, ColK = -1;
-                    ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowS, ColS);
+                    ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowS, ColS);
                     G.FindGrayKing(CloneATable(Table), ref RowK, ref ColK);
                     if (EnemyKingCanMateByCloseHome(RowK, ColK, CloneATable(Table), Order))
                         HA += RationalRegard;
@@ -4837,14 +4837,14 @@ namespace RefrigtzChessPortable
         }
         public int SimpleMate_Three_And_Four(int RowS, int ColS, int RowD, int ColD, int[,] Table, int a)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int HA = 0;
                 if (Order == 1)
                 {
                     int RowK = -1, ColK = -1;
-                    ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowS, ColS);
+                    ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowS, ColS);
                     G.FindBrownKing(CloneATable(Table), ref RowK, ref ColK);
                     if (EnemyKingHaveAtMostOneEmptyItemInAttack(RowK, ColK, CloneATable(Table), Order))
                         HA += RationalRegard;
@@ -4852,7 +4852,7 @@ namespace RefrigtzChessPortable
                 else
                 {
                     int RowK = -1, ColK = -1;
-                    ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowS, ColS);
+                    ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowS, ColS);
                     G.FindGrayKing(CloneATable(Table), ref RowK, ref ColK);
                     if (EnemyKingHaveAtMostOneEmptyItemInAttack(RowK, ColK, CloneATable(Table), Order))
                         HA += RationalRegard;
@@ -4862,7 +4862,7 @@ namespace RefrigtzChessPortable
         }
         public int EnemyKingHaveAtMostOneEmptyItem(int Rowk, int ColK, int[,] Table, int Order, ref List<int> EmptyR, ref List<int> EmptyC)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int NIs = 0;
@@ -4926,12 +4926,12 @@ namespace RefrigtzChessPortable
         public bool EnemyKingHaveAtMostOneEmptyItemInAttack(int Rowk, int ColK, int[,] Table, int Order)
         {
             bool ab = false;
-            var th = Task.Factory.StartNew(() => ab = IsNumberOfObjecttIsLessThanThreashold(CloneATable(Table)));
+            var th = Task.Factory.StartNew(() => ab = IsNumberOfobjecttIsLessThanThreashold(CloneATable(Table)));
             th.Wait();
             th.Dispose();
             if (!ab)
                 return false;
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
 // // The variable 'NIs' is assigned but its value is never used
@@ -4965,7 +4965,7 @@ namespace RefrigtzChessPortable
                                                 int[,] Ta = CloneATable(Table);
                                                 Ta[kkk, ppp] = Ta[kk, pp];
                                                 Ta[kk, pp] = 0;
-                                                ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Ta), Order, kkk, ppp);
+                                                ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Ta), Order, kkk, ppp);
                                                 var th3 = Task.Factory.StartNew(() => ab = G.CheckMate(CloneATable(Ta), Order));
                                                 th3.Wait();
                                                 th3.Dispose();
@@ -4984,9 +4984,9 @@ namespace RefrigtzChessPortable
                 return false;
             }
         }
-        bool IsNumberOfObjecttIsLessThanThreashold(int[,] Tab, int Threashold = 30)
+        bool IsNumberOfobjecttIsLessThanThreashold(int[,] Tab, int Threashold = 30)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int ObjN = 0;
@@ -5005,10 +5005,10 @@ namespace RefrigtzChessPortable
         }
         public bool EnemyKingCanMateByCloseHome(int RowK, int ColK, int[,] Table, int Order)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
-                if (!IsNumberOfObjecttIsLessThanThreashold(CloneATable(Table)))
+                if (!IsNumberOfobjecttIsLessThanThreashold(CloneATable(Table)))
                     return false;
                 bool Is = false;
                 List<int> EmptyR = new List<int>(), EmptyC = new List<int>();
@@ -5061,7 +5061,7 @@ namespace RefrigtzChessPortable
                                                     int[,] Ta = CloneATable(Tab);
                                                     Ta[kkk, ppp] = Ta[k, p];
                                                     Ta[k, p] = 0;
-                                                    ChessRules A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Ta[kkk, ppp], CloneATable(Tab), Order, kkk, ppp);
+                                                    ChessRules A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Ta[kkk, ppp], CloneATable(Tab), Order, kkk, ppp);
                                                     if (A.CheckMate(CloneATable(Ta), Order * 1))
                                                         return true;
                                                 }
@@ -5158,7 +5158,7 @@ namespace RefrigtzChessPortable
         ///Heuristic of Check and CheckMate.
         public int HeuristicCheckAndCheckMate(int RowS, int ColS, int RowD, int ColD, int[,] Table, int a)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int HA = 0;
@@ -5205,10 +5205,10 @@ namespace RefrigtzChessPortable
                 return HA;
             }
         }
-        //Veryfy and detect Object Value.
+        //Veryfy and detect object Value.
         int VeryFye(int[,] Table, int Order, int a)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int HA = 0;
@@ -5235,10 +5235,10 @@ namespace RefrigtzChessPortable
             }
         }
         //QC_OK
-        //Numbers of Supporting Current Objects method.
+        //Numbers of Supporting Current objects method.
         int SupporterCount(int[,] Table, int Order, int a, int ii, int jj)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int Count = 0;
@@ -5275,7 +5275,7 @@ namespace RefrigtzChessPortable
         //Attacks on Enemies.
         int AttackerCount(int[,] Table, int Order, int a, int i, int j)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int Count = 0;
@@ -5285,11 +5285,11 @@ namespace RefrigtzChessPortable
                 for (int h = 0; h < 8; h++)
                     for (int k = 0; k < 8; k++)
                         Tab[h, k] = Table[h, k];
-                //For Slef Objects..
+                //For Slef objects..
                 for (var ii = 0; ii < 8; ii++)
                     for (var jj = 0; jj < 8; jj++)
                     {
-                        //Ignore Of Self Objects
+                        //Ignore Of Self objects
                         if (Order == 1 && Tab[ii, jj] >= 0)
                             continue;
                         else
@@ -5313,7 +5313,7 @@ namespace RefrigtzChessPortable
         //Attackers of Enemies.QC_OK.
         int EnemyAttackerCount(int[,] Table, int Order, int a, int ii, int jj)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int Count = 0;
@@ -5353,7 +5353,7 @@ namespace RefrigtzChessPortable
         //clear TableInitiationPreventionOfMultipleMoveWhenAll
         void MakeEmptyTableInitiationPreventionOfMultipleMoveWhenAllIsFull()
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 bool Is = false;
@@ -5380,7 +5380,7 @@ namespace RefrigtzChessPortable
         //determine when specified ro column of TableInitiationPreventionOfMultipleMoveWhenAll is zero and empty
         bool IsTableRowColIsZero(int Row, int Col)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 var th = Task.Factory.StartNew(() => MakeEmptyTableInitiationPreventionOfMultipleMoveWhenAllIsFull());
@@ -5398,7 +5398,7 @@ namespace RefrigtzChessPortable
         //when situation of cerntralized location pawn object is ok
         public bool IsCentralPawnIsOk(int[,] Tab, int Order)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 bool Is = false;
@@ -5448,7 +5448,7 @@ namespace RefrigtzChessPortable
         //when center is controled by traversal objects.
         public bool CenrtrallnControlByTraversal(int[,] Tab, int a, int Order, int RowS, int ColS, int RowD, int ColD)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int aa = 1;
@@ -5806,7 +5806,7 @@ namespace RefrigtzChessPortable
         //when tow self castle control tow beside row or column
         bool ExistCastleInDouble(int Order, int[,] Table, int RowS, int ColS, int RowD, int ColD)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 bool Ex = false;
@@ -5916,10 +5916,10 @@ namespace RefrigtzChessPortable
                 return Ex;
             }
         }
-        //Distribution of Objects
+        //Distribution of objects
         public int HeuristicDistribution(bool Before, int[,] Tab, int Order, int a, int RowS, int ColS, int RowD, int ColD)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int Dis = 0;
@@ -5955,7 +5955,7 @@ namespace RefrigtzChessPortable
                         if (Tab[RowS, ColS] == 4 || Tab[RowD, ColD] == 4)
                             Dis += RationalRegard;
                     }
-                       if ((Tab[3, 4] > ObjectGray && Tab[4, 3] > ObjectGray && Tab[3, 3] > ObjectGray && Tab[4, 4] > ObjectGray) || (IsNumberOfObjecttIsLessThanThreashold(CloneATable(Tab), 25)))
+                       if ((Tab[3, 4] > ObjectGray && Tab[4, 3] > ObjectGray && Tab[3, 3] > ObjectGray && Tab[4, 4] > ObjectGray) || (IsNumberOfobjecttIsLessThanThreashold(CloneATable(Tab), 25)))
                     {
                         var th3 = Task.Factory.StartNew(() => ab = (Tab[RowS, ColS] == 3) && (NoOfExistInReducedAttackList(Before, RowS, ColS, RowD, ColD) > 0));
                         th3.Wait();
@@ -5988,7 +5988,7 @@ namespace RefrigtzChessPortable
                         }
                         }
                     }
-                    if (IsNumberOfObjecttIsLessThanThreashold(CloneATable(Tab), 32))
+                    if (IsNumberOfobjecttIsLessThanThreashold(CloneATable(Tab), 32))
                     {
                         int Cor = 0;
                         var H2 = Task.Factory.StartNew(() => Cor = RefrigtzChessPortable.Colleralation.GetCorrelationScore(TableInitiation, CloneATable(Tab), 8, Order));
@@ -6037,12 +6037,12 @@ namespace RefrigtzChessPortable
                         }
                     }
 
-                    var th11 = Task.Factory.StartNew(() => ab = ((Tab[3, 4] > ObjectGray && Tab[4, 3] > ObjectGray && Tab[3, 3] > ObjectGray && Tab[4, 4] > ObjectGray)) && (!IsNumberOfObjecttIsLessThanThreashold(CloneATable(Tab), 25)));
+                    var th11 = Task.Factory.StartNew(() => ab = ((Tab[3, 4] > ObjectGray && Tab[4, 3] > ObjectGray && Tab[3, 3] > ObjectGray && Tab[4, 4] > ObjectGray)) && (!IsNumberOfobjecttIsLessThanThreashold(CloneATable(Tab), 25)));
                     th11.Wait();
                     th11.Dispose();
                     if (!ab)
                     {
-                        var th12 = Task.Factory.StartNew(() => ab = IsNumberOfObjecttIsLessThanThreashold(CloneATable(Tab), 32));
+                        var th12 = Task.Factory.StartNew(() => ab = IsNumberOfobjecttIsLessThanThreashold(CloneATable(Tab), 32));
                         th12.Wait();
                         th12.Dispose();
                         if (!ab)
@@ -6068,7 +6068,7 @@ namespace RefrigtzChessPortable
                         if (Tab[RowS, ColS] == -4 || Tab[RowD, ColD] == -4)
                             Dis += RationalRegard;
                     }
-                    if ((Tab[3, 4] < ObjectBrown && Tab[4, 3] < ObjectBrown && Tab[3, 3] < ObjectBrown && Tab[4, 4] < ObjectBrown) || (IsNumberOfObjecttIsLessThanThreashold(CloneATable(Tab), 25)))
+                    if ((Tab[3, 4] < ObjectBrown && Tab[4, 3] < ObjectBrown && Tab[3, 3] < ObjectBrown && Tab[4, 4] < ObjectBrown) || (IsNumberOfobjecttIsLessThanThreashold(CloneATable(Tab), 25)))
                     {
                         var th13 = Task.Factory.StartNew(() => ab = (Tab[RowS, ColS] == -3) && (NoOfExistInReducedAttackList(Before, RowS, ColS, RowD, ColD) > 0));
                         th13.Wait();
@@ -6100,7 +6100,7 @@ namespace RefrigtzChessPortable
                             }
                         }
                     }
-                    var th17 = Task.Factory.StartNew(() => ab = IsNumberOfObjecttIsLessThanThreashold(CloneATable(Tab), 32));
+                    var th17 = Task.Factory.StartNew(() => ab = IsNumberOfobjecttIsLessThanThreashold(CloneATable(Tab), 32));
                     th17.Wait();
                     th17.Dispose();
                     if (ab)
@@ -6148,9 +6148,9 @@ namespace RefrigtzChessPortable
                             }
                         }
                     }
-                    if (!((Tab[3, 4] < ObjectBrown && Tab[4, 3] < ObjectBrown && Tab[3, 3] < ObjectBrown && Tab[4, 4] < ObjectBrown)) && (!IsNumberOfObjecttIsLessThanThreashold(CloneATable(Tab), 25)))
+                    if (!((Tab[3, 4] < ObjectBrown && Tab[4, 3] < ObjectBrown && Tab[3, 3] < ObjectBrown && Tab[4, 4] < ObjectBrown)) && (!IsNumberOfobjecttIsLessThanThreashold(CloneATable(Tab), 25)))
                     {
-                        if (!IsNumberOfObjecttIsLessThanThreashold(CloneATable(Tab), 32))
+                        if (!IsNumberOfobjecttIsLessThanThreashold(CloneATable(Tab), 32))
                         {
                             int Cor = 0;
                             var H5 = Task.Factory.StartNew(() => Cor = RefrigtzChessPortable.Colleralation.GetCorrelationScore(TableInitiation, CloneATable(Tab), 8, Order));
@@ -6176,7 +6176,7 @@ namespace RefrigtzChessPortable
         //when pawn is doubled or isolated at move before return true and rationalpenalty occured
         bool IsPawnIsolatedOrDoubleBackAwayOrHung(int RowS, int ColS, int RowD, int ColD, int[,] Table, int Order)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 bool Is = false;
@@ -6293,13 +6293,13 @@ namespace RefrigtzChessPortable
             }
         }
         //when pawn move to center by no reducedattack rational regard and heuristic of attacked and "IsPawnIsolatedOrDoubleBackAwayOrHung" rational penalty
-        public int HeuristicObjectAtCenterAndPawnAttackTraversalObjectsAndDangourForEnemy(int[,] Table, int aa, int Ord, int ii, int jj, int i, int j)
+        public int HeuristicobjectAtCenterAndPawnAttackTraversalobjectsAndDangourForEnemy(int[,] Table, int aa, int Ord, int ii, int jj, int i, int j)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int HA = 0;
-                Object O1 = new Object();
+                object O1 = new object();
                 lock (O1)
                 {
                     if ((i == 3 || i == 4) && (j == 3 || j == 4) && HeuristicAllReducedAttacked.Count == 0)
@@ -6346,7 +6346,7 @@ namespace RefrigtzChessPortable
         //intby order specified
         int OrderColor(int Ord)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int a = 1;
@@ -6358,7 +6358,7 @@ namespace RefrigtzChessPortable
         //permit mehod suit for heuristicexchange
         bool Permit(int Order, int TabS, int TabD, bool Self = true, bool Move = false)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 bool Per = false;
@@ -6402,7 +6402,7 @@ namespace RefrigtzChessPortable
         //specific method for calculation of differential tow object
         int Diff(int Obj1, int Obj2, bool Penalty = true)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int df = Obj1 - Obj2;
@@ -6425,7 +6425,7 @@ namespace RefrigtzChessPortable
         //specific method for calculation of differential tow object second kind
         int DiffSupport(int Obj1, int Obj2)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int df = Obj1 - Obj2;
@@ -6436,7 +6436,7 @@ namespace RefrigtzChessPortable
         public int[] HeuristicAll(bool Before, int Killed, int[,] Table, int aa, int Ord)
         {
 
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int[] HeuristicA = new int[6];
@@ -6446,7 +6446,7 @@ namespace RefrigtzChessPortable
                 int DummyOrder = Order;
                 int DummyCurrentOrder = ChessRules.CurrentOrder;
                 ///When AStarGreedy Heuristic is Not Assigned.
-                Object O1 = new Object();
+                object O1 = new object();
                 lock (O1)
                 {
                     var output = Task.Factory.StartNew(() =>
@@ -6459,7 +6459,7 @@ namespace RefrigtzChessPortable
                                 {
                                     Parallel.For(0, 8, ColD =>
                                     {
-                                        if (IsDistributedObjectAttackNonDistributedEnemyObject(Before, CloneATable(Table), Ord, aa, RowS, ColS, RowD, ColD))
+                                        if (IsDistributedobjectAttackNonDistributedEnemyobject(Before, CloneATable(Table), Ord, aa, RowS, ColS, RowD, ColD))
                                         {
                                             HA += RationalPenalty;
                                             return;
@@ -6467,7 +6467,7 @@ namespace RefrigtzChessPortable
 
                                         Parallel.Invoke(() =>
                                         {
-                                            Object OO = new Object();
+                                            object OO = new object();
                                             lock (OO)
                                             {
                                                 if (HeuristicA[0] == 0)
@@ -6572,7 +6572,7 @@ namespace RefrigtzChessPortable
         //number of exists of move situation in Heuristic lists 
         int NoOfExistInMoveList(bool Before, int Rows, int Cols, int Rowd, int Cold)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int Is = 0;
@@ -6601,7 +6601,7 @@ namespace RefrigtzChessPortable
         //number of exists of move situation in Heuristic lists 
         int NoOfExistInReducedMoveList(bool Before, int Rows, int Cols, int Rowd, int Cold)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int Is = 0;
@@ -6630,7 +6630,7 @@ namespace RefrigtzChessPortable
         //number of exists of move situation in Heuristic lists 
         int NoOfExistInAttackList(bool Before, int Rows, int Cols, int Rowd, int Cold)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int Is = 0;
@@ -6659,7 +6659,7 @@ namespace RefrigtzChessPortable
         //number of exists of move situation in Heuristic lists 
         int NoOfExistInReducedAttackList(bool Before, int Rows, int Cols, int Rowd, int Cold)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int Is = 0;
@@ -6687,7 +6687,7 @@ namespace RefrigtzChessPortable
         }
         List<int[]> ListOfExistInReducedAttackList(bool Before, int Rows, int Cols, int Rowd, int Cold)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 List<int[]> Is = new List<int[]>();
@@ -6771,7 +6771,7 @@ namespace RefrigtzChessPortable
         }
         List<int[]> ListOfExistInSupportList(bool Before, int RowS, int ColS, int RowD, int ColD)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 List<int[]> Is = new List<int[]>();
@@ -6815,7 +6815,7 @@ namespace RefrigtzChessPortable
         }
         List<int[]> ListOfExistInAttackList(bool Before, int RowS, int ColS, int RowD, int ColD)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 List<int[]> Is = new List<int[]>();
@@ -6860,7 +6860,7 @@ namespace RefrigtzChessPortable
         //number of exists of move situation in Heuristic lists 
         int NoOfExistInSupportList(bool Before, int Rows, int Cols, int Rowd, int Cold)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int Is = 0;
@@ -6889,7 +6889,7 @@ namespace RefrigtzChessPortable
         //number of exists of move situation in Heuristic lists 
         int NoOfExistInReducedSupportList(bool Before, int Rows, int Cols, int Rowd, int Cold)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int Is = 0;
@@ -6918,7 +6918,7 @@ namespace RefrigtzChessPortable
         //number of exists of move situation in Heuristic lists 
         int NoOfExistInSupportList(bool Before, int RowD, int ColD)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int Is = 0;
@@ -6953,7 +6953,7 @@ namespace RefrigtzChessPortable
         //promotion heuristic on pawn
         int HeuristicPromotion(bool Before, int[,] Tab, int Order, int Ros, int Cos, int Rod, int Cod)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int HP = 0;
@@ -6981,7 +6981,7 @@ namespace RefrigtzChessPortable
         //heuristic on trying open elephant of self to move
         int HeuristicElephantOpen(bool Before, int[,] Tab, int Order, int Ros, int Cos, int Rod, int Cod)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int HE = 0;
@@ -7009,7 +7009,7 @@ namespace RefrigtzChessPortable
         //safety of self hourse by value.
         int HeuristicHourseCloseBaseOfWeakHourseIsWhereIsHomeStrong(bool Before, int[,] Tab, int Order, int Ros, int Cos, int Rod, int Cod)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int HH = 0;
@@ -7042,10 +7042,10 @@ namespace RefrigtzChessPortable
         public int[] HeuristicExchange(bool Before, int Killed, int[,] Table, int aa, int Ord, int Ros, int Cos, int Rod, int Cod)
         {
 
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
-                int[,] RemobeActiveDenfesiveObjectsOfEnemy = new int[8, 8];
+                int[,] RemobeActiveDenfesiveobjectsOfEnemy = new int[8, 8];
                 const int ToSupport = 3, ReducedAttacked = 0, ReducedSupport = 2, ReducedMove = 5, ToAttacked = 1, ToMoved = 4;
                 int[] Exchange = new int[6];
                 int[] ExchangeSeed = new int[3];
@@ -7053,7 +7053,7 @@ namespace RefrigtzChessPortable
                 int DummyOrd = Ord;
                 int DummyCurrentOrd = ChessRules.CurrentOrder;
                 ///When AStarGreedy Exchange is Not Assigned.
-                Object O1 = new Object();
+                object O1 = new object();
                 lock (O1)
                 {
                     Parallel.For(0, 8, RowS =>
@@ -7070,7 +7070,7 @@ namespace RefrigtzChessPortable
                                         Parallel.Invoke(() =>
                                         {
 
-                                            Object OO = new Object();
+                                            object OO = new object();
                                             lock (OO)
                                             {
                                                 bool ab = false;
@@ -7085,7 +7085,7 @@ namespace RefrigtzChessPortable
                                                     th1.Dispose();
                                                     if (ab)
                                                     {
-                                                        Object OOO = new Object();
+                                                        object OOO = new object();
                                                         lock (OOO)
                                                         {
                                                             int[] A = new int[5];
@@ -7104,7 +7104,7 @@ namespace RefrigtzChessPortable
                                         }
                                                 , () =>
                                                 {
-                                                    Object OO = new Object();
+                                                    object OO = new object();
                                                     lock (OO)
                                                     {
                                                         bool ab = false;
@@ -7120,7 +7120,7 @@ namespace RefrigtzChessPortable
                                                             if (ab)
                                                             {
 
-                                                                Object OOO = new Object();
+                                                                object OOO = new object();
                                                                 lock (OOO)
                                                                 {
                                                                     int[] A = new int[5];
@@ -7138,7 +7138,7 @@ namespace RefrigtzChessPortable
                                                 }
                                                 , () =>
                                                 {
-                                                    Object OO = new Object();
+                                                    object OO = new object();
                                                     lock (OO)
                                                     {
                                                         bool ab = false;
@@ -7153,7 +7153,7 @@ namespace RefrigtzChessPortable
                                                             th1.Dispose();
                                                             if (ab)
                                                             {
-                                                                Object OOO = new Object();
+                                                                object OOO = new object();
                                                                 lock (OOO)
                                                                 {
                                                                     int[] A = new int[5];
@@ -7171,7 +7171,7 @@ namespace RefrigtzChessPortable
                                                 }, () =>
                                                 {
 
-                                                    Object OO = new Object();
+                                                    object OO = new object();
                                                     lock (OO)
                                                     {
                                                         bool ab = false;
@@ -7186,7 +7186,7 @@ namespace RefrigtzChessPortable
                                                             th1.Dispose();
                                                             if (ab)
                                                             {
-                                                                Object OOO = new Object();
+                                                                object OOO = new object();
                                                                 lock (OOO)
                                                                 {
                                                                     int[] A = new int[5];
@@ -7203,7 +7203,7 @@ namespace RefrigtzChessPortable
                                                     }
                                                 }, () =>
                                                 {
-                                                    Object OO = new Object();
+                                                    object OO = new object();
                                                     lock (OO)
                                                     {
                                                         bool ab = false;
@@ -7217,7 +7217,7 @@ namespace RefrigtzChessPortable
                                                             th1.Dispose();
                                                             if (ab)
                                                             {
-                                                                Object OOO = new Object();
+                                                                object OOO = new object();
                                                                 lock (OOO)
                                                                 {
                                                                     int[] A = new int[5];
@@ -7234,7 +7234,7 @@ namespace RefrigtzChessPortable
                                                     }
                                                 }, () =>
                                                 {
-                                                    Object OO = new Object();
+                                                    object OO = new object();
                                                     lock (OO)
                                                     {
                                                         bool ab = false;
@@ -7249,7 +7249,7 @@ namespace RefrigtzChessPortable
                                                             th1.Dispose();
                                                             if (ab)
                                                             {
-                                                                Object OOO = new Object();
+                                                                object OOO = new object();
                                                                 lock (OOO)
                                                                 {
                                                                     int[] A = new int[5];
@@ -7331,7 +7331,7 @@ namespace RefrigtzChessPortable
                     if (Exchange[ToSupport] - Exchange[ReducedSupport] + Exchange[ToAttacked] - Exchange[ReducedAttacked] > 0)
                     {
                         int HAA6 = 0;
-                        Object O11 = new Object();
+                        object O11 = new object();
                         lock (O11)
                         {
                             int i6 = Ros, j6 = Cos, iiii6 = Rod, jjjj6 = Cod;
@@ -7361,8 +7361,8 @@ namespace RefrigtzChessPortable
                 double ExchangedOfGameSimplification = (double)(Exchange[ToSupport] - Exchange[ReducedSupport] + Exchange[ToAttacked] - Exchange[ReducedSupport]);
                 double MAX = 64.0;
                 ExchangeSeed[2] += (int)(((double)(RationalRegard)) * (ExchangedOfGameSimplification / MAX));
-                //Remove of most impressive defensive enemy Objects
-                double Defen = (double)(RemobeActiveDenfesiveObjectsOfEnemy[Ros, Cos] - RemobeActiveDenfesiveObjectsOfEnemy[Rod, Cod]);
+                //Remove of most impressive defensive enemy objects
+                double Defen = (double)(RemobeActiveDenfesiveobjectsOfEnemy[Ros, Cos] - RemobeActiveDenfesiveobjectsOfEnemy[Rod, Cod]);
                 ExchangeSeed[2] += (int)(((double)(RationalRegard)) * (Defen / MAX) * 4);
                 var H4 = Task.Factory.StartNew(() => ExchangeSeed[2] += HeuristicPromotion(Before, CloneATable(Table), Ord, Ros, Cos, Rod, Cod));
                 H4.Wait();
@@ -7386,9 +7386,9 @@ namespace RefrigtzChessPortable
             }
         }
         //when objectS source less than destination
-        bool IsObjectSourceLessThanDestination(int RowS, int ColS, int RowD, int ColD, int[,] TabS)
+        bool IsobjectSourceLessThanDestination(int RowS, int ColS, int RowD, int ColD, int[,] TabS)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 bool Is = false;
@@ -7400,7 +7400,7 @@ namespace RefrigtzChessPortable
         //when support less than reduced support
         int IsSupportLessThanReducedSupport(int Support, int ReducedSupport)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 if (Support == 0)
@@ -7416,7 +7416,7 @@ namespace RefrigtzChessPortable
         //when attack less than reduced attack
         int IsAttackLessThanReducedAttack(int Attack, int ReducedAttack)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 if (Attack == 0)
@@ -7432,7 +7432,7 @@ namespace RefrigtzChessPortable
         //when move less than reduced move
         int IsMoveLessThanReducedMove(int Move, int ReducedMove)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 if (Move == 0)
@@ -7448,7 +7448,7 @@ namespace RefrigtzChessPortable
         //Heuristic of Movments.
         public int HeuristicMovment(bool Before, int[,] Table, int aa, int Ord, int RowS, int ColS, int RowD, int ColD)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int HAS = 0;
@@ -7472,7 +7472,7 @@ namespace RefrigtzChessPortable
         //Heuristic of self Movments.
         public int HeuristicMovmentSelf(bool Before, int[,] Table, int aa, int Ord, int RowS, int ColS, int RowD, int ColD)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int HeuristicMovementValue = 0;
@@ -7494,7 +7494,7 @@ namespace RefrigtzChessPortable
                     if (Table[RowD, ColD] == 0 && DummyOrder == -1 && Table[RowS, ColS] < 0)
                     {
                         Order = -1;
-                        Object O1 = new Object();
+                        object O1 = new object();
                         lock (O1)
                         {
                             Sign = 1 * AllDraw.SignMovments;
@@ -7505,7 +7505,7 @@ namespace RefrigtzChessPortable
                     else if (Table[RowD, ColD] == 0 && DummyOrder == 1 && Table[RowS, ColS] >= 0)
                     {
                         Order = 1;
-                        Object O1 = new Object();
+                        object O1 = new object();
                         lock (O1)
                         {
                             Sign = 1 * AllDraw.SignMovments;
@@ -7538,10 +7538,10 @@ namespace RefrigtzChessPortable
                                 ////Parallel.For(0, 8, h =>
                                 for (int h = 0; h < 8; h++)
                                 {
-                                    Object O2 = new Object();
+                                    object O2 = new object();
                                     lock (O2)
                                     {
-                                        //Ignore Of Self Objects.
+                                        //Ignore Of Self objects.
                                         if (Order == 1 && Table[g, h] == 0)
                                             continue;
                                         if (Order == -1 && Table[g, h] == 0)
@@ -7581,7 +7581,7 @@ namespace RefrigtzChessPortable
                                     }
                                 }
                             }
-                            Object O1 = new Object();
+                            object O1 = new object();
                             lock (O1)
                             {
                                 if (Supported > 0 && Attacked == 0)
@@ -7612,7 +7612,7 @@ namespace RefrigtzChessPortable
                     if (Table[RowD, ColD] == 0 && DummyOrder == -1 && Table[RowS, ColS] < 0)
                     {
                         Order = -1;
-                        Object O1 = new Object();
+                        object O1 = new object();
                         lock (O1)
                         {
                             Sign = 1 * AllDraw.SignMovments;
@@ -7623,7 +7623,7 @@ namespace RefrigtzChessPortable
                     else if (Table[RowD, ColD] == 0 && DummyOrder == 1 && Table[RowS, ColS] >= 0)
                     {
                         Order = 1;
-                        Object O1 = new Object();
+                        object O1 = new object();
                         lock (O1)
                         {
                             Sign = 1 * AllDraw.SignMovments;
@@ -7653,10 +7653,10 @@ namespace RefrigtzChessPortable
                                 ////Parallel.For(0, 8, h =>
                                 for (int h = 0; h < 8; h++)
                                 {
-                                    Object O2 = new Object();
+                                    object O2 = new object();
                                     lock (O2)
                                     {
-                                        //Ignore Of Self Objects.
+                                        //Ignore Of Self objects.
                                         if (Order == 1 && Table[g, h] == 0)
                                             continue;
                                         if (Order == -1 && Table[g, h] == 0)
@@ -7695,7 +7695,7 @@ namespace RefrigtzChessPortable
                                     }
                                 }
                             }
-                            Object O1 = new Object();
+                            object O1 = new object();
                             lock (O1)
                             {
                                 if (Supported > 0 && Attacked == 0)
@@ -7720,7 +7720,7 @@ namespace RefrigtzChessPortable
         //Heuristic of enemy Movments.
         public int HeuristicMovmentEnemy(bool Before, int[,] Table, int aa, int Ord, int RowD, int ColD, int RowS, int ColS)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int HeuristicMovementValue = 0;
@@ -7742,7 +7742,7 @@ namespace RefrigtzChessPortable
                     if (Table[RowD, ColD] == 0 && DummyOrder == -1 && Table[RowS, ColS] < 0)
                     {
                         Order = -1;
-                        Object O1 = new Object();
+                        object O1 = new object();
                         lock (O1)
                         {
                             Sign = 1 * AllDraw.SignMovments;
@@ -7753,7 +7753,7 @@ namespace RefrigtzChessPortable
                     else if (Table[RowD, ColD] == 0 && DummyOrder == 1 && Table[RowS, ColS] >= 0)
                     {
                         Order = 1;
-                        Object O1 = new Object();
+                        object O1 = new object();
                         lock (O1)
                         {
                             Sign = 1 * AllDraw.SignMovments;
@@ -7786,10 +7786,10 @@ namespace RefrigtzChessPortable
                                 ////Parallel.For(0, 8, h =>
                                 for (int h = 0; h < 8; h++)
                                 {
-                                    Object O2 = new Object();
+                                    object O2 = new object();
                                     lock (O2)
                                     {
-                                        //Ignore Of Self Objects.
+                                        //Ignore Of Self objects.
                                         if (Order == 1 && Table[g, h] == 0)
                                             continue;
                                         if (Order == -1 && Table[g, h] == 0)
@@ -7827,7 +7827,7 @@ namespace RefrigtzChessPortable
                                     }
                                 }
                             }
-                            Object O1 = new Object();
+                            object O1 = new object();
                             lock (O1)
                             {
                                 if (Attacked > 0 && Supported == 0)
@@ -7858,7 +7858,7 @@ namespace RefrigtzChessPortable
                     if (Table[RowD, ColD] == 0 && DummyOrder == -1 && Table[RowS, ColS] < 0)
                     {
                         Order = -1;
-                        Object O1 = new Object();
+                        object O1 = new object();
                         lock (O1)
                         {
                             Sign = 1 * AllDraw.SignMovments;
@@ -7869,7 +7869,7 @@ namespace RefrigtzChessPortable
                     else if (Table[RowD, ColD] == 0 && DummyOrder == 1 && Table[RowS, ColS] >= 0)
                     {
                         Order = 1;
-                        Object O1 = new Object();
+                        object O1 = new object();
                         lock (O1)
                         {
                             Sign = 1 * AllDraw.SignMovments;
@@ -7898,10 +7898,10 @@ namespace RefrigtzChessPortable
                                 ////Parallel.For(0, 8, h =>
                                 for (int h = 0; h < 8; h++)
                                 {
-                                    Object O2 = new Object();
+                                    object O2 = new object();
                                     lock (O2)
                                     {
-                                        //Ignore Of Self Objects.
+                                        //Ignore Of Self objects.
                                         if (Order == 1 && Table[g, h] == 0)
                                             continue;
                                         if (Order == -1 && Table[g, h] == 0)
@@ -7939,7 +7939,7 @@ namespace RefrigtzChessPortable
                                     }
                                 }
                             }
-                            Object O1 = new Object();
+                            object O1 = new object();
                             lock (O1)
                             {
                                 if (Attacked > 0 && Supported == 0)
@@ -7964,7 +7964,7 @@ namespace RefrigtzChessPortable
         ///Attack Determination.QC_Ok
         public bool Attack(int[,] Tab, int i, int j, int ii, int jj, int a, int Order)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 if (Tab[i, j] == 0)
@@ -7985,7 +7985,7 @@ namespace RefrigtzChessPortable
                 int[,] Table = CloneATable(Tab);
                 //when there is a Movment from Parameter One to Second Parameter return Attacke..
                 bool ab = false;
-                var th = Task.Factory.StartNew(() => ab = (new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Table[i, j], CloneATable(Table), Order, i, j)).Rules(i, j, ii, jj, a, Order));
+                var th = Task.Factory.StartNew(() => ab = (new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Table[i, j], CloneATable(Table), Order, i, j)).Rules(i, j, ii, jj, a, Order));
                 th.Wait();
                 th.Dispose();
                 if (ab)
@@ -7997,10 +7997,10 @@ namespace RefrigtzChessPortable
                 return false;
             }
         }
-        //Object Danger Determination.
-        public bool ObjectDanger(int[,] Tab, int i, int j, int ii, int jj, int a, int Order)
+        //object Danger Determination.
+        public bool objectDanger(int[,] Tab, int i, int j, int ii, int jj, int a, int Order)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int CCurrentOrder = ChessRules.CurrentOrder;
@@ -8014,7 +8014,7 @@ namespace RefrigtzChessPortable
                 ChessRules.CurrentOrder = Order;
                 ///When [i,j] is Attacked [ii,jj] retrun true when enemy is located in [ii,jj].
                 bool ab = false;
-                var th = Task.Factory.StartNew(() => ab = (new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Table[i, j], CloneATable(Table), Order, i, j)).Rules(i, j, ii, jj, a, Order));
+                var th = Task.Factory.StartNew(() => ab = (new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Table[i, j], CloneATable(Table), Order, i, j)).Rules(i, j, ii, jj, a, Order));
                 th.Wait();
                 th.Dispose();
                 if (ab)
@@ -8030,21 +8030,21 @@ namespace RefrigtzChessPortable
                     Table[ii, jj] = Table[i, j];
                     Table[i, j] = 0;
                     //Consider Check.
-                    ChessRules AA = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Table[ii, jj], CloneATable(Table), Order, ii, jj);
+                    ChessRules AA = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Table[ii, jj], CloneATable(Table), Order, ii, jj);
 
-                    var th1 = Task.Factory.StartNew(() => ab = AA.ObjectDangourKingMove(Order, CloneATable(Table), false));
+                    var th1 = Task.Factory.StartNew(() => ab = AA.objectDangourKingMove(Order, CloneATable(Table), false));
                     th1.Wait();
                     th1.Dispose();
                     if (ab)
                     {
                         ChessRules.CurrentOrder = CCurrentOrder;
-                        //Return ObjectDanger.
-                        if ((AA.CheckGrayObjectDangour) && Order == 1)
+                        //Return objectDanger.
+                        if ((AA.CheckGrayobjectDangour) && Order == 1)
                         {
                             return true;
                         }
                         else
-                            if ((AA.CheckBrownObjectDangour) && Order == -1)
+                            if ((AA.CheckBrownobjectDangour) && Order == -1)
                         {
                             return true;
                         }
@@ -8052,7 +8052,7 @@ namespace RefrigtzChessPortable
                     if (AA.CheckMate(CloneATable(Table), Order))
                     {
                         ChessRules.CurrentOrder = CCurrentOrder;
-                        //Return ObjectDanger.
+                        //Return objectDanger.
                         if ((AA.CheckGray || AA.CheckMateGray) && Order == 1)
                         {
                             return true;
@@ -8068,14 +8068,14 @@ namespace RefrigtzChessPortable
 
                 ChessRules.CurrentOrder = CCurrentOrder;
 
-                //return Non ObjectDanger.
+                //return Non objectDanger.
                 return false;
             }
         }
         ///Supportation Determination.QC_OK
         public bool Support(int[,] Tab, int i, int j, int ii, int jj, int a, int Order)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 if (Tab[i, j] == 0)
@@ -8090,7 +8090,7 @@ namespace RefrigtzChessPortable
                 {
                     ///When [i,j] Supporte [ii,jj].
                     bool ab = false;
-                    var th = Task.Factory.StartNew(() => ab = (new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Table[i, j], CloneATable(Table), Order, i, j)).Rules(i, j, ii, jj, a, Table[i, j], false) && SameSign(Table[i, j], Table[ii, jj]));
+                    var th = Task.Factory.StartNew(() => ab = (new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Table[i, j], CloneATable(Table), Order, i, j)).Rules(i, j, ii, jj, a, Table[i, j], false) && SameSign(Table[i, j], Table[ii, jj]));
                     th.Wait();
                     th.Dispose();
                     if (ab)
@@ -8103,7 +8103,7 @@ namespace RefrigtzChessPortable
                     if (Order == -1 && Table[i, j] < 0)
                     {  ///When [i,j] Supporte [ii,jj].
                         bool ab = false;
-                        var th = Task.Factory.StartNew(() => ab = (new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Table[i, j], CloneATable(Table), Order, i, j)).Rules(i, j, ii, jj, a, Table[i, j], false) && SameSign(Table[i, j], Table[ii, jj]));
+                        var th = Task.Factory.StartNew(() => ab = (new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Table[i, j], CloneATable(Table), Order, i, j)).Rules(i, j, ii, jj, a, Table[i, j], false) && SameSign(Table[i, j], Table[ii, jj]));
                         th.Wait();
                         th.Dispose();
                         if (ab)
@@ -8119,7 +8119,7 @@ namespace RefrigtzChessPortable
         //Return Msx Huiristic of Child Level.
         public bool MaxHeuristic(ref int j, int Kin, ref int Less, int Order)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
 
@@ -8515,11 +8515,11 @@ namespace RefrigtzChessPortable
                 return Found;
             }
         }
-        //Setting Numbers of Objects in Current Table boards.
+        //Setting Numbers of objects in Current Table boards.
         //Count of Solders on Table.
         int SolderOnTableCount(ref DrawSoldier[] So, bool Mi, int MaxCount)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int Count = 0, i = 0;
@@ -8551,7 +8551,7 @@ namespace RefrigtzChessPortable
         //Elepahnt On Table Count.
         int ElefantOnTableCount(ref DrawElefant[] So, bool Mi, int MaxCount)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
 
@@ -8584,7 +8584,7 @@ namespace RefrigtzChessPortable
         //Calculate Hourse on table.
         int HourseOnTableCount(ref DrawHourse[] So, bool Mi, int MaxCount)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int Count = 0, i = 0;
@@ -8616,7 +8616,7 @@ namespace RefrigtzChessPortable
         //Calculate Castles Count.
         int CastleOnTableCount(ref DrawCastle[] So, bool Mi, int MaxCount)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int Count = 0, i = 0;
@@ -8648,7 +8648,7 @@ namespace RefrigtzChessPortable
         //Calculate Minsiter Count.
         int MinisterOnTableCount(ref DrawMinister[] So, bool Mi, int MaxCount)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int Count = 0, i = 0;
@@ -8679,7 +8679,7 @@ namespace RefrigtzChessPortable
         //Calculate King on Table.
         int KingOnTableCount(ref DrawKing[] So, bool Mi, int MaxCount)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int Count = 0, i = 0;
@@ -8710,14 +8710,14 @@ namespace RefrigtzChessPortable
         //Return Heuristic.
         public int ReturnHeuristic(int ii, int j, int Order, bool AA, ref int HaveKilled)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 AllDraw.OutPut = new System.Text.StringBuilder("");
 
                 //calculation of Heuristic methos and storing value retured.
                 int Hur = new int();
-                Object O1 = new Object();
+                object O1 = new object();
                 lock (O1)
                 {
                     if (!AA)
@@ -8764,7 +8764,7 @@ namespace RefrigtzChessPortable
         //statstical html 
         String Alphabet(int RowRealesed)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 String A = "";
@@ -8798,7 +8798,7 @@ namespace RefrigtzChessPortable
         //statstical html 
         String Number(int ColumnRealeased)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 String A = "";
@@ -8864,7 +8864,7 @@ namespace RefrigtzChessPortable
                     HeuristicListSolder[j][7] +
                     HeuristicListSolder[j][8] +
                     HeuristicListSolder[j][9];
-                    Object O1 = new Object();
+                    object O1 = new object();
                     lock (O1)
                     {
                         if (AllDraw.NumberOfLeafComputation == -1 && AllDraw.FirstTraversalTree)
@@ -8887,7 +8887,7 @@ namespace RefrigtzChessPortable
                     HeuristicListElefant[j][7] +
                     HeuristicListElefant[j][8] +
                     HeuristicListElefant[j][9];
-                    Object O1 = new Object();
+                    object O1 = new object();
                     lock (O1)
                     {
                         if (AllDraw.NumberOfLeafComputation == -1 && AllDraw.FirstTraversalTree)
@@ -8911,7 +8911,7 @@ namespace RefrigtzChessPortable
                 HeuristicListHourse[j][7] +
                 HeuristicListHourse[j][8] +
                 HeuristicListHourse[j][9];
-                    Object O1 = new Object();
+                    object O1 = new object();
                     lock (O1)
                     {
                         if (AllDraw.NumberOfLeafComputation == -1 && AllDraw.FirstTraversalTree)
@@ -8935,7 +8935,7 @@ namespace RefrigtzChessPortable
             HeuristicListCastle[j][7] +
             HeuristicListCastle[j][8] +
             HeuristicListCastle[j][9];
-                    Object O1 = new Object();
+                    object O1 = new object();
                     lock (O1)
                     {
                         if (AllDraw.NumberOfLeafComputation == -1 && AllDraw.FirstTraversalTree)
@@ -8958,7 +8958,7 @@ namespace RefrigtzChessPortable
         HeuristicListMinister[j][7] +
         HeuristicListMinister[j][8] +
         HeuristicListMinister[j][9];
-                    Object O1 = new Object();
+                    object O1 = new object();
                     lock (O1)
                     {
                         if (AllDraw.NumberOfLeafComputation == -1 && AllDraw.FirstTraversalTree)
@@ -8982,7 +8982,7 @@ namespace RefrigtzChessPortable
         HeuristicListKing[j][7] +
         HeuristicListKing[j][8] +
         HeuristicListKing[j][9];
-                        Object O1 = new Object();
+                        object O1 = new object();
                         lock (O1)
                         {
                             if (AllDraw.NumberOfLeafComputation == -1 && AllDraw.FirstTraversalTree)
@@ -9014,7 +9014,7 @@ namespace RefrigtzChessPortable
                     //continue when deeper is null
                     if (AStarGreedy[k] == null)
                         continue;
-                    Object OOO = new Object();
+                    object OOO = new object();
                     lock (OOO)
                     {
                         //gray
@@ -9376,7 +9376,7 @@ namespace RefrigtzChessPortable
             if (iAstarGready > AllDraw.MaxAStarGreedy)
                 return 0;
             iAstarGready++;
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int Heuristic = 0;
@@ -9432,10 +9432,10 @@ namespace RefrigtzChessPortable
             }
         }
         //Returrn of Hurestic Tree.QC_Ok.
-        //Scope of Every Objects Movments.
+        //Scope of Every objects Movments.
         bool Scop(int i, int j, int ii, int jj, int Kind)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 if (i == ii && j == jj)
@@ -9554,7 +9554,7 @@ namespace RefrigtzChessPortable
         }
         bool Scop(int i, int j, int ii, int jj)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 if (i == ii && j == jj)
@@ -9596,10 +9596,10 @@ namespace RefrigtzChessPortable
                 return true;
             }
         }
-        //Calculate Maximum of Six Max Heuristic of Six Kind Objects.
+        //Calculate Maximum of Six Max Heuristic of Six Kind objects.
         int MaxOfSixHeuristic(int[] Less)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int Value = -1;
@@ -9615,10 +9615,10 @@ namespace RefrigtzChessPortable
                 return Value;
             }
         }
-        //Calculate Minimum of Six Min Heuristic of Six Kind Objects.note the enemy Heuristic are negative.
+        //Calculate Minimum of Six Min Heuristic of Six Kind objects.note the enemy Heuristic are negative.
         int MinOfSixHeuristic(int[] Less)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int Value = -1;
@@ -9678,7 +9678,7 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         void KingThinkingRefrigtzChessPortable(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int DummyOrder, int DummyCurrentOrder, int[,] TableS, int RowSource, int ColumnSource, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, int RowDestination, int ColumnDestination, bool Castle)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 TableS = CloneATable(TableConst);
@@ -9711,21 +9711,21 @@ namespace RefrigtzChessPortable
                     {
                         ///Add Table to List of Private.
                         HitNumberKing.Add(TableS[RowDestination, ColumnDestination]);
-                        Object OO = new Object();
+                        object OO = new object();
                         lock (OO)
                         {
                             ThinkingRun = true;
                         }
                     }
                     ///Predict Heuristic.
-                    Object A = new object();
+                    object A = new object();
                     lock (A)
                     {
                         int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                         newTask1.Wait(); newTask1.Dispose();
                         LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                     }
-                    Object A1 = new object();
+                    object A1 = new object();
                     lock (A1)
                     {
                         if (!Sup) { NumbersOfAllNode++; }
@@ -9738,7 +9738,7 @@ namespace RefrigtzChessPortable
 
                     // if (!Sup)
                     {
-                        Object A3 = new object();
+                        object A3 = new object();
                         lock (A3)
                         {
                             PenaltyVCar = false;
@@ -9749,10 +9749,10 @@ namespace RefrigtzChessPortable
                         }
                     }
                     ///Store of Indexes Changes and Table in specific List.
-                    newTask1 = Task.Factory.StartNew(() => ObjectIndexes(Kind, Sup, RowDestination, ColumnDestination, TableS));
+                    newTask1 = Task.Factory.StartNew(() => objectIndexes(Kind, Sup, RowDestination, ColumnDestination, TableS));
                     newTask1.Wait(); newTask1.Dispose();
                     ///Wehn Predict of Operation Do operate a Predict of this movments.
-                    Object A5 = new object();
+                    object A5 = new object();
                     lock (A5)
                     {
                         //Caused this for Stachostic results.
@@ -9767,7 +9767,7 @@ namespace RefrigtzChessPortable
                     if (!Sup)
                     {
                         
-                        Object A6 = new object();
+                        object A6 = new object();
                         lock (A6)
                         {
                             int[] Hu = new int[10];
@@ -9781,7 +9781,7 @@ namespace RefrigtzChessPortable
                                 HeuristicListKing.Add(Hu);
                             }
                         }
-                        Object O4 = new Object();
+                        object O4 = new object();
                         lock (O4)
                         {
                             ThinkingLevel++;
@@ -9805,7 +9805,7 @@ namespace RefrigtzChessPortable
 
                 }
                 else
-                    MovableAllObjectsListMethos(CloneATable(TableS), true, RowSource, ColumnSource, RowDestination, ColumnDestination, 1, -1);
+                    MovableAllobjectsListMethos(CloneATable(TableS), true, RowSource, ColumnSource, RowDestination, ColumnDestination, 1, -1);
             }
             ThinkingAtRun = false;
 
@@ -9831,7 +9831,7 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         void MinisterThinkingRefrigtzChessPortable(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int DummyOrder, int DummyCurrentOrder, int[,] TableS, int RowSource, int ColumnSource, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, int RowDestination, int ColumnDestination, bool Castle)
         {
-            Object O11 = new Object();
+            object O11 = new object();
             lock (O11)
             {
                 TableS = CloneATable(TableConst);
@@ -9863,21 +9863,21 @@ namespace RefrigtzChessPortable
                     {
                         ///Add Table to List of Private.
                         HitNumberMinister.Add(TableS[RowDestination, ColumnDestination]);
-                        Object OO = new Object();
+                        object OO = new object();
                         lock (OO)
                         {
                             ThinkingRun = true;
                         }
                     }
                     ///Predict Heuristic.
-                    Object A = new object();
+                    object A = new object();
                     lock (A)
                     {
                         int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                         newTask1.Wait(); newTask1.Dispose();
                         LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                     }
-                    Object A1 = new object();
+                    object A1 = new object();
                     lock (A1)
                     {
                         if (!Sup) { NumbersOfAllNode++; }
@@ -9889,7 +9889,7 @@ namespace RefrigtzChessPortable
 
                     // if (!Sup)
                     {
-                        Object A3 = new object();
+                        object A3 = new object();
                         lock (A3)
                         {
                             PenaltyVCar = false;
@@ -9900,10 +9900,10 @@ namespace RefrigtzChessPortable
                         }
                     }
                     ///Store of Indexes Changes and Table in specific List.
-                    newTask1 = Task.Factory.StartNew(() => ObjectIndexes(Kind, Sup, RowDestination, ColumnDestination, TableS));
+                    newTask1 = Task.Factory.StartNew(() => objectIndexes(Kind, Sup, RowDestination, ColumnDestination, TableS));
                     newTask1.Wait(); newTask1.Dispose();
                     ///Wehn Predict of Operation Do operate a Predict of this movments.
-                    Object A5 = new object();
+                    object A5 = new object();
                     lock (A5)
                     {
                         //Caused this for Stachostic results.
@@ -9918,7 +9918,7 @@ namespace RefrigtzChessPortable
                     if (!Sup)
                     {
                         
-                        Object A6 = new object();
+                        object A6 = new object();
                         lock (A6)
                         {
                             int[] Hu = new int[10];
@@ -9932,7 +9932,7 @@ namespace RefrigtzChessPortable
                                 HeuristicListMinister.Add(Hu);
                             }
                         }
-                        Object O4 = new Object();
+                        object O4 = new object();
                         lock (O4)
                         {
                             ThinkingLevel++;
@@ -9956,19 +9956,19 @@ namespace RefrigtzChessPortable
 
                 }
                 else
-                    MovableAllObjectsListMethos(CloneATable(TableS), true, RowSource, ColumnSource, RowDestination, ColumnDestination, 1, -1);
+                    MovableAllobjectsListMethos(CloneATable(TableS), true, RowSource, ColumnSource, RowDestination, ColumnDestination, 1, -1);
             }
             ThinkingAtRun = false;
         }
         //determination for kinmgs for stage of movment befor act
         bool IsPrviousMovemntIsDangrousForCurrent(int[,] TableS, int Order)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 bool Dang = false;
                 int BREAK = 0;
-                Object O1 = new Object();
+                object O1 = new object();
                 lock (O1)
                 {
                     //.Current
@@ -10048,10 +10048,10 @@ namespace RefrigtzChessPortable
                 return Dang;
             }
         }
-        //When There is not valuable Object in List Greater than Target Self Object return true.        
-        bool IsObjectValaubleObjectSelf(int i, int j, int Object, ref List<int[]> ValuableSelfSupported)
+        //When There is not valuable object in List Greater than Target Self object return true.        
+        bool IsobjectValaubleobjectSelf(int i, int j, int Object, ref List<int[]> ValuableSelfSupported)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 bool Is = true;
@@ -10074,10 +10074,10 @@ namespace RefrigtzChessPortable
                 return Is;
             }
         }
-        //When There is not valuable Object in List Greater than Target enemy Object return true.        
-        bool IsObjectValaubleObjectEnemy(int i, int j, int Object, ref List<int[]> ValuableEnemyNotSupported)
+        //When There is not valuable object in List Greater than Target enemy object return true.        
+        bool IsobjectValaubleobjectEnemy(int i, int j, int Object, ref List<int[]> ValuableEnemyNotSupported)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 bool Is = true;
@@ -10093,12 +10093,12 @@ namespace RefrigtzChessPortable
         //a machine learning of learning autamata surface scan
         bool[] SomeLearningVarsCalculator(int[,] TableS, int ik, int jk, int iik, int jjk)
         {
-            Object O22 = new Object();
+            object O22 = new object();
             lock (O22)
             {
                 int AttackCount = 0;
                 bool[] LearningV = new bool[3];
-                Object O = new Object();
+                object O = new object();
                 lock (O)
                 {
                     ////Parallel.For(0, 8, i =>
@@ -10123,7 +10123,7 @@ namespace RefrigtzChessPortable
                                         continue;
                                     //Parallel.Invoke(() =>
                                     {
-                                        Object O1 = new Object();
+                                        object O1 = new object();
                                         lock (O1)
                                         {
                                             if (!(LearningV[0] || LearningV[1] || LearningV[2]))
@@ -10131,13 +10131,13 @@ namespace RefrigtzChessPortable
                                         }
                                     }//, () =>
                                     {
-                                        Object O1 = new Object();
+                                        object O1 = new object();
                                         lock (O1)
                                         {
                                             if ((LearningV[0] || LearningV[1] || LearningV[2]))
                                                 continue;
                                             if (AttackCount <= 1 && (!(LearningV[0] || LearningV[1] || LearningV[2])))
-                                                AttackCount = AttackCount + IsNotSafeToMoveAenemeyToAttackMoreThanTowObject(AttackCount, CloneATable(TableS), Order, i, j, RowS, ColS//, ii, jj, RowD, ColD
+                                                AttackCount = AttackCount + IsNotSafeToMoveAenemeyToAttackMoreThanTowobject(AttackCount, CloneATable(TableS), Order, i, j, RowS, ColS//, ii, jj, RowD, ColD
                                                     );
                                             else
                                             if (!(LearningV[0] || LearningV[1] || LearningV[2]))
@@ -10145,7 +10145,7 @@ namespace RefrigtzChessPortable
                                         }
                                     }//, () =>
                                     {
-                                        Object O1 = new Object();
+                                        object O1 = new object();
                                         lock (O1)
                                         {
                                             if (!(LearningV[0] || LearningV[1] || LearningV[2]))
@@ -10164,7 +10164,7 @@ namespace RefrigtzChessPortable
         //learning autamata main section
         bool[] CalculateLearningVars(int Killed, int[,] TableS, int i, int j, int ii, int jj)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 bool[] LearningV = new bool[14];
@@ -10184,11 +10184,11 @@ namespace RefrigtzChessPortable
                 bool IsNotSafeToMoveAenemeyToAttackMoreThanTowObj = new bool();
                 bool P = new bool();
                 bool R = new bool();
-                bool IsTowValuableObjectEnemy = false;
+                bool IsTowValuableobjectEnemy = false;
                 List<int[]> ValuableEnemyNotSupported = new List<int[]>();
                 List<int[]> ValuableSelfSupported = new List<int[]>();
                 //When true must penalty
-                Object O11 = new Object();
+                object O11 = new object();
                 lock (O11)
                 {
                     var newTask = Task.Factory.StartNew(() => IsPrviousMovemntIsDangrousForCurr = IsPrviousMovemntIsDangrousForCurrent(CloneATable(TableS), Order));
@@ -10210,7 +10210,7 @@ namespace RefrigtzChessPortable
 					var b=Task.Factory.StartNew(() => LearningVars = SomeLearningVarsCalculator(CloneATable(TableS), ii, jj, i, j));
 					b.Wait ();
 					b.Dispose ();
-					Object O4 = new Object();
+					object O4 = new object();
                     lock (O4)
                     {
                         SelfNotSupported = LearningVars[0];
@@ -10239,7 +10239,7 @@ namespace RefrigtzChessPortable
 							ba.Dispose();
 							//A
                         }
-                        Object OO1 = new Object();
+                        object OO1 = new object();
                         lock (OO1)
                         {
                             if (Is[0] >= 1)
@@ -10257,7 +10257,7 @@ namespace RefrigtzChessPortable
                     //Order Depth Consideration Constraint.
                     if (IsNextMovemntIsCheckOrCheckMateForCurrent && IsNextMovemntIsCheckOrCheckMateForEnemy)
                     {
-                        Object OO2 = new Object();
+                        object OO2 = new object();
                         lock (OO2)
                         {
                             if (SelfChackedMateDepth < EnemyCheckedMateDepth)
@@ -10269,7 +10269,7 @@ namespace RefrigtzChessPortable
                     }
                     if ((!IsNextMovemntIsCheckOrCheckMateForCurrent) && (!SelfNotSupported) && (!IsPrviousMovemntIsDangrousForCurr) && (!IsGardForCurrentMovmentsAndIsNotMova) && (!IsNotSafeToMoveAenemeyToAttackMoreThanTowObj) && (!IsDangerous))
                     {
-                        newTask = Task.Factory.StartNew(() => EnemyNotSupported = InAttackEnemyThatIsNotSupportedAll(IsTowValuableObjectEnemy, CloneATable(TableS), Order, color, i, j, ii, jj, ref ValuableEnemyNotSupported));
+                        newTask = Task.Factory.StartNew(() => EnemyNotSupported = InAttackEnemyThatIsNotSupportedAll(IsTowValuableobjectEnemy, CloneATable(TableS), Order, color, i, j, ii, jj, ref ValuableEnemyNotSupported));
                         newTask.Wait();
                         newTask.Dispose();
                     }
@@ -10281,7 +10281,7 @@ namespace RefrigtzChessPortable
                     }
                     if ((!IsNextMovemntIsCheckOrCheckMateForCurrent) && (!SelfNotSupported) && (!IsPrviousMovemntIsDangrousForCurr) && (!IsGardForCurrentMovmentsAndIsNotMova) && (!IsNotSafeToMoveAenemeyToAttackMoreThanTowObj) && (!EnemyNotSupported) && (!IsDangerous))
                     {
-                        newTask = Task.Factory.StartNew(() => EnemyNotSupported = InAttackEnemyThatIsNotSupportedAll(IsTowValuableObjectEnemy, CloneATable(TableS), Order, color, i, j, ii, jj, ref ValuableEnemyNotSupported));
+                        newTask = Task.Factory.StartNew(() => EnemyNotSupported = InAttackEnemyThatIsNotSupportedAll(IsTowValuableobjectEnemy, CloneATable(TableS), Order, color, i, j, ii, jj, ref ValuableEnemyNotSupported));
                         newTask.Wait();
                         newTask.Dispose();
                     }
@@ -10298,7 +10298,7 @@ namespace RefrigtzChessPortable
                         EnemyNotSupported = false;
                         IsNextMovemntIsCheckOrCheckMateForEnemy = false;
                     }
-                    Object OO = new Object();
+                    object OO = new object();
                     lock (OO)
                     {
                         LearningV[0] = IsCurrentCanGardHighPriorityEne;
@@ -10331,7 +10331,7 @@ namespace RefrigtzChessPortable
         void CastlesThinkingRefrigtzChessPortable(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int DummyOrder, int DummyCurrentOrder, int[,] TableS, int RowSource, int ColumnSource, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, int RowDestination, int ColumnDestination, bool Castle
         )
         {
-            Object O22 = new Object();
+            object O22 = new object();
             lock (O22)
             {
                 TableS = CloneATable(TableConst);
@@ -10365,21 +10365,21 @@ namespace RefrigtzChessPortable
                     {
                         ///Add Table to List of Private.
                         HitNumberCastle.Add(TableS[RowDestination, ColumnDestination]);
-                        Object OO = new Object();
+                        object OO = new object();
                         lock (OO)
                         {
                             ThinkingRun = true;
                         }
                     }
                     ///Predict Heuristic.
-                    Object A = new object();
+                    object A = new object();
                     lock (A)
                     {
                         int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                         newTask1.Wait(); newTask1.Dispose();
                         LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                     }
-                    Object A1 = new object();
+                    object A1 = new object();
                     lock (A1)
                     {
                         if (!Sup) { NumbersOfAllNode++; }
@@ -10391,7 +10391,7 @@ namespace RefrigtzChessPortable
 
                     //if (!Sup)
                     {
-                        Object A3 = new object();
+                        object A3 = new object();
                         lock (A3)
                         {
                             PenaltyVCar = false;
@@ -10402,10 +10402,10 @@ namespace RefrigtzChessPortable
                         }
                     }
                     ///Store of Indexes Changes and Table in specific List.
-                    newTask1 = Task.Factory.StartNew(() => ObjectIndexes(Kind, Sup, RowDestination, ColumnDestination, TableS));
+                    newTask1 = Task.Factory.StartNew(() => objectIndexes(Kind, Sup, RowDestination, ColumnDestination, TableS));
                     newTask1.Wait(); newTask1.Dispose();
                     ///Wehn Predict of Operation Do operate a Predict of this movments.
-                    Object A5 = new object();
+                    object A5 = new object();
                     lock (A5)
                     {
                         //Caused this for Stachostic results.
@@ -10421,7 +10421,7 @@ namespace RefrigtzChessPortable
                     if (!Sup)
                     {
                         
-                        Object A6 = new object();
+                        object A6 = new object();
                         lock (A6)
                         {
                             int[] Hu = new int[10];
@@ -10434,7 +10434,7 @@ namespace RefrigtzChessPortable
                                 //H = " HAttack:" + ((Hu[0])).ToString() + " HMove:" + ((Hu[1])).ToString() + " HSelSup:" + ((Hu[2])).ToString() + " HCheckedMateDang:" + ((Hu[3])).ToString() + " HKiller:" + ((Hu[4])).ToString() + " HReduAttack:" + ((Hu[5])).ToString() + " HDisFromCurrentEnemyking:" + ((Hu[6])).ToString() + " HKingSafe:" + ((Hu[7])).ToString() + " HObjFromCeneter:" + ((Hu[8])).ToString() + " HKingDang:" + ((Hu[9])).ToString();
                                 HeuristicListCastle.Add(Hu);
                             }
-                            Object O4 = new Object();
+                            object O4 = new object();
                             lock (O4)
                             {
                                 ThinkingLevel++;
@@ -10458,14 +10458,14 @@ namespace RefrigtzChessPortable
                     }
                 }
                 else
-                    MovableAllObjectsListMethos(CloneATable(TableS), true, RowSource, ColumnSource, RowDestination, ColumnDestination, 1, -1);
+                    MovableAllobjectsListMethos(CloneATable(TableS), true, RowSource, ColumnSource, RowDestination, ColumnDestination, 1, -1);
             }
             ThinkingAtRun = false;
         }
         //specific determination for thinking main method
         void HourseThinkingRefrigtzChessPortable(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int DummyOrder, int DummyCurrentOrder, int[,] TableS, int RowSource, int ColumnSource, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, int RowDestination, int ColumnDestination, bool Castle)
         {
-            Object OO = new Object();
+            object OO = new object();
             lock (OO)
             {
                 TableS = CloneATable(TableConst);
@@ -10497,21 +10497,21 @@ namespace RefrigtzChessPortable
                     {
                         ///Add Table to List of Private.
                         HitNumberHourse.Add(TableS[RowDestination, ColumnDestination]);
-                        Object O = new Object();
+                        object O = new object();
                         lock (O)
                         {
                             ThinkingRun = true;
                         }
                     }
                     ///Predict Heuristic.
-                    Object A = new object();
+                    object A = new object();
                     lock (A)
                     {
                         int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                         newTask1.Wait(); newTask1.Dispose();
                         LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                     }
-                    Object A1 = new object();
+                    object A1 = new object();
                     lock (A1)
                     {
                         if (!Sup) { NumbersOfAllNode++; }
@@ -10523,7 +10523,7 @@ namespace RefrigtzChessPortable
 
                     // if (!Sup)
                     {
-                        Object A3 = new object();
+                        object A3 = new object();
                         lock (A3)
                         {
                             PenaltyVCar = false;
@@ -10534,10 +10534,10 @@ namespace RefrigtzChessPortable
                         }
                     }
                     ///Store of Indexes Changes and Table in specific List.
-                    newTask1 = Task.Factory.StartNew(() => ObjectIndexes(Kind, Sup, RowDestination, ColumnDestination, TableS));
+                    newTask1 = Task.Factory.StartNew(() => objectIndexes(Kind, Sup, RowDestination, ColumnDestination, TableS));
                     newTask1.Wait(); newTask1.Dispose();
                     ///Wehn Predict of Operation Do operate a Predict of this movments.
-                    Object A5 = new object();
+                    object A5 = new object();
                     lock (A5)
                     {
                         //Caused this for Stachostic results.
@@ -10553,7 +10553,7 @@ namespace RefrigtzChessPortable
                     if (!Sup)
                     {
                         
-                        Object A6 = new object();
+                        object A6 = new object();
                         lock (A6)
                         {
                             int[] Hu = new int[10];
@@ -10566,7 +10566,7 @@ namespace RefrigtzChessPortable
                                 //H = " HAttack:" + ((Hu[0])).ToString() + " HMove:" + ((Hu[1])).ToString() + " HSelSup:" + ((Hu[2])).ToString() + " HCheckedMateDang:" + ((Hu[3])).ToString() + " HKiller:" + ((Hu[4])).ToString() + " HReduAttack:" + ((Hu[5])).ToString() + " HDisFromCurrentEnemyking:" + ((Hu[6])).ToString() + " HKingSafe:" + ((Hu[7])).ToString() + " HObjFromCeneter:" + ((Hu[8])).ToString() + " HKingDang:" + ((Hu[9])).ToString();
                                 HeuristicListHourse.Add(Hu);
                             }
-                            Object O4 = new Object();
+                            object O4 = new object();
                             lock (O4)
                             {
                                 ThinkingLevel++;
@@ -10589,7 +10589,7 @@ namespace RefrigtzChessPortable
                     }
                 }
                 else
-                    MovableAllObjectsListMethos(CloneATable(TableS), true, RowSource, ColumnSource, RowDestination, ColumnDestination, 1, -1);
+                    MovableAllobjectsListMethos(CloneATable(TableS), true, RowSource, ColumnSource, RowDestination, ColumnDestination, 1, -1);
             }
             ThinkingAtRun = false;
         }
@@ -10597,7 +10597,7 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         void ElephantThinkingRefrigtzChessPortable(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int DummyOrder, int DummyCurrentOrder, int[,] TableS, int RowSource, int ColumnSource, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, int RowDestination, int ColumnDestination, bool Castle)
         {
-            Object OO = new Object();
+            object OO = new object();
             lock (OO)
             {
                 TableS = CloneATable(TableConst);
@@ -10629,21 +10629,21 @@ namespace RefrigtzChessPortable
                     {
                         ///Add Table to List of Private.
                         HitNumberElefant.Add(TableS[RowDestination, ColumnDestination]);
-                        Object O = new Object();
+                        object O = new object();
                         lock (O)
                         {
                             ThinkingRun = true;
                         }
                     }
                     ///Predict Heuristic.
-                    Object A = new object();
+                    object A = new object();
                     lock (A)
                     {
                         int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                         newTask1.Wait(); newTask1.Dispose();
                         LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                     }
-                    Object A1 = new object();
+                    object A1 = new object();
                     lock (A1)
                     {
                         if (!Sup) { NumbersOfAllNode++; }
@@ -10655,7 +10655,7 @@ namespace RefrigtzChessPortable
 
                     //if (!Sup)
                     {
-                        Object A3 = new object();
+                        object A3 = new object();
                         lock (A3)
                         {
                             PenaltyVCar = false;
@@ -10666,10 +10666,10 @@ namespace RefrigtzChessPortable
                         }
                     }
                     ///Store of Indexes Changes and Table in specific List.
-                    newTask1 = Task.Factory.StartNew(() => ObjectIndexes(Kind, Sup, RowDestination, ColumnDestination, TableS));
+                    newTask1 = Task.Factory.StartNew(() => objectIndexes(Kind, Sup, RowDestination, ColumnDestination, TableS));
                     newTask1.Wait(); newTask1.Dispose();
                     ///Wehn Predict of Operation Do operate a Predict of this movments.
-                    Object A5 = new object();
+                    object A5 = new object();
                     lock (A5)
                     {
                         //Caused this for Stachostic results.
@@ -10684,7 +10684,7 @@ namespace RefrigtzChessPortable
                     if (!Sup)
                     {
                         
-                        Object A6 = new object();
+                        object A6 = new object();
                         lock (A6)
                         {
                             int[] Hu = new int[10];
@@ -10697,7 +10697,7 @@ namespace RefrigtzChessPortable
                                 //H = " HAttack:" + ((Hu[0])).ToString() + " HMove:" + ((Hu[1])).ToString() + " HSelSup:" + ((Hu[2])).ToString() + " HCheckedMateDang:" + ((Hu[3])).ToString() + " HKiller:" + ((Hu[4])).ToString() + " HReduAttack:" + ((Hu[5])).ToString() + " HDisFromCurrentEnemyking:" + ((Hu[6])).ToString() + " HKingSafe:" + ((Hu[7])).ToString() + " HObjFromCeneter:" + ((Hu[8])).ToString() + " HKingDang:" + ((Hu[9])).ToString();
                                 HeuristicListElefant.Add(Hu);
                             }
-                            Object O4 = new Object();
+                            object O4 = new object();
                             lock (O4)
                             {
                                 ThinkingLevel++;
@@ -10721,14 +10721,14 @@ namespace RefrigtzChessPortable
                     }
                 }
                 else
-                    MovableAllObjectsListMethos(CloneATable(TableS), true, RowSource, ColumnSource, RowDestination, ColumnDestination, 1, -1);
+                    MovableAllobjectsListMethos(CloneATable(TableS), true, RowSource, ColumnSource, RowDestination, ColumnDestination, 1, -1);
             }
             ThinkingAtRun = false;
         }
         //healthy of lists in learning auatama
         bool EqualitTow(bool PenRegStrore, int kind)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 bool Equality = false;
@@ -10755,7 +10755,7 @@ namespace RefrigtzChessPortable
         //healthy of lists in learning auatama
         bool EqualitOne(QuantumAtamata Current, int kind)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 bool Equality = false;
@@ -10782,10 +10782,10 @@ namespace RefrigtzChessPortable
         //add list 
         void AddAtList(int kind, QuantumAtamata Current)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
-                //Adding Autamata Object to Specified List.
+                //Adding Autamata object to Specified List.
                 if (kind == 1)
                     //Soldier
                     PenaltyRegardListSolder.Add(Current);
@@ -10815,10 +10815,10 @@ namespace RefrigtzChessPortable
         //remove list
         void RemoveAtList(int kind)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
-                //Remove Last Atutamata Object.
+                //Remove Last Atutamata object.
                 if (kind == 1)
                     //Soldier
                     PenaltyRegardListSolder.RemoveAt(PenaltyRegardListSolder.Count - 1);
@@ -10847,13 +10847,13 @@ namespace RefrigtzChessPortable
         //learning autamata maib method
         void PenaltyMechanisam(ref bool RETURN, ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, ref int CheckedM, int Killed, bool Before, int kind, int[,] TableS, int ii, int jj, ref QuantumAtamata Current, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, int i, int j, bool Castle)
         {
-            Object OO = new Object();
+            object OO = new object();
             lock (OO)
             {
                 RETURN = false;
-                Object O3 = new Object();
-                ChessRules AA = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TableS[ii, jj], CloneATable(TableS), Order, ii, jj);
-                Object O = new Object();
+                object O3 = new object();
+                ChessRules AA = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TableS[ii, jj], CloneATable(TableS), Order, ii, jj);
+                object O = new object();
                 lock (O)
                 {
                     if (!UsePenaltyRegardMechnisamT || (GoldenFinished))
@@ -10868,7 +10868,7 @@ namespace RefrigtzChessPortable
                     {
                         if (AllDraw.OrderPlateDraw == 1 && AA.CheckMateBrown)
                         {
-                            Object A = new Object();
+                            object A = new object();
                             lock (A)
                             {
                                 IsThereMateOfEnemy.Add(true);
@@ -10898,7 +10898,7 @@ namespace RefrigtzChessPortable
                         if (AllDraw.OrderPlateDraw == -1 && AA.CheckMateGray)
                         {
                             DoEnemySelf = false;
-                            Object A = new Object();
+                            object A = new object();
                             lock (A)
                             {
                                 IsThereMateOfEnemy.Add(true);
@@ -10927,7 +10927,7 @@ namespace RefrigtzChessPortable
                         if (//(AllDraw.OrderPlateDraw == -1 && AA.CheckBrown)|| 
                             (AllDraw.OrderPlateDraw == -1 && AA.CheckMateBrown))
                         {
-                            Object A = new Object();
+                            object A = new object();
                             lock (A)
                             {
                                 IsThereMateOfEnemy.Add(false);
@@ -10958,7 +10958,7 @@ namespace RefrigtzChessPortable
                             (AllDraw.OrderPlateDraw == 1 && AA.CheckMateGray))
                         {
                             DoEnemySelf = false;
-                            Object A = new Object();
+                            object A = new object();
                             lock (A)
                             {
                                 IsThereMateOfEnemy.Add(false);
@@ -11041,7 +11041,7 @@ namespace RefrigtzChessPortable
                             KishSelf.Add(true);
                             KishEnemy.Add(false);
 
-                            Object A = new object();
+                            object A = new object();
                             lock (A)
                             {
                                 NumberOfPenalties++;
@@ -11057,7 +11057,7 @@ namespace RefrigtzChessPortable
                             IsThereCheckOfSelf.Add(false);
                             KishSelf.Add(true);
                             KishEnemy.Add(false);
-                            Object A = new object();
+                            object A = new object();
                             lock (A)
                             {
                                 NumberOfPenalties++;
@@ -11072,7 +11072,7 @@ namespace RefrigtzChessPortable
                             IsThereCheckOfSelf.Add(false);
                             KishEnemy.Add(true);
                             KishSelf.Add(false);
-                            Object A = new object();
+                            object A = new object();
                             lock (A)
                             {
                                 NumberOfPenalties++;
@@ -11087,7 +11087,7 @@ namespace RefrigtzChessPortable
                             IsThereCheckOfSelf.Add(false);
                             KishEnemy.Add(true);
                             KishSelf.Add(false);
-                            Object A = new object();
+                            object A = new object();
                             lock (A)
                             {
                                 NumberOfPenalties++;
@@ -11135,7 +11135,7 @@ namespace RefrigtzChessPortable
                 bool IsNotSafeToMoveAenemeyToAttackMoreThanTowObj = new bool();
                 bool[] LearningV = null;
                 //Mechanisam of Regrad.  
-                Object O1 = new Object();
+                object O1 = new object();
                 lock (O1)
                 {
                     if (kind == 1 && PenRegStrore && UsePenaltyRegardMechnisamT && PenaltyRegardListSolder != null && PenaltyRegardListSolder.Count == TableListSolder.Count)
@@ -11180,7 +11180,7 @@ namespace RefrigtzChessPortable
                         newTask2.Dispose();
                     }
                 }
-                Object O2 = new Object();
+                object O2 = new object();
                 lock (O2)
                 {
                     IsCurrentCanGardHighPriorityEne = LearningV[0];
@@ -11201,12 +11201,12 @@ namespace RefrigtzChessPortable
                 //Consideration of Itterative Movments to ignore.
                 //Operation of Penalty Regard Mechanisam on Check and mate speciffically.
                 bool Equality = EqualitOne(Current, kind);
-                Object O4 = new Object();
+                object O4 = new object();
                 lock (O4)
                 {
                     if (Equality)
                     {
-                        ChessRules A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TableS[ii, jj], CloneATable(TableS), Order, Row, Column);
+                        ChessRules A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TableS[ii, jj], CloneATable(TableS), Order, Row, Column);
                         if (A.Check(CloneATable(TableS), Order))
                         {
                             if (Order == 1 && (A.CheckGray))
@@ -11239,13 +11239,13 @@ namespace RefrigtzChessPortable
                             //Penalty.
                             if (PDo)
                             {
-                                Object OO1 = new Object();
+                                object OO1 = new object();
                                 lock (OO1)
                                 {
                                     for (var ik = 0; ik < System.Math.Abs(TableS[i, j]); ik++)
                                         LearniningTable.LearningAlgorithmPenaltyNet(ii, jj);
                                 }
-                                //When previous Move of Enemy goes to Dangoure Current Object.
+                                //When previous Move of Enemy goes to Dangoure Current object.
                                 if (IsPrviousMovemntIsDangrousForCurr && Current.IsPenaltyAction() != 0)
                                 {
                                     NumberOfPenalties++;
@@ -11303,7 +11303,7 @@ namespace RefrigtzChessPortable
                             }
                             else if (RDo)
                             {
-                                Object OOO = new Object();
+                                object OOO = new object();
                                 lock (OOO)
                                 {
                                     for (var ik = 0; ik < System.Math.Abs(TableS[i, j]); ik++)
@@ -11350,7 +11350,7 @@ namespace RefrigtzChessPortable
                                     Current.LearningAlgorithmRegard();
                                     AddAtList(kind, Current);
                                 }
-                                //For Ocuuring Enemy Garding Objects.
+                                //For Ocuuring Enemy Garding objects.
                                 if (Support && Current.IsPenaltyAction() != 0 && Current.IsRewardAction() != 1)
                                 {
                                     RemoveAtList(kind);
@@ -11367,7 +11367,7 @@ namespace RefrigtzChessPortable
                             
  // The variable 'Added' is assigned but its value is never used
                             // // The variable 'Added' is assigned but its value is never used
-                            Object OO1 = new Object();
+                            object OO1 = new object();
                             lock (OO1)
                             {
                                 for (var ik = 0; ik < System.Math.Abs(TableS[i, j]); ik++)
@@ -11445,7 +11445,7 @@ namespace RefrigtzChessPortable
         }
         void SoldierConversion(ref ThingsConverter t, int RowSource, int ColumnSource, int RowDestination, int ColumnDestination, int[,] TableS)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 t.ConvertOperation((int)RowSource, (int)ColumnSource, color, CloneATable(TableS), Order, false, 0);
@@ -11469,7 +11469,7 @@ namespace RefrigtzChessPortable
         }
         int KilledBool(int row1, int col1, int row2, int col2, int[,] tab)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 if (tab[row1, col1] != 0 && tab[row2, col2] != 0)
@@ -11485,7 +11485,7 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         void SupMethod(int[,] TableS, int RowSource, int ColumnSource, int RowDestination, int ColumnDestination, ref bool Sup)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 if (TableS[RowDestination, ColumnDestination] > 0 && TableS[RowSource, ColumnSource] > 0)
@@ -11511,7 +11511,7 @@ namespace RefrigtzChessPortable
         }
         void KilledMethod(ref int Killed, bool Sup, int RowSource, int ColumnSource, int RowDestination, int ColumnDestination, ref int[,] TableS, ThingsConverter t = null)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 Killed = 0;
@@ -11521,10 +11521,10 @@ namespace RefrigtzChessPortable
                     {
                         if ((!t.Convert))
                         {
-                            Object A2 = new object();
+                            object A2 = new object();
                             lock (A2)
                             {
-                                MovableAllObjectsListMethos(CloneATable(TableS), true, RowSource, ColumnSource, RowDestination, ColumnDestination, 1);
+                                MovableAllobjectsListMethos(CloneATable(TableS), true, RowSource, ColumnSource, RowDestination, ColumnDestination, 1);
                                 Killed = TableConst[RowDestination, ColumnDestination];
                                 TableS[RowDestination, ColumnDestination] = TableS[RowSource, ColumnSource];
                                 TableS[RowSource, ColumnSource] = 0;
@@ -11545,7 +11545,7 @@ namespace RefrigtzChessPortable
                             if (t.ConvertedToElefant)
                                 con = 2;
 
-                            MovableAllObjectsListMethos(CloneATable(TableS), true, RowSource, ColumnSource, RowDestination, ColumnDestination, con);
+                            MovableAllobjectsListMethos(CloneATable(TableS), true, RowSource, ColumnSource, RowDestination, ColumnDestination, con);
                             Killed = TableConst[RowDestination, ColumnDestination];
                             TableS[RowDestination, ColumnDestination] = (Math.Abs(TableS[RowSource, ColumnSource]) / TableS[RowSource, ColumnSource]) * con;
                             TableS[RowSource, ColumnSource] = 0;
@@ -11553,10 +11553,10 @@ namespace RefrigtzChessPortable
                     }
                     else
                     {
-                        Object A2 = new object();
+                        object A2 = new object();
                         lock (A2)
                         {
-                            MovableAllObjectsListMethos(CloneATable(TableS), true, RowSource, ColumnSource, RowDestination, ColumnDestination,1);
+                            MovableAllobjectsListMethos(CloneATable(TableS), true, RowSource, ColumnSource, RowDestination, ColumnDestination,1);
                             Killed = TableConst[RowDestination, ColumnDestination];
                             TableS[RowDestination, ColumnDestination] = TableS[RowSource, ColumnSource];
                             TableS[RowSource, ColumnSource] = 0;
@@ -11567,16 +11567,16 @@ namespace RefrigtzChessPortable
                 return;
             }
         }
-        void ObjectIndexes(int Kind, bool Sup, int RowDestination, int ColumnDestination, int[,] TableS)
+        void objectIndexes(int Kind, bool Sup, int RowDestination, int ColumnDestination, int[,] TableS)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 if (!Sup)
                 {
                     if (Kind == 1)
                     {
-                        Object A4 = new object();
+                        object A4 = new object();
                         lock (A4)
                         {
                             int[] AS = new int[2];
@@ -11591,7 +11591,7 @@ namespace RefrigtzChessPortable
                     else
                     if (Kind == 2)
                     {
-                        Object A4 = new object();
+                        object A4 = new object();
                         lock (A4)
                         {
                             int[] AS = new int[2];
@@ -11606,7 +11606,7 @@ namespace RefrigtzChessPortable
                     else
                     if (Kind == 3)
                     {
-                        Object A4 = new object();
+                        object A4 = new object();
                         lock (A4)
                         {
                             int[] AS = new int[2];
@@ -11621,7 +11621,7 @@ namespace RefrigtzChessPortable
                     else
                     if (Kind == 4)
                     {
-                        Object A4 = new object();
+                        object A4 = new object();
                         lock (A4)
                         {
                             int[] AS = new int[2];
@@ -11635,7 +11635,7 @@ namespace RefrigtzChessPortable
                     }
                     if (Kind == 5)
                     {
-                        Object A4 = new object();
+                        object A4 = new object();
                         lock (A4)
                         {
                             int[] AS = new int[2];
@@ -11650,7 +11650,7 @@ namespace RefrigtzChessPortable
                     else
                     if (Kind == 6)
                     {
-                        Object A4 = new object();
+                        object A4 = new object();
                         lock (A4)
                         {
                             int[] AS = new int[2];
@@ -11667,7 +11667,7 @@ namespace RefrigtzChessPortable
         }
         void HeuristicInsertion(int Kind, int RowDestination, int ColumnDestination, int[,] TableS, int[] Hu)
         {
-            Object A4 = new object();
+            object A4 = new object();
             lock (A4)
             {
                 if (Kind == 1)
@@ -11752,15 +11752,15 @@ namespace RefrigtzChessPortable
         }
         bool RefrigtzChessPortableRuleThinking(int[,] TableS, int RowSource, int ColumnSource, int RowDestination, int ColumnDestination)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
-                return (new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TableS[RowSource, ColumnSource], CloneATable(TableS), Order, RowSource, ColumnSource)).Rules(RowSource, ColumnSource, RowDestination, ColumnDestination, color, TableS[RowSource, ColumnSource], false);
+                return (new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TableS[RowSource, ColumnSource], CloneATable(TableS), Order, RowSource, ColumnSource)).Rules(RowSource, ColumnSource, RowDestination, ColumnDestination, color, TableS[RowSource, ColumnSource] ,false);
             }
         }
         void SolderThinkingRefrigtzChessPortable(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int DummyOrder, int DummyCurrentOrder, int[,] TableS, int RowSource, int ColumnSource, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, int RowDestination, int ColumnDestination, bool Castle)
         {
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 TableS = CloneATable(TableConst);
@@ -11796,21 +11796,21 @@ namespace RefrigtzChessPortable
                         newTask1.Wait(); newTask1.Dispose();
                         ///Add Table to List of Private.
                         HitNumberSoldier.Add(TableS[RowDestination, ColumnDestination]);
-                        Object O = new Object();
+                        object O = new object();
                         lock (O)
                         {
                             ThinkingRun = true;
                         }
                     }
                     ///Predict Heuristic.
-                    Object A = new object();
+                    object A = new object();
                     lock (A)
                     {
                         int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                         newTask1.Wait(); newTask1.Dispose();
                         LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                     }
-                    Object A1 = new object();
+                    object A1 = new object();
                     lock (A1)
                     {
                         if (!Sup) { NumbersOfAllNode++; }
@@ -11822,7 +11822,7 @@ namespace RefrigtzChessPortable
 
                     //if (!Sup)
                     {
-                        Object A3 = new object();
+                        object A3 = new object();
                         lock (A3)
                         {
                             PenaltyVCar = false;
@@ -11833,10 +11833,10 @@ namespace RefrigtzChessPortable
                         }
                     }
                     ///Store of Indexes Changes and Table in specific List.
-                    newTask1 = Task.Factory.StartNew(() => ObjectIndexes(Kind, Sup, RowDestination, ColumnDestination, TableS));
+                    newTask1 = Task.Factory.StartNew(() => objectIndexes(Kind, Sup, RowDestination, ColumnDestination, TableS));
                     newTask1.Wait(); newTask1.Dispose();
                     ///Wehn Predict of Operation Do operate a Predict of this movments.
-                    Object A5 = new object();
+                    object A5 = new object();
                     lock (A5)
                     {
                         //Caused this for Stachostic results.
@@ -11852,7 +11852,7 @@ namespace RefrigtzChessPortable
                     if (!Sup)
                     {
                         
-                        Object A6 = new object();
+                        object A6 = new object();
                         lock (A6)
                         {
                             int[] Hu = new int[10];
@@ -11866,7 +11866,7 @@ namespace RefrigtzChessPortable
                                 HeuristicListSolder.Add(Hu);
                             }
                         }
-                        Object O4 = new Object();
+                        object O4 = new object();
                         lock (O4)
                         {
                             ThinkingLevel++;
@@ -11890,14 +11890,14 @@ namespace RefrigtzChessPortable
 
                 }
                 else
-                    MovableAllObjectsListMethos(CloneATable(TableS), true, RowSource, ColumnSource, RowDestination, ColumnDestination, 1, -1);
+                    MovableAllobjectsListMethos(CloneATable(TableS), true, RowSource, ColumnSource, RowDestination, ColumnDestination, 1, -1);
             }
             ThinkingAtRun = false;
         }
         //specific determination for thinking main method
         void CastleThinkingBrown(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int DummyOrder, int DummyCurrentOrder, int[,] TableS, int RowSource, int ColumnSource, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, int RowDestination, int ColumnDestination, bool Castle)
         {
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 TableS = CloneATable(TableConst);
@@ -11934,7 +11934,7 @@ namespace RefrigtzChessPortable
                     IsSupHu.Add(false);
                 }
                 //Calcuilate Heuristic Before Movment.
-                Object O = new Object();
+                object O = new object();
                 lock (O)
                 {
                     ThinkingRun = true;
@@ -11942,7 +11942,7 @@ namespace RefrigtzChessPortable
                 int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; var newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                 newTask1.Wait(); newTask1.Dispose();
                 LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
-                Object A = new object();
+                object A = new object();
                 lock (A)
                 {
                     NumbersOfAllNode++;
@@ -11976,7 +11976,7 @@ namespace RefrigtzChessPortable
                 IndexKing++;
                 //Calculate Heuristic Sumation and Store in Specific List.
                 int[] Hu = new int[10]; 
-                Object A6 = new Object();
+                object A6 = new object();
                 lock (A6)
                 {
                     //if (IgnoreFromCheckandMateHeuristic)
@@ -11987,7 +11987,7 @@ namespace RefrigtzChessPortable
                     HeuristicListKing.Add(Hu);
                 }
                 Castle = true;
-                Object O7 = new Object(); SetObjectNumbersInList(TableS);
+                object O7 = new object(); SetobjectNumbersInList(TableS);
                 lock (O7)
                 {
                     if (RowDestination < RowSource)
@@ -12011,7 +12011,7 @@ namespace RefrigtzChessPortable
         }
         int HeuristicBetterSpace(int[,] TableSS, int colorS, int colorE, int OrderS, int OrderE)
         {
-            Object OO = new Object();
+            object OO = new object();
             lock (OO)
             {
                 int HA = 0;
@@ -12058,7 +12058,7 @@ namespace RefrigtzChessPortable
         public int[] CalculateHeuristicsParallel(bool Before, int Killed, int[,] TableS, int RowS, int ColS, int RowD, int ColD, int color
     )
         {
-            Object OO = new Object();
+            object OO = new object();
             lock (OO)
             {
                 int[] Heuristic = null;
@@ -12070,7 +12070,7 @@ namespace RefrigtzChessPortable
                     {
                         Parallel.Invoke(() =>
                         {
-                            Object O = new Object();
+                            object O = new object();
                             lock (O)
                             {
                                 if (!Scop(RowS, ColS, RowD, ColD, Kind))
@@ -12083,7 +12083,7 @@ namespace RefrigtzChessPortable
                             }
                         }, () =>
                         {
-                            Object O = new Object();
+                            object O = new object();
                             lock (O)
                             {
                                 if (!Scop(RowS, ColS, RowD, ColD, Kind))
@@ -12105,7 +12105,7 @@ namespace RefrigtzChessPortable
                     {
                         Parallel.Invoke(() =>
                         {
-                            Object O = new Object();
+                            object O = new object();
                             lock (O)
                             {
                                 //if (SubOfHeuristicAllIsPositive(Heuristic))
@@ -12122,7 +12122,7 @@ namespace RefrigtzChessPortable
                             }
                         }, () =>
                         {
-                            Object O = new Object();
+                            object O = new object();
                             lock (O)
                             {
                                 //if (SubOfHeuristicAllIsPositive(Heuristic))
@@ -12139,7 +12139,7 @@ namespace RefrigtzChessPortable
                             }
                         }, () =>
                         {
-                            Object O = new Object();
+                            object O = new object();
                             lock (O)
                             {
                                 if (!Scop(RowS, ColS, RowD, ColD, Kind))
@@ -12153,7 +12153,7 @@ namespace RefrigtzChessPortable
                             }
                         }, () =>
                         {
-                            Object O = new Object();
+                            object O = new object();
                             lock (O)
                             {
                                 if (!Scop(RowS, ColS, RowD, ColD, Kind))
@@ -12167,7 +12167,7 @@ namespace RefrigtzChessPortable
                             }
                         }, () =>
                         {
-                            Object O = new Object();
+                            object O = new object();
                             lock (O)
                             {
                                 //if (SubOfHeuristicAllIsPositive(Heuristic))
@@ -12176,14 +12176,14 @@ namespace RefrigtzChessPortable
                                         return;
                                     int RoS = RowS, CoS = ColS, RoD = RowD, CoD = ColD;
                                     int[,] TableSS = CloneATable(TableS);
-                                    var H = Task.Factory.StartNew(() => HeuristicRemain[4] = HeuristicObjectAtCenterAndPawnAttackTraversalObjectsAndDangourForEnemy(TableSS, color, Order, RoS, CoS, RoD, CoD));
+                                    var H = Task.Factory.StartNew(() => HeuristicRemain[4] = HeuristicobjectAtCenterAndPawnAttackTraversalobjectsAndDangourForEnemy(TableSS, color, Order, RoS, CoS, RoD, CoD));
                                     H.Wait();
                                     H.Dispose();
                                 }
                             }
                         }, () =>
                         {
-                            Object O = new Object();
+                            object O = new object();
                             lock (O)
                             {
                                 //if (SubOfHeuristicAllIsPositive(Heuristic))
@@ -12323,7 +12323,7 @@ namespace RefrigtzChessPortable
                                 int[,] Tab = CloneATable(Table);
                                 if ((Tab[AchmazPure[0][i][j][0], AchmazPure[0][i][j][1]] > 0 && Tab[AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]] < 0))
                                 {
-                                    ThinkingRefrigtzChessPortable t = new ThinkingRefrigtzChessPortable(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
+                                    ThinkingRefrigtzChessPortable t = new ThinkingRefrigtzChessPortable(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
                                     if (Scop(AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]))
                                     {
                                         int Killed = Math.Abs(Tab[AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]]);
@@ -12357,7 +12357,7 @@ namespace RefrigtzChessPortable
                                 int[,] Tab = CloneATable(Table);
                                 if ((Tab[AchmazPure[0][i][j][0], AchmazPure[0][i][j][1]] < 0 && Tab[AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]] > 0))
                                 {
-                                    ThinkingRefrigtzChessPortable t = new ThinkingRefrigtzChessPortable(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
+                                    ThinkingRefrigtzChessPortable t = new ThinkingRefrigtzChessPortable(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
                                     if (Scop(AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]))
                                     {
                                         int Killed = Math.Abs(Tab[AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]]);
@@ -12440,7 +12440,7 @@ namespace RefrigtzChessPortable
                                 int[,] Tab = CloneATable(Table);
                                 if ((Tab[AchmazPure[1][i][j][0], AchmazPure[1][i][j][1]] > 0 && Tab[AchmazPure[1][i][j][2], AchmazPure[1][i][j][3]] < 0))
                                 {
-                                    ThinkingRefrigtzChessPortable t = new ThinkingRefrigtzChessPortable(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazPure[1][i][j][0], AchmazPure[1][i][j][1], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
+                                    ThinkingRefrigtzChessPortable t = new ThinkingRefrigtzChessPortable(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazPure[1][i][j][0], AchmazPure[1][i][j][1], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
                                     if (Scop(AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]))
                                     {
                                         int Killed = Math.Abs(Tab[AchmazPure[1][i][j][2], AchmazPure[1][i][j][3]]);
@@ -12472,7 +12472,7 @@ namespace RefrigtzChessPortable
                                 int[,] Tab = CloneATable(Table);
                                 if ((Tab[AchmazPure[1][i][j][0], AchmazPure[1][i][j][1]] > 0 && Tab[AchmazPure[1][i][j][2], AchmazPure[1][i][j][3]] < 0))
                                 {
-                                    ThinkingRefrigtzChessPortable t = new ThinkingRefrigtzChessPortable(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazPure[1][i][j][0], AchmazPure[1][i][j][1], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
+                                    ThinkingRefrigtzChessPortable t = new ThinkingRefrigtzChessPortable(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazPure[1][i][j][0], AchmazPure[1][i][j][1], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
                                     if (Scop(AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]))
                                     {
                                         int Killed = Math.Abs(Tab[AchmazPure[1][i][j][2], AchmazPure[1][i][j][3]]);
@@ -12555,7 +12555,7 @@ namespace RefrigtzChessPortable
                                 int[,] Tab = CloneATable(Table);
                                 if ((Tab[AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1]] < 0 && Tab[AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]] > 0))
                                 {
-                                    ThinkingRefrigtzChessPortable t = new ThinkingRefrigtzChessPortable(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
+                                    ThinkingRefrigtzChessPortable t = new ThinkingRefrigtzChessPortable(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
                                     if (Scop(AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3], AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1]))
                                     {
                                         int Killed = Math.Abs(Tab[AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]]);
@@ -12587,7 +12587,7 @@ namespace RefrigtzChessPortable
                                 int[,] Tab = CloneATable(Table);
                                 if ((Tab[AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1]] > 0 && Tab[AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]] < 0))
                                 {
-                                    ThinkingRefrigtzChessPortable t = new ThinkingRefrigtzChessPortable(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
+                                    ThinkingRefrigtzChessPortable t = new ThinkingRefrigtzChessPortable(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
                                     if (Scop(AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3], AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1]))
                                     {
                                         int Killed = Math.Abs(Tab[AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]]);
@@ -12670,7 +12670,7 @@ namespace RefrigtzChessPortable
                                 int[,] Tab = CloneATable(Table);
                                 if ((Tab[AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3]] < 0 && Tab[AchmazReduced[1][i][j][0], AchmazReduced[1][i][j][1]] > 0))
                                 {
-                                    ThinkingRefrigtzChessPortable t = new ThinkingRefrigtzChessPortable(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
+                                    ThinkingRefrigtzChessPortable t = new ThinkingRefrigtzChessPortable(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
                                     if (Scop(AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3], AchmazReduced[1][i][j][0], AchmazReduced[1][i][j][1]))
                                     {
                                         int Killed = Math.Abs(Tab[AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3]]);
@@ -12702,7 +12702,7 @@ namespace RefrigtzChessPortable
                                 int[,] Tab = CloneATable(Table);
                                 if ((Tab[AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3]] > 0 && Tab[AchmazReduced[1][i][j][0], AchmazReduced[1][i][j][1]] < 0))
                                 {
-                                    ThinkingRefrigtzChessPortable t = new ThinkingRefrigtzChessPortable(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
+                                    ThinkingRefrigtzChessPortable t = new ThinkingRefrigtzChessPortable(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
                                     if (Scop(AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3], AchmazReduced[1][i][j][0], AchmazReduced[1][i][j][1]))
                                     {
                                         int Killed = Math.Abs(Tab[AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3]]);
@@ -12776,7 +12776,7 @@ namespace RefrigtzChessPortable
             {
                 for (var j = 0; j < 8; j++)
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
                         if (!Scop(ii, jj, i, j))
@@ -12807,13 +12807,13 @@ namespace RefrigtzChessPortable
             
             int ii = RowS, jj = ColS;
 
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 ////Parallel.For(0, 8, i =>
                 for (var i = 0; i < 8; i++)
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
 
@@ -12836,12 +12836,12 @@ namespace RefrigtzChessPortable
             }
             //===============================
             
-            Object OO = new Object();
+            object OO = new object();
             lock (OO)
             {
                 for (var j = 0; j < 8; j++)
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
 
@@ -12879,7 +12879,7 @@ namespace RefrigtzChessPortable
             {
                 for (var j = 0; j < 8; j++)
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
 
@@ -12908,13 +12908,13 @@ namespace RefrigtzChessPortable
                 return Existence;
             if (Order == -1 && Tabl[RowS, ColS] != -4)
                 return Existence;
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 ////Parallel.For(0, 8, i =>
                 for (var i = 0; i < 8; i++)
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
 
@@ -12934,13 +12934,13 @@ namespace RefrigtzChessPortable
                 
             }
             //===============================
-            Object OO = new Object();
+            object OO = new object();
             lock (OO)
             {
                 
                 for (var j = 0; j < 8; j++)
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
 
@@ -12971,7 +12971,7 @@ namespace RefrigtzChessPortable
                 return Existence;
             if (Order == -1 && Tabl[RowS, ColS] != -3)
                 return Existence;
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 ////Parallel.For(0, 8, i =>
@@ -12979,7 +12979,7 @@ namespace RefrigtzChessPortable
                 {
                     for (var j = ColS - 3; j < ColS + 4; j++)
                     {
-                        Object O = new Object();
+                        object O = new object();
                         lock (O)
                         {
                             if (!Scop(ii, jj, i, j))
@@ -13005,7 +13005,7 @@ namespace RefrigtzChessPortable
             List<List<int[]>> Existence = new List<List<int[]>>();
             
             int ii = RowS, jj = ColS;
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 ////Parallel.For(0, 8, i =>
@@ -13013,7 +13013,7 @@ namespace RefrigtzChessPortable
                 {
                     for (var j = ColS - 3; j < ColS + 4; j++)
                     {
-                        Object O = new Object();
+                        object O = new object();
                         lock (O)
                         {
                             if (!Scop(ii, jj, i, j))
@@ -13048,14 +13048,14 @@ namespace RefrigtzChessPortable
                 return Existence;
             if (Order == -1 && Tabl[RowS, ColS] != -5)
                 return Existence;
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 for (var i = 0; i < 8; i++)
                 {
                     for (var j = 0; j < 8; j++)
                     {
-                        Object O = new Object();
+                        object O = new object();
                         lock (O)
                         {
 
@@ -13085,12 +13085,12 @@ namespace RefrigtzChessPortable
                 return Existence;
             if (Order == -1 && Tabl[RowS, ColS] != -6)
                 return Existence;
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 for (var i = ii - 1; i < ii + 2; i++)
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
                         var j = i + ii - jj;
@@ -13106,14 +13106,14 @@ namespace RefrigtzChessPortable
                     }
                 }
                 //===============================
-                Object OOOo1 = new Object();
+                object OOOo1 = new object();
                 lock (OOOo1)
                 {
                     
                     
                     for (var i = ii - 1; i < ii + 2; i++)
                     {
-                        Object O = new Object();
+                        object O = new object();
                         lock (O)
                         {
                             var j = i * -1 + ii - jj;
@@ -13135,7 +13135,7 @@ namespace RefrigtzChessPortable
                 
                 for (var i = ii - 1; i < ii + 2; i++)
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
 
@@ -13153,14 +13153,14 @@ namespace RefrigtzChessPortable
                 }
             }
             //===============================
-            Object OO = new Object();
+            object OO = new object();
             lock (OO)
             {
                 
                 
                 for (var j = ii - 1; j < ii + 2; j++)
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
 
@@ -13188,12 +13188,12 @@ namespace RefrigtzChessPortable
             
             int ii = RowS, jj = ColS;
 
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 for (var i = ii - 1; i < ii + 2; i++)
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
                         var j = i + ii - jj;
@@ -13213,14 +13213,14 @@ namespace RefrigtzChessPortable
                     }
                 }
                 //===============================
-                Object OOOo1 = new Object();
+                object OOOo1 = new object();
                 lock (OOOo1)
                 {
                     
                     
                     for (var i = ii - 1; i < ii + 2; i++)
                     {
-                        Object O = new Object();
+                        object O = new object();
                         lock (O)
                         {
                             var j = i * -1 + ii - jj;
@@ -13246,7 +13246,7 @@ namespace RefrigtzChessPortable
                 
                 for (var i = ii - 1; i < ii + 2; i++)
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
 
@@ -13269,14 +13269,14 @@ namespace RefrigtzChessPortable
                 }
             }
             //===============================
-            Object OO = new Object();
+            object OO = new object();
             lock (OO)
             {
                 
                 
                 for (var j = ii - 1; j < ii + 2; j++)
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
 
@@ -13312,7 +13312,7 @@ namespace RefrigtzChessPortable
             {
                 for (var j = 0; j < 8; j++)
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
                         if (!Scop(ii, jj, i, j))
@@ -13763,7 +13763,7 @@ namespace RefrigtzChessPortable
             , ref int HeuristicFromCenter
             , ref int HeuristicKingDangour, ref int HeuristicCheckedMate)
         {
-            Object OO = new Object();
+            object OO = new object();
             lock (OO)
             {
                 if (!Scop(RowS, ColS, RowD, ColD, Kind))
@@ -13830,7 +13830,7 @@ namespace RefrigtzChessPortable
                     SetSupHuTrue();
                     IsS = true;
                 }
-                Object O1 = new Object();
+                object O1 = new object();
                 lock (O1)
                 {
                     if (!IsSupHu[IsSupHu.Count - 1])
@@ -13876,12 +13876,12 @@ namespace RefrigtzChessPortable
                                 //Every objects one move at game begin
                                 int Total = 0;
                                 int Is = 0;
-                                NoOfObjectNotMovable(CloneATable(TableS), Order, OrderColor(Order), ref Total, ref Is);
+                                NoOfobjectNotMovable(CloneATable(TableS), Order, OrderColor(Order), ref Total, ref Is);
                                 if (Order == 1)
                                 {
                                     if (
                                             //((NoOfBoardMoved + Is >= Total) && 
-                                            TableInitiationPreventionOfMultipleMove[RowS, ColS] >= NoOfMovableAllObjectMove
+                                            TableInitiationPreventionOfMultipleMove[RowS, ColS] >= NoOfMovableAllobjectMove
                                     //)&& A && TableS[RowS, ColS] < 0 && TableS[RowD, ColD] >= 0
                                     )
                                     {
@@ -13893,7 +13893,7 @@ namespace RefrigtzChessPortable
                                 {
                                     if (
                                             //((NoOfBoardMoved + Is >= Total) && 
-                                            TableInitiationPreventionOfMultipleMove[RowS, ColS] >= NoOfMovableAllObjectMove
+                                            TableInitiationPreventionOfMultipleMove[RowS, ColS] >= NoOfMovableAllobjectMove
                                     //)&& A && TableS[RowS, ColS] < 0 && TableS[RowD, ColD] >= 0
                                     )
                                     {
@@ -13967,9 +13967,9 @@ namespace RefrigtzChessPortable
                                 }
                                 else
                                 {
-                                    if (TableInitiationPreventionOfMultipleMove[RowS, ColS] == NoOfMovableAllObjectMove && IsSupHu[IsSupHu.Count - 1] && IsS)
+                                    if (TableInitiationPreventionOfMultipleMove[RowS, ColS] == NoOfMovableAllobjectMove && IsSupHu[IsSupHu.Count - 1] && IsS)
                                     {
-                                        TableInitiationPreventionOfMultipleMove[RowS, ColS] = NoOfMovableAllObjectMove - 1;
+                                        TableInitiationPreventionOfMultipleMove[RowS, ColS] = NoOfMovableAllobjectMove - 1;
                                         IsS = false;
                                     }
                                 }
@@ -14003,7 +14003,7 @@ namespace RefrigtzChessPortable
                                 else
                                 {
                                     if (Order == AllDraw.OrderPlateDraw)
-                                    {//if (TableInitiationPreventionOfMultipleMove[RowS, ColS] == NoOfMovableAllObjectMove && IsSupHu[IsSupHu.Count - 1] && (!IsS))
+                                    {//if (TableInitiationPreventionOfMultipleMove[RowS, ColS] == NoOfMovableAllobjectMove && IsSupHu[IsSupHu.Count - 1] && (!IsS))
 
                                         //Empire more
                                         if (A)
@@ -14039,12 +14039,12 @@ namespace RefrigtzChessPortable
                                         //Every objects one move at game begin
                                         int Total = 0;
                                         int Is = 0;
-                                        NoOfObjectNotMovable(CloneATable(TableS), Order, OrderColor(Order), ref Total, ref Is);
+                                        NoOfobjectNotMovable(CloneATable(TableS), Order, OrderColor(Order), ref Total, ref Is);
                                         if (Order == 1)
                                         {
                                             if (
                                                  //((NoOfBoardMoved + Is >= Total) && 
-                                                 TableInitiationPreventionOfMultipleMove[RowS, ColS] >= NoOfMovableAllObjectMove
+                                                 TableInitiationPreventionOfMultipleMove[RowS, ColS] >= NoOfMovableAllobjectMove
                                          //)&& A && TableS[RowS, ColS] == 0 && TableS[RowD, ColD] > 0
                                          )
                                             {
@@ -14056,7 +14056,7 @@ namespace RefrigtzChessPortable
                                         {
                                             if (
                                                   //((NoOfBoardMoved + Is >= Total) && 
-                                                  TableInitiationPreventionOfMultipleMove[RowS, ColS] >= NoOfMovableAllObjectMove
+                                                  TableInitiationPreventionOfMultipleMove[RowS, ColS] >= NoOfMovableAllobjectMove
                                           //)&& A && TableS[RowS, ColS] == 0 && TableS[RowD, ColD] < 0
                                           )
                                             {
@@ -14100,7 +14100,7 @@ namespace RefrigtzChessPortable
                         {
                             int TotalS = 0;
                             int IsSC = 0;
-                            NoOfObjectNotMovable(CloneATable(TableS), Order, OrderColor(Order), ref TotalS, ref IsSC);
+                            NoOfobjectNotMovable(CloneATable(TableS), Order, OrderColor(Order), ref TotalS, ref IsSC);
                             if ((16 - ColleralationGray) + IsSC >= TotalS)
                                 GoldenFinished = true;
                             HAchmaz = (RationalPenalty * (AchmazReducedBefore(Before, CloneATable(TableS)))) + (RationalRegard * (AchmazPuredBefore(Before, CloneATable(TableS))));
@@ -14109,7 +14109,7 @@ namespace RefrigtzChessPortable
                         {
                             int TotalS = 0;
                             int IsSC = 0;
-                            NoOfObjectNotMovable(CloneATable(TableS), Order, OrderColor(Order), ref TotalS, ref IsSC);
+                            NoOfobjectNotMovable(CloneATable(TableS), Order, OrderColor(Order), ref TotalS, ref IsSC);
                             if ((16 - ColleralationBrown) + IsSC >= TotalS)
                                 GoldenFinished = true;
                             HAchmaz = (RationalPenalty * (AchmazReducedAfter(Before, CloneATable(TableS)))) + (RationalRegard * (AchmazPuredAfter(Before, CloneATable(TableS))));
@@ -14280,7 +14280,7 @@ namespace RefrigtzChessPortable
             return Is;
         }
         //return number of un movable objects on board
-        int NoOfObjectNotMovable(int[,] Tab, int Order, int a, ref int Total, ref int Is)
+        int NoOfobjectNotMovable(int[,] Tab, int Order, int a, ref int Total, ref int Is)
         {
             List<int[]> IsThere = new List<int[]>();
             for (int Row = 0; Row < 8; Row++)
@@ -14338,7 +14338,7 @@ namespace RefrigtzChessPortable
         //specific determination for ThinkingQuantum main method
         void CastleThinkingGray(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int DummyOrder, int DummyCurrentOrder, int[,] TableS, int RowSource, int ColumnSource, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, int RowDestination, int ColumnDestination, bool Castle)
         {
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 TableS = CloneATable(TableConst);
@@ -14358,7 +14358,7 @@ namespace RefrigtzChessPortable
                 ChessRules.CurrentOrder = DummyCurrentOrder;
                 //When is Castles Gray King.
                 //Predict Heuristic Caluculatio Before Movments.
-                Object O = new Object();
+                object O = new object();
                 lock (O)
                 {
                     ThinkingRun = true;
@@ -14367,7 +14367,7 @@ namespace RefrigtzChessPortable
                 newTask1.Wait(); newTask1.Dispose();
                 LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
 
-                Object A = new object();
+                object A = new object();
                 lock (A)
                 {
                     NumbersOfAllNode++;
@@ -14425,7 +14425,7 @@ namespace RefrigtzChessPortable
 
                 
                 int[] Hu = new int[10];
-                Object A6 = new Object();
+                object A6 = new object();
                 lock (A6)
                 {
                     //if (IgnoreFromCheckandMateHeuristic)
@@ -14435,7 +14435,7 @@ namespace RefrigtzChessPortable
 
                     //H = " HAttack:" + ((Hu[0])).ToString() + " HMove:" + ((Hu[1])).ToString() + " HSelSup:" + ((Hu[2])).ToString() + " HCheckedMateDang:" + ((Hu[3])).ToString() + " HKiller:" + ((Hu[4])).ToString() + " HReduAttack:" + ((Hu[5])).ToString() + " HDisFromCurrentEnemyking:" + ((Hu[6])).ToString() + " HKingSafe:" + ((Hu[7])).ToString() + " HObjFromCeneter:" + ((Hu[8])).ToString() + " HKingDang:" + ((Hu[9])).ToString();
                 }
-                Object O7 = new Object(); SetObjectNumbersInList(TableS);
+                object O7 = new object(); SetobjectNumbersInList(TableS);
                 lock (O7)
                 {
                     if (RowDestination < RowSource)
@@ -14459,10 +14459,10 @@ namespace RefrigtzChessPortable
         public void HeuristicPenaltyValuePerform(QuantumAtamata Current, int Order, ref int HeuristicAttackValue, bool AllDrawClass = false)
         {
 
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
-                if (LearningVarsObject.Count == 0 || AllDrawClass)
+                if (LearningVarsobject.Count == 0 || AllDrawClass)
                 {
                     if (Order != AllDraw.OrderPlateDraw)
                     {
@@ -14489,7 +14489,7 @@ namespace RefrigtzChessPortable
                 }
                 else
                 {
-                    if ((LearningVarsObject[LearningVarsObject.Count - 1][1] && !LearningVarsObject[LearningVarsObject.Count - 1][4]))
+                    if ((LearningVarsobject[LearningVarsobject.Count - 1][1] && !LearningVarsobject[LearningVarsobject.Count - 1][4]))
                     {
                         if (Order != AllDraw.OrderPlateDraw)
                         {
@@ -14520,12 +14520,12 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         public void ThinkingSoldierbase(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int i, int j, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int[,] TableS = CloneATable(TableConst);
                 ///Initiate a Local Variables.
-                ///"Inizialization of This New Class (Current is Dynamic class Object) is MalFunction (Constant Variable Count).
+                ///"Inizialization of This New Class (Current is Dynamic class object) is MalFunction (Constant Variable Count).
                 QuantumAtamata Current = new QuantumAtamata(3, 3, 3);
                 if (Scop(ii, jj, i, j, 1) && System.Math.Abs(TableS[ii, jj]) == 1 && System.Math.Abs(Kind) == 1)
                 {
@@ -14541,7 +14541,7 @@ namespace RefrigtzChessPortable
         }
         void ThinkWait()
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 do { } while (ThinkingAtRun);
@@ -14550,7 +14550,7 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         public void ThinkingSoldier(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 ////Parallel.For(ii - 2, ii + 3, i =>
@@ -14560,7 +14560,7 @@ namespace RefrigtzChessPortable
                     for (var j = jj - 2; j < jj + 3; j++)
                     {
                         int[,] TableS = new int[8, 8];
-                        Object O = new Object();
+                        object O = new object();
                         lock (O)
                         {
                             if (Scop(ii, jj, i, j, 1))
@@ -14586,15 +14586,15 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         public void ThinkingElephantbase(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int i, int j, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 int[,] TableS = CloneATable(TableConst);
 
                 ///Initiate a Local Variables.
-                ///"Inizialization of This New Class (Current is Dynamic class Object) is MalFunction (Constant Variable Count).
+                ///"Inizialization of This New Class (Current is Dynamic class object) is MalFunction (Constant Variable Count).
                 QuantumAtamata Current = new QuantumAtamata(3, 3, 3);
-                Object O = new Object();
+                object O = new object();
                 lock (O)
                 {
                     ///Else for Elephant Thinking.
@@ -14614,10 +14614,10 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         public void ThinkingElephant(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
-            Object O2 = new Object();
+            object O2 = new object();
             lock (O2)
             {
-                Object O1 = new Object();
+                object O1 = new object();
                 lock (O1)
                 {
                     ////Parallel.For(0, 8, i =>
@@ -14625,7 +14625,7 @@ namespace RefrigtzChessPortable
                     {////Parallel.For(0, 8, i =>
                         for (var j = 0; j < 8; j++)
                         {
-                            Object O = new Object();
+                            object O = new object();
                             lock (O)
                             {
 
@@ -14648,15 +14648,15 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         public void ThinkingHourseOne(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 int[,] TableS = CloneATable(TableConst);
 
                 ///Initiate a Local Variables.
-                ///"Inizialization of This New Class (Current is Dynamic class Object) is MalFunction (Constant Variable Count).
+                ///"Inizialization of This New Class (Current is Dynamic class object) is MalFunction (Constant Variable Count).
                 QuantumAtamata Current = new QuantumAtamata(3, 3, 3);
-                Object O = new Object();
+                object O = new object();
                 lock (O)
                 {
                     Order = ord;
@@ -14675,14 +14675,14 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         public void ThinkingHourseTwo(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 int[,] TableS = CloneATable(TableConst);
 
 
                 ///Initiate a Local Variables.
-                ///"Inizialization of This New Class (Current is Dynamic class Object) is MalFunction (Constant Variable Count).
+                ///"Inizialization of This New Class (Current is Dynamic class object) is MalFunction (Constant Variable Count).
                 QuantumAtamata Current = new QuantumAtamata(3, 3, 3);
 
                 Order = ord;
@@ -14700,15 +14700,15 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         public void ThinkingHourseThree(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 int[,] TableS = CloneATable(TableConst);
 
                 ///Initiate a Local Variables.
-                ///"Inizialization of This New Class (Current is Dynamic class Object) is MalFunction (Constant Variable Count).
+                ///"Inizialization of This New Class (Current is Dynamic class object) is MalFunction (Constant Variable Count).
                 QuantumAtamata Current = new QuantumAtamata(3, 3, 3);
-                Object O = new Object();
+                object O = new object();
                 lock (O)
                 {
 
@@ -14728,13 +14728,13 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         public void ThinkingHourseFour(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 int[,] TableS = CloneATable(TableConst);
 
                 ///Initiate a Local Variables.
-                ///"Inizialization of This New Class (Current is Dynamic class Object) is MalFunction (Constant Variable Count).
+                ///"Inizialization of This New Class (Current is Dynamic class object) is MalFunction (Constant Variable Count).
                 QuantumAtamata Current = new QuantumAtamata(3, 3, 3);
 
                 Order = ord;
@@ -14752,16 +14752,16 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         public void ThinkingHourseFive(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 int[,] TableS = CloneATable(TableConst);
 
 
                 ///Initiate a Local Variables.
-                ///"Inizialization of This New Class (Current is Dynamic class Object) is MalFunction (Constant Variable Count).
+                ///"Inizialization of This New Class (Current is Dynamic class object) is MalFunction (Constant Variable Count).
                 QuantumAtamata Current = new QuantumAtamata(3, 3, 3);
-                Object O = new Object();
+                object O = new object();
                 lock (O)
                 {
                     Order = ord;
@@ -14780,16 +14780,16 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         public void ThinkingHourseSix(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 int[,] TableS = CloneATable(TableConst);
 
 
                 ///Initiate a Local Variables.
-                ///"Inizialization of This New Class (Current is Dynamic class Object) is MalFunction (Constant Variable Count).
+                ///"Inizialization of This New Class (Current is Dynamic class object) is MalFunction (Constant Variable Count).
                 QuantumAtamata Current = new QuantumAtamata(3, 3, 3);
-                Object O = new Object();
+                object O = new object();
                 lock (O)
                 {
                     Order = ord;
@@ -14808,16 +14808,16 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         public void ThinkingHourseSeven(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int[,] TableS = CloneATable(TableConst);
 
 
                 ///Initiate a Local Variables.
-                ///"Inizialization of This New Class (Current is Dynamic class Object) is MalFunction (Constant Variable Count).
+                ///"Inizialization of This New Class (Current is Dynamic class object) is MalFunction (Constant Variable Count).
                 QuantumAtamata Current = new QuantumAtamata(3, 3, 3);
-                Object O111 = new Object();
+                object O111 = new object();
                 lock (O111)
                 {
                     Order = ord;
@@ -14836,15 +14836,15 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         public void ThinkingHourseEight(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
-            Object O111 = new Object();
+            object O111 = new object();
             lock (O111)
             {
                 int[,] TableS = CloneATable(TableConst);
 
                 ///Initiate a Local Variables.
-                ///"Inizialization of This New Class (Current is Dynamic class Object) is MalFunction (Constant Variable Count).
+                ///"Inizialization of This New Class (Current is Dynamic class object) is MalFunction (Constant Variable Count).
                 QuantumAtamata Current = new QuantumAtamata(3, 3, 3);
-                Object O = new Object();
+                object O = new object();
                 lock (O)
                 {
                     Order = ord;
@@ -14864,7 +14864,7 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         public void ThinkingHourse(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
@@ -14875,7 +14875,7 @@ namespace RefrigtzChessPortable
                 LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
 
             }
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
@@ -14886,7 +14886,7 @@ namespace RefrigtzChessPortable
                 LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
 
             }
-            Object O2 = new Object();
+            object O2 = new object();
             lock (O2)
             {
                 int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
@@ -14897,7 +14897,7 @@ namespace RefrigtzChessPortable
                 LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
 
             }
-            Object O3 = new Object();
+            object O3 = new object();
             lock (O3)
             {
                 int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
@@ -14908,7 +14908,7 @@ namespace RefrigtzChessPortable
                 LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
 
             }
-            Object O4 = new Object();
+            object O4 = new object();
             lock (O4)
             {
                 int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
@@ -14919,7 +14919,7 @@ namespace RefrigtzChessPortable
                 LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
 
             }
-            Object O5 = new Object();
+            object O5 = new object();
             lock (O5)
             {
                 int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
@@ -14930,7 +14930,7 @@ namespace RefrigtzChessPortable
                 LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
 
             }
-            Object O6 = new Object();
+            object O6 = new object();
             lock (O6)
             {
                 int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
@@ -14941,7 +14941,7 @@ namespace RefrigtzChessPortable
                 LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
 
             }
-            Object O7 = new Object();
+            object O7 = new object();
             lock (O7)
             {
                 int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
@@ -14957,20 +14957,20 @@ namespace RefrigtzChessPortable
         public void ThinkingCastleOne(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
 
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 ////Parallel.For(0, 8, i =>
                 for (var i = 0; i < 8; i++)
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
 
                         var j = jj;
                         ///Initiate a Local Variables.
                         int[,] TableS = CloneATable(TableConst);
-                        ///"Inizialization of This New Class (Current is Dynamic class Object) is MalFunction (Constant Variable Count).
+                        ///"Inizialization of This New Class (Current is Dynamic class object) is MalFunction (Constant Variable Count).
                         QuantumAtamata Current = new QuantumAtamata(3, 3, 3);
                         if (Scop(ii, jj, i, j, 4) && System.Math.Abs(TableS[ii, jj]) == 4 && System.Math.Abs(Kind) == 4)
                         {
@@ -14990,20 +14990,20 @@ namespace RefrigtzChessPortable
         public void ThinkingCastleTow(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
             //==================
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 ////Parallel.For(0, 8, j =>
                 for (var j = 0; j < 8; j++)
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
 
                         var i = ii;
                         ///Initiate a Local Variables.
                         int[,] TableS = CloneATable(TableConst);
-                        ///"Inizialization of This New Class (Current is Dynamic class Object) is MalFunction (Constant Variable Count).
+                        ///"Inizialization of This New Class (Current is Dynamic class object) is MalFunction (Constant Variable Count).
                         QuantumAtamata Current = new QuantumAtamata(3, 3, 3);
 
                         if (Scop(ii, jj, i, j, 4) && System.Math.Abs(TableS[ii, jj]) == 4 && System.Math.Abs(Kind) == 4)
@@ -15022,7 +15022,7 @@ namespace RefrigtzChessPortable
         public void ThinkingCastle(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
 
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
@@ -15038,15 +15038,15 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         public void ThinkingMinisterbase(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int i, int j, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
 
                 ///Initiate a Local Variables.
                 int[,] TableS = CloneATable(TableConst);
-                ///"Inizialization of This New Class (Current is Dynamic class Object) is MalFunction (Constant Variable Count).
+                ///"Inizialization of This New Class (Current is Dynamic class object) is MalFunction (Constant Variable Count).
                 QuantumAtamata Current = new QuantumAtamata(3, 3, 3);
-                Object O = new Object();
+                object O = new object();
                 lock (O)
                 {
 
@@ -15067,7 +15067,7 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         public void ThinkingMinister(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
                 int[,] TableS = new int[8, 8];
@@ -15078,7 +15078,7 @@ namespace RefrigtzChessPortable
                     for (var j = 0; j < 8; j++)
                     {
                         TableS = CloneATable(TableConst);
-                        Object O = new Object();
+                        object O = new object();
                         lock (O)
                         {
                             int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
@@ -15096,7 +15096,7 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         public void ThinkingCastleBrown(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 for (var i = ii - 2; i < ii + 2; i++)
@@ -15106,11 +15106,11 @@ namespace RefrigtzChessPortable
                     ///Initiate a Local Variables.
                     int[,] TableS = CloneATable(TableConst);
 
-                    ///"Inizialization of This New Class (Current is Dynamic class Object) is MalFunction (Constant Variable Count).
+                    ///"Inizialization of This New Class (Current is Dynamic class object) is MalFunction (Constant Variable Count).
                     QuantumAtamata Current = new QuantumAtamata(3, 3, 3);
 
                     ///Calculate of Castles of Brown.
-                    if ((new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, -7, CloneATable(TableS), Order, ii, jj)).Rules(ii, jj, i, jj, color, -7) && (ChessRules.CastleKingAllowedBrown))
+                    if ((new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, -7, CloneATable(TableS), Order, ii, jj)).Rules(ii, jj, i, jj, color, -7) && (ChessRules.CastleKingAllowedBrown))
                     {
                         int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
                         var newTask = Task.Factory.StartNew(() => CastleThinkingBrown(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, i, jj, Castle));
@@ -15127,7 +15127,7 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         public void ThinkingCastleGray(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 for (var i = ii - 2; i < ii + 2; i++)
@@ -15136,10 +15136,10 @@ namespace RefrigtzChessPortable
                     ///Initiate a Local Variables.
                     int[,] TableS = CloneATable(TableConst);
 
-                    ///"Inizialization of This New Class (Current is Dynamic class Object) is MalFunction (Constant Variable Count).
+                    ///"Inizialization of This New Class (Current is Dynamic class object) is MalFunction (Constant Variable Count).
                     QuantumAtamata Current = new QuantumAtamata(3, 3, 3);
 
-                    if ((new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, 7, CloneATable(TableS), Order, ii, jj)).Rules(ii, jj, i, jj, color, 7) && (ChessRules.CastleKingAllowedGray))
+                    if ((new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, 7, CloneATable(TableS), Order, ii, jj)).Rules(ii, jj, i, jj, color, 7) && (ChessRules.CastleKingAllowedGray))
                     {
                         int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
                         var newTask = Task.Factory.StartNew(() => CastleThinkingGray(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, i, jj, Castle));
@@ -15155,10 +15155,10 @@ namespace RefrigtzChessPortable
         //specific determination for thinking main method
         public void ThinkingKing(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
-            Object O1 = new Object();
+            object O1 = new object();
             lock (O1)
             {
-                Object O = new Object();
+                object O = new object();
                 lock (O)
                 {
                     ////Parallel.For(ii - 1, ii + 2, i =>
@@ -15172,7 +15172,7 @@ namespace RefrigtzChessPortable
                                 continue;
                             ///Initiate a Local Variables.
                             int[,] TableS = CloneATable(TableConst);
-                            ///"Inizialization of This New Class (Current is Dynamic class Object) is MalFunction (Constant Variable Count).
+                            ///"Inizialization of This New Class (Current is Dynamic class object) is MalFunction (Constant Variable Count).
                             QuantumAtamata Current = new QuantumAtamata(3, 3, 3);
                             if (Scop(ii, jj, i, j, 6) && System.Math.Abs(TableS[ii, jj]) == 6 && System.Math.Abs(Kind) == 6)
                             {
@@ -15194,7 +15194,7 @@ namespace RefrigtzChessPortable
         //specific thinking main method
         void ThinkingWaite()
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 while (!ThinkingBegin)
@@ -15215,7 +15215,7 @@ namespace RefrigtzChessPortable
                 {
                     if (AStarGreedy.Count == 0)
                         AStarGreedy = new List<AllDraw>();
-                    AStarGreedy.Add(new AllDraw(Order * -1, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged));
+                    AStarGreedy.Add(new AllDraw(Order * -1, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged));
                     AStarGreedy[AStarGreedy.Count - 1].TableList.Clear();
                     AStarGreedy[AStarGreedy.Count - 1].TableList.Add(CloneATable(TableListSolder[j]));
                     AStarGreedy[AStarGreedy.Count - 1].SetRowColumn(0);
@@ -15229,7 +15229,7 @@ namespace RefrigtzChessPortable
                 {
                     if (AStarGreedy.Count == 0)
                         AStarGreedy = new List<AllDraw>();
-                    AStarGreedy.Add(new AllDraw(Order * -1, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged));
+                    AStarGreedy.Add(new AllDraw(Order * -1, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged));
                     AStarGreedy[AStarGreedy.Count - 1].TableList.Clear();
                     AStarGreedy[AStarGreedy.Count - 1].TableList.Add(CloneATable(TableListElefant[j]));
                     AStarGreedy[AStarGreedy.Count - 1].SetRowColumn(0);
@@ -15243,7 +15243,7 @@ namespace RefrigtzChessPortable
                 {
                     if (AStarGreedy.Count == 0)
                         AStarGreedy = new List<AllDraw>();
-                    AStarGreedy.Add(new AllDraw(Order * -1, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged));
+                    AStarGreedy.Add(new AllDraw(Order * -1, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged));
                     AStarGreedy[AStarGreedy.Count - 1].TableList.Clear();
                     AStarGreedy[AStarGreedy.Count - 1].TableList.Add(CloneATable(TableListHourse[j]));
                     AStarGreedy[AStarGreedy.Count - 1].SetRowColumn(0);
@@ -15257,7 +15257,7 @@ namespace RefrigtzChessPortable
                 {
                     if (AStarGreedy.Count == 0)
                         AStarGreedy = new List<AllDraw>();
-                    AStarGreedy.Add(new AllDraw(Order * -1, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged));
+                    AStarGreedy.Add(new AllDraw(Order * -1, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged));
                     AStarGreedy[AStarGreedy.Count - 1].TableList.Clear();
                     AStarGreedy[AStarGreedy.Count - 1].TableList.Add(CloneATable(TableListCastle[j]));
                     AStarGreedy[AStarGreedy.Count - 1].SetRowColumn(0);
@@ -15271,7 +15271,7 @@ namespace RefrigtzChessPortable
                 {
                     if (AStarGreedy.Count == 0)
                         AStarGreedy = new List<AllDraw>();
-                    AStarGreedy.Add(new AllDraw(Order * -1, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged));
+                    AStarGreedy.Add(new AllDraw(Order * -1, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged));
                     AStarGreedy[AStarGreedy.Count - 1].TableList.Clear();
                     AStarGreedy[AStarGreedy.Count - 1].TableList.Add(CloneATable(TableListMinister[j]));
                     AStarGreedy[AStarGreedy.Count - 1].SetRowColumn(0);
@@ -15285,7 +15285,7 @@ namespace RefrigtzChessPortable
                 {
                     if (AStarGreedy.Count == 0)
                         AStarGreedy = new List<AllDraw>();
-                    AStarGreedy.Add(new AllDraw(Order * -1, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged));
+                    AStarGreedy.Add(new AllDraw(Order * -1, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged));
                     AStarGreedy[AStarGreedy.Count - 1].TableList.Clear();
                     AStarGreedy[AStarGreedy.Count - 1].TableList.Add(CloneATable(TableListKing[j]));
                     AStarGreedy[AStarGreedy.Count - 1].SetRowColumn(0);
@@ -15303,7 +15303,7 @@ namespace RefrigtzChessPortable
         //Deeper than deeper
         void ThinkingFullGame(int iAStarGreedy, AllDraw THIS)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 if (AllDraw.Deeperthandeeper)
@@ -15372,33 +15372,33 @@ namespace RefrigtzChessPortable
                 return -1;
             return 1;
         }
-        bool MovableAllObjectsListMethos(int RowS, int ColS)
+        bool MovableAllobjectsListMethos(int RowS, int ColS)
         {
             bool Is = false;
-            if (MovableAllObjectsList.Count == 8)
+            if (MovableAllobjectsList.Count == 8)
             {
-                if (MovableAllObjectsList[RowS].Count == 8)
+                if (MovableAllobjectsList[RowS].Count == 8)
                 {
-                    for (int i = 0; i < MovableAllObjectsList[RowS][ColS].Count; i++)
+                    for (int i = 0; i < MovableAllobjectsList[RowS][ColS].Count; i++)
                     {
-                        if (MovableAllObjectsList[RowS][ColS][i][5] == 1)
+                        if (MovableAllobjectsList[RowS][ColS][i][5] == 1)
                             Is = true;
                     }
                 }
             }
             return Is;
         }
-        void MovableAllObjectsListMethos(int[,] TableS, bool Before, int RowS, int ColS, int RowD, int ColD, int con, int movable = 1)
+        void MovableAllobjectsListMethos(int[,] TableS, bool Before, int RowS, int ColS, int RowD, int ColD, int con, int movable = 1)
         {
             if (Before)
             {
-                if (MovableAllObjectsList.Count == 0)
+                if (MovableAllobjectsList.Count == 0)
                 {
                     for (int i = 0; i < 8; i++)
                     {
-                        MovableAllObjectsList.Add(new List<List<int[]>>());
+                        MovableAllobjectsList.Add(new List<List<int[]>>());
                         for (int k = 0; k < 8; k++)
-                            MovableAllObjectsList[i].Add(new List<int[]>());
+                            MovableAllobjectsList[i].Add(new List<int[]>());
                     }
                 }
                 int[] B = new int[6];
@@ -15412,23 +15412,23 @@ namespace RefrigtzChessPortable
                     B[4] = con;
                 B[5] = movable;
 
-                for (int i = 0; i < MovableAllObjectsList[RowS][ColS].Count; i++)
+                for (int i = 0; i < MovableAllobjectsList[RowS][ColS].Count; i++)
                 {
-                    if (MovableAllObjectsList[RowS][ColS][i][2] == RowS && MovableAllObjectsList[RowS][ColS][i][3] == ColS && MovableAllObjectsList[RowS][ColS][i][4] == TableS[RowS, ColS])
-                        MovableAllObjectsList[RowS][ColS].RemoveAt(i);
+                    if (MovableAllobjectsList[RowS][ColS][i][2] == RowS && MovableAllobjectsList[RowS][ColS][i][3] == ColS && MovableAllobjectsList[RowS][ColS][i][4] == TableS[RowS, ColS])
+                        MovableAllobjectsList[RowS][ColS].RemoveAt(i);
                 }
-                MovableAllObjectsList[RowS][ColS].Add(B);
+                MovableAllobjectsList[RowS][ColS].Add(B);
 
             }
             else
             {
-                if (MovableAllObjectsList.Count == 0)
+                if (MovableAllobjectsList.Count == 0)
                 {
                     for (int i = 0; i < 8; i++)
                     {
-                        MovableAllObjectsList.Add(new List<List<int[]>>());
+                        MovableAllobjectsList.Add(new List<List<int[]>>());
                         for (int k = 0; k < 8; k++)
-                            MovableAllObjectsList[i].Add(new List<int[]>());
+                            MovableAllobjectsList[i].Add(new List<int[]>());
                     }
                 }
                 int[] B = new int[6];
@@ -15442,12 +15442,12 @@ namespace RefrigtzChessPortable
                     B[4] = con;
                 B[5] = movable;
 
-                for (int i = 0; i < MovableAllObjectsList[RowS][ColS].Count; i++)
+                for (int i = 0; i < MovableAllobjectsList[RowS][ColS].Count; i++)
                 {
-                    if (MovableAllObjectsList[RowS][ColS][i][2] == RowS && MovableAllObjectsList[RowS][ColS][i][3] == ColS && MovableAllObjectsList[RowS][ColS][i][4] == TableS[RowS, ColS])
-                        MovableAllObjectsList[RowS][ColS].RemoveAt(i);
+                    if (MovableAllobjectsList[RowS][ColS][i][2] == RowS && MovableAllobjectsList[RowS][ColS][i][3] == ColS && MovableAllobjectsList[RowS][ColS][i][4] == TableS[RowS, ColS])
+                        MovableAllobjectsList[RowS][ColS].RemoveAt(i);
                 }
-                MovableAllObjectsList[RowD][ColD].Add(B);
+                MovableAllobjectsList[RowD][ColD].Add(B);
 
             }
         }
@@ -15486,7 +15486,7 @@ namespace RefrigtzChessPortable
 
 
                 int ord = Order;
-                Object O = new Object();
+                object O = new object();
                 lock (O)
                 {
                     if (CurrentAStarGredyMax > AllDraw.MaxAStarGreedy)
@@ -15501,11 +15501,11 @@ namespace RefrigtzChessPortable
                     t.Join();
 
                     NumberOfPenalties = 0;
-                    SetObjectNumbers(CloneATable(TableConst));
+                    SetobjectNumbers(CloneATable(TableConst));
                     bool PenRegStrore = true;
                     // if (Order == AllDraw.OrderPlateDraw)
 
-                    Object O1 = new Object();
+                    object O1 = new object();
                     lock (O1)
                     {
                         BeginThread++;
@@ -15515,7 +15515,7 @@ namespace RefrigtzChessPortable
                             FoundFirstSelfMating > AllDraw.MaxAStarGreedy
                             )
                         {
-                            Object O2 = new Object();
+                            object O2 = new object();
                             lock (O2)
                             {
                                 
@@ -15529,7 +15529,7 @@ namespace RefrigtzChessPortable
                             FoundFirstMating > AllDraw.MaxAStarGreedy
                             )
                         {
-                            Object O2 = new Object();
+                            object O2 = new object();
                             lock (O2)
                             {
                                 
@@ -15550,17 +15550,17 @@ namespace RefrigtzChessPortable
                     IndexMinister = 0;
                     IndexKing = 0;
                     int[,] TableS = new int[8, 8];
-                    ///"Inizialization of This New Class (Current is Dynamic class Object) is MalFunction (Constant Variable Count).
+                    ///"Inizialization of This New Class (Current is Dynamic class object) is MalFunction (Constant Variable Count).
                     ///Most Dot Net FrameWork Hot Path
-                    ///Create A Clone of Current Table Constant in ThinkingRefrigtzChessPortable Object Tasble.
-                    ///For Stored Location of Objects.
+                    ///Create A Clone of Current Table Constant in ThinkingRefrigtzChessPortable object Tasble.
+                    ///For Stored Location of objects.
                     var ii = Row;
                     var jj = Column;
                     if (//CheckMateOcuured ||
                     FoundFirstMating > AllDraw.MaxAStarGreedy
                         )
                     {
-                        Object O2 = new Object();
+                        object O2 = new object();
                         lock (O2)
                         {
                             
@@ -15574,7 +15574,7 @@ namespace RefrigtzChessPortable
                     FoundFirstSelfMating > AllDraw.MaxAStarGreedy
                         )
                     {
-                        Object O2 = new Object();
+                        object O2 = new object();
                         lock (O2)
                         {
                             
@@ -15584,13 +15584,13 @@ namespace RefrigtzChessPortable
                         }
                         return;
                     }
-                    IgnoreObjectDangour = -1;
+                    IgnoreobjectDangour = -1;
                     ///Initiate a Local Variables.
                     TableS = new int[8, 8];
-                    ///"Inizialization of This New Class (Current is Dynamic class Object) is MalFunction (Constant Variable Count).
+                    ///"Inizialization of This New Class (Current is Dynamic class object) is MalFunction (Constant Variable Count).
                     QuantumAtamata Current = new QuantumAtamata(3, 3, 3);
                     ///Most Dot Net FrameWork Hot Path
-                    ///Create A Clone of Current Table Constant in ThinkingRefrigtzChessPortable Object Tasble.
+                    ///Create A Clone of Current Table Constant in ThinkingRefrigtzChessPortable object Tasble.
                     for (var RowS = 0; RowS < 8; RowS++)
                         for (var ColS = 0; ColS < 8; ColS++)
                         {
@@ -15599,12 +15599,12 @@ namespace RefrigtzChessPortable
                     ///Deterimine for Castle King Wrongly Desision.
                     bool Castle = false;
                     bool DoEnemySelf = true;
-                    ChessRules AAA = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TableS[ii, jj], CloneATable(TableS), Order, ii, jj);
+                    ChessRules AAA = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TableS[ii, jj], CloneATable(TableS), Order, ii, jj);
                     if (AAA.CheckMate(CloneATable(TableS), Order))
                     {
                         if (AAA.CheckMateGray || AAA.CheckMateBrown)
                         {
-                            Object O2 = new Object();
+                            object O2 = new object();
                             lock (O2)
                             {
                                 ThinkingFinished = true;
@@ -15631,25 +15631,25 @@ namespace RefrigtzChessPortable
                     }
                     if (Order == -1 && AAA.CheckBrown)
                     {
-                        IgnoreObjectDangour = 0;
+                        IgnoreobjectDangour = 0;
                         IsCheck = true;
                         DoEnemySelf = false;
                     }
                     if (Order == -1 && AAA.CheckGray)
                     {
-                        IgnoreObjectDangour = 0;
+                        IgnoreobjectDangour = 0;
                         IsCheck = true;
                         DoEnemySelf = false;
                     }
                     if (Order == -1 && AAA.CheckGray)
                     {
-                        IgnoreObjectDangour = 0;
+                        IgnoreobjectDangour = 0;
                         IsCheck = true;
                         DoEnemySelf = false;
                     }
                     if (Order == 1 && AAA.CheckBrown)
                     {
-                        IgnoreObjectDangour = 0;
+                        IgnoreobjectDangour = 0;
                         IsCheck = true;
                         DoEnemySelf = false;
                     }
@@ -15723,7 +15723,7 @@ namespace RefrigtzChessPortable
                             break;
                     }
                     LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
-                    Object O3 = new Object();
+                    object O3 = new object();
                     lock (O3)
                     {
                         ///Initiate Global Varibales at END.
@@ -15761,7 +15761,7 @@ namespace RefrigtzChessPortable
         }
         public void TowDistrurbProperUse(ref int[] LoseOcuuredatChiled)
         {
-            Object OI = new Object();
+            object OI = new object();
             lock (OI)
             {
                 if (!IsTheeAtleastMAteSelf())
@@ -15814,7 +15814,7 @@ namespace RefrigtzChessPortable
         }
         public void TowDistrurbProperUsePreferNotToClose(ref int[] LoseOcuuredatChiled, int[,] Tab)
         {
-            Object OI = new Object();
+            object OI = new object();
             lock (OI)
             {
                 if (!IsTheeAtleastMAteSelf())
@@ -15840,7 +15840,7 @@ namespace RefrigtzChessPortable
                                         if (Kind != i[2])
                                             return;
                                         RemoveOfDisturbIndex = IndexOfIsSupTRUE(Math.Abs(TableConst[HeuristicDoubleDefenceIndexInOnGame[i[0]][i[1]][2], HeuristicDoubleDefenceIndexInOnGame[i[0]][i[1]][3]]), HeuristicDoubleDefenceIndexInOnGame[i[0]]);
-                                        bool a = MovableAllObjectsListMethos(HeuristicDoubleDefenceIndexInOnGame[i[0]][i[1]][2], HeuristicDoubleDefenceIndexInOnGame[i[0]][i[1]][3]);
+                                        bool a = MovableAllobjectsListMethos(HeuristicDoubleDefenceIndexInOnGame[i[0]][i[1]][2], HeuristicDoubleDefenceIndexInOnGame[i[0]][i[1]][3]);
                                         if (RemoveOfDisturbIndex != -1 && a)
                                             IsSupHu[RemoveOfDisturbIndex] = false;
                                         else if (!a)
@@ -15889,7 +15889,7 @@ namespace RefrigtzChessPortable
         int[] IndexOfMovedDoubleDefence(int[,] Tab)
         {
             int Object = 0;
-            int[] ObjectIndex = { -1, -1, -1 };
+            int[] objectIndex = { -1, -1, -1 };
             bool Is = false;
             for (int i = 0; i < HeuristicDoubleDefenceIndexInOnGameMidle; i++)
             {
@@ -15897,12 +15897,12 @@ namespace RefrigtzChessPortable
                     continue;
                 for (int j = 0; j < HeuristicDoubleDefenceIndexInOnGame[i].Count; j++)
                 {
-                    if (System.Math.Abs(Tab[HeuristicDoubleDefenceIndexInOnGame[i][j][2], HeuristicDoubleDefenceIndexInOnGame[i][j][3]]) > ObjectIndex[2])
+                    if (System.Math.Abs(Tab[HeuristicDoubleDefenceIndexInOnGame[i][j][2], HeuristicDoubleDefenceIndexInOnGame[i][j][3]]) > objectIndex[2])
                     {
                         Is = true;
-                        ObjectIndex[0] = i;
-                        ObjectIndex[1] = j;
-                        ObjectIndex[2] = System.Math.Abs(Tab[HeuristicDoubleDefenceIndexInOnGame[i][j][2], HeuristicDoubleDefenceIndexInOnGame[i][j][3]]);
+                        objectIndex[0] = i;
+                        objectIndex[1] = j;
+                        objectIndex[2] = System.Math.Abs(Tab[HeuristicDoubleDefenceIndexInOnGame[i][j][2], HeuristicDoubleDefenceIndexInOnGame[i][j][3]]);
                     }
                 }
             }
@@ -15924,10 +15924,10 @@ namespace RefrigtzChessPortable
                 Is = false;
             if (Is)
             {
-                ObjectIndex[0] = -1;
-                ObjectIndex[1] = -1;
+                objectIndex[0] = -1;
+                objectIndex[1] = -1;
             }
-            return ObjectIndex;
+            return objectIndex;
 
             
         }
@@ -16226,7 +16226,7 @@ namespace RefrigtzChessPortable
                 //objects value main method determination
                 bool SignSelfEmpty(int Obj1, int Obj2, int Order, ref int Ord, ref int a)
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
                         bool Is = false;
@@ -16254,7 +16254,7 @@ namespace RefrigtzChessPortable
                 //objects value main method determination
                 bool SignEnemyEmpty(int Obj1, int Obj2, int Order, ref int Ord, ref int a)
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
                         bool Is = false;
@@ -16282,7 +16282,7 @@ namespace RefrigtzChessPortable
                 //objects value main method determination
                 bool SignNotEqualEnemy(int Obj1, int Obj2, int Order, ref int Ord, ref int a)
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
                         bool Is = false;
@@ -16311,7 +16311,7 @@ namespace RefrigtzChessPortable
                 //objects value main method determination
                 bool SignEqualSelf(int Obj1, int Obj2, int Order, ref int Ord, ref int a)
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
                         bool Is = false;
@@ -16340,7 +16340,7 @@ namespace RefrigtzChessPortable
                 //objects value main method determination
                 bool SignNotEqualSelf(int Obj1, int Obj2, int Order, ref int Ord, ref int a)
                 {
-                    Object O = new Object();
+                    object O = new object();
                     lock (O)
                     {
                         bool Is = false;

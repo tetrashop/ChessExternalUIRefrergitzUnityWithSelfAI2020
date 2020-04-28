@@ -16,11 +16,16 @@ namespace RefrigtzChessPortable
 
         public Logger(string logPath)
         {
-            using (file = File.Open(logPath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
+			try{  object o=new object();
+				lock(o){
+					using (file = File.Open(logPath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
             {
                 writer = new StreamWriter(file);
                 mutex = new object();
+					}
             }
+			}catch(Exception t){
+			}
         }
 
         // Log is thread safe, it can be called from many threads

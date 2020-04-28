@@ -32,7 +32,7 @@ namespace RefrigtzChessPortable
         
         
         public bool MovementsAStarGreedyHeuristicFoundT = false;
-        public bool IgnoreSelfObjectsT = false;
+        public bool IgnoreSelfobjectsT = false;
         public bool UsePenaltyRegardMechnisamT = true;
         public bool BestMovmentsT = false;
         public bool PredictHeuristicT = true;
@@ -52,7 +52,7 @@ namespace RefrigtzChessPortable
 
             try
             {
-                Object a = new Object();
+                object a = new object();
                 lock (a)
                 {
                     string stackTrace = ex.ToString();
@@ -62,7 +62,7 @@ namespace RefrigtzChessPortable
                 }
             }
 
-            catch (Exception t) {Log(t); }
+            catch (Exception t) { /*Log(t);*/ }
 
         }
 
@@ -78,7 +78,7 @@ namespace RefrigtzChessPortable
             int a = ReturnHeuristic();
             if (MaxHeuristicxS < a)
             {
-                Object O2 = new Object();
+                object O2 = new object();
                 lock (O2)
                 {
                     MaxNotFound = false;
@@ -131,7 +131,7 @@ namespace RefrigtzChessPortable
 
                 CurrentAStarGredyMax = CurrentAStarGredy;
                 MovementsAStarGreedyHeuristicFoundT = MovementsAStarGreedyHeuristicTFou;
-                IgnoreSelfObjectsT = IgnoreSelfObject;
+                IgnoreSelfobjectsT = IgnoreSelfObject;
                 UsePenaltyRegardMechnisamT = UsePenaltyRegardMechnisa;
                 BestMovmentsT = BestMovment;
                 PredictHeuristicT = PredictHurist;
@@ -145,7 +145,7 @@ namespace RefrigtzChessPortable
                         Table[ii, jj] = Tab[ii, jj];
                 for (var ii = 0; ii < AllDraw.SodierMovments; ii++)
 
-                    SoldierThinking[ii] = new ThinkingRefrigtzChessPortable(ii,1,CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, (int)i, (int)j, a, CloneATable(Tab), 4, Ord, TB, Cur, 16, 1);
+                    SoldierThinking[ii] = new ThinkingRefrigtzChessPortable(ii,1,CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, (int)i, (int)j, a, CloneATable(Tab), 4, Ord, TB, Cur, 16, 1);
                 Row = i;
                 Column = j;
                 color =a;
@@ -164,15 +164,15 @@ namespace RefrigtzChessPortable
             for (var i = 0; i < 8; i++)
                 for (var j = 0; j < 8; j++)
                     Tab[i, j] = this.Table[i, j];
-            //Initiate a Object and Assignemt of a Clone to Construction of a Copy.
+            //Initiate a object and Assignemt of a Clone to Construction of a Copy.
 
-            AA = new DrawSoldier(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, this.Row, this.Column, this.color, CloneATable(Tab), this.Order, false, this.Current
+            AA = new DrawSoldier(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, this.Row, this.Column, this.color, CloneATable(Tab), this.Order, false, this.Current
                 );
             AA.ArrangmentsChanged = ArrangmentsChanged;
             for (var i = 0; i < AllDraw.SodierMovments; i++)
             {
 
-                AA.SoldierThinking[i] = new ThinkingRefrigtzChessPortable(i,1,CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, (int)this.Row, (int)this.Column);
+                AA.SoldierThinking[i] = new ThinkingRefrigtzChessPortable(i,1,CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, (int)this.Row, (int)this.Column);
                 this.SoldierThinking[i].Clone(ref AA.SoldierThinking[i]);
 
             }
@@ -191,16 +191,16 @@ namespace RefrigtzChessPortable
         bool[,] CloneATable(bool[,] Tab)
         {
             
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
-                //Create and new an Object.
+                //Create and new an object.
                 bool[,] Table = new bool[8, 8];
-                //Assigne Parameter To New Objects.
+                //Assigne Parameter To New objects.
                 for (var i = 0; i < 8; i++)
                     for (var j = 0; j < 8; j++)
                         Table[i, j] = Tab[i, j];
-                //Return New Object.
+                //Return New object.
                 
                 return Table;
             }

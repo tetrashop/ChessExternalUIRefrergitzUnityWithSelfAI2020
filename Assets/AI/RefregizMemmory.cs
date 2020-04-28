@@ -21,7 +21,7 @@ namespace GalleryStudio
 
         public int iii = 0, jjj = 0;
         public bool MovementsAStarGreedyHeuristicFoundT = false;
-        public bool IgnoreSelfObjectsT = false;
+        public bool IgnoreSelfobjectsT = false;
         public bool UsePenaltyRegardMechnisamT = true;
         public bool BestMovmentsT = false;
         public bool PredictHeuristicT = true;
@@ -70,11 +70,11 @@ namespace GalleryStudio
             SAllDraw = AllDrawKindString;
 
   
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 MovementsAStarGreedyHeuristicFoundT = MovementsAStarGreedyHeuristicTFou;
-                IgnoreSelfObjectsT = IgnoreSelfObject;
+                IgnoreSelfobjectsT = IgnoreSelfObject;
                 BestMovmentsT = BestMovment;
                 PredictHeuristicT = PredictHurist;
                 OnlySelfT = OnlySel;
@@ -84,7 +84,7 @@ namespace GalleryStudio
         }
         public RefrigtzChessPortable.AllDraw Load(bool Quantum, int Order)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 if (File.Exists(SAllDraw))
@@ -93,7 +93,7 @@ namespace GalleryStudio
                     if (A.Length == 0)
                         return null;
 
-                    RefrigtzChessPortable.AllDraw tt = new RefrigtzChessPortable.AllDraw(Order, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsT);
+                    RefrigtzChessPortable.AllDraw tt = new RefrigtzChessPortable.AllDraw(Order, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsT);
                     FileStream DummyFileStream = new FileStream(SAllDraw, System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.ReadWrite);
                     BinaryFormatter Formatters = new BinaryFormatter();
                     DummyFileStream.Seek(0, SeekOrigin.Begin);
@@ -117,11 +117,11 @@ namespace GalleryStudio
         }
         public void RewriteAllDraw(int Order)
         {
-            Object oo = new Object();
+            object oo = new object();
             lock (oo)
             {
 
-                //Current = new RefrigtzChessPortable.AllDraw(MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsT);
+                //Current = new RefrigtzChessPortable.AllDraw(MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsT);
                 FileStream DummyFileStream = null;
 
 

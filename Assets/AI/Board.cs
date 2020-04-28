@@ -7,7 +7,7 @@ namespace RefrigtzChessPortable
     /// <summary>
     /// Summary description for Board.
     /// </summary>
-    public class Board : System.Object
+	public class Board : System.Object
     {
         private int[,] square;
 
@@ -136,7 +136,7 @@ namespace RefrigtzChessPortable
         }
         public int[,] GetSqure(int[,] Table)
         {
-            Object O = new Object();
+            object O = new object();
             lock (O)
             {
                 int[,] square = new int[8, 8];

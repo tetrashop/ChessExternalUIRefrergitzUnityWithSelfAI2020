@@ -21,7 +21,7 @@ namespace RefrigtzChessPortable
         
         static public Double[] Array(Double[] ArrayInput, Int32 n)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 Double[] ArrayOutputA = new Double[n];
@@ -35,7 +35,7 @@ namespace RefrigtzChessPortable
         }
        static  Double[] Answer(Double[] a, Int32 n)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 Double[] Ans = new Double[n];
@@ -59,7 +59,7 @@ namespace RefrigtzChessPortable
         }
         static private Double[,] AMinuseOne(Double[,] A, Int32 n)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 Double[,] N = new Double[n, n];
@@ -84,7 +84,7 @@ namespace RefrigtzChessPortable
         }
         static Double Det(Double[,] A, Int32 n)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 if (n == 0)
@@ -101,7 +101,7 @@ namespace RefrigtzChessPortable
         }
         static bool Det(bool[,] A, int n)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 if (n == 0)
@@ -118,7 +118,7 @@ namespace RefrigtzChessPortable
         }
         static double DetB(bool[,] A, int n)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 if (n == 0)
@@ -135,7 +135,7 @@ namespace RefrigtzChessPortable
         }
         static Double[,] AStar(Double[,] A, Int32 n, Int32 ii, Int32 jj)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 Double[,] Ast = new Double[n - 1, n - 1];
@@ -163,7 +163,7 @@ namespace RefrigtzChessPortable
         }
         static bool[,] AStar(bool[,] A, Int32 n, Int32 ii, Int32 jj)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 bool[,] Ast = new bool[n - 1, n - 1];
@@ -191,7 +191,7 @@ namespace RefrigtzChessPortable
         }
         public static bool Similarity(bool[,] A, bool[,] B, Int32 n)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 bool[,] Ast = new bool[n, n];
@@ -209,7 +209,7 @@ namespace RefrigtzChessPortable
         }
         public static double SimilarityB(bool[,] A, bool[,] B, Int32 n)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 bool[,] Ast = new bool[n, n];
@@ -227,7 +227,7 @@ namespace RefrigtzChessPortable
         }
         public static double SimilarityB(double[,] A, double[,] B, Int32 n)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 double[,] Ast = new double[n, n];

@@ -3,13 +3,13 @@
  * Learning Autamata.**********************************************************
  * The every sum of probability == one.****************************************(*_)
  * four formula .tow for Regard regime and tow for penalty regime.***************(-)
- * Derived Quantum Automata Penalty All Objects of Derived Automata************(-)
+ * Derived Quantum Automata Penalty All objects of Derived Automata************(-)
  * Malfunction Reward and Penalty Detection**********************************(_*)
  * Penalty Reward Action Failure************************************************(*_)
  * M==tuning of Penalty and Regard Data in ==Regard and IsPenalty Values*******(+)
  * No Reason For Malfunction of Reward and Penalty Mechan==m******************(_)
  * 1395/1/2********************************************************************(*:Sum(3)) (_:Sum(4)) (-:Sum(2)) (All Errors:(7))
- * Penalty Regard Action == Useful For One Time Per AllDraw Object.************
+ * Penalty Regard Action == Useful For One Time Per AllDraw object.************
  * No Solution to Overcome to static Behavior Of Quantum Variables Inhererete.*
  ******************************************************************************/
 
@@ -39,7 +39,7 @@ namespace RefrigtzChessPortable
         //int State = 1;
         public void Initiate()
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 IsPenalty = false;
@@ -48,7 +48,7 @@ namespace RefrigtzChessPortable
         }
         public LearningKrinskyAtamata(int r0, int m0, int k0)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 IsReward = new bool();
@@ -88,7 +88,7 @@ namespace RefrigtzChessPortable
         }
         public void Clone(ref QuantumAtamata AA)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 AA.r = this.r;
@@ -114,7 +114,7 @@ namespace RefrigtzChessPortable
 
         public void FailureState()
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 Failer++;
@@ -126,7 +126,7 @@ namespace RefrigtzChessPortable
         }
         public void SuccessState()
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 Success++;
@@ -138,7 +138,7 @@ namespace RefrigtzChessPortable
         }
         public int IsSecondDerivitionIsPositive()
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 for (int i = 0; i < r - 2; i++)
@@ -151,7 +151,7 @@ namespace RefrigtzChessPortable
         }
         public double LearningAlgorithmRegard()
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 SuccessState();
@@ -167,7 +167,7 @@ namespace RefrigtzChessPortable
         }
         public int IsRewardAction()
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 if (this.IsReward)
@@ -178,7 +178,7 @@ namespace RefrigtzChessPortable
 
         public double IsPenaltyAction()
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 if (this.IsPenalty)
@@ -188,7 +188,7 @@ namespace RefrigtzChessPortable
         }
         public double LearningAlgorithmPenalty()
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 FailureState();

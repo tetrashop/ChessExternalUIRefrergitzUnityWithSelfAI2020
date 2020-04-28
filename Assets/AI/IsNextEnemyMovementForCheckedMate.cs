@@ -89,7 +89,7 @@ namespace RefrigtzChessPortable
             int A44 = AllDraw.SignKingDangour;
             int A45 = AllDraw.SignKingSafe;
             int A46 = AllDraw.SignMovments;
-            int A47 = AllDraw.SignObjectDangour;
+            int A47 = AllDraw.SignobjectDangour;
             int A48 = AllDraw.SignReducedAttacked;
             int A49 = AllDraw.SignSupport;
             bool A50 = AllDraw.SodierConversionOcuured;
@@ -199,7 +199,7 @@ namespace RefrigtzChessPortable
              AllDraw.SignKingDangour = A44;
              AllDraw.SignKingSafe= A45;
              AllDraw.SignMovments = A46;
-             AllDraw.SignObjectDangour = A47;
+             AllDraw.SignobjectDangour = A47;
             AllDraw.SignReducedAttacked = A48;
              AllDraw.SignSupport= A49;
             AllDraw.SodierConversionOcuured = A50;

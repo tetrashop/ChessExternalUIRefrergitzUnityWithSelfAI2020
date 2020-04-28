@@ -45,6 +45,7 @@ public class TileSelector : MonoBehaviour
         Vector3 point = Geometry.PointFromGrid(gridPoint);
         tileHighlight = Instantiate(tileHighlightPrefab, point, Quaternion.identity, gameObject.transform);
         tileHighlight.SetActive(false);
+
     }
 	public void Awake ()
 	{
@@ -55,7 +56,10 @@ public class TileSelector : MonoBehaviour
 	{
 		
 
-			
+//		if (RefrigtzChessPortable.AllDraw.CalIdle != 1&&RefrigtzChessPortable.AllDraw.CalIdle != 5) {
+//			if (RefrigtzChessPortable.AllDraw.CalIdle ==0)
+//				RefrigtzChessPortable.AllDraw.CalIdle = 2;
+//		}	
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
@@ -79,6 +83,7 @@ public class TileSelector : MonoBehaviour
 					GameManager.instance.SelectPiece(selectedPiece);
                     // Reference Point 1: add ExitState call here later
                     ExitState(selectedPiece);
+					instance = this;
                 }
             }
         }
@@ -101,7 +106,6 @@ public class TileSelector : MonoBehaviour
 		tileHighlight.SetActive (false);
 		MoveSelector move = GetComponent<MoveSelector> ();
 		move.EnterState (movingPiece);
-		//addd by tetrashop.ir	  
 		MoveSelector.Instance = move;
 	}
 }

@@ -11,7 +11,7 @@ namespace RefrigtzChessPortable
         public bool[] Bits = new bool[2];
         public Bit()
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 Bits[0] = false;
@@ -20,7 +20,7 @@ namespace RefrigtzChessPortable
         }
         public bool[] GetBits()
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 return Bits;
@@ -28,7 +28,7 @@ namespace RefrigtzChessPortable
         }
         public void SetZeroZero()//State 0
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 Bits[0] = false;
@@ -37,7 +37,7 @@ namespace RefrigtzChessPortable
         }
         public void SetZeroOne()//State 1
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 Bits[0] = true;
@@ -46,7 +46,7 @@ namespace RefrigtzChessPortable
         }
         public void SetOneZero()//State SuperPosition
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 Bits[0] = false;
@@ -55,7 +55,7 @@ namespace RefrigtzChessPortable
         }
         public void SetOneOne()
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 Bits[0] = true;
@@ -64,7 +64,7 @@ namespace RefrigtzChessPortable
         }
         public bool IsZeroZero()
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 if (Bits[0] == false && Bits[1] == false)
@@ -74,7 +74,7 @@ namespace RefrigtzChessPortable
         }
         public bool IsZeroOne()
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 if (Bits[0] == true && Bits[1] == false)
@@ -84,7 +84,7 @@ namespace RefrigtzChessPortable
         }
         public bool IsOneZero()
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 if (Bits[0] == false && Bits[1] == true)
@@ -94,7 +94,7 @@ namespace RefrigtzChessPortable
         }
         public bool IsOneOne()
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 if (Bits[0] == true && Bits[1] == true)
@@ -128,7 +128,7 @@ namespace RefrigtzChessPortable
         public QuantumAtamata(int r0, int m0, int k0)
             : base(r0, m0, k0)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 for (int i = 0; i < 3; i++)
@@ -147,7 +147,7 @@ namespace RefrigtzChessPortable
         }
         public void CurrenStateInitialize()
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 A1 = FirstAtamataState();
@@ -181,7 +181,7 @@ namespace RefrigtzChessPortable
                         if (A3 == 2)
                     AC = "|2>+|3>,";
                 CurrentState = AA + AB + AC;
-                //  CurrentStateByte = System.Convert.ToByte(CurrentState, 2);
+                //  CurrentStateByte = System.Convert.toByte(CurrentState, 2);
                 States.Add(CurrentState);
                 //   StateByte.Add(CurrentStateByte);
                 if (A1 == 2)
@@ -281,7 +281,7 @@ namespace RefrigtzChessPortable
         }
         
         public int FirstAtamataState()
-        { Object o = new Object();
+        { object o = new object();
             lock (o)
             {
 
@@ -301,7 +301,7 @@ namespace RefrigtzChessPortable
             }
         }
         public int SecondAtamataState()
-        { Object o = new Object();
+        { object o = new object();
             lock (o)
             {
 
@@ -322,7 +322,7 @@ namespace RefrigtzChessPortable
             }
         }
         public int ThirdAtamataState()
-        { Object o = new Object();
+        { object o = new object();
             lock (o)
             {
 

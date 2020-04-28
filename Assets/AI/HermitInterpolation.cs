@@ -10,7 +10,7 @@ namespace RefrigtzChessPortable
     {
         static Double[] SimplifyLxi(Double[] s, Double[] x, int p, int j,int i)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 if (j == p)
@@ -30,7 +30,7 @@ namespace RefrigtzChessPortable
         }
         static Double[] Derivate(Double[] za, int n)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 Double[] sz = new Double[n - 1];
@@ -41,7 +41,7 @@ namespace RefrigtzChessPortable
         }
         private static Double[] PxLxi(Double[] s, Double[] x, int n, int i)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 Double ss = 1;
@@ -62,7 +62,7 @@ namespace RefrigtzChessPortable
         }
         static Double[] PxUxi(Double[] x, Double[] f, int n, int i)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 Double[] uxi = new Double[2 * n + n];
@@ -91,7 +91,7 @@ namespace RefrigtzChessPortable
         }
         static Double[] PxVxi(Double[] x, Double[] f, int n, int i)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 Double[] result = new Double[2 * n + n];
@@ -114,7 +114,7 @@ namespace RefrigtzChessPortable
         }
         static Double[] FPerinValue(Double[] x, Double[] f, int n)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 Double[] fperin = new Double[n];
@@ -129,7 +129,7 @@ namespace RefrigtzChessPortable
         }
         public static Double[] PxHermit(Double[] x, Double[] f, int n)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 Double[] fperin = FPerinValue(x, f, n);
@@ -156,7 +156,7 @@ namespace RefrigtzChessPortable
         }
         static Double DetaIorward(Double[] x, Double[] f,int index)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 Double ad = 0;
@@ -167,7 +167,7 @@ namespace RefrigtzChessPortable
         }
         static Double DeltaiBackward(Double[] x, Double[] f,int index)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 Double ad = 0;
@@ -178,7 +178,7 @@ namespace RefrigtzChessPortable
         }
         public static int Factorial(int n)
         {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 if (n == 1 || n == 0)
@@ -188,7 +188,7 @@ namespace RefrigtzChessPortable
         }
             private static int Combinition(int nb,int kb)
                     {
-            Object o = new Object();
+            object o = new object();
             lock (o)
             {
                 if (nb == kb)
