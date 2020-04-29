@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using UnityEngine;
+
+
 namespace RefrigtzChessPortable
 {
     [Serializable]
@@ -27,7 +30,7 @@ namespace RefrigtzChessPortable
 		String AllDrawReplacement = "";
 
 		public static int MovmentsNumber = 0;
-		public static String Root = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]);
+		public static String Root =GameManager.Root;// System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]);
 		public static String AllDrawKindString = "";
 		public static int OrderPlate = 1;
 		bool CoPermit = true;
@@ -229,7 +232,7 @@ namespace RefrigtzChessPortable
                                 Draw.SetRowColumn(0);
                                 Draw.IsCurrentDraw = true;
                             }
-							AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+							AllDraw.TimeInitiation = GameManager.a;
 
                             Draw.InitiateAStarGreedyt(RefrigtzChessPortable.AllDraw.MaxAStarGreedy, 0, 0, aa, CloneATable(RefrigtzChessPortable.AllDraw.TableListAction[RefrigtzChessPortable.AllDraw.TableListAction.Count - 1]), Ord, false, FOUND, 0);
 
@@ -352,11 +355,13 @@ namespace RefrigtzChessPortable
                         
                         
                         
-                        
+						object l=new object();
+						lock(l){
                         var newTask = Task.Factory.StartNew(() => AliceAction(-1));
                         newTask.Wait();
-                        newTask.Dispose();
-						object oaa=new object();
+							newTask.Dispose();
+								}
+                      	object oaa=new object();
 //						if(AllDraw.CalIdle==2)
 //						{
 //							AllDraw.CalIdle=5;
@@ -378,8 +383,9 @@ namespace RefrigtzChessPortable
                             RefrigtzChessPortable.ThinkingRefrigtzChessPortable.NoOfMovableAllobjectMove++;
                             RefrigtzChessPortable.AllDraw.AllowedSupTrue = true;
 
-                            goto Again;
-                        }
+                            //goto Again;
+									return -2;
+								}
                         RefrigtzChessPortable.AllDraw.AllowedSupTrue = false;
 
 
@@ -1219,7 +1225,7 @@ namespace RefrigtzChessPortable
                                         }
                                         Draw.AStarGreedyString = thiB;
 
-//										AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+//										AllDraw.TimeInitiation = GameManager.a;
 
                                         Draw.InitiateAStarGreedyt(RefrigtzChessPortable.AllDraw.MaxAStarGreedy, 0, 0, aa, CloneATable(RefrigtzChessPortable.AllDraw.TableListAction[RefrigtzChessPortable.AllDraw.TableListAction.Count - 1]), Ord, false, FOUND, 0);
 
@@ -1234,7 +1240,7 @@ namespace RefrigtzChessPortable
 //										RefrigtzChessPortable.AllDraw.CalIdle=2;
 
 									
-                                        Play(-1, -1);
+                                        //Play(-1, -1);
                                         
 
                                         
@@ -1296,7 +1302,7 @@ namespace RefrigtzChessPortable
                                 }
                                 Draw.AStarGreedyString = thiB;
 
-//								AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+//								AllDraw.TimeInitiation = GameManager.a;
 
                                 Draw.InitiateAStarGreedyt(RefrigtzChessPortable.AllDraw.MaxAStarGreedy, 0, 0, aa, CloneATable(RefrigtzChessPortable.AllDraw.TableListAction[RefrigtzChessPortable.AllDraw.TableListAction.Count - 1]), Ord, false, FOUND, 0);
 
@@ -1315,7 +1321,7 @@ namespace RefrigtzChessPortable
 
 
 
-                                Play(-1, -1);
+                               // Play(-1, -1);
                                 
 
 						     }
@@ -1714,7 +1720,7 @@ namespace RefrigtzChessPortable
                         }
                         Draw.AStarGreedyString = thiB;
 
-//					AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000) + (DateTime.Now.Minute * 60 * 1000) + (DateTime.Now.Second * 1000);
+//					AllDraw.TimeInitiation = GameManager.a;
 						RefrigtzChessPortable.AllDraw.MaxAStarGreedy=RefrigtzChessPortable.AllDraw.PlatformHelperProcessorCount;
                         output = Task.Factory.StartNew(() => Draw.InitiateAStarGreedyt(RefrigtzChessPortable.AllDraw.MaxAStarGreedy, 0, 0, aa, CloneATable(RefrigtzChessPortable.AllDraw.TableListAction[RefrigtzChessPortable.AllDraw.TableListAction.Count - 1]), Ord, false, FOUND, 0));
                         output.Wait();

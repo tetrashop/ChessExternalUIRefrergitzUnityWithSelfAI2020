@@ -8,6 +8,9 @@ using System.Text;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.IO;
+using UnityEngine;
+
+
 namespace GalleryStudio
 {
     [Serializable]
@@ -25,7 +28,7 @@ namespace GalleryStudio
         public bool OnlySelfT = false;
         public bool AStarGreedyHeuristicT = false;
         public bool ArrangmentsT = false;
-        public static String Root = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]);
+		public static String Root =  GameManager.Root;//System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]);
 
         string SAllDraw ="";
         //static GalleryStudio.RefregizMemmory Node;

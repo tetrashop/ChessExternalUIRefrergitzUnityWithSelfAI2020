@@ -31,6 +31,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RefrigtzChessPortable;
 
 public class TileSelector : MonoBehaviour
 {
@@ -39,6 +40,10 @@ public class TileSelector : MonoBehaviour
 
 	public GameObject tileHighlight;
 	public static TileSelector instance;
+
+	static bool Log=true;
+
+
     public void Start ()
     { 
         Vector2Int gridPoint = Geometry.GridPoint(0, 0);
@@ -54,45 +59,49 @@ public class TileSelector : MonoBehaviour
 	public void Update ()
 
 	{
-		
+		if (ArtificialInteligenceMove.UpdateIsRunning) {
+//			tileHighlight.SetActive (false);
+//
+
+			if (Log) {
+				Debug.Log ("Ready to UpdateIsRunning base");
+				Log = false;
+			}
+
 
 //		if (RefrigtzChessPortable.AllDraw.CalIdle != 1&&RefrigtzChessPortable.AllDraw.CalIdle != 5) {
 //			if (RefrigtzChessPortable.AllDraw.CalIdle ==0)
 //				RefrigtzChessPortable.AllDraw.CalIdle = 2;
 //		}	
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
-		{
+			RaycastHit hit;
+			if (Physics.Raycast (ray, out hit)) {
 
-            Vector3 point = hit.point;
-            Vector2Int gridPoint = Geometry.GridFromPoint(point);
+				Vector3 point = hit.point;
+				Vector2Int gridPoint = Geometry.GridFromPoint (point);
 		
-            tileHighlight.SetActive(true);
-            tileHighlight.transform.position = Geometry.PointFromGrid(gridPoint);
-            if (Input.GetMouseButtonDown(0))
-            {
+				tileHighlight.SetActive (true);
+				tileHighlight.transform.position = Geometry.PointFromGrid (gridPoint);
+				if (Input.GetMouseButtonDown (0)) {
 				
 
-				GameObject selectedPiece = GameManager.instance.PieceAtGrid(gridPoint);
-                if (GameManager.instance.DoesPieceBelongToCurrentPlayer(selectedPiece))
-                {
-					x = gridPoint.x;
-					y = gridPoint.y;
-					GameManager.instance.SelectPiece(selectedPiece);
-                    // Reference Point 1: add ExitState call here later
-                    ExitState(selectedPiece);
-					instance = this;
-                }
-            }
-        }
-        else
-		{
-					tileHighlight.SetActive (false);
+					GameObject selectedPiece = GameManager.instance.PieceAtGrid (gridPoint);
+					if (GameManager.instance.DoesPieceBelongToCurrentPlayer (selectedPiece)) {
+						x = gridPoint.x;
+						y = gridPoint.y;
+						GameManager.instance.SelectPiece (selectedPiece);
+						// Reference Point 1: add ExitState call here later
+						ExitState (selectedPiece);
+						instance = this;
+					}
+				}
+			} else {
+				tileHighlight.SetActive (false);
 				
-
-		}
+			}
+		} else
+			Log = true;
     }
 
     public void EnterState()

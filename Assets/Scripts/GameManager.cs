@@ -30,9 +30,11 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using RefrigtzChessPortable;
 
 public class GameManager : MonoBehaviour
 {
+	public static string Root = "";
     public static GameManager instance;
 
     public Board board;
@@ -58,14 +60,29 @@ public class GameManager : MonoBehaviour
     private Player black;
     public Player currentPlayer;
     public Player otherPlayer;
-
-    void Awake()
-    {
+	public static float a = 0;
+	static System.Threading.Thread f=null;
+	void Awake()
+	{//Root = Application.persistentDataPath.ToString ();
         instance = this;
     }
+	void TimeElapse()
+	{
+		do {
+			object o=new object();
+			lock(o){
+				System.Threading.Thread.Sleep(1000);
+				a++;
+			}
+
+		} while(true);
+	}
 
     void Start ()
-    {
+	{if (f == null) {
+			f = new System.Threading.Thread (new System.Threading.ThreadStart (TimeElapse));
+			f.Start ();
+		}
         pieces = new GameObject[8, 8];
         movedPawns = new List<GameObject>();
 
@@ -248,4 +265,11 @@ public class GameManager : MonoBehaviour
         currentPlayer = otherPlayer;
         otherPlayer = tempPlayer;
     }
+//	public static float GetTime(){
+//		object o = new object ();
+//		lock (o) {
+//			a = Time.time;
+//		}
+//		return a;
+//	}
 }

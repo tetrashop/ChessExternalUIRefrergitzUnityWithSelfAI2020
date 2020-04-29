@@ -34,7 +34,7 @@ using UnityEngine;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEditor;
-
+using RefrigtzChessPortable;
 
 [SerializeField]
 
@@ -42,7 +42,6 @@ using UnityEditor;
 public class MoveSelector : MonoBehaviour
 {	
 //	static bool OutrPoutInWorking = false;
-
 	public GameObject deprecatedTarget;
 	public GameObject[] target;
 
@@ -101,6 +100,7 @@ public class MoveSelector : MonoBehaviour
 				ArtificialInteligenceMove.Ret().t.Play(k,p);
 			ArtificialInteligenceMove.Ret().t.Play(m,s);
 			Order = -1;
+				return true;
 		}else
 			if(Order==-1)
 				{
@@ -113,17 +113,19 @@ public class MoveSelector : MonoBehaviour
 					}
 					object ooo = new object ();
 					lock(oo){	
-				ArtificialInteligenceMove.Ret().t.Play(-1,-1);
+						int a=	ArtificialInteligenceMove.Ret().t.Play(-1,-1);
+					if (a == -2)
+						Debug.LogError ("Table zero");
 				x=ArtificialInteligenceMove.Ret().t.R.CromosomRowFirst;
 				y=ArtificialInteligenceMove.Ret().t.R.CromosomColumnFirst;
 				x1=ArtificialInteligenceMove.Ret().t.R.CromosomRow;
 				y1=ArtificialInteligenceMove.Ret().t.R.CromosomColumn;
 					}
 			Order = 1;
-  
+					return true;
 			}
 	}
-		return true;
+		return false;
 	}
 	bool Exist(List<Vector2Int> ite,Vector2Int t)
 	{
@@ -138,177 +140,181 @@ public class MoveSelector : MonoBehaviour
     void Update ()
 	{
 			
-
-		object p = new object ();
-		lock (p) {
+//		if (UpdateIsRunning)
+//			return;
+		object pp = new object ();
+		lock (pp) {
 			bool aa = false;
 		
-			aa =ArtificialInteligenceMove.Ret() != null;
-		aa = aa && 
-				ArtificialInteligenceMove.Ret().t != null;
-		if (!aa)
-			return;
-		if (!ArtificialInteligenceMove.Ret().t.LoadP)
-			return;
+			aa = ArtificialInteligenceMove.Ret () != null;
+			aa = aa &&
+			ArtificialInteligenceMove.Ret ().t != null;
+			if (aa) {
 
-
-			if (ArtificialInteligenceMove.IdleProgress) {
-				RefrigtzChessPortable.AllDraw.CalIdle = 2;
-
-				return;
-			};
-							
-			
-		}
-		 
-//		if (OutrPoutInWorking)
-//			return;
-
-		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-
-		RaycastHit hit;
-		if (Physics.Raycast (ray, out hit)) {
-			Vector3 point = hit.point;
-			Vector2Int gridPoint =Geometry.GridFromPoint (point);
-			tileHighlight.SetActive (true);
-			tileHighlight.transform.position = Geometry.PointFromGrid (gridPoint);
-			if (Input.GetMouseButtonDown (0)) {
-				// Reference Point 2: check for valid move location
-				if (!Exist (moveLocations, gridPoint)) {
-					return;
-				}
-
-				if (GameManager.instance.PieceAtGrid (gridPoint) == null) {
-
-					GameManager.instance.Move (movingPiece, gridPoint);
-				}else {
-					GameManager.instance.CapturePieceAt (gridPoint);
-					GameManager.instance.Move (movingPiece, gridPoint);
-
-				}
-
-				// Reference Point 3: capture enemy piece here later	
-				ExitState ();
-				var output = Task.Factory.StartNew(() => {
-					if(Order==1){
-						object OO=new object();
-						lock(OO){
-							
-							k = TileSelector.x;
-							p = 7 - TileSelector.y;
-							m = gridPoint.x;
-							s = 7 - gridPoint.y;
-
-							ff =	System.Threading.Tasks.Task.Factory.StartNew (() => xc = MoveAI ());
-							ff.Wait ();
-						}
-					}
-					object OOO=new object();
-					lock(OOO){
-						if(Order==-1){
-							if(xc){
-								OrB = 1;
+				if (ArtificialInteligenceMove.Ret ().t.LoadP) {
 
 
 
+					Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
-								//xx = MoveAI (-1, -1, -1, -1);
-								f = System.Threading.Tasks.Task.Factory.StartNew (() => xx = MoveAI ());
-								f.Wait ();
-								if(x!=-1&&y!=-1&&x1!=-1&&y1!=-1)
-								{
-
-									if(xx){
-										Debug.Log ("Thinking Finished.");
-										Vector2Int gridPointN = new Vector2Int (x, 7 - y);
-										Debug.Log ("gridPointN.");
-										//					TileSelector instance=GetComponent<TileSelector>();
-//										TileSelector.instance=GetComponent<TileSelector>();
-//										Debug.Log ("TileSelector.instance=GetComponent<TileSelector>().");
- 										TileSelector.instance.tileHighlight.SetActive (true);
-										Debug.Log ("TileSelector.instance.tileHighlight.SetActive (true).");
-										TileSelector.instance.tileHighlight.transform.position = Geometry.PointFromGrid (gridPointN);
-										Debug.Log ("TileSelector.instance.tileHighlight.Ret().transform.position = Geometry.PointFromGrid (gridPointN).");
-										selectobject = GameManager.instance.pieces[x,7-y];
-
-										Debug.Log ("GameObject\tselectobject = GameManager.instance.PieceAtGrid(gridPointN).");
-										TileSelector.instance.EnterState ();
-										Debug.Log ("TileSelector.instance.EnterState ().");
-										if (GameManager.instance.DoesPieceBelongToCurrentPlayer(selectobject))
-										{
-											Debug.Log ("current player.");
-											GameManager.instance.SelectPiece(selectobject);
-											// Reference Point 1: add ExitState call here later
-											//TileSelector.instance.enabled = false;
-											//TileSelector.instance.tileHighlight.SetActive(false);
-											TileSelector.instance.ExitState(selectobject);
-										}
-										string A="x:'"+x.ToString()+"';y:'"+y.ToString()+"';x1:'"+x1.ToString()+"';y1:'"+y1.ToString()+"'\r\n";
-										A+="================================================================================================\r\n";
-											System.IO.File.AppendAllText("A.txt"
-											,A);										//									movingPiece=selectobject;
-										//									EnterState(selectobject);
-										Vector2Int gridPointNN = new Vector2Int (x1, 7 - y1);
-
-
-										MoveSelector.Instance.tileHighlight.SetActive (true);
-										MoveSelector.Instance.tileHighlight.transform.position = Geometry.PointFromGrid (gridPointNN);
-										// Reference Point 1: add ExitState call here later
-										Debug.Log ("tile selected.");
-										if(MoveSelector.Instance.moveLocations.Count==0)
-											Debug.Log ("enter state not valid.");
-
-										if (!Exist (MoveSelector.Instance.moveLocations, gridPointNN)) {
-											return;
-										}
-										Debug.Log ("Move Source...");
-										if (GameManager.instance.PieceAtGrid (gridPointNN) == null) {
-											GameManager.instance.Move (MoveSelector.Instance.movingPiece, gridPointNN);
-										} else {
-											GameManager.instance.CapturePieceAt (gridPointNN);
-											GameManager.instance.Move (MoveSelector.Instance.movingPiece, gridPointNN);
-
-										}
-
-
-										ExitState ();
-										Debug.Log ("Move Occured.");
-										OrB = 1;
-										xx = false;
-										// Reference Point 1: add ExitState call here later
-										object OOOOO=new object();
-										lock(OOOOO){				
-												tileHighlight.SetActive (false);
-											x = ArtificialInteligenceMove.Ret().t.R.CromosomRowFirst = -1;
-											y = ArtificialInteligenceMove.Ret().t.R.CromosomColumnFirst = -1;
-											x1 = ArtificialInteligenceMove.Ret().t.R.CromosomRow = -1;
-											y1 = ArtificialInteligenceMove.Ret().t.R.CromosomColumn = -1;
-
-											RefrigtzChessPortable.AllDraw.CalIdle=0;
-											RefrigtzChessPortable.AllDraw.IdleInWork=true;
-											}
-
-									}
-								}else
-									Debug.LogError("Thjinkingn Failed.");
+					RaycastHit hit;
+					if (Physics.Raycast (ray, out hit)) {
+						Vector3 point = hit.point;
+						Vector2Int gridPoint = Geometry.GridFromPoint (point);
+						tileHighlight.SetActive (true);
+						tileHighlight.transform.position = Geometry.PointFromGrid (gridPoint);
+						if (Input.GetMouseButtonDown (0)) {
+							// Reference Point 2: check for valid move location
+							if (!Exist (moveLocations, gridPoint)) {
+								return;
 							}
 
-						}
-					}
+							if (GameManager.instance.PieceAtGrid (gridPoint) == null) {
+
+								GameManager.instance.Move (movingPiece, gridPoint);
+							} else {
+								GameManager.instance.CapturePieceAt (gridPoint);
+								GameManager.instance.Move (movingPiece, gridPoint);
+
+							}
+//							object o = new object ();
+//							lock (o) {
+//								//
+//								RefrigtzChessPortable.AllDraw.CalIdle = 2;
+//								Debug.Log ("Ready to 2 base");
+//
+//								while (RefrigtzChessPortable.AllDraw.CalIdle != 1) {
+//									System.Threading.Thread.Sleep (1);
+//								}
+//							}
+			
+							// Reference Point 3: capture enemy piece here later	
+							ExitState ();
+
+							var output = Task.Factory.StartNew (() => {
+								if (Order == 1) {
+									object OO = new object ();
+									lock (OO) {
+							
+										k = TileSelector.x;
+										p = 7 - TileSelector.y;
+										m = gridPoint.x;
+										s = 7 - gridPoint.y;
+
+										ff =	System.Threading.Tasks.Task.Factory.StartNew (() => xc = MoveAI ());
+										ff.Wait ();
+									}
+								}
+								object OOO = new object ();
+								lock (OOO) {
+									if (Order == -1) {
+										//if(xc)
+										{
+											OrB = 1;
+
+
+
+
+											//xx = MoveAI (-1, -1, -1, -1);
+											f = System.Threading.Tasks.Task.Factory.StartNew (() => xx = MoveAI ());
+											f.Wait ();
+											if (x != -1 && y != -1 && x1 != -1 && y1 != -1) {
+
+												//if(xx)
+												{
+													Debug.Log ("Thinking Finished.");
+													Vector2Int gridPointN = new Vector2Int (x, 7 - y);
+//										Debug.Log ("gridPointN.");
+													//					TileSelector instance=GetComponent<TileSelector>();
+//										TileSelector.instance=GetComponent<TileSelector>();
+//										Debug.Log ("TileSelector.instance=GetComponent<TileSelector>().");
+													TileSelector.instance.tileHighlight.SetActive (true);
+//										Debug.Log ("TileSelector.instance.tileHighlight.SetActive (true).");
+													TileSelector.instance.tileHighlight.transform.position = Geometry.PointFromGrid (gridPointN);
+//										Debug.Log ("TileSelector.instance.tileHighlight.Ret().transform.position = Geometry.PointFromGrid (gridPointN).");
+													selectobject = GameManager.instance.pieces [x, 7 - y];
+
+//										Debug.Log ("GameObject\tselectobject = GameManager.instance.PieceAtGrid(gridPointN).");
+													TileSelector.instance.EnterState ();
+//										Debug.Log ("TileSelector.instance.EnterState ().");
+													if (GameManager.instance.DoesPieceBelongToCurrentPlayer (selectobject)) {
+//											Debug.Log ("current player.");
+														GameManager.instance.SelectPiece (selectobject);
+														// Reference Point 1: add ExitState call here later
+														//TileSelector.instance.enabled = false;
+														//TileSelector.instance.tileHighlight.SetActive(false);
+														TileSelector.instance.ExitState (selectobject);
+													}
+													string A = "x:'" + x.ToString () + "';y:'" + y.ToString () + "';x1:'" + x1.ToString () + "';y1:'" + y1.ToString () + "'\r\n";
+													A += "================================================================================================\r\n";
+													System.IO.File.AppendAllText ("A.txt"
+											, A);										//									movingPiece=selectobject;
+													//									EnterState(selectobject);
+													Vector2Int gridPointNN = new Vector2Int (x1, 7 - y1);
+
+
+													MoveSelector.Instance.tileHighlight.SetActive (true);
+													MoveSelector.Instance.tileHighlight.transform.position = Geometry.PointFromGrid (gridPointNN);
+													// Reference Point 1: add ExitState call here later
+//										Debug.Log ("tile selected.");
+													if (MoveSelector.Instance.moveLocations.Count == 0)
+														Debug.Log ("enter state not valid.");
+
+													if (!Exist (MoveSelector.Instance.moveLocations, gridPointNN)) {
+														return;
+													}
+//										Debug.Log ("Move Source...");
+													if (GameManager.instance.PieceAtGrid (gridPointNN) == null) {
+														GameManager.instance.Move (MoveSelector.Instance.movingPiece, gridPointNN);
+													} else {
+														GameManager.instance.CapturePieceAt (gridPointNN);
+														GameManager.instance.Move (MoveSelector.Instance.movingPiece, gridPointNN);
+
+													}
+
+
+													ExitState ();
+													Debug.Log ("Move Occured.");
+
+													OrB = 1;
+													xx = false;
+													// Reference Point 1: add ExitState call here later
+													object OOOOO = new object ();
+													lock (OOOOO) {				
+														tileHighlight.SetActive (false);
+														x = ArtificialInteligenceMove.Ret ().t.R.CromosomRowFirst = -1;
+														y = ArtificialInteligenceMove.Ret ().t.R.CromosomColumnFirst = -1;
+														x1 = ArtificialInteligenceMove.Ret ().t.R.CromosomRow = -1;
+														y1 = ArtificialInteligenceMove.Ret ().t.R.CromosomColumn = -1;
+
+														RefrigtzChessPortable.AllDraw.CalIdle = 0;
+														RefrigtzChessPortable.AllDraw.IdleInWork = true;
+													}
+//										ArtificialInteligenceMove.ttt.Start ();
+												}
+											} else
+												Debug.LogError ("Thjinkingn Failed.");
+										}
+
+									}
+								}
 				
 
 
-					});
-				output.Wait ();
+							});
+							output.Wait ();
+							output.Dispose ();
 
+							ArtificialInteligenceMove.UpdateIsRunning = false;
 
-
-
+						}
+					} else {
+						tileHighlight.SetActive (false);
+					}
+				}
 			}
-		} else {
-			tileHighlight.SetActive (false);
-			}
-
+		}
+//		UpdateIsRunning = false;
 
 
 	}

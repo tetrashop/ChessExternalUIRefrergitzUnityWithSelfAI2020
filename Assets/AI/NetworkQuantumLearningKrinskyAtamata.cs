@@ -4,13 +4,16 @@
  */ 
 using System;
 using System.IO;
+using UnityEngine;
+
+
 
 namespace RefrigtzChessPortable
 {
     [Serializable]
     public class NetworkQuantumLearningKrinskyAtamata : LearningKrinskyAtamata
     {
-        public static String Root = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]);
+		public static String Root =GameManager.Root;//System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]);
         static void Log(Exception ex)
         {
             
