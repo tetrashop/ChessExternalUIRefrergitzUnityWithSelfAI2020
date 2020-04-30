@@ -265,6 +265,8 @@ public class GameManager : MonoBehaviour
         currentPlayer = otherPlayer;
         otherPlayer = tempPlayer;
     }
+	public void Update()
+	{}
 //	public static float GetTime(){
 //		object o = new object ();
 //		lock (o) {
