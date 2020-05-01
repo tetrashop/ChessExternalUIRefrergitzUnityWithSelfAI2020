@@ -8739,8 +8739,8 @@ namespace RefrigtzChessPortable
                                     //hourse
                                     for (var i = 0; i < HourseMidle; i++)
                                     {
-                                        object OOOO = new object();
-                                        lock (OOOO)
+                                        object OOOOO = new object();
+                                        lock (OOOOO)
                                         {
                                             //when search finished stop and return
                                             bool ac = false;
