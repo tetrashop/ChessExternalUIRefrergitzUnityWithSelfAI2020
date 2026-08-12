@@ -1,15 +1,46 @@
-# ChessExternalUIRefrergitzUnityWithSelfAI2020
-# Copyright (c) 2018 Razeware LLC; 2020 Tetrashop.ir
-# Unity 3d;
-# AI core by tetrashop.ir
-# Changes:
-# Color class conversion to int;
-# Idle thinking is overfall;
-# time limitation is victorious;
-# scripted artificialinteligent.cs by tetrashop;
-# ready to inteligent game by tetrashop.ir;
-# by revision of update method of moveselector.cs scripted;
-# virtualilization of true ilustrated game by UnityTread.cs class.(https://stackoverflow.com/questions/41330771/use-unity-api-from-another-thread-or-call-a-function-in-the-main-thread/41333540#41333540)
-# Thanks in advances.
-# terashop.ir
-# terashop team.
+# Chessexternaluirefrergitzunitywithselfai2020
+
+## 📋 درباره پروژه
+این پروژه بخشی از اکوسیستم **TetraShop** است.
+
+- **نوع:** PYTHON
+- **تعداد فایل‌ها:** 202
+
+## 🚀 ویژگی‌ها
+- کد تمیز و بهینه
+- آماده برای توسعه
+- پشتیبانی از آخرین تکنولوژی‌ها
+
+## 📦 نصب و راه‌اندازی
+
+### پیش‌نیازها
+- Python 3.8+
+
+### نصب
+```bash
+git clone https://github.com/tetrashop/ChessExternalUIRefrergitzUnityWithSelfAI2020.git
+cd ChessExternalUIRefrergitzUnityWithSelfAI2020
+pip install -r requirements.txt
+```
+
+## 🔧 استفاده
+```bash
+python main.py
+```
+
+## 🤝 مشارکت
+1. Fork کنید
+2. Branch جدید: `git checkout -b feature/your-feature`
+3. Commit: `git commit -m 'Add feature'`
+4. Push: `git push origin feature/your-feature`
+5. Pull Request باز کنید
+
+## 📝 مجوز
+MIT License
+
+## 🌐 ارتباط با ما
+- **وبسایت:** [tetrashop.ir](https://tetrashop.ir)
+- **گیت‌هاب:** [github.com/tetrashop](https://github.com/tetrashop)
+
+---
+**آخرین به‌روزرسانی:** 2026-08-12
